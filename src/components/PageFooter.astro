@@ -1,0 +1,18 @@
+---
+import { AUTHOR, TODAY } from "@/consts";
+---
+
+<footer>
+    <div class="container">
+        <small class="block">
+            &copy; {TODAY.getFullYear()}
+            {AUTHOR}. All rights reserved.
+        </small>
+    </div>
+</footer>
+<style>
+    footer {
+        padding: var(--size-8) var(--size-4) var(--size-12);
+        text-align: center;
+    }
+</style>

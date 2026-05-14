@@ -1,0 +1,25 @@
+---
+interface Props {
+    source: string;
+}
+
+const { source } = Astro.props;
+
+let domain = "";
+try {
+    domain = new URL(source).hostname.replace("www.", "");
+} catch (e) {
+    domain = source;
+}
+---
+
+{
+    source && (
+        <span>
+            Originally published at:{" "}
+            <a href={source} target="_blank" rel="noopener noreferrer">
+                {domain}
+            </a>
+        </span>
+    )
+}

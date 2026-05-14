@@ -1,86 +1,94 @@
 ---
-import { Image } from 'astro:assets';
-import type { CollectionEntry } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
+import "@/assets/main.css";
+import type { CollectionEntry } from "astro:content";
 
-type Props = CollectionEntry<'blog'>['data'];
+import Head from "@fylgja/Head.astro";
+import ThemeToggleJs from "@/components/ThemeToggle/script.astro";
+import PageHeader from "@/components/PageHeader.astro";
+import PageFooter from "@/components/PageFooter.astro";
+import FormattedDate from "@/components/FormattedDate.astro";
+import PostNavigation from "@/components/PostNavigation.astro";
+import OriginalSource from "@/components/OriginalSource.astro";
+import Tags from "@/components/Tags.astro";
+import FallbackImage from "@/assets/placeholder/blue.jpg";
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+import { SITE_TITLE, SITE_DESCRIPTION, THEME_COLOR } from "../consts";
+
+type BlogProps = CollectionEntry<"blog">["data"];
+interface Props extends BlogProps {
+    lang?: string;
+    dir?: string;
+    class?: string;
+    prev?: CollectionEntry<"blog"> | null;
+    next?: CollectionEntry<"blog"> | null;
+}
+
+const {
+    title = SITE_TITLE,
+    description = SITE_DESCRIPTION,
+    pubDate,
+    updatedDate,
+    image = FallbackImage,
+    tags = [],
+    pubSource = "",
+    lang = "en",
+    dir = "ltr",
+    class: className = "",
+    prev,
+    next,
+} = Astro.props;
+const rssUrl = new URL("feed.xml", Astro.site);
 ---
 
-<html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
-	</head>
-
-	<body>
-		<Header />
-		<main>
-			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<hr />
-					</div>
-					<slot />
-				</div>
-			</article>
-		</main>
-		<Footer />
-	</body>
+<html lang={lang} dir={dir} data-theme="auto">
+    <Head
+        siteName={SITE_TITLE}
+        title={title}
+        description={description}
+        image={image}
+        themeColor={THEME_COLOR}
+        sitemap="/sitemap-index.xml"
+        rss={rssUrl}
+    >
+        <ThemeToggleJs />
+        <meta name="fediverse:creator" content="@GrimLink@mastodon.social" />
+        <slot name="head" />
+    </Head>
+    <body>
+        <PageHeader />
+        <main
+            class:list={["container", className]}
+            style="--container-size: 68ch"
+        >
+            <article>
+                <h1>{title}</h1>
+                <div class="post-meta">
+                    <span>
+                        <FormattedDate date={pubDate} />
+                        {
+                            updatedDate && (
+                                <span class="last-updated-on">
+                                    Last updated on{" "}
+                                    <FormattedDate date={updatedDate} />
+                                </span>
+                            )
+                        }
+                        {pubSource && <OriginalSource source={pubSource} />}
+                    </span>
+                </div>
+                <slot />
+                <Tags tags={tags} />
+            </article>
+            <hr />
+            <PostNavigation prev={prev} next={next} />
+        </main>
+        <PageFooter />
+    </body>
 </html>
+
+<style>
+    .post-meta {
+        font-style: italic;
+        color: var(--color-muted);
+    }
+</style>

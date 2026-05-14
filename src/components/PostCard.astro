@@ -1,0 +1,82 @@
+---
+import "@fylgja/card/index.css";
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import type { HTMLAttributes } from "astro/types";
+import FormattedDate from "@/components/FormattedDate.astro";
+import OriginalSource from "@/components/OriginalSource.astro";
+
+type PostProps = {
+    image?: ImageMetadata;
+    title: string;
+    description?: string;
+    pubDate?: Date;
+    pubSource?: string;
+};
+
+interface Props extends HTMLAttributes<"article"> {
+    style?: astroHTML.JSX.CSSProperties;
+    variant?: "card" | "flat";
+    data: PostProps;
+}
+
+const { id, class: className, style, variant = "card", data } = Astro.props;
+const { image, title, description, pubDate, pubSource } = data;
+const postId = id
+    ? `post-${id.replace(/^\/|\/$/g, "").replaceAll("/", "-")}`
+    : undefined;
+const href = id ? `/blog/${id}/` : undefined;
+---
+
+<article
+    id={postId}
+    class:list={[
+        "flex",
+        className,
+        variant === "card" ? "card" : "relative",
+        variant === "card" && href ? "card-elevated" : "",
+    ]}
+    style={{
+        ...style,
+        "view-transition-name": postId,
+    }}
+>
+    <div class:list={["flex-auto", variant === "card" ? "card-content" : ""]}>
+        <h2
+            class="post-heading"
+            style={{
+                "view-transition-name": postId ? `${postId}__title` : null,
+            }}
+        >
+            <a href={href} class="stretched-link">
+                {title}
+            </a>
+        </h2>
+        {description && <p>{description}</p>}
+        <div class="post-meta relative">
+            {pubDate && <FormattedDate date={pubDate} />}
+            {pubSource && <OriginalSource source={pubSource} />}
+        </div>
+    </div>
+    {image && <Image src={image} alt="" width="150" height="150" />}
+</article>
+
+<style>
+    .post-heading {
+        font-size: 1.125em;
+
+        :any-link:not(:hover) {
+            text-decoration: none;
+        }
+    }
+
+    .post-meta {
+        font-size: 0.875em;
+        font-style: italic;
+        color: var(--color-muted);
+    }
+
+    .card-elevated:has(:hover, :focus-within) {
+        --card-shadow: var(--shadow-4);
+    }
+</style>

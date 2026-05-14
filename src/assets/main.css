@@ -1,0 +1,31 @@
+@layer theme, base, components, utilities;
+
+@import "@fylgja/base" layer(base);
+@import "./theme" layer(base);
+
+@import "@fylgja/tokens/css/sizes.css" layer(theme);
+@import "@fylgja/tokens/css/fonts.css" layer(theme);
+@import "@fylgja/tokens/css/shadows.css" layer(theme);
+@import "@fylgja/tokens/css/easing.css" layer(theme);
+
+@import "@fylgja/utilities" layer(utilities);
+
+@layer theme {
+    :root {
+        --color-muted: color-mix(in oklab, var(--root-fg) 70%, var(--root-bg));
+    }
+}
+
+@layer utilities {
+    .float-start {
+        float: inline-start;
+    }
+
+    .float-end {
+        float: inline-end;
+    }
+
+    .text-muted {
+        color: var(--color-muted);
+    }
+}

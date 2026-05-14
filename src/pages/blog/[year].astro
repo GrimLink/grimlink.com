@@ -4,14 +4,34 @@ import { getCollection } from "astro:content";
 import PostCard from "@/components/PostCard.astro";
 import BlogSidebar from "@/components/BlogSidebar.astro";
 
-const posts = (await getCollection("blog")).sort(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+export async function getStaticPaths() {
+    const posts = await getCollection("blog");
 
-const pageTitle = "My Feed";
+    const allYears = posts.map((post) =>
+        post.data.pubDate.getFullYear().toString(),
+    );
+    const uniqueYears = [...new Set(allYears)];
+
+    return uniqueYears.map((year) => {
+        const filteredPosts = posts
+            .filter(
+                (post) => post.data.pubDate.getFullYear().toString() === year,
+            )
+            .sort(
+                (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+            );
+        return {
+            params: { year },
+            props: { posts: filteredPosts, year },
+        };
+    });
+}
+
+const { posts, year } = Astro.props;
+const pageTitle = `Posts from ${year}`;
 ---
 
-<PageLayout title={pageTitle} description="Lorem ipsum dolor sit amet">
+<PageLayout title={pageTitle} description={`All posts from the year ${year}`}>
     <div class="container">
         <h1>{pageTitle}</h1>
         <div class="page-layout">

@@ -1,0 +1,49 @@
+---
+import SocialsIcons from "@/assets/socials.svg?url";
+import MenuLink from "@/components/MenuLink.astro";
+import ThemeToggleBtn from "@/components/ThemeToggle/btn.astro";
+import { SITE_TITLE } from "@/consts";
+
+const menuItems = [
+    { href: "/blog", label: "Feed" },
+    { href: "/projects", label: "Projects" },
+    { href: "/about", label: "More About Me" },
+];
+---
+
+<header>
+    <div class="container flex-col align" style="--md_flex-dir: row">
+        <a href="/">{SITE_TITLE}</a>
+        <nav>
+            <ul class="flex gap-sm">
+                {
+                    menuItems.map((item) => (
+                        <MenuLink href={item.href} class="btn">
+                            {item.label}
+                        </MenuLink>
+                    ))
+                }
+            </ul>
+        </nav>
+        <div class="flex gap">
+            <a href="/rss.xml" class="btn" aria-label="RSS Feed">
+                <svg width="20" height="20" fill="currentcolor">
+                    <use href={`${SocialsIcons}#rss`}></use>
+                </svg>
+            </a>
+            <ThemeToggleBtn />
+        </div>
+    </div>
+</header>
+
+<style>
+    header {
+        padding-block: 1rem;
+        background-color: var(--surface-color);
+        border-block-end: 1px solid #0002;
+    }
+
+    .btn {
+        --btn-stroke: transparent;
+    }
+</style>

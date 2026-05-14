@@ -1,0 +1,16 @@
+---
+import "@fylgja/card/index.css";
+import type { HTMLAttributes } from "astro/types";
+
+type TagProps = HTMLAttributes<"div" | "article">;
+interface Props extends TagProps {
+    tag?: "div" | "article";
+}
+
+const { tag = "div", class: className, ...props } = Astro.props;
+const Tag = tag;
+---
+
+<Tag class:list={[className]} {...props}>
+    <slot />
+</Tag>

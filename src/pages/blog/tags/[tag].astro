@@ -4,14 +4,29 @@ import { getCollection } from "astro:content";
 import PostCard from "@/components/PostCard.astro";
 import BlogSidebar from "@/components/BlogSidebar.astro";
 
-const posts = (await getCollection("blog")).sort(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+export async function getStaticPaths() {
+    const posts = await getCollection("blog");
+    const allTags = posts.flatMap((post) => post.data.tags).filter(Boolean);
+    const uniqueTags = [...new Set(allTags)];
 
-const pageTitle = "My Feed";
+    return uniqueTags.map((tag) => {
+        const filteredPosts = posts
+            .filter((post) => post.data.tags?.includes(tag))
+            .sort(
+                (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+            );
+        return {
+            params: { tag },
+            props: { posts: filteredPosts, tag },
+        };
+    });
+}
+
+const { posts, tag } = Astro.props;
+const pageTitle = `Posts tagged with #${tag}`;
 ---
 
-<PageLayout title={pageTitle} description="Lorem ipsum dolor sit amet">
+<PageLayout title={pageTitle} description={`All posts tagged with ${tag}`}>
     <div class="container">
         <h1>{pageTitle}</h1>
         <div class="page-layout">

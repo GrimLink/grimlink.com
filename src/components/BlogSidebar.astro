@@ -1,0 +1,39 @@
+---
+import { getCollection } from "astro:content";
+import Tags from "@/components/Tags.astro";
+
+const posts = await getCollection("blog");
+const allTags = posts.flatMap((post) => post.data.tags).filter(Boolean);
+const uniqueTags = [...new Set(allTags)].sort();
+
+const allYears = posts.map((post) =>
+    post.data.pubDate.getFullYear().toString(),
+);
+const uniqueYears = [...new Set(allYears)].sort((a, b) => b.localeCompare(a));
+---
+
+<aside class="flow">
+    <section>
+        <h2>Tags</h2>
+        <Tags tags={uniqueTags} useLinks={true} />
+    </section>
+    <section>
+        <h2>Archive</h2>
+        <ul role="list" class="tags inline-flex flex-wrap gap">
+            {
+                uniqueYears.map((year) => (
+                    <li>
+                        <a href={`/blog/${year}/`}>{year}</a>
+                    </li>
+                ))
+            }
+        </ul>
+    </section>
+</aside>
+
+<style>
+    .tags {
+        --gap: var(--size-1) var(--size-2);
+        color: var(--color-muted);
+    }
+</style>
