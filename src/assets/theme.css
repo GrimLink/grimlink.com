@@ -6,8 +6,8 @@
     navigation: auto;
 }
 :root {
-    --brand: hsl(260, 84%, 56%);
-    --on-brand: hsl(260, 0%, 100%);
+    --brand: oklch(0.44 0.18 260);
+    --on-brand: hsl(0, 0%, 100%);
     --form-active-color: var(--brand);
     --form-error-color: #e00;
     --control-checked-stroke: var(--brand);
@@ -115,7 +115,7 @@ body > main {
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --root-bg: color-mix(in oklab, hsl(0 15% 5%) 92%, var(--brand));
+        --root-bg: color-mix(in oklab, hsl(0 15% 5%) 88%, var(--brand));
         --root-fg: hsl(0 0% 98%);
         --select-icon: var(--select-dark-scheme);
     }
@@ -129,7 +129,7 @@ body > main {
 }
 
 [data-theme="dark"] {
-    --root-bg: color-mix(in oklab, hsl(0 15% 5%) 92%, var(--brand));
+    --root-bg: color-mix(in oklab, hsl(0 15% 5%) 88%, var(--brand));
     --root-fg: hsl(0 0% 98%);
     --select-icon: var(--select-dark-scheme);
     color-scheme: dark;

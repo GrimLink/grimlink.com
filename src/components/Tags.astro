@@ -24,7 +24,9 @@ const {
         >
             {tags.map((tag) => (
                 <li>
-                    <a href={useLinks ? `${linkPrefix}/${tag}/` : ""}>#{tag}</a>
+                    <a href={useLinks ? `${linkPrefix}/${tag}/` : null}>
+                        #{tag}
+                    </a>
                 </li>
             ))}
         </ul>

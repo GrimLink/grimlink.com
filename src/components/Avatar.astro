@@ -1,0 +1,35 @@
+---
+import { Image } from "astro:assets";
+import avatar from "@/assets/avatar.jpg";
+
+interface Props {
+    class?: string;
+    style?: {
+        [key: string]: string;
+    };
+    alt?: string;
+    size?: number;
+}
+
+const { class: className, style, alt = "", size = 120 } = Astro.props;
+---
+
+<Image
+    src={avatar}
+    width={size}
+    height={size}
+    alt={alt}
+    class:list={["avatar round", className]}
+    style={style}
+/>
+
+<style>
+    .avatar {
+        border: 4px solid #fff;
+        box-shadow: var(--shadow-2);
+
+        @media (prefers-reduced-motion: no-preference) {
+            view-transition-name: avatar;
+        }
+    }
+</style>

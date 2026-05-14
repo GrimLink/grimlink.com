@@ -10,4 +10,5 @@ export const SOCIALS = {
   bluesky: "https://bsky.app/profile/grimlink.bsky.social",
   mastodon: "https://mastodon.social/@GrimLink",
   github: "https://github.com/GrimLink",
+  linkedin: "https://www.linkedin.com/in/seanvanzuidam",
 };

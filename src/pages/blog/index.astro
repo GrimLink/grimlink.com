@@ -11,9 +11,13 @@ const posts = (await getCollection("blog")).sort(
 const pageTitle = "My Feed";
 ---
 
-<PageLayout title={pageTitle} description="Lorem ipsum dolor sit amet">
+<PageLayout
+    title={pageTitle}
+    description="All my Blog and Social Posts in one handy page."
+>
     <div class="container">
         <h1>{pageTitle}</h1>
+        <p>All my Blog and Social Posts in one handy page.</p>
         <div class="page-layout">
             <ul role="list" class="flow">
                 {

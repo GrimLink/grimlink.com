@@ -1,74 +1,117 @@
 ---
-import PageLayout from "@/layouts/BlogPost.astro";
+import PageLayout from "@/layouts/PageLayout.astro";
+import Avatar from "@/components/Avatar.astro";
+
+const pageTitle = "About Me";
+const pageDescription =
+    "Learn more about Sean van Zuidam, Frontend Developer and creator of Fylgja CSS.";
 ---
 
-<PageLayout
-    title="About Me"
-    description="Lorem ipsum dolor sit amet"
-    pubDate={new Date("August 08 2021")}
->
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo
-        integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu
-        turpis egestas pretium. Euismod elementum nisi quis eleifend quam
-        adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus
-        sit amet volutpat. Netus et malesuada fames ac turpis egestas. Eget
-        magna fermentum iaculis eu non diam phasellus vestibulum lorem. Varius
-        sit amet mattis vulputate enim. Habitasse platea dictumst quisque
-        sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque
-        sagittis purus sit amet.
-    </p>
+<PageLayout title={pageTitle} description={pageDescription}>
+    <div class="container" style="--container-size: 72ch; --my: var(--size-8)">
+        <section
+            class="flex gap align"
+            style="--gap: var(--size-4) var(--size-8); --align-items: center;"
+            aria-labelledby="intro"
+        >
+            <div class="flow">
+                <h1 id="intro">Hi, I'm Sean.</h1>
+                <p class="lead">
+                    Frontend Developer at
+                    <a href="https://hyva.io" target="_blank">Hyvä Themes</a>,
+                    creator of
+                    <a href="https://fylgja.dev" target="_blank">Fylgja CSS</a>,
+                    and a firm believer in modular, performant web developement.
+                </p>
+            </div>
+            <Avatar size={160} class="flex-none" />
+        </section>
 
-    <p>
-        Morbi tristique senectus et netus. Id semper risus in hendrerit gravida
-        rutrum quisque non tellus. Habitasse platea dictumst quisque sagittis
-        purus sit amet. Tellus molestie nunc non blandit massa. Cursus vitae
-        congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna
-        porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt
-        lobortis. In cursus turpis massa tincidunt dui ut ornare lectus. Integer
-        feugiat scelerisque varius morbi enim nunc. Bibendum neque egestas
-        congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis
-        bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus
-        urna et pharetra pharetra massa massa ultricies mi.
-    </p>
+        <section aria-labelledby="what-im-doing-now">
+            <h2 id="what-im-doing-now">What I'm doing now</h2>
+            <div>
+                <p>
+                    Based in Zwollywood (Zwolle), The Netherlands, my
+                    professional life currently revolves around the Magento
+                    ecosystem, specifically making it faster and more enjoyable
+                    to work with through
+                    <strong>Hyvä Themes</strong>. As the "Frontend Wizard," I
+                    help build the UI and themes that power modern e-commerce
+                    experiences.
+                </p>
+                <p>
+                    When I'm not deep in Magento templates, I'm working on <strong
+                        >Fylgja CSS</strong
+                    >. Fylgja CSS aims to solve many issues that CSS frameworks
+                    have, by providing a modular library that lets developers
+                    use only what they need.
+                </p>
+            </div>
+        </section>
 
-    <p>
-        Mollis nunc sed id semper risus in. Convallis a cras semper auctor
-        neque. Diam sit amet nisl suscipit. Lacus viverra vitae congue eu
-        consequat ac felis donec. Egestas integer eget aliquet nibh praesent
-        tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In
-        vitae turpis massa sed elementum. Tristique et egestas quis ipsum
-        suspendisse ultrices. Eget lorem dolor sed viverra ipsum. Vel turpis
-        nunc eget lorem dolor sed viverra. Posuere ac ut consequat semper
-        viverra nam. Laoreet suspendisse interdum consectetur libero id
-        faucibus. Diam phasellus vestibulum lorem sed risus ultricies tristique.
-        Rhoncus dolor purus non enim praesent elementum facilisis. Ultrices
-        tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium
-        quam vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus
-        faucibus ornare. Fringilla urna porttitor rhoncus dolor purus non. Amet
-        dictum sit amet justo donec enim.
-    </p>
+        <section aria-labelledby="my-professional-journey">
+            <h2 id="my-professional-journey">My Professional Journey</h2>
+            <div>
+                <p>
+                    My journey in the web started with a passion for systems
+                    thinking and finding efficient ways to build interfaces.
+                    Before joining Hyvä, I spent nearly a decade at other
+                    e-commerce agencies, where I work on small and large-scale
+                    e-commerce projects.
+                </p>
+                <p>
+                    I've also been an active part of the community, helping out
+                    at events like <strong>MageUnconference NL</strong> and contributing
+                    to various open-source projects. For me, the web is at its best
+                    when it's collaborative and open.
+                </p>
+            </div>
+        </section>
 
-    <p>
-        Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere
-        ac ut consequat semper viverra. Tellus mauris a diam maecenas sed enim
-        ut sem viverra. Venenatis urna cursus eget nunc scelerisque viverra
-        mauris in. Arcu ac tortor dignissim convallis aenean et tortor at.
-        Curabitur gravida arcu ac tortor dignissim convallis aenean et tortor.
-        Egestas tellus rutrum tellus pellentesque eu. Fusce ut placerat orci
-        nulla pellentesque dignissim enim sit amet. Ut enim blandit volutpat
-        maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt
-        arcu. Id cursus metus aliquam eleifend mi.
-    </p>
+        <section aria-labelledby="philosophy-tools">
+            <h2 id="philosophy-tools">Philosophy & Tools</h2>
+            <div>
+                <p>
+                    I lean towards <strong>minimalism</strong> in code. I believe
+                    in the "pay only for what you use" architecture. If a project
+                    doesn't need a massive framework, don't use one.
+                </p>
+                <p>
+                    I use a Macbook with the Zed Editor. For the rest of the
+                    tools I use, you can find it on
+                    <a href="https://github.com/grimlink/dotfiles"
+                        >my github, under my dotfiles</a
+                    >.
+                </p>
+            </div>
+        </section>
 
-    <p>
-        Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi
-        tempus imperdiet. Id porta nibh venenatis cras sed felis eget velit.
-        Ipsum a arcu cursus vitae. Facilisis magna etiam tempor orci eu lobortis
-        elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-        ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper
-        feugiat nibh sed pulvinar proin gravida. Egestas integer eget aliquet
-        nibh praesent tristique magna.
-    </p>
+        <section aria-labelledby="beyond-the-code">
+            <h2 id="beyond-the-code">Beyond the Code</h2>
+            <div>
+                <p>
+                    Life isn't just about semi-colons and CSS. When I step away
+                    from the keyboard, you'll likely find me:
+                </p>
+                <ul role="list">
+                    <li>
+                        🤘 <strong>Listening to Music:</strong> Rock, Metal, and video
+                        game soundtracks.
+                    </li>
+                    <li>
+                        🎮 <strong>Gaming:</strong> From retro classics to modern
+                        experiments.
+                    </li>
+                    <li>
+                        📺 <strong>Anime:</strong> A long-time fan of the medium's
+                        unique storytelling and a hugh fan of One Piece.
+                    </li>
+                    <li>
+                        🪴 <strong>Planting:</strong> A passionate gardener who loves
+                        to grow plants.
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
 </PageLayout>

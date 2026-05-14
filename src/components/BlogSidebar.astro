@@ -20,6 +20,7 @@ const uniqueYears = [...new Set(allYears)].sort((a, b) => b.localeCompare(a));
     <section>
         <h2>Archive</h2>
         <ul role="list" class="tags inline-flex flex-wrap gap">
+            <li><a href="/blog/">All</a></li>
             {
                 uniqueYears.map((year) => (
                     <li>

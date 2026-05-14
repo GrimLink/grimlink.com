@@ -25,6 +25,10 @@
         float: inline-end;
     }
 
+    .text-brand {
+        color: var(--brand);
+    }
+
     .text-muted {
         color: var(--color-muted);
     }

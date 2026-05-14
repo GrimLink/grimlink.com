@@ -36,18 +36,10 @@ const href = id ? `/blog/${id}/` : undefined;
         variant === "card" ? "card" : "relative",
         variant === "card" && href ? "card-elevated" : "",
     ]}
-    style={{
-        ...style,
-        "view-transition-name": postId,
-    }}
+    style={style}
 >
     <div class:list={["flex-auto", variant === "card" ? "card-content" : ""]}>
-        <h2
-            class="post-heading"
-            style={{
-                "view-transition-name": postId ? `${postId}__title` : null,
-            }}
-        >
+        <h2 class="post-heading">
             <a href={href} class="stretched-link">
                 {title}
             </a>
@@ -61,7 +53,13 @@ const href = id ? `/blog/${id}/` : undefined;
     {image && <Image src={image} alt="" width="150" height="150" />}
 </article>
 
-<style>
+<style define:vars={{ postId }}>
+    @media (prefers-reduced-motion: no-preference) {
+        article {
+            view-transition-name: var(--postId);
+        }
+    }
+
     .post-heading {
         font-size: 1.125em;
 

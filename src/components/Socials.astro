@@ -2,16 +2,24 @@
 import SocialsIcons from "@/assets/socials.svg?url";
 
 interface Props {
+    class?: string;
+    style?: {
+        [key: string]: string;
+    };
     data: {
         [key: string]: string;
     };
     size?: number;
 }
 
-const { data, size = 24 } = Astro.props;
+const { class: className, style, data, size = 24 } = Astro.props;
 ---
 
-<ul role="list" class="social-links flex-wrap gap">
+<ul
+    role="list"
+    class:list={["social-links flex-wrap gap", className]}
+    style={style}
+>
     {
         Object.entries(data).map(([platform, url]) => (
             <li>
@@ -25,3 +33,18 @@ const { data, size = 24 } = Astro.props;
         ))
     }
 </ul>
+
+<style>
+    .social-links {
+        color: light-dark(var(--brand), currentcolor);
+
+        :any-link {
+            display: inline-block;
+            transition: scale 0.2s var(--ease-3);
+
+            &:is(:hover, :focus) {
+                scale: 1.2;
+            }
+        }
+    }
+</style>
