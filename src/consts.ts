@@ -8,6 +8,7 @@ export const authorAbout =
 	"Frontend Developer, CSS maniac, Gamer and also the creator of Fylgja CSS";
 export const authorTitle = "CSS Wizard";
 
+export const isProd = import.meta.env.PROD;
 export const today = new Date();
 
 export const socials = {

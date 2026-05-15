@@ -10,7 +10,7 @@ import { SchemaMe, SchemaSite } from "@/components/Schema";
 import Speculation from "@fylgja/Speculation.astro";
 
 import FallbackImage from "@/assets/placeholder/blue.jpg";
-import { author, siteTitle, siteDescription, themeColor } from "@/consts";
+import { author, siteTitle, siteDescription, themeColor, isProd, today } from "@/consts";
 
 interface Props {
 	title?: string;
@@ -30,6 +30,7 @@ const {
 	class: className = "",
 } = Astro.props;
 const rssUrl = new URL("feed.xml", Astro.site);
+const dateHash = `?v=${today.getMonth() + 1}-${today.getFullYear()}`;
 ---
 
 <html lang={lang} dir={dir} data-theme="auto">
@@ -41,6 +42,7 @@ const rssUrl = new URL("feed.xml", Astro.site);
 		image={image}
 		themeColor={themeColor}
 		sitemap="/sitemap-index.xml"
+		manifest={`/manifest.webmanifest${dateHash}`}
 		rss={rssUrl}
 		fediverse="@GrimLink@mastodon.social"
 	>
@@ -49,6 +51,7 @@ const rssUrl = new URL("feed.xml", Astro.site);
 		<slot name="head" />
 		<SchemaSite />
 		<SchemaMe />
+		{isProd && <ServiceWorker />}
 	</Head>
 	<body>
 		<PageHeader />
