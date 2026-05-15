@@ -1,0 +1,29 @@
+---
+import Schema from "@fylgja/Schema.astro";
+import { author, authorAbout, authorTitle, socials } from "@/consts";
+---
+
+<Schema
+	data={{
+		"@context": "https://schema.org",
+		"@type": "Person",
+		name: author,
+		url: new URL(Astro.url.pathname, Astro.site),
+		sameAs: Object.values(socials),
+		jobTitle: authorTitle,
+		description: authorAbout,
+		knowsAbout: [
+			"CSS",
+			"Web Development",
+			"JavaScript",
+			"HTML",
+			"Web Design",
+			"UX",
+			"Accessibility",
+			"Performance",
+			"Design Systems",
+			"Web Standards",
+			"E-Commerce",
+		],
+	}}
+/>

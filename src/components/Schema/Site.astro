@@ -1,0 +1,15 @@
+---
+import Schema from "@fylgja/Schema.astro";
+import { author, siteDescription, siteTitle } from "@/consts";
+---
+
+<Schema
+	data={{
+		"@context": "https://schema.org",
+		"@type": "WebSite",
+		name: siteTitle,
+		url: new URL(Astro.url.pathname, Astro.site),
+		author: { "@type": "Person", name: author },
+		description: siteDescription,
+	}}
+/>

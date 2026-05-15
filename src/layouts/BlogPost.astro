@@ -6,89 +6,90 @@ import Head from "@fylgja/Head.astro";
 import ThemeToggleJs from "@/components/ThemeToggle/script.astro";
 import PageHeader from "@/components/PageHeader.astro";
 import PageFooter from "@/components/PageFooter.astro";
+import { SchemaMe, SchemaSite } from "@/components/Schema";
+import Speculation from "@fylgja/Speculation.astro";
 import FormattedDate from "@/components/FormattedDate.astro";
 import PostNavigation from "@/components/PostNavigation.astro";
 import OriginalSource from "@/components/OriginalSource.astro";
 import Tags from "@/components/Tags.astro";
-import FallbackImage from "@/assets/placeholder/blue.jpg";
 
+import FallbackImage from "@/assets/placeholder/blue.jpg";
 import { siteTitle, siteDescription, themeColor } from "../consts";
 
 type BlogProps = CollectionEntry<"blog">["data"];
 interface Props extends BlogProps {
-    lang?: string;
-    dir?: string;
-    class?: string;
-    prev?: CollectionEntry<"blog"> | null;
-    next?: CollectionEntry<"blog"> | null;
+	lang?: string;
+	dir?: string;
+	class?: string;
+	prev?: CollectionEntry<"blog"> | null;
+	next?: CollectionEntry<"blog"> | null;
 }
 
 const {
-    title = siteTitle,
-    description = siteDescription,
-    pubDate,
-    updatedDate,
-    image = FallbackImage,
-    tags = [],
-    pubSource = "",
-    lang = "en",
-    dir = "ltr",
-    class: className = "",
-    prev,
-    next,
+	title = siteTitle,
+	description = siteDescription,
+	pubDate,
+	updatedDate,
+	image = FallbackImage,
+	tags = [],
+	pubSource = "",
+	lang = "en",
+	dir = "ltr",
+	class: className = "",
+	prev,
+	next,
 } = Astro.props;
 const rssUrl = new URL("feed.xml", Astro.site);
 ---
 
 <html lang={lang} dir={dir} data-theme="auto">
-    <Head
-        siteName={siteTitle}
-        title={title}
-        description={description}
-        image={image}
-        themeColor={themeColor}
-        sitemap="/sitemap-index.xml"
-        rss={rssUrl}
-    >
-        <ThemeToggleJs />
-        <meta name="fediverse:creator" content="@GrimLink@mastodon.social" />
-        <slot name="head" />
-    </Head>
-    <body>
-        <PageHeader />
-        <main
-            class:list={["container", className]}
-            style="--container-size: 68ch"
-        >
-            <article>
-                <h1>{title}</h1>
-                <div class="post-meta">
-                    <span>
-                        <FormattedDate date={pubDate} />
-                        {
-                            updatedDate && (
-                                <span class="last-updated-on">
-                                    Last updated on{" "}
-                                    <FormattedDate date={updatedDate} />
-                                </span>
-                            )
-                        }
-                        {pubSource && <OriginalSource source={pubSource} />}
-                    </span>
-                </div>
-                <slot />
-                <Tags tags={tags} />
-            </article>
-            <hr />
-            <PostNavigation prev={prev} next={next} />
-        </main>
-        <PageFooter />
-    </body>
+	<Head
+		siteName={siteTitle}
+		title={title}
+		description={description}
+		image={image}
+		themeColor={themeColor}
+		sitemap="/sitemap-index.xml"
+		rss={rssUrl}
+		fediverse="@GrimLink@mastodon.social"
+	>
+		<ThemeToggleJs />
+		<Speculation />
+		<slot name="head" />
+		<SchemaSite />
+		<SchemaMe />
+	</Head>
+	<body>
+		<PageHeader />
+		<main class:list={["container", className]} style="--container-size: 68ch">
+			<article>
+				<h1>{title}</h1>
+				<div class="post-meta">
+					<span>
+						<FormattedDate date={pubDate} />
+						{
+							updatedDate && (
+								<span class="last-updated-on">
+									Last updated on <FormattedDate date={updatedDate} />
+								</span>
+							)
+						}
+						{pubSource && <OriginalSource source={pubSource} />}
+					</span>
+				</div>
+				<slot />
+				<Tags tags={tags} />
+			</article>
+			<hr />
+			<PostNavigation prev={prev} next={next} />
+		</main>
+		<PageFooter />
+	</body>
 </html>
 
 <style>
-    .post-meta {
-        font-style: italic;
-        color: var(--color-muted);
-    }
+	.post-meta {
+		font-style: italic;
+		color: var(--color-muted);
+	}
 </style>

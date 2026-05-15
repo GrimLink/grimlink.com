@@ -6,49 +6,54 @@ import Head from "@fylgja/Head.astro";
 import ThemeToggleJs from "@/components/ThemeToggle/script.astro";
 import PageHeader from "@/components/PageHeader.astro";
 import PageFooter from "@/components/PageFooter.astro";
-import FallbackImage from "@/assets/placeholder/blue.jpg";
+import { SchemaMe, SchemaSite } from "@/components/Schema";
+import Speculation from "@fylgja/Speculation.astro";
 
-import { siteTitle, siteDescription, themeColor } from "../consts";
+import FallbackImage from "@/assets/placeholder/blue.jpg";
+import { siteTitle, siteDescription, themeColor } from "@/consts";
 
 interface Props {
-    title?: string;
-    description?: string;
-    image?: ImageMetadata;
-    lang?: string;
-    dir?: string;
-    class?: string;
+	title?: string;
+	description?: string;
+	image?: ImageMetadata;
+	lang?: string;
+	dir?: string;
+	class?: string;
 }
 
 const {
-    title = siteTitle,
-    description = siteDescription,
-    image = FallbackImage,
-    lang = "en",
-    dir = "ltr",
-    class: className = "",
+	title = siteTitle,
+	description = siteDescription,
+	image = FallbackImage,
+	lang = "en",
+	dir = "ltr",
+	class: className = "",
 } = Astro.props;
 const rssUrl = new URL("feed.xml", Astro.site);
 ---
 
 <html lang={lang} dir={dir} data-theme="auto">
-    <Head
-        siteName={siteTitle}
-        title={title}
-        description={description}
-        image={image}
-        themeColor={themeColor}
-        sitemap="/sitemap-index.xml"
-        rss={rssUrl}
-    >
-        <meta name="fediverse:creator" content="@GrimLink@mastodon.social" />
-        <ThemeToggleJs />
-        <slot name="head" />
-    </Head>
-    <body>
-        <PageHeader />
-        <main class:list={className}>
-            <slot />
-        </main>
-        <PageFooter />
-    </body>
+	<Head
+		siteName={siteTitle}
+		title={title}
+		description={description}
+		image={image}
+		themeColor={themeColor}
+		sitemap="/sitemap-index.xml"
+		rss={rssUrl}
+		fediverse="@GrimLink@mastodon.social"
+	>
+		<ThemeToggleJs />
+		<Speculation />
+		<slot name="head" />
+		<SchemaSite />
+		<SchemaMe />
+	</Head>
+	<body>
+		<PageHeader />
+		<main class:list={className}>
+			<slot />
+		</main>
+		<PageFooter />
+	</body>
 </html>
