@@ -32,4 +32,40 @@
     .text-muted {
         color: var(--color-muted);
     }
+
+    .text-sm {
+        font-size: 0.875em;
+    }
+
+    .text-md {
+        font-size: 1em;
+    }
+
+    .text-lg {
+        font-size: 1.125em;
+    }
+
+    .text-xl {
+        font-size: 1.25em;
+    }
+
+    .font-medium {
+        font-weight: 500;
+    }
+
+    .underline {
+        text-decoration: underline;
+    }
+
+    .no-underline {
+        text-decoration: none;
+    }
+
+    .hover-underline {
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 }

@@ -114,10 +114,12 @@ body > main {
 }
 
 @media (prefers-color-scheme: dark) {
-    :root {
-        --root-bg: color-mix(in oklab, hsl(0 15% 5%) 88%, var(--brand));
+    [data-theme="auto"] {
+        --root-bg: color-mix(in oklab, hsl(0 15% 5%) 83%, var(--brand));
         --root-fg: hsl(0 0% 98%);
         --select-icon: var(--select-dark-scheme);
+        --card-bg: color-mix(in oklab, hsl(0 15% 5%) 72%, var(--brand));
+        --card-stroke: transparent;
     }
 }
 
@@ -129,8 +131,10 @@ body > main {
 }
 
 [data-theme="dark"] {
-    --root-bg: color-mix(in oklab, hsl(0 15% 5%) 88%, var(--brand));
+    --root-bg: color-mix(in oklab, hsl(0 15% 5%) 83%, var(--brand));
     --root-fg: hsl(0 0% 98%);
     --select-icon: var(--select-dark-scheme);
+    --card-bg: color-mix(in oklab, hsl(0 15% 5%) 72%, var(--brand));
+    --card-stroke: transparent;
     color-scheme: dark;
 }
