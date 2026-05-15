@@ -47,7 +47,7 @@ const Heading = headingTag;
 				{title}
 			</a>
 		</Heading>
-		{description && <p>{description}</p>}
+		{description && <p class="line-clamp">{description}</p>}
 		<div class="post-meta relative">
 			{pubDate && <FormattedDate date={pubDate} />}
 			{pubDate && pubSource && <span> ∙ </span>}

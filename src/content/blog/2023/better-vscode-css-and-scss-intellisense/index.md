@@ -1,6 +1,6 @@
 ---
 title: "Better VSCode CSS and SCSS IntelliSense"
-description: "VSCode is a fantastic editor for writing in your favourite language, as well as a powerful tool for Javascript-based applications, introducing numerous functionality without the need for extensions."
+description: "Improve your CSS and SCSS IntelliSense in VS Code with these essential tips and extensions."
 image: "css-autocompletion.jpg"
 pubDate: 2023-06-02
 pubSource: "https://dev.to/grimlink/better-vscode-css-and-scss-intellisense-1a49"
