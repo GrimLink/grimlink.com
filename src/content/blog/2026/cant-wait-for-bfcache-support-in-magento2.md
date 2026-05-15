@@ -1,9 +1,9 @@
 ---
-title: "Linkedin: bfcache support"
+title: "Can't wait for bfcache support in Magento2"
 description: "Waiting for Adobe Commerce to merge a PR is like watching paint dry, but I'm far too excited about the performance gains to just sit around."
 pubDate: 2026-05-13
 pubSource: "https://www.linkedin.com/posts/seanvanzuidam_github-grimlinkmagento-patch-bfcache-activity-7460290705064681473-qY94"
-tags: ["linkedin", "magento2", "performance", "bfcache"]
+tags: ["magento2", "performance"]
 ---
 
 Waiting for Adobe Commerce to merge a PR is like watching paint dry, but I’m far too excited about the performance gains to just sit around.

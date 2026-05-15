@@ -1,6 +1,7 @@
 ---
 import PageLayout from "@/layouts/PageLayout.astro";
 import Avatar from "@/components/Avatar.astro";
+import profiles from "@/profiles.json";
 
 const pageTitle = "About Me";
 const pageDescription =
@@ -14,17 +15,18 @@ const pageDescription =
             style="--gap: var(--size-4) var(--size-8); --align-items: center;"
             aria-labelledby="intro"
         >
+            <Avatar size={160} />
             <div class="flow">
                 <h1 id="intro">Hi, I'm Sean.</h1>
                 <p class="lead">
                     Frontend Developer at
-                    <a href="https://hyva.io" target="_blank">Hyvä Themes</a>,
+                    <a href="https://hyva.io/" target="_blank">Hyvä Themes</a>,
                     creator of
-                    <a href="https://fylgja.dev" target="_blank">Fylgja CSS</a>,
-                    and a firm believer in modular, performant web developement.
+                    <a href="https://fylgja.dev/" target="_blank">Fylgja CSS</a
+                    >, and a firm believer in modular, performant web
+                    developement.
                 </p>
             </div>
-            <Avatar size={160} class="flex-none" />
         </section>
 
         <section aria-labelledby="what-im-doing-now">
@@ -79,7 +81,7 @@ const pageDescription =
                 <p>
                     I use a Macbook with the Zed Editor. For the rest of the
                     tools I use, you can find it on
-                    <a href="https://github.com/grimlink/dotfiles"
+                    <a href="https://github.com/grimlink/dotfiles/"
                         >my github, under my dotfiles</a
                     >.
                 </p>
@@ -112,6 +114,46 @@ const pageDescription =
                     </li>
                 </ul>
             </div>
+        </section>
+
+        <section aria-labelledby="profiles">
+            <h2 id="profiles">Profiles</h2>
+            <p>
+                You can find me on various platforms where I share my work,
+                interests, and occasional updates.
+            </p>
+            <ul
+                role="list"
+                class="flex-wrap gap"
+                style="--gap: var(--size-2) var(--size-4)"
+            >
+                {
+                    profiles.map((profile) => (
+                        <li>
+                            <a
+                                href={profile.url}
+                                class:list={[
+                                    "hover-underline",
+                                    profile.active ? null : "text-muted",
+                                ]}
+                                target="_blank"
+                                rel="me noreferrer"
+                                title={
+                                    profile.active
+                                        ? null
+                                        : `${profile.name}, Inactive`
+                                }
+                            >
+                                {profile.active ? (
+                                    <span>{profile.name}</span>
+                                ) : (
+                                    <del>{profile.name}</del>
+                                )}
+                            </a>
+                        </li>
+                    ))
+                }
+            </ul>
         </section>
     </div>
 </PageLayout>

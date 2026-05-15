@@ -1,9 +1,7 @@
 ---
 import PageLayout from "@/layouts/PageLayout.astro";
 import { getCollection } from "astro:content";
-import { Image } from "astro:assets";
-import { projects } from "@/projects";
-import { SOCIALS } from "@/consts";
+import { socials, myLists, projects } from "@/consts";
 import Avatar from "@/components/Avatar.astro";
 import PostCard from "@/components/PostCard.astro";
 import Socials from "@/components/Socials.astro";
@@ -17,27 +15,20 @@ const posts = (await getCollection("blog"))
     <div class="page-layout container">
         <section
             aria-labelledby="intro"
-            class="flow-root"
-            style={{ "--my": "2rem" }}
+            class="flow"
+            style="margin-block-start: var(--size-8);"
         >
-            <Avatar
-                class="float-end"
-                style={{
-                    "--my": "0 1rem",
-                    "--mx": "1rem 0",
-                }}
-            />
-            <h1 id="intro" class="lead">
-                Hi, I am Sean van Zuidam also known on the web as @GrimLink.
-            </h1>
-            <p class="lead font-normal">
-                I am a Frontend Developer from Zwolle, The Netherlands. Gamer,
-                Anime watcher and fan of METAL, Rock and Chiptune music 🤘 I am
-                also the creator of Fylgja CSS.
+            <div class="flow-none flex gap align-center">
+                <Avatar />
+                <h1 id="intro" class="text-lg font-medium">
+                    Hi, I am Sean van Zuidam also known on the web as GrimLink.
+                </h1>
+            </div>
+            <p>
+                I am a Frontend Developer from Zwollywood (Zwolle), The
+                Netherlands. Gamer, Anime watcher and fan of METAL, Rock and
+                Game soundtracks 🤘 I am also the creator of Fylgja CSS.
             </p>
-            <hr />
-            <p><strong>You can also find me on:</strong></p>
-            <Socials data={SOCIALS} />
         </section>
 
         <section aria-labelledby="recent-posts">
@@ -46,7 +37,7 @@ const posts = (await getCollection("blog"))
                 {
                     posts.map((post) => (
                         <li>
-                            <PostCard {...post} />
+                            <PostCard {...post} headingTag="h3" />
                         </li>
                     ))
                 }
@@ -58,25 +49,68 @@ const posts = (await getCollection("blog"))
             </p>
         </section>
 
-        <section aria-labelledby="projects">
-            <h2 id="projects">Projects I Work on</h2>
-            <ul role="list" class="flow divide-y">
-                {projects.map((project) => <li>{JSON.stringify(project)}</li>)}
+        <section aria-labelledby="projects" class="flow">
+            <h2 id="projects" class="lead">Projects</h2>
+            <ul style="--px: 1em 0">
+                {
+                    projects.map((project) => (
+                        <li>
+                            <a href={project.url}>{project.title}</a>
+                        </li>
+                    ))
+                }
             </ul>
+        </section>
+
+        <section aria-labelledby="lists" class="flow">
+            <h2 id="lists" class="lead">Lists</h2>
+            <ul style="--px: 1em 0">
+                {
+                    Object.entries(myLists).map(([name, url]) => {
+                        const external = url.startsWith("http");
+                        return (
+                            <li>
+                                <a
+                                    href={url}
+                                    target={external ? "_blank" : null}
+                                    rel={
+                                        external ? "noopener noreferrer" : null
+                                    }
+                                >
+                                    {name}
+                                </a>
+                            </li>
+                        );
+                    })
+                }
+            </ul>
+        </section>
+
+        <section
+            aria-label="You can also find me on on the following socials"
+            class="flow"
+        >
+            <h2 id="socials" class="lead">You can also find me on</h2>
+            <Socials data={socials} />
         </section>
     </div>
 </PageLayout>
 
 <style>
-    .page-layout {
-        @media (width >= 128ch) {
+    section.flow {
+        margin-block-start: var(--size-8);
+    }
+
+    @media (width >= 128ch) {
+        .page-layout {
             display: grid;
             grid-template-columns: 34ch 1fr;
-            gap: var(--size-12);
+            grid-template-rows: repeat(3, auto) 1fr;
+            gap: 0 var(--size-12);
+        }
 
-            > :first-child {
-                grid-row: span 2;
-            }
+        [aria-labelledby="recent-posts"] {
+            grid-row: span 4;
         }
     }
 </style>

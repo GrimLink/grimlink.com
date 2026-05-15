@@ -1,14 +1,34 @@
-// Place any global data in this file.
-// You can import this data from anywhere in your site by using the `import` keyword.
+export const siteTitle = "GrimLink.com";
+export const siteDescription =
+  "Hi, I am Sean van Zuidam also known on the web as GrimLink. I am a Frontend Developer from Zwollywood.";
+export const author = "Sean van Zuidam";
+export const themeColor = "#fff";
 
-export const TODAY = new Date();
-export const SITE_TITLE = "GrimLink.com";
-export const SITE_DESCRIPTION = "Welcome to my website!";
-export const AUTHOR = "Sean van Zuidam";
-export const THEME_COLOR = "#fff";
-export const SOCIALS = {
-  bluesky: "https://bsky.app/profile/grimlink.bsky.social",
-  mastodon: "https://mastodon.social/@GrimLink",
-  github: "https://github.com/GrimLink",
-  linkedin: "https://www.linkedin.com/in/seanvanzuidam",
+export const today = new Date();
+
+export const socials = {
+  github: "https://github.com/GrimLink/",
+  bluesky: "https://bsky.app/profile/grimlink.bsky.social/",
+  mastodon: "https://mastodon.social/@GrimLink/",
+  linkedin: "https://www.linkedin.com/in/seanvanzuidam/",
+  instagram: "https://www.instagram.com/seangrimlink/",
+  youtube: "https://www.youtube.com/@SeanGrimLink/",
 };
+
+export const myLists = {
+  Backloggd: "https://backloggd.com/u/Grimlink/",
+  MyAnimelist: "https://myanimelist.net/profile/GrimLink/",
+};
+
+export const projects = [
+  {
+    title: "Fylgja CSS",
+    description: "",
+    url: "https://fylgja.dev/",
+  },
+  {
+    title: "Mage Script",
+    description: "",
+    url: "https://github.com/grimlink/mage/",
+  },
+];
