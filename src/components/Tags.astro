@@ -2,40 +2,30 @@
 import { undefined } from "astro:schema";
 
 interface Props {
-    tags: (string | undefined)[];
-    class?: string;
-    useLinks?: boolean;
-    linkPrefix?: string;
+	tags: (string | undefined)[];
+	class?: string;
+	useLinks?: boolean;
+	linkPrefix?: string;
 }
 
-const {
-    tags,
-    class: className,
-    useLinks = false,
-    linkPrefix = "/blog/tags",
-} = Astro.props;
+const { tags, class: className, useLinks = false, linkPrefix = "/blog/tags" } = Astro.props;
 ---
 
 {
-    tags && tags.length > 0 && (
-        <ul
-            role="list"
-            class:list={["tags inline-flex flex-wrap gap", className]}
-        >
-            {tags.map((tag) => (
-                <li>
-                    <a href={useLinks ? `${linkPrefix}/${tag}/` : null}>
-                        #{tag}
-                    </a>
-                </li>
-            ))}
-        </ul>
-    )
+	tags && tags.length > 0 && (
+		<ul role="list" class:list={["tags inline-flex flex-wrap gap", className]}>
+			{tags.map((tag) => (
+				<li>
+					<a href={useLinks ? `${linkPrefix}/${tag}/` : null}>#{tag}</a>
+				</li>
+			))}
+		</ul>
+	)
 }
 
 <style>
-    .tags {
-        --gap: var(--size-1) var(--size-2);
-        color: var(--color-muted);
-    }
+	.tags {
+		--gap: var(--size-1) var(--size-2);
+		color: var(--color-muted);
+	}
 </style>

@@ -5,40 +5,37 @@ import PostCard from "@/components/PostCard.astro";
 import BlogSidebar from "@/components/BlogSidebar.astro";
 
 const posts = (await getCollection("blog")).sort(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
 const pageTitle = "My Feed";
 ---
 
-<PageLayout
-    title={pageTitle}
-    description="All my Blog and Social Posts in one handy page."
->
-    <div class="container">
-        <h1>{pageTitle}</h1>
-        <p>All my Blog and Social Posts in one handy page.</p>
-        <div class="page-layout">
-            <ul role="list" class="flow">
-                {
-                    posts.map((post) => (
-                        <li>
-                            <PostCard {...post} />
-                        </li>
-                    ))
-                }
-            </ul>
-            <BlogSidebar />
-        </div>
-    </div>
+<PageLayout title={pageTitle} description="All my Blog and Social Posts in one handy page.">
+	<div class="container">
+		<h1>{pageTitle}</h1>
+		<p>All my Blog and Social Posts in one handy page.</p>
+		<div class="page-layout">
+			<ul role="list" class="flow">
+				{
+					posts.map((post) => (
+						<li>
+							<PostCard {...post} />
+						</li>
+					))
+				}
+			</ul>
+			<BlogSidebar />
+		</div>
+	</div>
 </PageLayout>
 
 <style>
-    .page-layout {
-        @media (width >= 128ch) {
-            display: grid;
-            grid-template-columns: 1fr 34ch;
-            gap: var(--size-12);
-        }
-    }
+	.page-layout {
+		@media (width >= 128ch) {
+			display: grid;
+			grid-template-columns: 1fr 34ch;
+			gap: var(--size-12);
+		}
+	}
 </style>

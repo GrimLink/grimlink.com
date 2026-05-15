@@ -2,49 +2,45 @@
 import SocialsIcons from "@/assets/socials.svg?url";
 
 interface Props {
-    class?: string;
-    style?: {
-        [key: string]: string;
-    };
-    data: {
-        [key: string]: string;
-    };
-    size?: number;
+	class?: string;
+	style?: {
+		[key: string]: string;
+	};
+	data: {
+		[key: string]: string;
+	};
+	size?: number;
 }
 
 const { class: className, style, data, size = 24 } = Astro.props;
 ---
 
-<ul
-    role="list"
-    class:list={["social-links flex-wrap gap", className]}
-    style={style}
->
-    {
-        Object.entries(data).map(([platform, url]) => (
-            <li>
-                <a href={url} target="_blank" rel="me noreferrer">
-                    <svg width={size} height={size} fill="currentcolor">
-                        <title>Me on ${platform}</title>
-                        <use href={`${SocialsIcons}#${platform}`} />
-                    </svg>
-                </a>
-            </li>
-        ))
-    }
+<ul role="list" class:list={["social-links flex-wrap gap", className]} style={style}>
+	{
+		Object.entries(data).map(([platform, url]) => (
+			<li>
+				<a href={url} target="_blank" rel="me noreferrer">
+					<svg width={size} height={size} fill="currentcolor">
+						<title>Me on ${platform}</title>
+						<use href={`${SocialsIcons}#${platform}`} />
+					</svg>
+				</a>
+			</li>
+		))
+	}
 </ul>
 
 <style>
-    .social-links {
-        color: light-dark(var(--brand), currentcolor);
+	.social-links {
+		color: light-dark(var(--brand), currentcolor);
 
-        :any-link {
-            display: inline-block;
-            transition: scale 0.2s var(--ease-3);
+		:any-link {
+			display: inline-block;
+			transition: scale 0.2s var(--ease-3);
 
-            &:is(:hover, :focus) {
-                scale: 1.2;
-            }
-        }
-    }
+			&:is(:hover, :focus) {
+				scale: 1.2;
+			}
+		}
+	}
 </style>
