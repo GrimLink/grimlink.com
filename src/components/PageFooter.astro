@@ -1,18 +1,32 @@
 ---
-import { AUTHOR, TODAY } from "@/consts";
+import MenuLink from "@/components/MenuLink.astro";
+import { author, today } from "@/consts";
+
+const menuItems = [
+    { href: "/blog/", label: "Feed" },
+    { href: "/about/", label: "About Me" },
+];
 ---
 
-<footer>
-    <div class="container">
-        <small class="block">
-            &copy; {TODAY.getFullYear()}
-            {AUTHOR}. All rights reserved.
-        </small>
-    </div>
+<footer class="container text-center flow">
+    <nav>
+        <ul class="inline-flex gap">
+            {
+                menuItems.map((item) => (
+                    <MenuLink href={item.href}>{item.label}</MenuLink>
+                ))
+            }
+        </ul>
+    </nav>
+    <small class="block">
+        © {today.getFullYear()}
+        {author}.
+    </small>
 </footer>
 <style>
     footer {
-        padding: var(--size-8) var(--size-4) var(--size-12);
-        text-align: center;
+        margin-block-start: var(--size-8);
+        padding-block: var(--size-8);
+        border-block-start: 1px solid oklch(from var(--root-fg) l c h / 10%);
     }
 </style>

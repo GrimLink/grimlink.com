@@ -1,38 +1,22 @@
 ---
 import SocialsIcons from "@/assets/socials.svg?url";
-import MenuLink from "@/components/MenuLink.astro";
 import ThemeToggleBtn from "@/components/ThemeToggle/btn.astro";
-import { SITE_TITLE } from "@/consts";
-
-const menuItems = [
-    { href: "/blog", label: "Feed" },
-    { href: "/projects", label: "Projects" },
-    { href: "/about", label: "More About Me" },
-];
+import { siteTitle } from "@/consts";
 ---
 
-<header>
-    <div class="container flex-col align" style="--md_flex-dir: row">
-        <a href="/">{SITE_TITLE}</a>
-        <nav>
-            <ul class="flex gap-sm">
-                {
-                    menuItems.map((item) => (
-                        <MenuLink href={item.href} class="btn">
-                            {item.label}
-                        </MenuLink>
-                    ))
-                }
-            </ul>
-        </nav>
-        <div class="flex gap">
-            <a href="/rss.xml" class="btn" aria-label="RSS Feed">
-                <svg width="20" height="20" fill="currentcolor">
-                    <use href={`${SocialsIcons}#rss`}></use>
-                </svg>
-            </a>
-            <ThemeToggleBtn />
-        </div>
+<header class="container flex gap-sm align">
+    <a href="/" class="logo" aria-label={siteTitle}>
+        <span class="symbol">&lt;</span>
+        <span>GrimLink</span>
+        <span class="symbol">&gt;</span>
+    </a>
+    <div class="inline-flex gap">
+        <ThemeToggleBtn />
+        <a href="/rss.xml" class="btn" aria-label="RSS Feed">
+            <svg width="20" height="20" fill="currentcolor">
+                <use href={`${SocialsIcons}#rss`}></use>
+            </svg>
+        </a>
     </div>
 </header>
 
@@ -41,6 +25,29 @@ const menuItems = [
         padding-block: 1rem;
         background-color: var(--root-bg);
         border-block-end: 1px solid oklch(from var(--root-fg) l c h / 10%);
+    }
+
+    .logo {
+        display: inline-flex;
+        gap: 0.25em;
+        font-family: var(--family-mono);
+        text-decoration: none;
+
+        @media (prefers-reduced-motion: no-preference) {
+            transition: translate 0.2s var(--ease-out-3);
+        }
+
+        .symbol {
+            transition: opacity 0.2s var(--ease-out-3);
+        }
+
+        &:hover {
+            translate: -1ch 0;
+
+            .symbol {
+                opacity: 0;
+            }
+        }
     }
 
     .btn {

@@ -18,14 +18,24 @@ interface Props extends HTMLAttributes<"article"> {
     style?: astroHTML.JSX.CSSProperties;
     variant?: "card" | "flat";
     data: PostProps;
+    headingTag?: "h2" | "h3" | "h4" | "h5" | "h6";
 }
 
-const { id, class: className, style, variant = "card", data } = Astro.props;
+const {
+    id,
+    class: className,
+    style,
+    variant = "card",
+    data,
+    headingTag = "h2",
+} = Astro.props;
 const { image, title, description, pubDate, pubSource } = data;
 const postId = id
     ? `post-${id.replace(/^\/|\/$/g, "").replaceAll("/", "-")}`
     : undefined;
 const href = id ? `/blog/${id}/` : undefined;
+
+const Heading = headingTag;
 ---
 
 <article
@@ -39,18 +49,19 @@ const href = id ? `/blog/${id}/` : undefined;
     style={style}
 >
     <div class:list={["flex-auto", variant === "card" ? "card-content" : ""]}>
-        <h2 class="post-heading">
+        <Heading class="post-heading">
             <a href={href} class="stretched-link">
                 {title}
             </a>
-        </h2>
+        </Heading>
         {description && <p>{description}</p>}
         <div class="post-meta relative">
             {pubDate && <FormattedDate date={pubDate} />}
+            {pubDate && pubSource && <span> ∙ </span>}
             {pubSource && <OriginalSource source={pubSource} />}
         </div>
     </div>
-    {image && <Image src={image} alt="" width="150" height="150" />}
+    {image && <Image src={image} alt="" width="250" height="250" />}
 </article>
 
 <style define:vars={{ postId }}>
@@ -58,6 +69,12 @@ const href = id ? `/blog/${id}/` : undefined;
         article {
             view-transition-name: var(--postId);
         }
+    }
+
+    img {
+        max-width: 33%;
+        width: 150px;
+        object-fit: cover;
     }
 
     .post-heading {

@@ -11,6 +11,6 @@ const { tag = "div", class: className, ...props } = Astro.props;
 const Tag = tag;
 ---
 
-<Tag class:list={[className]} {...props}>
+<Tag class:list={["card", className]} {...props}>
     <slot />
 </Tag>

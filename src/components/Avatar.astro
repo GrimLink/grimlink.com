@@ -11,7 +11,7 @@ interface Props {
     size?: number;
 }
 
-const { class: className, style, alt = "", size = 120 } = Astro.props;
+const { class: className, style, alt = "", size = 80 } = Astro.props;
 ---
 
 <Image
@@ -19,13 +19,13 @@ const { class: className, style, alt = "", size = 120 } = Astro.props;
     width={size}
     height={size}
     alt={alt}
-    class:list={["avatar round", className]}
+    class:list={["avatar round flex-none", className]}
     style={style}
 />
 
 <style>
     .avatar {
-        border: 4px solid #fff;
+        border: 3px solid #fff;
         box-shadow: var(--shadow-2);
 
         @media (prefers-reduced-motion: no-preference) {

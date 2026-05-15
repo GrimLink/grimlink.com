@@ -8,7 +8,7 @@ import PageHeader from "@/components/PageHeader.astro";
 import PageFooter from "@/components/PageFooter.astro";
 import FallbackImage from "@/assets/placeholder/blue.jpg";
 
-import { SITE_TITLE, SITE_DESCRIPTION, THEME_COLOR } from "../consts";
+import { siteTitle, siteDescription, themeColor } from "../consts";
 
 interface Props {
     title?: string;
@@ -20,8 +20,8 @@ interface Props {
 }
 
 const {
-    title = SITE_TITLE,
-    description = SITE_DESCRIPTION,
+    title = siteTitle,
+    description = siteDescription,
     image = FallbackImage,
     lang = "en",
     dir = "ltr",
@@ -32,11 +32,11 @@ const rssUrl = new URL("feed.xml", Astro.site);
 
 <html lang={lang} dir={dir} data-theme="auto">
     <Head
-        siteName={SITE_TITLE}
+        siteName={siteTitle}
         title={title}
         description={description}
         image={image}
-        themeColor={THEME_COLOR}
+        themeColor={themeColor}
         sitemap="/sitemap-index.xml"
         rss={rssUrl}
     >

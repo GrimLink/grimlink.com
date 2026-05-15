@@ -19,9 +19,10 @@ const { prev, next } = Astro.props;
                     {next.data.title}
                 </a>
             ) : (
-                <span aria-hidden="true" aria-disabled="true" class="btn">
-                    No next post
-                </span>
+                <a href={`/blog/`} class="btn">
+                    <span aria-hidden="true">←</span>
+                    Back to blog
+                </a>
             )}
             {prev ? (
                 <a href={`/blog/${prev.id}/`} class="btn" rel="prev">
@@ -30,9 +31,7 @@ const { prev, next } = Astro.props;
                     <span aria-hidden="true">→</span>
                 </a>
             ) : (
-                <span aria-hidden="true" aria-disabled="true" class="btn">
-                    No previous post
-                </span>
+                <span />
             )}
         </nav>
     )
