@@ -11,61 +11,75 @@
 @import "@fylgja/utilities" layer(utilities);
 
 @layer theme {
-    :root {
-        --color-muted: color-mix(in oklab, var(--root-fg) 70%, var(--root-bg));
-    }
+	:root {
+		--color-muted: color-mix(in oklab, var(--root-fg) 70%, var(--root-bg));
+	}
+}
+
+@layer components {
+	/* For Markdown layouts */
+	.md-row {
+		display: grid;
+		gap: 1em;
+		grid-template-columns: minmax(0px, 1fr) minmax(0px, 1fr);
+		margin-block: 1.5em;
+
+		p:only-child {
+			display: contents;
+		}
+	}
 }
 
 @layer utilities {
-    .float-start {
-        float: inline-start;
-    }
+	.float-start {
+		float: inline-start;
+	}
 
-    .float-end {
-        float: inline-end;
-    }
+	.float-end {
+		float: inline-end;
+	}
 
-    .text-brand {
-        color: var(--brand);
-    }
+	.text-brand {
+		color: var(--brand);
+	}
 
-    .text-muted {
-        color: var(--color-muted);
-    }
+	.text-muted {
+		color: var(--color-muted);
+	}
 
-    .text-sm {
-        font-size: 0.875em;
-    }
+	.text-sm {
+		font-size: 0.875em;
+	}
 
-    .text-md {
-        font-size: 1em;
-    }
+	.text-md {
+		font-size: 1em;
+	}
 
-    .text-lg {
-        font-size: 1.125em;
-    }
+	.text-lg {
+		font-size: 1.125em;
+	}
 
-    .text-xl {
-        font-size: 1.25em;
-    }
+	.text-xl {
+		font-size: 1.25em;
+	}
 
-    .font-medium {
-        font-weight: 500;
-    }
+	.font-medium {
+		font-weight: 500;
+	}
 
-    .underline {
-        text-decoration: underline;
-    }
+	.underline {
+		text-decoration: underline;
+	}
 
-    .no-underline {
-        text-decoration: none;
-    }
+	.no-underline {
+		text-decoration: none;
+	}
 
-    .hover-underline {
-        text-decoration: none;
+	.hover-underline {
+		text-decoration: none;
 
-        &:hover {
-            text-decoration: underline;
-        }
-    }
+		&:hover {
+			text-decoration: underline;
+		}
+	}
 }

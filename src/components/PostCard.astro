@@ -7,91 +7,88 @@ import FormattedDate from "@/components/FormattedDate.astro";
 import OriginalSource from "@/components/OriginalSource.astro";
 
 type PostProps = {
-    image?: ImageMetadata;
-    title: string;
-    description?: string;
-    pubDate?: Date;
-    pubSource?: string;
+	image?: ImageMetadata;
+	title: string;
+	description?: string;
+	pubDate?: Date;
+	pubSource?: string;
 };
 
 interface Props extends HTMLAttributes<"article"> {
-    style?: astroHTML.JSX.CSSProperties;
-    variant?: "card" | "flat";
-    data: PostProps;
-    headingTag?: "h2" | "h3" | "h4" | "h5" | "h6";
+	style?: {
+		[key: string]: string | number | undefined;
+	};
+	variant?: "card" | "flat";
+	data: PostProps;
+	headingTag?: "h2" | "h3" | "h4" | "h5" | "h6";
 }
 
-const {
-    id,
-    class: className,
-    style,
-    variant = "card",
-    data,
-    headingTag = "h2",
-} = Astro.props;
+const { id, class: className, style, variant = "card", data, headingTag = "h2" } = Astro.props;
 const { image, title, description, pubDate, pubSource } = data;
-const postId = id
-    ? `post-${id.replace(/^\/|\/$/g, "").replaceAll("/", "-")}`
-    : undefined;
+const postId = id ? `post-${id.replace(/^\/|\/$/g, "").replaceAll("/", "-")}` : undefined;
 const href = id ? `/blog/${id}/` : undefined;
 
 const Heading = headingTag;
 ---
 
 <article
-    id={postId}
-    class:list={[
-        "flex",
-        className,
-        variant === "card" ? "card" : "relative",
-        variant === "card" && href ? "card-elevated" : "",
-    ]}
-    style={style}
+	id={postId}
+	class:list={[
+		"flex",
+		className,
+		variant === "card" ? "card" : "relative",
+		variant === "card" && href ? "card-elevated" : "",
+	]}
+	style={style}
 >
-    <div class:list={["flex-auto", variant === "card" ? "card-content" : ""]}>
-        <Heading class="post-heading">
-            <a href={href} class="stretched-link">
-                {title}
-            </a>
-        </Heading>
-        {description && <p>{description}</p>}
-        <div class="post-meta relative">
-            {pubDate && <FormattedDate date={pubDate} />}
-            {pubDate && pubSource && <span> ∙ </span>}
-            {pubSource && <OriginalSource source={pubSource} />}
-        </div>
-    </div>
-    {image && <Image src={image} alt="" width="250" height="250" />}
+	<div class:list={["flex-auto", variant === "card" ? "card-content" : ""]}>
+		<Heading class="post-heading">
+			<a href={href} class="stretched-link">
+				{title}
+			</a>
+		</Heading>
+		{description && <p>{description}</p>}
+		<div class="post-meta relative">
+			{pubDate && <FormattedDate date={pubDate} />}
+			{pubDate && pubSource && <span> ∙ </span>}
+			{pubSource && <OriginalSource source={pubSource} />}
+		</div>
+	</div>
+	{image && <Image src={image} alt="" width="250" height="250" />}
 </article>
 
 <style define:vars={{ postId }}>
-    @media (prefers-reduced-motion: no-preference) {
-        article {
-            view-transition-name: var(--postId);
-        }
-    }
+	@media (prefers-reduced-motion: no-preference) {
+		article {
+			view-transition-name: var(--postId);
+		}
+	}
 
-    img {
-        max-width: 33%;
-        width: 150px;
-        object-fit: cover;
-    }
+	img {
+		max-width: 33%;
+		width: 150px;
+		object-fit: cover;
+	}
 
-    .post-heading {
-        font-size: 1.125em;
+	.post-heading {
+		font-size: 1.125em;
 
-        :any-link:not(:hover) {
-            text-decoration: none;
-        }
-    }
+		:any-link:not(:hover) {
+			text-decoration: none;
+		}
+	}
 
-    .post-meta {
-        font-size: 0.875em;
-        font-style: italic;
-        color: var(--color-muted);
-    }
+	.post-meta {
+		font-size: 0.875em;
+		font-style: italic;
+		color: var(--color-muted);
+	}
 
-    .card-elevated:has(:hover, :focus-within) {
-        --card-shadow: var(--shadow-4);
-    }
+	.card {
+		--card-shadow: light-dark(none, var(--shadow-1));
+	}
+
+	.card-elevated:hover {
+		--card-shadow: var(--shadow-4);
+	}
 </style>

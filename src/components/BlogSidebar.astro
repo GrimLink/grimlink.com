@@ -14,10 +14,10 @@ const uniqueYears = [...new Set(allYears)].sort((a, b) => b.localeCompare(a));
 
 <aside class="sticky">
 	<h2>Tags</h2>
-	<Tags tags={uniqueTags} useLinks={true} />
+	<Tags tags={uniqueTags} class="blog-list" />
 
 	<h2>Archive</h2>
-	<ul role="list" class="inline-flex flex-wrap gap">
+	<ul role="list" class="blog-list inline-flex flex-wrap gap">
 		<li><a href="/blog/">All</a></li>
 		{
 			uniqueYears.map((year) => (
@@ -45,7 +45,7 @@ const uniqueYears = [...new Set(allYears)].sort((a, b) => b.localeCompare(a));
 			}
 		}
 
-		ul:not(.social-links) {
+		.blog-list {
 			--gap: var(--size-1) var(--size-2);
 			color: var(--color-muted);
 

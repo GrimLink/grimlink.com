@@ -1,129 +1,129 @@
 [
-  {
-    "name": "Backloggd",
-    "url": "https://backloggd.com/u/Grimlink/",
-    "active": true
-  },
-  {
-    "name": "Bluesky",
-    "url": "https://bsky.app/profile/grimlink.bsky.social",
-    "active": true
-  },
-  {
-    "name": "Dev.to",
-    "url": "https://dev.to/grimlink",
-    "active": true
-  },
-  {
-    "name": "DeviantArt",
-    "url": "https://www.deviantart.com/grimlink",
-    "active": false,
-    "description": "Lost interest in DeviantArt, do lack of time and not being a great artist, I do love to browser ones in a while"
-  },
-  {
-    "name": "Facebook",
-    "url": "https://www.facebook.com/sean.grimlink/",
-    "active": false
-  },
-  {
-    "name": "flickr",
-    "url": "https://www.flickr.com/people/seangrimlink/",
-    "active": false
-  },
-  {
-    "name": "GitHub",
-    "url": "https://github.com/GrimLink",
-    "active": true
-  },
-  {
-    "name": "Gravatar",
-    "url": "https://gravatar.com/grimlink",
-    "active": true
-  },
-  {
-    "name": "Instagram",
-    "url": "https://www.instagram.com/seangrimlink/",
-    "active": true
-  },
-  {
-    "name": "Kongregate",
-    "url": "https://www.kongregate.com/en/accounts/grimlink",
-    "active": false
-  },
-  {
-    "name": "Last.fm",
-    "url": "https://www.last.fm/user/SeanGrimLink",
-    "active": false
-  },
-  {
-    "name": "LinkedIn",
-    "url": "https://www.linkedin.com/in/seanvanzuidam",
-    "active": true
-  },
-  {
-    "name": "Mastodon",
-    "url": "https://mastodon.social/@GrimLink",
-    "active": true
-  },
-  {
-    "name": "Medium",
-    "url": "https://medium.com/@GrimLink",
-    "active": false
-  },
-  {
-    "name": "MyAnimelist",
-    "url": "https://myanimelist.net/profile/GrimLink",
-    "active": true
-  },
-  {
-    "name": "Newgrounds",
-    "url": "https://seangrimlink.newgrounds.com/",
-    "active": false
-  },
-  {
-    "name": "Pinterest",
-    "url": "https://pinterest.com/seangrimlink/",
-    "active": false
-  },
-  {
-    "name": "PSN Profiles",
-    "url": "https://psnprofiles.com/GrimLink/",
-    "active": true
-  },
-  {
-    "name": "Reddit",
-    "url": "https://www.reddit.com/user/GrimLink/",
-    "active": true
-  },
-  {
-    "name": "Soundcloud",
-    "url": "https://soundcloud.com/seangrimlink",
-    "active": true
-  },
-  {
-    "name": "Steam",
-    "url": "https://steamcommunity.com/id/GrimLink",
-    "active": true
-  },
-  {
-    "name": "Threads",
-    "url": "https://www.threads.com/@seangrimlink",
-    "active": true
-  },
-  {
-    "name": "Twitch",
-    "url": "https://www.twitch.tv/grimlink/",
-    "active": false
-  },
-  {
-    "name": "Twitter",
-    "url": "https://x.com/GrimLink",
-    "active": false,
-    "description": "While I loved using Twitter trough the years, my love was lost when it became a toxic place"
-  },
-  {
-    "name": "YouTube",
-    "url": "https://www.youtube.com/@SeanGrimLink",
-    "active": true
-  }
+	{
+		"name": "Backloggd",
+		"url": "https://backloggd.com/u/Grimlink/",
+		"active": true
+	},
+	{
+		"name": "Bluesky",
+		"url": "https://bsky.app/profile/grimlink.bsky.social",
+		"active": true
+	},
+	{
+		"name": "Dev.to",
+		"url": "https://dev.to/grimlink",
+		"active": true
+	},
+	{
+		"name": "DeviantArt",
+		"url": "https://www.deviantart.com/grimlink",
+		"active": false,
+		"description": "Lost interest in DeviantArt, do lack of time and not being a great artist, I do love to browser ones in a while"
+	},
+	{
+		"name": "Facebook",
+		"url": "https://www.facebook.com/sean.grimlink/",
+		"active": false
+	},
+	{
+		"name": "flickr",
+		"url": "https://www.flickr.com/people/seangrimlink/",
+		"active": false
+	},
+	{
+		"name": "GitHub",
+		"url": "https://github.com/GrimLink",
+		"active": true
+	},
+	{
+		"name": "Gravatar",
+		"url": "https://gravatar.com/grimlink",
+		"active": true
+	},
+	{
+		"name": "Instagram",
+		"url": "https://www.instagram.com/seangrimlink/",
+		"active": true
+	},
+	{
+		"name": "Kongregate",
+		"url": "https://www.kongregate.com/en/accounts/grimlink",
+		"active": false
+	},
+	{
+		"name": "Last.fm",
+		"url": "https://www.last.fm/user/SeanGrimLink",
+		"active": false
+	},
+	{
+		"name": "LinkedIn",
+		"url": "https://www.linkedin.com/in/seanvanzuidam",
+		"active": true
+	},
+	{
+		"name": "Mastodon",
+		"url": "https://mastodon.social/@GrimLink",
+		"active": true
+	},
+	{
+		"name": "Medium",
+		"url": "https://medium.com/@GrimLink",
+		"active": false
+	},
+	{
+		"name": "MyAnimelist",
+		"url": "https://myanimelist.net/profile/GrimLink",
+		"active": true
+	},
+	{
+		"name": "Newgrounds",
+		"url": "https://seangrimlink.newgrounds.com/",
+		"active": false
+	},
+	{
+		"name": "Pinterest",
+		"url": "https://pinterest.com/seangrimlink/",
+		"active": false
+	},
+	{
+		"name": "PSN Profiles",
+		"url": "https://psnprofiles.com/GrimLink/",
+		"active": true
+	},
+	{
+		"name": "Reddit",
+		"url": "https://www.reddit.com/user/GrimLink/",
+		"active": true
+	},
+	{
+		"name": "Soundcloud",
+		"url": "https://soundcloud.com/seangrimlink",
+		"active": true
+	},
+	{
+		"name": "Steam",
+		"url": "https://steamcommunity.com/id/GrimLink",
+		"active": true
+	},
+	{
+		"name": "Threads",
+		"url": "https://www.threads.com/@seangrimlink",
+		"active": true
+	},
+	{
+		"name": "Twitch",
+		"url": "https://www.twitch.tv/grimlink/",
+		"active": true
+	},
+	{
+		"name": "Twitter",
+		"url": "https://x.com/GrimLink",
+		"active": false,
+		"description": "While I loved using Twitter trough the years, my love was lost when it became a toxic place"
+	},
+	{
+		"name": "YouTube",
+		"url": "https://www.youtube.com/@SeanGrimLink",
+		"active": true
+	}
 ]

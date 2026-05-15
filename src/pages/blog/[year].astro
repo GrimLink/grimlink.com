@@ -5,26 +5,20 @@ import PostCard from "@/components/PostCard.astro";
 import BlogSidebar from "@/components/BlogSidebar.astro";
 
 export async function getStaticPaths() {
-    const posts = await getCollection("blog");
+	const posts = await getCollection("blog");
 
-    const allYears = posts.map((post) =>
-        post.data.pubDate.getFullYear().toString(),
-    );
-    const uniqueYears = [...new Set(allYears)];
+	const allYears = posts.map((post) => post.data.pubDate.getFullYear().toString());
+	const uniqueYears = [...new Set(allYears)];
 
-    return uniqueYears.map((year) => {
-        const filteredPosts = posts
-            .filter(
-                (post) => post.data.pubDate.getFullYear().toString() === year,
-            )
-            .sort(
-                (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-            );
-        return {
-            params: { year },
-            props: { posts: filteredPosts, year },
-        };
-    });
+	return uniqueYears.map((year) => {
+		const filteredPosts = posts
+			.filter((post) => post.data.pubDate.getFullYear().toString() === year)
+			.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+		return {
+			params: { year },
+			props: { posts: filteredPosts, year },
+		};
+	});
 }
 
 const { posts, year } = Astro.props;
@@ -32,29 +26,33 @@ const pageTitle = `Posts from ${year}`;
 ---
 
 <PageLayout title={pageTitle} description={`All posts from the year ${year}`}>
-    <div class="container">
-        <h1>{pageTitle}</h1>
-        <div class="page-layout">
-            <ul role="list" class="flow">
-                {
-                    posts.map((post) => (
-                        <li>
-                            <PostCard {...post} />
-                        </li>
-                    ))
-                }
-            </ul>
-            <BlogSidebar />
-        </div>
-    </div>
+	<div class="container">
+		<h1>{pageTitle}</h1>
+		<div class="page-layout">
+			<ul role="list" class="post-list flow">
+				{
+					posts.map((post) => (
+						<li>
+							<PostCard {...post} />
+						</li>
+					))
+				}
+			</ul>
+			<BlogSidebar />
+		</div>
+	</div>
 </PageLayout>
 
 <style>
-    .page-layout {
-        @media (width >= 128ch) {
-            display: grid;
-            grid-template-columns: 1fr 34ch;
-            gap: var(--size-12);
-        }
-    }
+	.page-layout {
+		@media (width >= 128ch) {
+			display: grid;
+			grid-template-columns: 1fr 34ch;
+			gap: var(--size-12);
+		}
+	}
+
+	.post-list {
+		--flow: 1.5em;
+	}
 </style>

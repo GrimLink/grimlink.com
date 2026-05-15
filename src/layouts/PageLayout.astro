@@ -10,7 +10,7 @@ import { SchemaMe, SchemaSite } from "@/components/Schema";
 import Speculation from "@fylgja/Speculation.astro";
 
 import FallbackImage from "@/assets/placeholder/blue.jpg";
-import { siteTitle, siteDescription, themeColor } from "@/consts";
+import { author, siteTitle, siteDescription, themeColor } from "@/consts";
 
 interface Props {
 	title?: string;
@@ -37,6 +37,7 @@ const rssUrl = new URL("feed.xml", Astro.site);
 		siteName={siteTitle}
 		title={title}
 		description={description}
+		publisher={author}
 		image={image}
 		themeColor={themeColor}
 		sitemap="/sitemap-index.xml"

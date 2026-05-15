@@ -14,7 +14,7 @@ import OriginalSource from "@/components/OriginalSource.astro";
 import Tags from "@/components/Tags.astro";
 
 import FallbackImage from "@/assets/placeholder/blue.jpg";
-import { siteTitle, siteDescription, themeColor } from "../consts";
+import { author, siteTitle, siteDescription, themeColor } from "../consts";
 
 type BlogProps = CollectionEntry<"blog">["data"];
 interface Props extends BlogProps {
@@ -47,6 +47,7 @@ const rssUrl = new URL("feed.xml", Astro.site);
 		siteName={siteTitle}
 		title={title}
 		description={description}
+		publisher={author}
 		image={image}
 		themeColor={themeColor}
 		sitemap="/sitemap-index.xml"
@@ -78,8 +79,8 @@ const rssUrl = new URL("feed.xml", Astro.site);
 					</span>
 				</div>
 				<slot />
-				<Tags tags={tags} />
 			</article>
+			<Tags tags={tags} style={{ "--my": "var(--size-6) 0" }} />
 			<hr />
 			<PostNavigation prev={prev} next={next} />
 		</main>

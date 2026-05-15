@@ -7,110 +7,115 @@ import PostCard from "@/components/PostCard.astro";
 import Socials from "@/components/Socials.astro";
 
 const posts = (await getCollection("blog"))
-    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-    .slice(0, 3);
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 3);
 ---
 
 <PageLayout>
-    <div class="page-layout container">
-        <section
-            aria-labelledby="intro"
-            class="flow"
-            style="margin-block-start: var(--size-8);"
-        >
-            <div class="flow-none flex gap align-center">
-                <Avatar />
-                <h1 id="intro" class="text-lg font-medium">
-                    Hi, I am Sean van Zuidam also known on the web as GrimLink.
-                </h1>
-            </div>
-            <p>
-                I am a Frontend Developer from Zwollywood (Zwolle), The
-                Netherlands. Gamer, Anime watcher and fan of METAL, Rock and
-                Game soundtracks 🤘 I am also the creator of Fylgja CSS.
-            </p>
-        </section>
+	<div class="page-layout container">
+		<section aria-labelledby="intro" class="flow" style="margin-block-start: var(--size-8);">
+			<div class="flow-none flex gap align-center">
+				<Avatar />
+				<h1 id="intro" class="text-lg font-medium">
+					Hi, I am Sean van Zuidam also known on the web as GrimLink.
+				</h1>
+			</div>
+			<p>
+				I am a Frontend Developer from Zwollywood (Zwolle), The Netherlands. Gamer, Anime
+				watcher and fan of METAL, Rock and Game soundtracks 🤘 I am also the creator of
+				Fylgja CSS.
+			</p>
+			<p class="text-muted">
+				<a href="/about" class="hover-underline">More about me.</a>
+			</p>
+		</section>
 
-        <section aria-labelledby="recent-posts">
-            <h2 id="recent-posts">Recent Posts</h2>
-            <ul role="list" class="flow">
-                {
-                    posts.map((post) => (
-                        <li>
-                            <PostCard {...post} headingTag="h3" />
-                        </li>
-                    ))
-                }
-            </ul>
-            <p class="text-center">
-                <a href="/blog" class="btn --primary"
-                    >Read More Post from my Feed</a
-                >
-            </p>
-        </section>
+		<section aria-labelledby="recent-posts">
+			<h2 id="recent-posts">Recent Posts</h2>
+			<ul role="list" class="post-list flow">
+				{
+					posts.map((post) => (
+						<li>
+							<PostCard {...post} headingTag="h3" />
+						</li>
+					))
+				}
+			</ul>
+			<p class="text-center" style="--my: 2.5em 0">
+				<a href="/blog" class="btn --primary">Read More Post from my Feed</a>
+			</p>
+		</section>
 
-        <section aria-labelledby="projects" class="flow">
-            <h2 id="projects" class="lead">Projects</h2>
-            <ul style="--px: 1em 0">
-                {
-                    projects.map((project) => (
-                        <li>
-                            <a href={project.url}>{project.title}</a>
-                        </li>
-                    ))
-                }
-            </ul>
-        </section>
+		<section aria-labelledby="projects" class="flow">
+			<h2 id="projects" class="lead">Projects</h2>
+			<ul style="--px: 1em 0">
+				{
+					projects.map((project) => {
+						const external = project.url.startsWith("http");
+						return (
+							<li>
+								<a
+									href={project.url}
+									target={external ? "_blank" : null}
+									rel={external ? "noopener noreferrer" : null}
+								>
+									{project.title}
+								</a>
+							</li>
+						);
+					})
+				}
+			</ul>
+		</section>
 
-        <section aria-labelledby="lists" class="flow">
-            <h2 id="lists" class="lead">Lists</h2>
-            <ul style="--px: 1em 0">
-                {
-                    Object.entries(myLists).map(([name, url]) => {
-                        const external = url.startsWith("http");
-                        return (
-                            <li>
-                                <a
-                                    href={url}
-                                    target={external ? "_blank" : null}
-                                    rel={
-                                        external ? "noopener noreferrer" : null
-                                    }
-                                >
-                                    {name}
-                                </a>
-                            </li>
-                        );
-                    })
-                }
-            </ul>
-        </section>
+		<section aria-labelledby="lists" class="flow">
+			<h2 id="lists" class="lead">Lists</h2>
+			<ul style="--px: 1em 0">
+				{
+					Object.entries(myLists).map(([name, url]) => {
+						const external = url.startsWith("http");
+						return (
+							<li>
+								<a
+									href={url}
+									target={external ? "_blank" : null}
+									rel={external ? "noopener noreferrer" : null}
+								>
+									{name}
+								</a>
+							</li>
+						);
+					})
+				}
+			</ul>
+		</section>
 
-        <section
-            aria-label="You can also find me on on the following socials"
-            class="flow"
-        >
-            <h2 id="socials" class="lead">You can also find me on</h2>
-            <Socials data={socials} />
-        </section>
-    </div>
+		<section aria-label="You can also find me on on the following socials" class="flow">
+			<h2 id="socials" class="lead">You can also find me on</h2>
+			<Socials data={socials} />
+		</section>
+	</div>
 </PageLayout>
 
 <style>
-    section.flow {
-        margin-block-start: var(--size-8);
-    }
+	section.flow {
+		margin-block-start: var(--size-8);
+	}
 
-    @media (width >= 128ch) {
-        .page-layout {
-            display: grid;
-            grid-template-columns: 34ch 1fr;
-            grid-template-rows: repeat(3, auto) 1fr;
-            gap: 0 var(--size-12);
-        }
+	.post-list {
+		--flow: 1.5em;
+	}
 
-        [aria-labelledby="recent-posts"] {
-            grid-row: span 4;
-        }
-    }
+	@media (width >= 128ch) {
+		.page-layout {
+			display: grid;
+			grid-template-columns: 34ch 1fr;
+			grid-template-rows: repeat(3, auto) 1fr;
+			gap: 0 var(--size-12);
+		}
+
+		[aria-labelledby="recent-posts"] {
+			grid-row: span 4;
+		}
+	}
 </style>

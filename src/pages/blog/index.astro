@@ -16,7 +16,7 @@ const pageTitle = "My Feed";
 		<h1>{pageTitle}</h1>
 		<p>All my Blog and Social Posts in one handy page.</p>
 		<div class="page-layout">
-			<ul role="list" class="flow">
+			<ul role="list" class="post-list flow">
 				{
 					posts.map((post) => (
 						<li>
@@ -37,5 +37,9 @@ const pageTitle = "My Feed";
 			grid-template-columns: 1fr 34ch;
 			gap: var(--size-12);
 		}
+	}
+
+	.post-list {
+		--flow: 1.5em;
 	}
 </style>
