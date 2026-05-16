@@ -16,6 +16,7 @@ interface Props {
 	sitemap?: string;
 	rss?: URL;
 	fediverse?: string;
+	twitterHandle?: string;
 	themeColor?: string;
 	themeColorDark?: string;
 	separator?: string;
@@ -35,6 +36,7 @@ const {
 	sitemap,
 	rss,
 	fediverse,
+	twitterHandle,
 	themeColor = "#fff",
 	themeColorDark,
 	pageType = "website",
@@ -83,6 +85,8 @@ const {
 		<meta property="og:description" content={description} />
 		{image && <meta property="og:image" content={new URL(image.src, Astro.url)} />}
 		{fediverse && <meta name="fediverse:creator" content={fediverse} />}
+		<meta name="twitter:card" content="summary_large_image" />
+		{twitterHandle && <meta name="twitter:site" content={twitterHandle} />}
 	</slot>
 
 	<meta name="generator" content={Astro.generator} />
