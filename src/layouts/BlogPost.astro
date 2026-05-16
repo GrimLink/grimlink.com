@@ -14,7 +14,10 @@ import PostNavigation from "@/components/PostNavigation.astro";
 import OriginalSource from "@/components/OriginalSource.astro";
 import Tags from "@/components/Tags.astro";
 
-import FallbackImage from "@/assets/placeholder/blue.jpg";
+import FallbackImage1 from "@/assets/placeholder/blue.jpg";
+import FallbackImage2 from "@/assets/placeholder/purple.jpg";
+import FallbackImage3 from "@/assets/placeholder/red.jpg";
+import FallbackImage4 from "@/assets/placeholder/yellow.jpg";
 import { author, siteTitle, siteDescription, themeColor, isProd, today } from "@/consts";
 
 type BlogProps = CollectionEntry<"blog">["data"];
@@ -31,7 +34,7 @@ const {
 	description = siteDescription,
 	pubDate,
 	updatedDate,
-	image = FallbackImage,
+	image,
 	tags = [],
 	pubSource = "",
 	lang = "en",
@@ -40,6 +43,8 @@ const {
 	prev,
 	next,
 } = Astro.props;
+const fallbackImages = [FallbackImage1, FallbackImage2, FallbackImage3, FallbackImage4];
+const fallbackImage = fallbackImages[pubDate.getTime() % fallbackImages.length];
 const rssUrl = new URL("feed.xml", Astro.site);
 const dateHash = `?v=${today.getMonth() + 1}-${today.getFullYear()}`;
 ---
@@ -50,7 +55,7 @@ const dateHash = `?v=${today.getMonth() + 1}-${today.getFullYear()}`;
 		title={title}
 		description={description}
 		publisher={author}
-		image={image}
+		image={image || fallbackImage}
 		themeColor={themeColor}
 		sitemap="/sitemap-index.xml"
 		manifest={`/manifest.webmanifest${dateHash}`}
