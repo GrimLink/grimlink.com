@@ -3,33 +3,28 @@ import { Image } from "astro:assets";
 import avatar from "@/assets/avatar.jpg";
 
 interface Props {
-    class?: string;
-    style?: {
-        [key: string]: string;
-    };
-    alt?: string;
-    size?: number;
+	class?: string;
+	style?: {
+		[key: string]: string;
+	};
+	alt?: string;
+	size?: number;
 }
 
 const { class: className, style, alt = "", size = 80 } = Astro.props;
 ---
 
-<Image
-    src={avatar}
-    width={size}
-    height={size}
-    alt={alt}
-    class:list={["avatar round flex-none", className]}
-    style={style}
-/>
+<div class:list={["avatar round flex-none", className]} style={style}>
+	<Image src={avatar} width={size} height={size} alt={alt} />
+</div>
 
 <style>
-    .avatar {
-        border: 3px solid #fff;
-        box-shadow: var(--shadow-2);
+	.avatar {
+		border: 3px solid #fff;
+		box-shadow: var(--shadow-2);
 
-        @media (prefers-reduced-motion: no-preference) {
-            view-transition-name: avatar;
-        }
-    }
+		@media (prefers-reduced-motion: no-preference) {
+			view-transition-name: avatar;
+		}
+	}
 </style>
