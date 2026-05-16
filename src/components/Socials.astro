@@ -21,7 +21,7 @@ const { class: className, style, data, size = 24 } = Astro.props;
 			<li>
 				<a href={url} target="_blank" rel="me noreferrer">
 					<svg width={size} height={size} fill="currentcolor">
-						<title>Me on ${platform}</title>
+						<title>Me on {platform}</title>
 						<use href={`${SocialsIcons}#${platform}`} />
 					</svg>
 				</a>
