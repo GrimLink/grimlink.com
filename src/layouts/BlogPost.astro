@@ -13,6 +13,7 @@ import FormattedDate from "@/components/FormattedDate.astro";
 import PostNavigation from "@/components/PostNavigation.astro";
 import OriginalSource from "@/components/OriginalSource.astro";
 import Tags from "@/components/Tags.astro";
+import ShareButton from "@fylgja/ShareButton.astro";
 
 import FallbackImage1 from "@/assets/placeholder/blue.jpg";
 import FallbackImage2 from "@/assets/placeholder/purple.jpg";
@@ -89,7 +90,10 @@ const dateHash = `?v=${today.getMonth() + 1}-${today.getFullYear()}`;
 				</div>
 				<slot />
 			</article>
-			<Tags tags={tags} style={{ "--my": "var(--size-6) 0" }} />
+			<div class="flex gap align" style={{ "--my": "var(--size-6) 0" }}>
+				<Tags tags={tags} />
+				<ShareButton url={new URL(Astro.url)} title={title} class="btn --primary" />
+			</div>
 			<hr />
 			<PostNavigation prev={prev} next={next} />
 		</main>

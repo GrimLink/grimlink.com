@@ -2,8 +2,8 @@
 import { author, today } from "@/consts";
 
 const menuItems = [
-	{ href: "/blog/", label: "Feed" },
-	// { href: "/events/", label: "Events" },
+	{ href: "/blog/", label: "My Feed" },
+	// { href: "/events/", label: "Events & Speaking" },
 	{ href: "/about/", label: "About Me" },
 ];
 ---
@@ -30,5 +30,9 @@ const menuItems = [
 		margin-block-start: var(--size-8);
 		padding-block: var(--size-8);
 		border-block-start: 1px solid oklch(from var(--root-fg) l c h / 10%);
+	}
+
+	nav {
+		margin-block-end: var(--size-8);
 	}
 </style>

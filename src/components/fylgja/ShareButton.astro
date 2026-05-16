@@ -3,9 +3,13 @@ interface Props {
 	url: URL | string;
 	title: string;
 	text?: string;
+	class?: string;
+	style?: {
+		[key: string]: string;
+	};
 }
 
-const { url, title, text } = Astro.props;
+const { url, title, text, class: className, style } = Astro.props;
 ---
 
 <button
@@ -15,6 +19,8 @@ const { url, title, text } = Astro.props;
 	type="button"
 	title={`Share ${title}`}
 	aria-label={`Share ${title}`}
+	class={className}
+	style={style}
 >
 	<slot>
 		<svg
@@ -49,7 +55,7 @@ const { url, title, text } = Astro.props;
 		const shareData = {
 			title: title,
 			text: desc || undefined,
-			url: url + "?title=",
+			url: url + "?s=",
 		};
 
 		if (navigator.canShare(shareData)) {
