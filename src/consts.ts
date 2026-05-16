@@ -1,7 +1,7 @@
 export const siteTitle = "GrimLink";
 export const siteDescription =
 	"Hi, I am Sean van Zuidam also known on the web as GrimLink. I am a Frontend Developer from Zwollywood.";
-export const themeColor = "#fff";
+export const themeColor = "#111624";
 
 export const author = "Sean van Zuidam";
 export const authorAbout =
