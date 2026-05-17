@@ -15,7 +15,7 @@ const { class: className, style, alt = "", size = 80 } = Astro.props;
 ---
 
 <div class:list={["avatar round flex-none", className]} style={style}>
-	<Image src={avatar} width={size} height={size} alt={alt} />
+	<Image src={avatar} width={size} height={size} alt={alt} densities={[1.5, 2]} />
 </div>
 
 <style>
