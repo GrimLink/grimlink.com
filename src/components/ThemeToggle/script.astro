@@ -62,4 +62,10 @@
             theme.value = isDark ? "dark" : "light";
             setPreference();
         });
+
+    window.addEventListener('pageshow', (event) => {
+        if (event.persisted) {
+            reflectPreference();
+        }
+    });
 </script>
