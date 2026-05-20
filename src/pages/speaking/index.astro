@@ -1,0 +1,93 @@
+---
+import PageLayout from "@/layouts/PageLayout.astro";
+import Card from "@fylgja/Card.astro";
+import Youtube from "@fylgja/Youtube.astro";
+import FormattedDate from "@/components/FormattedDate.astro";
+import { Image } from "astro:assets";
+import dataJson from "./data.json";
+
+interface Speaker {
+	type: "event" | "video";
+	title: string;
+	link: string;
+	description?: string;
+	logo?: string;
+	pubDate?: string;
+	videoStart?: number;
+}
+
+const data = dataJson as Speaker[];
+
+const pageTitle = "Speaking";
+const pageDescription =
+	"An overview of the events, conferences, and videos where I have shared my knowledge and experiences.";
+---
+
+<PageLayout title={pageTitle} description={pageDescription} class="container">
+	<h1>{pageTitle}</h1>
+	<p>{pageDescription}</p>
+	<ul role="list" class="auto-grid gap" style="--max-col-size: 42ch">
+		{
+			data.map((speaker, index) => {
+				const loading = index < 2 ? "eager" : "lazy";
+				return (
+					<Card tag="li">
+						{speaker.type === "video" ? (
+							<Youtube
+								src={speaker.link}
+								start={speaker.videoStart}
+								title={speaker.title}
+								loading={loading}
+								style={{
+									width: "100%",
+									height: "100%",
+								}}
+							/>
+						) : (
+							<div class="card-content">
+								<div class="flex align gap">
+									<div class="flow-none">
+										<p class="lead">
+											<a
+												href={speaker.link}
+												class="stretched-link hover-underline"
+												target="_blank"
+												rel="noopener noreferrer"
+											>
+												{speaker.title}
+											</a>
+										</p>
+										{speaker.pubDate && (
+											<p class="post-meta">
+												<FormattedDate date={speaker.pubDate} />
+											</p>
+										)}
+									</div>
+									{speaker.logo && (
+										<Image
+											src={speaker.logo}
+											width={80}
+											height={60}
+											layout="constrained"
+											alt=""
+											loading={loading}
+										/>
+									)}
+								</div>
+								<p class="post-body">{speaker.description}</p>
+							</div>
+						)}
+					</Card>
+				);
+			})
+		}
+	</ul>
+</PageLayout>
+
+<style>
+	.post-meta {
+		font-size: 0.875em;
+		font-style: italic;
+		color: var(--color-muted);
+	}
+</style>

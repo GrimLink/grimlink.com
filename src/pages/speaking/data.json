@@ -1,0 +1,43 @@
+[
+	{
+		"type": "event",
+		"title": "MageTitans 2025",
+		"description": "⚡ Design Tokens and Figma. Bridge the gap between design and development to eliminate inconsistencies and speed up releases.",
+		"logo": "https://mage-titans.nl/build/assets/heading-logo-dT4OpLSi.png",
+		"link": "https://mage-titans.nl/speakers/sean-van-zuidam",
+		"pubDate": "2025-09-26"
+	},
+	{
+		"type": "event",
+		"title": "Hyvä Camp 2025 | Kiel",
+		"description": "Hyvä Commerce: Your Magento Store, Supercharged ⚡",
+		"link": "https://www.splendid-internet.de/hyvae-camp-kiel-2025/#english-version",
+		"pubDate": "2025-06-25"
+	},
+	{
+		"type": "video",
+		"title": "Building Lightweight, Accessible Sliders with Hyvä UI 2.6.0 | Hyvä Bytes",
+		"link": "https://youtu.be/DZG4XUd3kRY",
+		"pubDate": "2025-04-25"
+	},
+	{
+		"type": "video",
+		"title": "",
+		"description": "",
+		"link": "https://youtu.be/P3YwZNeaCtk",
+		"videoStart": "1456",
+		"pubDate": ""
+	},
+	{
+		"type": "video",
+		"title": "Integrating Adobe Edge Delivery Services (EDS) With Hyvä Edge | Talking Hyvä XI",
+		"link": "https://youtu.be/ipeVEBSJS40",
+		"pubDate": "2024-06-17"
+	},
+	{
+		"type": "video",
+		"title": "Getting more out of Hyvä | Hyvä Meetup #8",
+		"link": "https://youtu.be/bgM6oZ_QtEs",
+		"pubDate": "2023-11-28"
+	}
+]
