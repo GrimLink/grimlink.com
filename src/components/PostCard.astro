@@ -72,10 +72,6 @@ const Heading = headingTag;
 
 	.post-heading {
 		font-size: 1.125em;
-
-		:any-link:not(:hover) {
-			text-decoration: none;
-		}
 	}
 
 	.post-meta {
@@ -88,7 +84,13 @@ const Heading = headingTag;
 		--card-shadow: light-dark(none, var(--shadow-1));
 	}
 
-	.card-elevated:hover {
-		--card-shadow: var(--shadow-4);
+	.card-elevated {
+		:any-link:not(:hover) {
+			text-decoration: none;
+		}
+
+		&:hover {
+			--card-shadow: var(--shadow-4);
+		}
 	}
 </style>
