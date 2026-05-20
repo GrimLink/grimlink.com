@@ -4,7 +4,7 @@ import type { HTMLAttributes } from "astro/types";
 
 type TagProps = HTMLAttributes<"div" | "article">;
 interface Props extends TagProps {
-    tag?: "div" | "article";
+	tag?: "div" | "article" | "li";
 }
 
 const { tag = "div", class: className, ...props } = Astro.props;
@@ -12,5 +12,12 @@ const Tag = tag;
 ---
 
 <Tag class:list={["card", className]} {...props}>
-    <slot />
+	<slot />
 </Tag>
+
+<style>
+	.card:has(iframe:only-child) {
+		--card-py: 0;
+		--card-px: 0;
+	}
+</style>
