@@ -1,0 +1,124 @@
+---
+interface Props {
+	id?: string;
+	title?: string;
+	items: {
+		url: URL | string;
+		label: string;
+	}[];
+}
+
+const { id = "mobile-menu", title = "Mobile Menu", items } = Astro.props;
+---
+
+<button commandfor={id} command="show-modal" aria-label={`Open ${title}`} class="menu-btn">
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		width="24"
+		height="24"
+		viewBox="0 0 24 24"
+		fill="none"
+		stroke="currentColor"
+		stroke-width="2"
+		stroke-linecap="round"
+		stroke-linejoin="round"
+	>
+		<path d="M4 5h16" class="line top"></path>
+		<path d="M4 12h16" class="line mid"></path>
+		<path d="M4 19h16" class="line bot"></path>
+	</svg>
+</button>
+
+<dialog id={id} closedby="any" class="offcanvas">
+	<div class="offcanvas-header text-end">
+		<button commandfor={id} command="close" aria-label={`Close ${title}`}>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="24"
+				height="24"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+			>
+				<path d="M18 6L6 18"></path>
+				<path d="M6 6l12 12"></path>
+			</svg>
+		</button>
+	</div>
+	<nav>
+		<ul>
+			{
+				items.map((item) => {
+					const isExternal = typeof item.url === "string" && item.url.startsWith("http");
+					return (
+						<li>
+							<a
+								href={item.url}
+								aria-current={item.url === Astro.url.pathname ? "page" : undefined}
+								class="btn w-full align"
+								target={isExternal ? "_blank" : undefined}
+								rel={isExternal ? "noopener noreferrer" : undefined}
+							>
+								{item.label}
+							</a>
+						</li>
+					);
+				})
+			}
+		</ul>
+	</nav>
+</dialog>
+
+<style>
+	.menu-btn {
+		background: none;
+		border: none;
+		padding: 0.5rem;
+		color: inherit;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		&:hover,
+		&:focus-visible {
+			.line.top {
+				transform: translateY(-1px);
+			}
+
+			.line.mid {
+				transform: translateX(3px);
+			}
+
+			.line.bot {
+				transform: translateY(1px);
+			}
+		}
+
+		&:active .line {
+			transform: scale(0.95);
+		}
+	}
+
+	.line {
+		transition: transform 0.2s ease;
+		transform-origin: left center;
+	}
+
+	.offcanvas {
+		padding: 0;
+
+		ul .btn {
+			--btn-radius: 0;
+			--btn-active-bg: var(--brand);
+			--btn-active-color: var(--on-brand);
+		}
+	}
+
+	.offcanvas-header {
+		padding: 0.5rem;
+	}
+</style>

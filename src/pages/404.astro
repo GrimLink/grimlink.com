@@ -6,16 +6,18 @@ const pageDescription = "The CSS is fine, but the page is gone.";
 ---
 
 <PageLayout title={pageTitle} description={pageDescription}>
-	<div class="container text-center" style="--container-size: 72ch;">
-		<section aria-labelledby="error-title">
-			<h1 id="error-title" class="glitch" data-text="404">404</h1>
-			<p class="lead">{pageDescription}</p>
-			<p class="text-muted">The page you're looking for doesn't exist or has been moved.</p>
-			<p class="cta">
-				<a href="/" class="btn --primary">Back to Home</a>
-			</p>
-		</section>
-	</div>
+	<section
+		aria-labelledby="error-title"
+		class="container text-center"
+		style="--container-size: 72ch;"
+	>
+		<h1 id="error-title" class="glitch" data-text="404">404</h1>
+		<p class="lead">{pageDescription}</p>
+		<p class="text-muted">The page you're looking for doesn't exist or has been moved.</p>
+		<p class="cta">
+			<a href="/" class="btn --primary">Back to Home</a>
+		</p>
+	</section>
 </PageLayout>
 
 <style>

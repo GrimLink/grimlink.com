@@ -1,20 +1,20 @@
 ---
 import { author, today } from "@/consts";
-
-const menuItems = [
-	{ href: "/blog/", label: "My Feed" },
-	// { href: "/events/", label: "Events & Speaking" },
-	{ href: "/about/", label: "About Me" },
-];
+import { footerMenu } from "@/menus";
 ---
 
 <footer class="container text-center flow">
 	<nav>
 		<ul class="inline-flex gap">
 			{
-				menuItems.map((item) => (
+				footerMenu.map((item) => (
 					<li>
-						<a href={item.href}>{item.label}</a>
+						<a
+							href={item.url}
+							aria-current={item.url === Astro.url.pathname ? "page" : undefined}
+						>
+							{item.label}
+						</a>
 					</li>
 				))
 			}

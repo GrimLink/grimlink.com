@@ -20,6 +20,11 @@ interface Props {
 	lang?: string;
 	dir?: string;
 	class?: string;
+	style?:
+		| {
+				[key: string]: string;
+		  }
+		| string;
 }
 
 const {
@@ -29,6 +34,7 @@ const {
 	lang = "en",
 	dir = "ltr",
 	class: className = "",
+	style,
 } = Astro.props;
 const rssUrl = new URL("feed.xml", Astro.site);
 const dateHash = `?v=${today.getMonth() + 1}-${today.getFullYear()}`;
@@ -56,7 +62,7 @@ const dateHash = `?v=${today.getMonth() + 1}-${today.getFullYear()}`;
 	</Head>
 	<body>
 		<PageHeader />
-		<main class:list={className}>
+		<main class:list={className} style={style}>
 			<slot />
 		</main>
 		<PageFooter />
