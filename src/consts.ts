@@ -28,17 +28,17 @@ export const myLists = {
 export const projects = [
 	{
 		title: "Fylgja CSS",
-		description: "",
+		description: "A modular and lightweight CSS library.",
 		url: "https://fylgja.dev/",
 	},
 	{
 		title: "Magento2 Storeinfo",
-		description: "",
+		description: "Easily access and display Magento store information.",
 		url: "https://github.com/Siteation/magento2-storeinfo",
 	},
 	{
-		title: "Mage Script",
-		description: "",
+		title: "Mage Tool",
+		description: "Shortcuts and tools to simplify Magento CLI commands.",
 		url: "https://github.com/grimlink/mage/",
 	},
 ];

@@ -8,7 +8,7 @@ import Socials from "@/components/Socials.astro";
 
 const posts = (await getCollection("blog"))
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-	.slice(0, 3);
+	.slice(0, 4);
 ---
 
 <PageLayout>
@@ -47,7 +47,7 @@ const posts = (await getCollection("blog"))
 		</section>
 
 		<section aria-labelledby="projects" class="flow">
-			<h2 id="projects" class="lead">Projects</h2>
+			<h2 id="projects" class="lead">Projects I'm working on</h2>
 			<ul style="--px: 1em 0">
 				{
 					projects.map((project) => {
@@ -61,6 +61,7 @@ const posts = (await getCollection("blog"))
 								>
 									{project.title}
 								</a>
+								<span>{project.description}</span>
 							</li>
 						);
 					})
@@ -69,7 +70,10 @@ const posts = (await getCollection("blog"))
 		</section>
 
 		<section aria-labelledby="lists" class="flow">
-			<h2 id="lists" class="lead">Lists</h2>
+			<hgroup>
+				<h2 id="lists" class="lead">Games, Anime & more</h2>
+				<p>A collection of lists I use to keep track of my hobbies and interests.</p>
+			</hgroup>
 			<ul style="--px: 1em 0">
 				{
 					Object.entries(myLists).map(([name, url]) => {
