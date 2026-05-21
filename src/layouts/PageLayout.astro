@@ -10,7 +10,7 @@ import PageFooter from "@/components/PageFooter.astro";
 import { SchemaMe, SchemaSite } from "@/components/Schema";
 import Speculation from "@fylgja/Speculation.astro";
 
-import FallbackImage from "@/assets/placeholder/blue.jpg";
+import PlaceHolderImg from "@/assets/placeholder.webp";
 import { author, siteTitle, siteDescription, themeColor, isProd, today } from "@/consts";
 
 interface Props {
@@ -30,7 +30,7 @@ interface Props {
 const {
 	title = siteTitle,
 	description = siteDescription,
-	image = FallbackImage,
+	image = PlaceHolderImg,
 	lang = "en",
 	dir = "ltr",
 	class: className = "",
