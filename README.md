@@ -7,7 +7,7 @@ Built with a focus on simplicity, performance, and modularity, this site serves 
 ## Tech Stack
 
 - **Framework:** [Astro](https://astro.build/) (Static Site Generation)
-- **Styling:** [Fylgja CSS](https://fylgja.dev/) (Modular CSS framework)
+- **Styling:** [Fylgja CSS](https://fylgja.dev/) (Modular CSS Library)
 
 ## Features
 
