@@ -46,7 +46,7 @@ const {
 } = Astro.props;
 const fallbackImages = [FallbackImage1, FallbackImage2, FallbackImage3, FallbackImage4];
 const fallbackImage = fallbackImages[pubDate.getTime() % fallbackImages.length];
-const rssUrl = new URL("feed.xml", Astro.site);
+const rssUrl = new URL("rss.xml", Astro.site);
 const dateHash = `?v=${today.getMonth() + 1}-${today.getFullYear()}`;
 ---
 
