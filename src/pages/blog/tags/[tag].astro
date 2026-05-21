@@ -3,6 +3,7 @@ import PageLayout from "@/layouts/PageLayout.astro";
 import { getCollection } from "astro:content";
 import PostCard from "@/components/PostCard.astro";
 import BlogSidebar from "@/components/BlogSidebar.astro";
+import BlogImg from "@/assets/blog.webp";
 
 export async function getStaticPaths() {
 	const posts = await getCollection("blog");
@@ -24,7 +25,7 @@ const { posts, tag } = Astro.props;
 const pageTitle = `Posts tagged with #${tag}`;
 ---
 
-<PageLayout title={pageTitle} description={`All posts tagged with ${tag}`}>
+<PageLayout title={pageTitle} description={`All posts tagged with ${tag}`} image={BlogImg}>
 	<div class="container">
 		<h1>{pageTitle}</h1>
 		<div class="page-layout">

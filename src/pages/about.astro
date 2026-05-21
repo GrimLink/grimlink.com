@@ -2,6 +2,7 @@
 import PageLayout from "@/layouts/PageLayout.astro";
 import Avatar from "@/components/Avatar.astro";
 import profiles from "@/profiles.json";
+import AboutImg from "@/assets/about.webp";
 
 const pageTitle = "About Me";
 const pageDescription =
@@ -11,6 +12,7 @@ const pageDescription =
 <PageLayout
 	title={pageTitle}
 	description={pageDescription}
+	image={AboutImg}
 	class="container"
 	style="--container-size: 72ch; --my: var(--size-8)"
 >

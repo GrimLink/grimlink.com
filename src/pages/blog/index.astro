@@ -3,6 +3,7 @@ import PageLayout from "@/layouts/PageLayout.astro";
 import { getCollection } from "astro:content";
 import PostCard from "@/components/PostCard.astro";
 import BlogSidebar from "@/components/BlogSidebar.astro";
+import BlogImg from "@/assets/blog.webp";
 
 const posts = (await getCollection("blog")).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -11,7 +12,11 @@ const posts = (await getCollection("blog")).sort(
 const pageTitle = "My Feed";
 ---
 
-<PageLayout title={pageTitle} description="All my Blog and Social Posts in one handy page.">
+<PageLayout
+	title={pageTitle}
+	description="All my Blog and Social Posts in one handy page."
+	image={BlogImg}
+>
 	<div class="container">
 		<h1>{pageTitle}</h1>
 		<p>All my Blog and Social Posts in one handy page.</p>
