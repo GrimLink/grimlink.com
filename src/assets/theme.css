@@ -117,7 +117,7 @@ body > main {
 		--select-icon: var(--select-dark-scheme);
 		--card-bg: color-mix(in oklab, hsl(0 15% 5%) 72%, var(--brand));
 		--dialog-bg: color-mix(in oklab, hsl(0 15% 5%) 72%, var(--brand));
-		--card-stroke: transparent;
+		--card-stroke: #fff1;
 	}
 }
 
@@ -134,6 +134,6 @@ body > main {
 	--select-icon: var(--select-dark-scheme);
 	--card-bg: color-mix(in oklab, hsl(0 15% 5%) 72%, var(--brand));
 	--dialog-bg: color-mix(in oklab, hsl(0 15% 5%) 72%, var(--brand));
-	--card-stroke: transparent;
+	--card-stroke: #fff1;
 	color-scheme: dark;
 }
