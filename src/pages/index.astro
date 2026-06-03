@@ -11,7 +11,7 @@ const posts = (await getCollection("blog"))
 	.slice(0, 4);
 ---
 
-<PageLayout>
+<PageLayout breadcrumbs={[{ name: "Home", item: "/" }]}>
 	<div class="page-layout container">
 		<section aria-labelledby="intro" class="flow" style="margin-block-start: var(--size-8);">
 			<div class="flow-none flex gap align-center">

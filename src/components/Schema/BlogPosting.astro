@@ -1,0 +1,37 @@
+---
+import Schema from "@fylgja/Schema.astro";
+import { author } from "@/consts";
+
+interface Props {
+	title: string;
+	description: string;
+	pubDate: Date;
+	updatedDate?: Date;
+	image?: string;
+	tags?: string[];
+}
+
+const { title, description, pubDate, updatedDate, image, tags } = Astro.props;
+---
+
+<Schema
+	data={{
+		"@context": "https://schema.org",
+		"@type": "BlogPosting",
+		headline: title,
+		description: description,
+		author: {
+			"@type": "Person",
+			name: author,
+			url: Astro.site,
+		},
+		datePublished: pubDate.toISOString(),
+		...(updatedDate && { dateModified: updatedDate.toISOString() }),
+		...(image && { image: new URL(image, Astro.site) }),
+		...(tags && { keywords: tags.join(", ") }),
+		mainEntityOfPage: {
+			"@type": "WebPage",
+			"@id": new URL(Astro.url.pathname, Astro.site),
+		},
+	}}
+/>

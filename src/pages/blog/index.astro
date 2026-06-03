@@ -16,6 +16,10 @@ const pageTitle = "My Feed";
 	title={pageTitle}
 	description="All my Blog and Social Posts in one handy page."
 	image={BlogImg}
+	breadcrumbs={[
+		{ name: "Home", item: "/" },
+		{ name: "Blog", item: "/blog" },
+	]}
 >
 	<div class="container">
 		<h1>{pageTitle}</h1>

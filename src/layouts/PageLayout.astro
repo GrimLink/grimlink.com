@@ -7,7 +7,7 @@ import ServiceWorker from "@/components/ServiceWorker.astro";
 import ThemeToggleJs from "@/components/ThemeToggle/script.astro";
 import PageHeader from "@/components/PageHeader.astro";
 import PageFooter from "@/components/PageFooter.astro";
-import { SchemaMe, SchemaSite } from "@/components/Schema";
+import { SchemaMe, SchemaSite, SchemaBreadcrumbs } from "@/components/Schema";
 import Speculation from "@fylgja/Speculation.astro";
 
 import PlaceHolderImg from "@/assets/placeholder.webp";
@@ -25,6 +25,7 @@ interface Props {
 				[key: string]: string;
 		  }
 		| string;
+	breadcrumbs?: { name: string; item: string }[];
 }
 
 const {
@@ -35,6 +36,7 @@ const {
 	dir = "ltr",
 	class: className = "",
 	style,
+	breadcrumbs,
 } = Astro.props;
 const rssUrl = new URL("rss.xml", Astro.site);
 const dateHash = `?v=${today.getMonth() + 1}-${today.getFullYear()}`;
@@ -58,6 +60,7 @@ const dateHash = `?v=${today.getMonth() + 1}-${today.getFullYear()}`;
 		<slot name="head" />
 		<SchemaSite />
 		<SchemaMe />
+		{breadcrumbs && <SchemaBreadcrumbs items={breadcrumbs} />}
 		{isProd && <ServiceWorker />}
 	</Head>
 	<body>

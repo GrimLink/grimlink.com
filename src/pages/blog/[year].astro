@@ -26,7 +26,16 @@ const { posts, year } = Astro.props;
 const pageTitle = `Posts from ${year}`;
 ---
 
-<PageLayout title={pageTitle} description={`All posts from the year ${year}`} image={BlogImg}>
+<PageLayout
+	title={pageTitle}
+	description={`All posts from the year ${year}`}
+	image={BlogImg}
+	breadcrumbs={[
+		{ name: "Home", item: "/" },
+		{ name: "Blog", item: "/blog" },
+		{ name: `Year: ${year}`, item: `/blog/${year}` },
+	]}
+>
 	<div class="container">
 		<h1>{pageTitle}</h1>
 		<div class="page-layout">

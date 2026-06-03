@@ -25,7 +25,16 @@ const { posts, tag } = Astro.props;
 const pageTitle = `Posts tagged with #${tag}`;
 ---
 
-<PageLayout title={pageTitle} description={`All posts tagged with ${tag}`} image={BlogImg}>
+<PageLayout
+	title={pageTitle}
+	description={`All posts tagged with ${tag}`}
+	image={BlogImg}
+	breadcrumbs={[
+		{ name: "Home", item: "/" },
+		{ name: "Blog", item: "/blog" },
+		{ name: `Tag: ${tag}`, item: `/blog/tags/${tag}` },
+	]}
+>
 	<div class="container">
 		<h1>{pageTitle}</h1>
 		<div class="page-layout">

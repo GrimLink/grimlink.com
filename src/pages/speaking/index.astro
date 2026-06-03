@@ -24,7 +24,16 @@ const pageDescription =
 	"An overview of the events, conferences, and videos where I have shared my knowledge and experiences.";
 ---
 
-<PageLayout title={pageTitle} description={pageDescription} image={SpeakingImg} class="container">
+<PageLayout
+	title={pageTitle}
+	description={pageDescription}
+	image={SpeakingImg}
+	class="container"
+	breadcrumbs={[
+		{ name: "Home", item: "/" },
+		{ name: "Speaking", item: "/speaking" },
+	]}
+>
 	<h1>{pageTitle}</h1>
 	<p>{pageDescription}</p>
 	<ul role="list" class="auto-grid gap" style="--max-col-size: 42ch">
