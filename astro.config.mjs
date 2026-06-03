@@ -3,7 +3,12 @@ import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
 	site: "https://grimlink.com",
+	trailingSlash: "always",
 	integrations: [sitemap()],
+	redirects: {
+		"/feed.xml": "/rss.xml",
+		"/*": "/",
+	},
 	image: {
 		remotePatterns: [{ protocol: "https" }],
 	},
