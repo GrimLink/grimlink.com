@@ -14,9 +14,9 @@
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.18",
-    "@astrojs/sitemap": "^3.7.2",
+    "@astrojs/sitemap": "^3.7.3",
     "@fylgja/card": "^2.0.2",
-    "astro": "^6.3.1",
+    "astro": "^6.4.3",
     "fylgja": "^2.1.0",
     "sharp": "^0.34.3"
   }
