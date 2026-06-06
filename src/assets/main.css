@@ -83,3 +83,10 @@
 		}
 	}
 }
+
+@media (width >= 1400px) {
+	:root {
+		--font-size: 1.125rem;
+		--container-size: 1400px;
+	}
+}
