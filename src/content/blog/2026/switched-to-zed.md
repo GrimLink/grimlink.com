@@ -2,7 +2,7 @@
 title: "Switched to Zed"
 description: "It's rare that I switch editors, but the Zed Editor has completely won me over these past few weeks."
 pubDate: 2026-02-19
-pubSource: "https://bsky.app/profile/grimlink.bsky.social/post/3mfa34dxddc2x"
+pubSource: "https://bsky.app/profile/grimlink.com/post/3mfa34dxddc2x"
 tags: ["tools"]
 ---
 

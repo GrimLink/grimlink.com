@@ -13,7 +13,7 @@ export const today = new Date();
 
 export const socials = {
 	github: "https://github.com/GrimLink/",
-	bluesky: "https://bsky.app/profile/grimlink.bsky.social/",
+	bluesky: "https://bsky.app/profile/grimlink.com/",
 	mastodon: "https://mastodon.social/@GrimLink/",
 	linkedin: "https://www.linkedin.com/in/seanvanzuidam/",
 	instagram: "https://www.instagram.com/seangrimlink/",
