@@ -14,6 +14,7 @@ This is a great video by Scott Tolinski on HTML Invokers, definitely worth the w
 	width="1120"
 	height="630"
 	src="https://www.youtube-nocookie.com/embed/Ctb9-Bb2j-Y"
+	title="YouTube Video: Scott Tolinski on HTML Invokers"
 	allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 	referrerpolicy="strict-origin-when-cross-origin"
 	allowfullscreen

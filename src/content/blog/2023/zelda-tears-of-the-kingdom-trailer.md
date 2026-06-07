@@ -13,6 +13,7 @@ Okay the new #LegendofZelda Tears of the Kingdom trailer is pure fire, super hyp
 	width="1120"
 	height="630"
 	src="https://www.youtube-nocookie.com/embed/uHGShqcAHlQ"
+	title="YouTube Video: Legend of Zelda: Tears of the Kingdom Trailer"
 	allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 	referrerpolicy="strict-origin-when-cross-origin"
 	allowfullscreen
