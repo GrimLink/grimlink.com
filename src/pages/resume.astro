@@ -1,0 +1,312 @@
+---
+import PageLayout from "@/layouts/PageLayout.astro";
+import AboutImg from "@/assets/about.webp";
+
+const experiences = [
+	{
+		company: "Hyvä",
+		role: "Frontend Developer",
+		period: "Nov 2022 - Present",
+		description:
+			"Frontend developer with the focus on building Hyvä UI and improving the Hyvä Theme.",
+	},
+	{
+		company: "Mooore Digital (formerly Marissen e-commerce)",
+		role: "Frontend Developer",
+		period: "Aug 2017 - Oct 2022",
+		location: "Kampen",
+		description:
+			"Frontend Developer specializing in high-performance Magento storefronts. Key responsibilities included mentoring new developers and leading the implementation of headless solutions using Vue, React, and PWA technologies, alongside custom WordPress integrations for Magento 2.",
+	},
+	{
+		company: "RIFF (formerly Jaagers BV)",
+		role: "Frontend Developer",
+		period: "Jan 2017 - Sep 2018",
+		location: "Nijmegen & Zwolle",
+		description:
+			"Frontend developer focused on building high-quality Magento storefronts for a diverse range of clients.",
+	},
+	{
+		company: "Converzy",
+		role: "Frontend Developer",
+		period: "Oct 2015 - Jan 2017",
+		location: "Zwolle",
+		description:
+			"Front-end developer with the focus of building the Magento front-end for Converzy projects. Also did some Wordpress and static sites.",
+	},
+	{
+		company: "Wezo Zwolle",
+		role: "Technical support",
+		period: "Nov 2012 - Jul 2014 & Jun 2015 - Oct 2015",
+		location: "Zwolle",
+		description:
+			"Technical support specialist responsible for resolving hardware and software issues, managing the internal IT network, and overseeing the configuration of mobile devices and thin clients.",
+	},
+	{
+		company: "Masters of Media",
+		role: "Web Designer",
+		period: "Jul 2014 - Jun 2015",
+		location: "Zwolle",
+		description:
+			"Front-end developer with the focus of building the Joomla front-end for Masters of Media projects. Also provided support for our clients: - How to use their site - Content support.",
+	},
+	{
+		company: "Wezo Zwolle",
+		role: "Administration Packaging and assembly",
+		period: "Apr 2012 - Feb 2013",
+		location: "Zwolle",
+		description:
+			"Administrative role focused on production tracking and logistics documentation. Responsible for recording employee workflows and managing inventory movement through precise registration and documentation of finished goods.",
+	},
+];
+
+const projects = [
+	{
+		title: "Fylgja CSS",
+		period: "2017 - Present",
+		description:
+			"Fylgja CSS is a library designed to help developers streamline their work with HTML and CSS. Unlike traditional CSS frameworks, Fylgja provides modular solutions that focus on simplicity, flexibility, and customization.",
+		repo: "https://github.com/fylgja/fylgja",
+		website: "https://fylgja.dev/",
+	},
+	{
+		title: "Snap Slider",
+		period: "2025 - Present",
+		description:
+			"A CSS-based slider/carousel component for Fylgja, hydrated by JavaScript for enhanced functionality while leveraging native CSS Scroll Snap for performance.",
+		website: "https://fylgja.dev/library/extensions/snap-slider/",
+	},
+	{
+		title: "Alpinejs Dialog",
+		period: "2022 - Present",
+		description:
+			"An Alpine.js extension that brings the power of Alpine to the native HTML <dialog> element, making it easier to handle accessibility and state.",
+		website: "https://fylgja.dev/library/extensions/alpinejs-dialog/",
+	},
+];
+
+const certifications = [
+	{
+		title: "Hyvä Certified Professional Developer",
+		issued: "Oct 2025",
+		source: "https://www.credly.com/badges/2b4a2b4c-de73-413b-968b-815da398126a/linked_in_profile",
+	},
+	{
+		title: "Hyvä Certified Associate Developer",
+		issued: "Jun 2025",
+		source: "https://www.credly.com/badges/8bd48b8a-62c6-4993-b0d6-b66e60034861/linked_in_profile",
+	},
+	{
+		title: "MBO Natuur en groene ruimte 2",
+		school: "De Groene Welle",
+		issued: "Jul 2011",
+	},
+];
+
+const education = [
+	{
+		school: "Ambelt Herfte",
+		period: "1996 - 2012",
+	},
+	{
+		school: "Scheidegger",
+		degree: "MBO Professional Web Design, Web Design",
+		period: "2014 - 2015",
+	},
+	{
+		school: "De Groene Welle",
+		degree: "MBO Niveau 2, Hovenier",
+		period: "2009 - 2012",
+	},
+];
+---
+
+<PageLayout
+	title="Resume"
+	description="Professional resume of Sean van Zuidam, Frontend Developer at Hyvä."
+	image={AboutImg}
+	breadcrumbs={[
+		{ name: "Home", item: "/" },
+		{ name: "Resume", item: "/resume/" },
+	]}
+	class="container"
+>
+	<section aria-labelledby="resume-title" class="intro">
+		<h1>Sean van Zuidam</h1>
+		<p class="lead">
+			Frontend Developer at
+			<a href="https://hyva.io/" target="_blank">Hyvä Themes</a>, creator of
+			<a href="https://fylgja.dev/" target="_blank">Fylgja CSS</a>, and a firm believer in
+			modular, performant web developement.
+		</p>
+		<p>
+			Based in Zwolle, Netherlands, I specialize in the technical implementation of design
+			systems using <strong>HTML</strong>, <strong>CSS</strong>,
+			<strong>JavaScript</strong>, and <strong>PHP</strong>. With nearly a decade of
+			experience in the Magento ecosystem, I focus on bridging the gap between design and
+			development.
+		</p>
+		<p>
+			Beyond the keyboard, I am a passionate gardener with a green thumb, a dedicated gamer,
+			and a fan of metal music and anime.
+		</p>
+	</section>
+
+	<div class="grid-cols gap" style="--md_grid-cols: 2; --gap: 0 3rem">
+		<section aria-labelledby="work-experience">
+			<h2 id="work-experience">Work Experience</h2>
+			<ul role="list" class="flow" style="--flow: var(--size-8)">
+				{
+					experiences.map((exp) => (
+						<li>
+							<div
+								class="flow-none flex-col align gap-sm"
+								style="--sm_flex-dir: row; --align-items: baseline"
+							>
+								<hgroup>
+									<h3 class="item-heading">{exp.company}</h3>
+									<p>{exp.role}</p>
+								</hgroup>
+								<div class="item-meta flow-none">
+									<p>{exp.period}</p>
+									{exp.location && <p>{exp.location}</p>}
+								</div>
+							</div>
+							<p class="text-sm">{exp.description}</p>
+						</li>
+					))
+				}
+			</ul>
+		</section>
+
+		<section aria-labelledby="projects">
+			<h2 id="projects">Projects</h2>
+			<ul role="list" class="flow" style="--flow: var(--size-8)">
+				{
+					projects.map((project) => (
+						<li>
+							<div
+								class="flow-none flex-col align gap-sm"
+								style="--sm_flex-dir: row; --align-items: baseline"
+							>
+								<h3 class="item-heading">{project.title}</h3>
+								<p class="item-meta">{project.period}</p>
+							</div>
+							<p class="text-sm">{project.description}</p>
+							<p class="flex-wrap gap">
+								{project.repo && (
+									<a
+										href={project.repo}
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										View Repository
+									</a>
+								)}
+								{project.website && (
+									<a
+										href={project.website}
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										View Website
+									</a>
+								)}
+							</p>
+						</li>
+					))
+				}
+			</ul>
+		</section>
+
+		<section aria-labelledby="education">
+			<h2 id="education">Education</h2>
+			<ul role="list" class="flow" style="--flow: var(--size-8)">
+				{
+					education.map((edu) => (
+						<li>
+							<div
+								class="flow-none flex-col align gap-sm"
+								style="--sm_flex-dir: row; --align-items: baseline"
+							>
+								<hgroup>
+									<h3 class="item-heading">{edu.school}</h3>
+									{edu.degree && <p class="text-sm">{edu.degree}</p>}
+								</hgroup>
+								<span class="item-meta">{edu.period}</span>
+							</div>
+						</li>
+					))
+				}
+			</ul>
+		</section>
+
+		<section aria-labelledby="certifications">
+			<h2 id="certifications">Licenses & Certifications</h2>
+			<ul role="list" class="flow" style="--flow: var(--size-8)">
+				{
+					certifications.map((cert) => (
+						<li>
+							<div
+								class="flow-none flex-col align gap-sm"
+								style="--sm_flex-dir: row; --align-items: baseline"
+							>
+								<hgroup>
+									<h3 class="item-heading">{cert.title}</h3>
+								</hgroup>
+								<p class="item-meta">Issued {cert.issued}</p>
+							</div>
+							{cert.source && (
+								<p>
+									<a href={cert.source} target="_blank" rel="noopener noreferrer">
+										View Credential
+									</a>
+								</p>
+							)}
+						</li>
+					))
+				}
+			</ul>
+		</section>
+	</div>
+</PageLayout>
+
+<style>
+	section > h2 {
+		--text-flow: 2em 1.5rem;
+		padding-block-end: 0.5rem;
+		border-bottom: 2px solid var(--brand);
+		color: light-dark(var(--brand), currentcolor);
+		font-size: 1.375rem;
+	}
+
+	.intro {
+		max-inline-size: 74ch;
+	}
+
+	.item-heading {
+		font-size: 1.25rem;
+	}
+
+	.item-meta {
+		font-size: 0.875em;
+		color: var(--color-muted);
+
+		@media (width >= 480px) {
+			text-align: end;
+		}
+	}
+</style>
+
+<style is:inline>
+	@media print {
+		.page-header,
+		.page-footer {
+			display: none;
+		}
+
+		section li {
+			break-inside: avoid;
+		}
+	}
+</style>
