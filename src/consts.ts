@@ -12,12 +12,13 @@ export const isProd = import.meta.env.PROD;
 export const today = new Date();
 
 export const socials = {
-	github: "https://github.com/GrimLink/",
-	bluesky: "https://bsky.app/profile/grimlink.com/",
-	mastodon: "https://mastodon.social/@GrimLink/",
-	linkedin: "https://www.linkedin.com/in/seanvanzuidam/",
-	instagram: "https://www.instagram.com/seangrimlink/",
-	youtube: "https://www.youtube.com/@SeanGrimLink/",
+	github: "https://github.com/GrimLink",
+	bluesky: "https://bsky.app/profile/grimlink.com",
+	mastodon: "https://mastodon.social/@GrimLink",
+	linkedin: "https://www.linkedin.com/in/seanvanzuidam",
+	instagram: "https://www.instagram.com/seangrimlink",
+	youtube: "https://www.youtube.com/@SeanGrimLink",
+	gravatar: "https://gravatar.com/grimlink",
 };
 
 export const myLists = {
