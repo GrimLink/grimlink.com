@@ -10,6 +10,6 @@ crossPosts:
 
 I got the The Stoic archetype!
 
-https://mastodon.social/@GrimLink/wrapstodon/2025/5342d5b3fe16efea
+[View my Wrapstodon](https://mastodon.social/@GrimLink/wrapstodon/2025/5342d5b3fe16efea)
 
-![View my Wrapstodon](./mastodon.social_GrimLink_wrapstodon_2025.png)
+![My Wrapstodon](./mastodon.social_GrimLink_wrapstodon_2025.png)
