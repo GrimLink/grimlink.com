@@ -5,6 +5,7 @@ image: "my-new-mac-stickers.webp"
 pubDate: 2026-04-04
 crossPosts:
   bluesky: "3miomqo7qxs2h"
+  instagram: "DWt0xdNjVig"
 tags: ["tools", "swag", "zed", "games"]
 ---
 

@@ -5,6 +5,8 @@ pubDate: 2023-12-05
 image: "youtube-music-recap.webp"
 crossPosts:
   bluesky: "3kfrvdb75ys2l"
+  mastodon: "111526784532156190"
+  instagram: "C0d4kl7t2Ey"
 tags: ["recap", "music"]
 ---
 

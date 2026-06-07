@@ -26,6 +26,7 @@ export const sourceBaseUrls = {
 	mastodon: "https://mastodon.social/@GrimLink/",
 	devto: "https://dev.to/grimlink/",
 	linkedin: "https://www.linkedin.com/posts/",
+	instagram: "https://www.instagram.com/p/",
 };
 
 export const myLists = {
