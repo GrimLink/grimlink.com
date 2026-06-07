@@ -2,8 +2,9 @@
 title: "Thanks Fangamer for this wonderful message!"
 description: ""
 image: "thanks-fangamer.webp"
+tags: ["games", "swag"]
 pubDate: 2024-07-29
-pubSource:
+crossPosts:
   bluesky: "3kygmkdoa4d2z"
 ---
 

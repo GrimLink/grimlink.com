@@ -3,8 +3,9 @@ title: "My Wrap-Up of 2025"
 description: "A collection of my wrap-ups from 2025."
 image: "playstation-wrap.webp"
 pubDate: 2025-12-11
-pubSource:
+crossPosts:
   bluesky: "3m7pgqfy3222m"
+  mastodon: "115700627277947494"
 tags: ["recap", "music", "games"]
 ---
 

@@ -3,7 +3,7 @@ title: "YouTube Music Recap"
 description: "Check out my 2023 YouTube Music Recap!"
 pubDate: 2023-12-05
 image: "youtube-music-recap.webp"
-pubSource:
+crossPosts:
   bluesky: "3kfrvdb75ys2l"
 tags: ["recap", "music"]
 ---

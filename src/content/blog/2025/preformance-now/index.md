@@ -3,9 +3,9 @@ title: "Performance Now, 2025 Wrap-Up"
 description: "What a fantastic two days at performance.now()!"
 image: "img-1.webp"
 pubDate: "2025-10-31"
-pubSource:
+crossPosts:
   bluesky: "3m4j6vhvsls2m"
-tags: ["performance", "magento", "hyva"]
+tags: ["events", "performance", "magento", "hyva"]
 ---
 
 What a fantastic two days at performance.now()! Learned so much, not just from the talks, but from all the great people.

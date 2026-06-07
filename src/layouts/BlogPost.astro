@@ -11,7 +11,7 @@ import { SchemaMe, SchemaSite, SchemaBlogPosting, SchemaBreadcrumbs } from "@/co
 import Speculation from "@fylgja/Speculation.astro";
 import FormattedDate from "@/components/FormattedDate.astro";
 import PostNavigation from "@/components/PostNavigation.astro";
-import OriginalSource from "@/components/OriginalSource.astro";
+import DiscussionLinks from "@/components/DiscussionLinks.astro";
 import Tags from "@/components/Tags.astro";
 import ShareButton from "@fylgja/ShareButton.astro";
 
@@ -34,7 +34,7 @@ const {
 	updatedDate,
 	image,
 	tags = [],
-	pubSource,
+	crossPosts,
 	lang = "en",
 	dir = "ltr",
 	class: className = "",
@@ -103,7 +103,9 @@ const dateHash = `?v=${today.getMonth() + 1}-${today.getFullYear()}`;
 				<slot />
 			</article>
 			<div class="flex gap align" style={{ "--my": "var(--size-6) 0" }}>
-				<div>{pubSource && <OriginalSource source={pubSource} />}</div>
+				<div>
+					{crossPosts && <DiscussionLinks sources={crossPosts} />}
+				</div>
 				<ShareButton url={new URL(Astro.url)} title={title} class="btn --primary" />
 			</div>
 			<hr />

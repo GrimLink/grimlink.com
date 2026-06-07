@@ -2,9 +2,9 @@
 title: "Switched to Zed"
 description: "It's rare that I switch editors, but the Zed Editor has completely won me over these past few weeks."
 pubDate: 2026-02-19
-pubSource:
+crossPosts:
   bluesky: "3mfa34dxddc2x"
-tags: ["tools"]
+tags: ["tools", "zed"]
 ---
 
 It’s rare that I switch editors, but the Zed Editor has completely won me over these past few weeks.
