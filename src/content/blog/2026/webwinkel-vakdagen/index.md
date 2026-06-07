@@ -16,6 +16,6 @@ This year, Hyvä is teaming up with co-host Hypernode and our partners to take a
 
 Find us at Stand 53 for a delicious coffee, freshly baked stroopwafels 🧇, or a cold beer 🍻. Whether you want to talk Open Source, frontend development, or just catch up, I'd love to see you there! ✨
 
-👉 The vision behind the booth: https://hyva.io/blog/ownership-at-webwinkel-vakdagen-2026.html
+👉 The vision behind the booth: https://www.hyva.io/blog/events/a-stand-for-ownership-at-wwv.html
 
 ![Hyvä at Webwinkel Vakdagen 2026](./image.jpg)
