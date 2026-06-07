@@ -1,0 +1,41 @@
+---
+
+---
+
+<a href="/rss.xml" class="btn rss-link" aria-label="RSS Feed">
+	<svg width="24" height="24" viewBox="0 0 24 24" fill="currentcolor" aria-hidden="true">
+		<path class="rss-dot" d="M5.903 16.586a2.414 2.414 0 1 1 0 4.828 2.414 2.414 0 0 1 0-4.828z"
+		></path>
+		<path
+			class="rss-bar-1"
+			d="M2.586 9.344c6.643 0 12.029 5.385 12.029 12.028h-2.887a9.14 9.14 0 0 0-9.142-9.141V9.344z"
+		></path>
+		<path
+			class="rss-bar-2"
+			d="M2.586 2.586c10.372 0 18.784 8.412 18.784 18.785h-2.887A15.897 15.897 0 0 0 2.586 5.474V2.586z"
+		></path>
+	</svg>
+</a>
+
+<style>
+	.rss-link {
+		&:is(:hover, :focus) {
+			.rss-bar-1 {
+				animation: rss-signal 1.5s infinite;
+			}
+			.rss-bar-2 {
+				animation: rss-signal 1.5s infinite 0.2s;
+			}
+		}
+	}
+
+	@keyframes rss-signal {
+		0%,
+		100% {
+			opacity: 1;
+		}
+		50% {
+			opacity: 0.3;
+		}
+	}
+</style>

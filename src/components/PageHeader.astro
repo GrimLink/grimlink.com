@@ -1,6 +1,6 @@
 ---
-import SocialsIcons from "@/assets/socials.svg?url";
 import ThemeToggleBtn from "@/components/ThemeToggle/btn.astro";
+import RssBtn from "@/components/RssBtn.astro";
 import MobileMenu from "@/components/MobileMenu.astro";
 
 import { siteTitle } from "@/consts";
@@ -15,11 +15,7 @@ import { mainMenu } from "@/menus";
 	</a>
 	<div class="inline-flex gap">
 		<ThemeToggleBtn />
-		<a href="/rss.xml" class="btn" aria-label="RSS Feed">
-			<svg width="20" height="20" fill="currentcolor">
-				<use href={`${SocialsIcons}#rss`}></use>
-			</svg>
-		</a>
+		<RssBtn />
 		<MobileMenu items={mainMenu} />
 	</div>
 </header>
