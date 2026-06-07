@@ -4,14 +4,15 @@ import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import type { HTMLAttributes } from "astro/types";
 import FormattedDate from "@/components/FormattedDate.astro";
-import OriginalSource from "@/components/OriginalSource.astro";
+import Tags from "@/components/Tags.astro";
 
 type PostProps = {
 	image?: ImageMetadata;
 	title: string;
 	description?: string;
 	pubDate?: Date;
-	pubSource?: string;
+	pubSource?: Record<string, string>;
+	tags?: string[];
 };
 
 interface Props extends HTMLAttributes<"article"> {
@@ -24,7 +25,7 @@ interface Props extends HTMLAttributes<"article"> {
 }
 
 const { id, class: className, style, variant = "card", data, headingTag = "h2" } = Astro.props;
-const { image, title, description, pubDate, pubSource } = data;
+const { image, title, description, pubDate, tags } = data;
 const postId = id ? `post-${id.replace(/^\/|\/$/g, "").replaceAll("/", "-")}` : undefined;
 const href = id ? `/blog/${id}/` : undefined;
 
@@ -50,8 +51,8 @@ const Heading = headingTag;
 		{description && <p class="line-clamp">{description}</p>}
 		<div class="post-meta relative">
 			{pubDate && <FormattedDate date={pubDate} />}
-			{pubDate && pubSource && <span> ∙ </span>}
-			{pubSource && <OriginalSource source={pubSource} />}
+			{tags && <span> ∙ </span>}
+			{tags && <Tags tags={tags} />}
 		</div>
 	</div>
 	{image && <Image src={image} alt="" width="250" height="250" />}
