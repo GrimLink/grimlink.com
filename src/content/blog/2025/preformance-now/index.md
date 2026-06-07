@@ -5,7 +5,7 @@ image: "img-1.webp"
 pubDate: "2025-10-31"
 crossPosts:
   bluesky: "3m4j6vhvsls2m"
-tags: ["events", "performance", "magento", "hyva"]
+tags: ["events", "magento", "hyva", "performance"]
 ---
 
 What a fantastic two days at performance.now()! Learned so much, not just from the talks, but from all the great people.
