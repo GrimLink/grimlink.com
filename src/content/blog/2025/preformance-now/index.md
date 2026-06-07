@@ -3,7 +3,8 @@ title: "Performance Now, 2025 Wrap-Up"
 description: "What a fantastic two days at performance.now()!"
 image: "img-1.webp"
 pubDate: "2025-10-31"
-pubSource: "https://bsky.app/profile/grimlink.com/post/3m4j6vhvsls2m"
+pubSource:
+  bluesky: "3m4j6vhvsls2m"
 tags: ["performance", "magento", "hyva"]
 ---
 

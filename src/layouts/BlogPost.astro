@@ -34,7 +34,7 @@ const {
 	updatedDate,
 	image,
 	tags = [],
-	pubSource = "",
+	pubSource,
 	lang = "en",
 	dir = "ltr",
 	class: className = "",
@@ -86,22 +86,24 @@ const dateHash = `?v=${today.getMonth() + 1}-${today.getFullYear()}`;
 			<article>
 				<h1>{title}</h1>
 				<div class="post-meta">
-					<span>
-						<FormattedDate date={pubDate} />
-						{
-							updatedDate && (
+					<FormattedDate date={pubDate} />
+					{
+						updatedDate && (
+							<>
+								<span> ∙ </span>
 								<span class="last-updated-on">
 									Last updated on <FormattedDate date={updatedDate} />
 								</span>
-							)
-						}
-						{pubSource && <OriginalSource source={pubSource} />}
-					</span>
+							</>
+						)
+					}
+					{tags && <span> ∙ </span>}
+					{tags && <Tags tags={tags} />}
 				</div>
 				<slot />
 			</article>
 			<div class="flex gap align" style={{ "--my": "var(--size-6) 0" }}>
-				<Tags tags={tags} />
+				<div>{pubSource && <OriginalSource source={pubSource} />}</div>
 				<ShareButton url={new URL(Astro.url)} title={title} class="btn --primary" />
 			</div>
 			<hr />

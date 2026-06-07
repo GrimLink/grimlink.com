@@ -3,6 +3,10 @@ title: "GrimLink.com Finally Live!"
 description: "After many years I finally made my own site."
 pubDate: 2026-05-15
 tags: ["astro", "fylgja-css"]
+pubSource:
+  bluesky: "3mly7cekl6c25"
+  mastodon: "116585055101841158"
+  linkedin: "seanvanzuidam_grimlinkcom-finally-live-share-7461443621570031616-JAQA"
 ---
 
 They say that every good plumber has a leaky tap at home, and for developers, it's often our own personal websites that suffer the most. For years, GrimLink.com has lived in a state of perpetual "under construction" or served as nothing more than a simple placeholder. Today, that finally changes.

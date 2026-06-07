@@ -3,7 +3,8 @@ title: "YouTube Music Recap"
 description: "My YouTube Music 2024 Recap"
 pubDate: 2024-11-20
 image: "youtube-music-recap.webp"
-pubSource: "https://bsky.app/profile/grimlink.com/post/3lbeodxuirc2j"
+pubSource:
+  bluesky: "3lbeodxuirc2j"
 tags: ["recap", "music"]
 ---
 

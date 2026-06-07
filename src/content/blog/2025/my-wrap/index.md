@@ -3,7 +3,8 @@ title: "My Wrap-Up of 2025"
 description: "A collection of my wrap-ups from 2025."
 image: "playstation-wrap.webp"
 pubDate: 2025-12-11
-pubSource: "https://bsky.app/profile/grimlink.com/post/3m7pgqfy3222m"
+pubSource:
+  bluesky: "3m7pgqfy3222m"
 tags: ["recap", "music", "games"]
 ---
 

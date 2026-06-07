@@ -3,7 +3,8 @@ title: "Better VSCode CSS and SCSS IntelliSense"
 description: "Improve your CSS and SCSS IntelliSense in VS Code with these essential tips and extensions."
 image: "css-autocompletion.jpg"
 pubDate: 2023-06-02
-pubSource: "https://dev.to/grimlink/better-vscode-css-and-scss-intellisense-1a49"
+pubSource:
+  devto: "better-vscode-css-and-scss-intellisense-1a49"
 tags: ["css", "tools"]
 ---
 

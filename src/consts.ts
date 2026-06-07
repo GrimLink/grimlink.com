@@ -21,6 +21,13 @@ export const socials = {
 	gravatar: "https://gravatar.com/grimlink",
 };
 
+export const sourceBaseUrls = {
+	bluesky: "https://bsky.app/profile/grimlink.com/post/",
+	mastodon: "https://mastodon.social/@GrimLink/",
+	devto: "https://dev.to/grimlink/",
+	linkedin: "https://www.linkedin.com/posts/",
+};
+
 export const myLists = {
 	Backloggd: "https://backloggd.com/u/Grimlink/",
 	MyAnimelist: "https://myanimelist.net/profile/GrimLink/",
