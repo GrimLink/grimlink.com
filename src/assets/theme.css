@@ -6,7 +6,7 @@
 	navigation: auto;
 }
 :root {
-	--brand: oklch(0.44 0.18 260);
+	--brand: oklch(0.46 0.2 260);
 	--on-brand: hsl(0, 0%, 100%);
 	--form-active-color: var(--brand);
 	--form-error-color: #e00;

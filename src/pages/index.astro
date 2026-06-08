@@ -60,8 +60,8 @@ const posts = (await getCollection("blog"))
 									rel={external ? "noopener noreferrer" : null}
 								>
 									{project.title}
-								</a>
-								<span>{project.description}</span>
+								</a>{" "}
+								<span class="text-muted-dark">{project.description}</span>
 							</li>
 						);
 					})
@@ -72,7 +72,9 @@ const posts = (await getCollection("blog"))
 		<section aria-labelledby="lists" class="flow">
 			<hgroup>
 				<h2 id="lists" class="lead">Games, Anime & more</h2>
-				<p>A collection of lists I use to keep track of my hobbies and interests.</p>
+				<p class="text-muted-dark">
+					A collection of lists I use to keep track of my hobbies and interests.
+				</p>
 			</hgroup>
 			<ul style="--px: 1em 0">
 				{
@@ -108,6 +110,10 @@ const posts = (await getCollection("blog"))
 
 	.post-list {
 		--flow: 1.5em;
+	}
+
+	.text-muted-dark {
+		color: light-dark(currentcolor, var(--color-muted));
 	}
 
 	@media (width >= 128ch) {
