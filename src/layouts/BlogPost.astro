@@ -20,6 +20,7 @@ import { author, siteTitle, siteDescription, themeColor, isProd, today } from "@
 
 type BlogProps = CollectionEntry<"blog">["data"];
 interface Props extends BlogProps {
+	id?: string;
 	lang?: string;
 	dir?: string;
 	class?: string;
@@ -35,6 +36,7 @@ const {
 	image,
 	tags = [],
 	crossPosts,
+	id,
 	lang = "en",
 	dir = "ltr",
 	class: className = "",
@@ -43,6 +45,7 @@ const {
 } = Astro.props;
 const rssUrl = new URL("rss.xml", Astro.site);
 const dateHash = `?v=${today.getMonth() + 1}-${today.getFullYear()}`;
+const postId = id ? `post-${id.replace(/^\/|\/$/g, "").replaceAll("/", "-")}` : undefined;
 ---
 
 <html lang={lang} dir={dir} data-theme="auto">
@@ -84,7 +87,7 @@ const dateHash = `?v=${today.getMonth() + 1}-${today.getFullYear()}`;
 		<PageHeader />
 		<main class:list={["container", className]} style="--container-size: 68ch">
 			<article>
-				<h1>{title}</h1>
+				<h1 class="post-heading">{title}</h1>
 				<div class="post-meta">
 					<FormattedDate date={pubDate} />
 					{
@@ -115,9 +118,25 @@ const dateHash = `?v=${today.getMonth() + 1}-${today.getFullYear()}`;
 	</body>
 </html>
 
-<style>
+<style
+	define:vars={{
+		postId,
+		postIdHeading: postId ? `${postId}-heading` : undefined,
+		postIdMeta: postId ? `${postId}-Meta` : undefined,
+	}}
+>
 	.post-meta {
 		font-style: italic;
 		color: var(--color-muted);
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.post-heading {
+			view-transition-name: var(--postIdHeading);
+		}
+
+		.post-meta {
+			view-transition-name: var(--postIdMeta);
+		}
 	}
 </style>

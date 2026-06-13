@@ -57,10 +57,24 @@ const Heading = headingTag;
 	{image && <Image src={image} alt="" width="250" height="250" />}
 </article>
 
-<style define:vars={{ postId }}>
+<style
+	define:vars={{
+		postId,
+		postIdHeading: postId ? `${postId}-heading` : undefined,
+		postIdMeta: postId ? `${postId}-Meta` : undefined,
+	}}
+>
 	@media (prefers-reduced-motion: no-preference) {
 		article {
 			view-transition-name: var(--postId);
+		}
+
+		.post-heading {
+			view-transition-name: var(--postIdHeading);
+		}
+
+		.post-meta {
+			view-transition-name: var(--postIdMeta);
 		}
 	}
 

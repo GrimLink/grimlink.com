@@ -3,30 +3,31 @@ import { type CollectionEntry, getCollection, render } from "astro:content";
 import PageLayout from "@/layouts/BlogPost.astro";
 
 export async function getStaticPaths() {
-    const posts = (await getCollection("blog")).sort(
-        (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
-    );
-    return posts.map((post, index) => ({
-        params: { slug: post.id },
-        props: {
-            post,
-            prev: index > 0 ? posts[index - 1] : null,
-            next: index < posts.length - 1 ? posts[index + 1] : null,
-        },
-    }));
+	const posts = (await getCollection("blog")).sort(
+		(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
+	);
+	return posts.map((post, index) => ({
+		params: { slug: post.id },
+		props: {
+			post,
+			prev: index > 0 ? posts[index - 1] : null,
+			next: index < posts.length - 1 ? posts[index + 1] : null,
+		},
+	}));
 }
 
 type BlogProps = CollectionEntry<"blog">;
 interface Props {
-    post: BlogProps;
-    prev: BlogProps | null;
-    next: BlogProps | null;
+	post: BlogProps;
+	prev: BlogProps | null;
+	next: BlogProps | null;
 }
 
 const { post, prev, next } = Astro.props;
 const { Content } = await render(post);
+const postData = { id: post.id, ...post.data };
 ---
 
-<PageLayout {...post.data} prev={prev} next={next}>
-    <Content />
+<PageLayout {...postData} prev={prev} next={next}>
+	<Content />
 </PageLayout>
