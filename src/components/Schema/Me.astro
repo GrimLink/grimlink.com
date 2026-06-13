@@ -1,6 +1,11 @@
 ---
 import Schema from "@fylgja/Schema.astro";
+import { getImage } from "astro:assets";
+import avatarSrc from "@/assets/avatar.jpg";
 import { author, authorAbout, authorTitle, socials } from "@/consts";
+
+const avatar = await getImage({ src: avatarSrc, format: "webp" });
+const avatarUrl = new URL(avatar.src, Astro.site).href;
 ---
 
 <Schema
@@ -9,6 +14,7 @@ import { author, authorAbout, authorTitle, socials } from "@/consts";
 		"@type": "Person",
 		name: author,
 		url: new URL(Astro.url.pathname, Astro.site),
+		image: avatarUrl,
 		sameAs: Object.values(socials),
 		jobTitle: authorTitle,
 		description: authorAbout,
