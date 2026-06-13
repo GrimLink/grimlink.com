@@ -22,12 +22,13 @@ export async function getStaticPaths() {
 }
 
 const { posts, tag } = Astro.props;
-const pageTitle = `Posts tagged with #${tag}`;
+const pageTitle = `Posts tagged with ${tag}`;
+const pageDescription = `Blog and Social Posts filtered by the tag ${tag}`;
 ---
 
 <PageLayout
 	title={pageTitle}
-	description={`All posts tagged with ${tag}`}
+	description={pageDescription}
 	image={BlogImg}
 	breadcrumbs={[
 		{ name: "Home", item: "/" },
@@ -37,6 +38,7 @@ const pageTitle = `Posts tagged with #${tag}`;
 >
 	<div class="container">
 		<h1>{pageTitle}</h1>
+		<p>{pageDescription}</p>
 		<div class="page-layout">
 			<ul role="list" class="post-list flow">
 				{

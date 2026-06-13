@@ -10,11 +10,12 @@ const posts = (await getCollection("blog")).sort(
 );
 
 const pageTitle = "My Feed";
+const pageDescription = "All my Blog and Social Posts in one handy page.";
 ---
 
 <PageLayout
 	title={pageTitle}
-	description="All my Blog and Social Posts in one handy page."
+	description={pageDescription}
 	image={BlogImg}
 	breadcrumbs={[
 		{ name: "Home", item: "/" },
@@ -23,7 +24,7 @@ const pageTitle = "My Feed";
 >
 	<div class="container">
 		<h1>{pageTitle}</h1>
-		<p>All my Blog and Social Posts in one handy page.</p>
+		<p>{pageDescription}</p>
 		<div class="page-layout">
 			<ul role="list" class="post-list flow">
 				{
