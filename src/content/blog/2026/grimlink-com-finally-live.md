@@ -21,7 +21,7 @@ Of course, since I built [Fylgja](https://fylgja.dev), it would have been a crim
 
 ## A Digital Garden
 
-Moving forward, I want this site to serve as my "digital garden", a space where thoughts can grow and evolve over time. You can expect to see deep dives into the Magento 2 ecosystem and Hyvä Themes, alongside updates and tips for Fylgja CSS. But it won't just be about work. I also plan to share my thoughts on general frontend development, and occasionally drift into my other passions like music, gaming, and even some gardening updates.
+Moving forward, I want this site to serve as my "digital garden", a space where thoughts can grow and evolve over time. You can expect to see deep dives into the Magento 2 ecosystem and Hyvä, alongside updates and tips for Fylgja CSS. But it won't just be about work. I also plan to share my thoughts on general frontend development, and occasionally drift into my other passions like music, gaming, and even some gardening updates.
 
 One of my main drivers for this project was to create a central hub for all my thoughts. Over the years, I've shared countless tips, opinions, and updates across various social media platforms, only for them to be buried by algorithms. I'm planning to migrate those posts here, creating a permanent reference so there is one unified place for everything I've shared.
 
