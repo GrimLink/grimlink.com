@@ -17,6 +17,7 @@ interface Props {
 	rss?: URL;
 	fediverse?: string;
 	twitterHandle?: string;
+	schema?: "light" | "dark" | "light-dark";
 	themeColor?: string;
 	themeColorDark?: string;
 	separator?: string;
@@ -37,8 +38,9 @@ const {
 	rss,
 	fediverse,
 	twitterHandle,
+	schema = "light-dark",
 	themeColor = "#fff",
-	themeColorDark,
+	themeColorDark = "#111",
 	pageType = "website",
 	separator = " - ",
 } = Astro.props;
@@ -47,7 +49,8 @@ const {
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
- <meta name="text-scale" content="scale" />
+	<meta name="text-scale" content="scale" />
+	{schema !== "light" && <meta name="color-scheme" content={schema} />}
 	<title>
 		{title === siteName ? siteName : `${title}${separator}${siteName}`}
 	</title>
@@ -63,12 +66,6 @@ const {
 	{icon && <link rel="icon" href={icon} type="image/svg+xml" />}
 	{appleIcon && <link rel="apple-touch-icon" href={appleIcon} />}
 
-	{manifest && <link rel="manifest" href={manifest} />}
-
-	{sitemap && <link rel="sitemap" href={sitemap} />}
-
-	{rss && <link rel="alternate" type="application/rss+xml" title={siteName} href={rss} />}
-
 	{
 		themeColorDark && (
 			<meta
@@ -79,6 +76,12 @@ const {
 		)
 	}
 	{themeColor && <meta name="theme-color" content={themeColor} />}
+
+	{manifest && <link rel="manifest" href={manifest} />}
+
+	{sitemap && <link rel="sitemap" href={sitemap} />}
+
+	{rss && <link rel="alternate" type="application/rss+xml" title={siteName} href={rss} />}
 
 	<slot name="socials">
 		<meta property="og:type" content={pageType} />
