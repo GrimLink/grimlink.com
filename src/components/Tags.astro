@@ -16,7 +16,15 @@ const { tags, class: className, style, linkPrefix = "/blog/tags" } = Astro.props
 		<ul role="list" class:list={["tags inline-flex flex-wrap gap", className]} style={style}>
 			{tags.map((tag) => (
 				<li>
-					<a href={`${linkPrefix}/${tag}/`}>#{tag}</a>
+					<a
+						href={`${linkPrefix}/${tag}/`}
+						aria-label={`Posts from ${tag}`}
+						aria-current={
+							`${linkPrefix}/${tag}/` === Astro.url.pathname ? "page" : undefined
+						}
+					>
+						#{tag}
+					</a>
 				</li>
 			))}
 		</ul>

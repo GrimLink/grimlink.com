@@ -13,20 +13,26 @@ const uniqueYears = [...new Set(allYears)].sort((a, b) => b.localeCompare(a));
 ---
 
 <aside class="sticky">
-	<h2>Tags</h2>
-	<Tags tags={uniqueTags} class="blog-list" />
-
 	<h2>Archive</h2>
 	<ul role="list" class="blog-list inline-flex flex-wrap gap">
 		<li><a href="/blog/">All</a></li>
 		{
 			uniqueYears.map((year) => (
 				<li>
-					<a href={`/blog/${year}/`}>{year}</a>
+					<a
+						href={`/blog/${year}/`}
+						aria-label={`Posts from ${year}`}
+						aria-current={`/blog/${year}/` === Astro.url.pathname ? "page" : undefined}
+					>
+						{year}
+					</a>
 				</li>
 			))
 		}
 	</ul>
+
+	<h2>Tags</h2>
+	<Tags tags={uniqueTags} class="blog-list" />
 
 	<hr />
 
@@ -42,6 +48,13 @@ const uniqueYears = [...new Set(allYears)].sort((a, b) => b.localeCompare(a));
 
 			> :first-child {
 				margin-block-start: 0;
+			}
+		}
+
+		.blog-list,
+		.tags {
+			[aria-current="page"] {
+				color: var(--root-fg);
 			}
 		}
 
