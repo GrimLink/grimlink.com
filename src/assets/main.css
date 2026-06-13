@@ -16,6 +16,16 @@
 	}
 }
 
+@layer base {
+	blockquote {
+		--text-flow: 0;
+
+		* + * {
+			margin-inline-start: 1em;
+		}
+	}
+}
+
 @layer components {
 	/* For Markdown layouts */
 	.md-row {
