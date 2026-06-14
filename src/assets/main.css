@@ -17,6 +17,10 @@
 }
 
 @layer base {
+	html {
+		container-type: scroll-state;
+	}
+
 	blockquote {
 		--text-flow: 0;
 

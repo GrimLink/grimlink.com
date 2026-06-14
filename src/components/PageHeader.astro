@@ -29,6 +29,21 @@ import { mainMenu } from "@/menus";
 		:is(.btn, button) {
 			--btn-stroke: transparent;
 		}
+
+		@container (not scroll-state(scrolled: none)) {
+			z-index: 5;
+			position: sticky;
+			top: 0;
+			transition: translate 0.3s;
+		}
+
+		@container (scroll-state(scrolled: bottom)) {
+			translate: 0 -100%;
+		}
+
+		@container (scroll-state(scrolled: top)) {
+			translate: 0 0;
+		}
 	}
 
 	.logo {
