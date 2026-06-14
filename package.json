@@ -18,6 +18,7 @@
     "@fylgja/card": "^2.0.2",
     "astro": "^6.4.3",
     "fylgja": "^2.1.0",
+    "rehype-external-links": "^3.0.0",
     "sharp": "^0.34.3"
   }
 }
