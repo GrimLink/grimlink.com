@@ -14,6 +14,7 @@ import PostNavigation from "@/components/PostNavigation.astro";
 import DiscussionLinks from "@/components/DiscussionLinks.astro";
 import Tags from "@/components/Tags.astro";
 import ShareButton from "@fylgja/ShareButton.astro";
+import ShareBluesky from "@fylgja/ShareBluesky.astro";
 
 import PlaceHolderImg from "@/assets/placeholder.webp";
 import { author, siteTitle, siteDescription, themeColor, isProd, today } from "@/consts";
@@ -109,7 +110,10 @@ const postId = id ? `post-${id.replace(/^\/|\/$/g, "").replaceAll("/", "-")}` : 
 				<div>
 					{crossPosts && <DiscussionLinks sources={crossPosts} />}
 				</div>
-				<ShareButton url={new URL(Astro.url)} title={title} class="btn --primary" />
+				<div class="inline-flex gap-sm">
+					<ShareBluesky url={new URL(Astro.url)} class="btn --primary" />
+					<ShareButton url={new URL(Astro.url)} title={title} class="btn --primary" />
+				</div>
 			</div>
 			<hr />
 			<PostNavigation prev={prev} next={next} />
