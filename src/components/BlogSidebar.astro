@@ -67,4 +67,10 @@ const uniqueYears = [...new Set(allYears)].sort((a, b) => b.localeCompare(a));
 			}
 		}
 	}
+
+	@container (scroll-state(scrolled: top)) {
+		aside {
+			--inset-y: var(--size-24) 0;
+		}
+	}
 </style>
