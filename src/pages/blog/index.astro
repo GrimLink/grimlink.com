@@ -26,15 +26,18 @@ const pageDescription = "All my Blog and Social Posts in one handy page.";
 		<h1>{pageTitle}</h1>
 		<p>{pageDescription}</p>
 		<div class="page-layout">
-			<ul role="list" class="post-list flow">
-				{
-					posts.map((post) => (
-						<li>
-							<PostCard {...post} />
-						</li>
-					))
-				}
-			</ul>
+			<div>
+				<ul role="list" class="post-list flow">
+					{
+						posts.map((post) => (
+							<li>
+								<PostCard {...post} class="reveal" />
+							</li>
+						))
+					}
+				</ul>
+				<p><a href="#main" class="btn w-full">Back to Top</a></p>
+			</div>
 			<BlogSidebar />
 		</div>
 	</div>
