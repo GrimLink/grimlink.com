@@ -7,9 +7,10 @@ import FormattedDate from "@/components/FormattedDate.astro";
 import Tags from "@/components/Tags.astro";
 
 type PostProps = {
-	image?: ImageMetadata;
 	title: string;
 	description?: string;
+	image?: ImageMetadata;
+	thumb?: ImageMetadata;
 	pubDate?: Date;
 	tags?: string[];
 };
@@ -24,7 +25,7 @@ interface Props extends HTMLAttributes<"article"> {
 }
 
 const { id, class: className, style, variant = "card", data, headingTag = "h2" } = Astro.props;
-const { image, title, description, pubDate, tags } = data;
+const { title, description, image, thumb, pubDate, tags } = data;
 const postId = id ? `post-${id.replace(/^\/|\/$/g, "").replaceAll("/", "-")}` : undefined;
 const href = id ? `/blog/${id}/` : undefined;
 
@@ -54,7 +55,7 @@ const Heading = headingTag;
 			{tags && <Tags tags={tags} />}
 		</div>
 	</div>
-	{image && <Image src={image} alt="" width="250" height="250" />}
+	{image && <Image src={thumb || image} alt="" width="250" height="250" />}
 </article>
 
 <style
