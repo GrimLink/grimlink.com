@@ -5,6 +5,10 @@ image: "photo-of-me-with-kevin.jpg"
 thumb: "css-day-logo.jpg"
 pubDate: 2026-06-14
 tags: ["events", "css", "design-tokens", "fylgja-css", "games"]
+crossPosts:
+  bluesky: "3mobcrpbzlk2s"
+  mastodon: "116749685130782791"
+  linkedin: "seanvanzuidam_my-first-time-at-css-day-activity-7471980277423292416-29Am"
 ---
 
 This year I finally stopped hesitating and bought a ticket for CSS Day. It's not the cheapest event to attend, but this year's lineup was too good to pass up.
