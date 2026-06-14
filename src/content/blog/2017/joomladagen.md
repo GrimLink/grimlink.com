@@ -3,7 +3,7 @@ title: "JoomlaDagen 2017 — first presentation"
 description: "My first JoomlaDagen presentation on Joomla and Progressive Web Apps went well!"
 pubDate: 2017-04-01
 updatedDate: 2026-06-14
-tags: ["events", "pwa"]
+tags: ["events", "pwa", "joomla"]
 ---
 
 My first JoomlaDagen presentation on Joomla and Progressive Web Apps went well, super happy 😄

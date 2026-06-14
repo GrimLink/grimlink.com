@@ -2,7 +2,7 @@
 title: "Updated the YouTube Music DOOM Staff Playlist"
 description: "Updated the YouTube Music version of the Year of DOOM, id Software Staff Playlist, originally found on Spotify."
 pubDate: 2019-08-10
-tags: ["music", "games"]
+tags: ["music", "games", "doom"]
 ---
 
 Updated the YouTube Music version of the Year of DOOM, id Software Staff Playlist, originally found on Spotify.

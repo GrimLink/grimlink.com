@@ -2,7 +2,7 @@
 title: "Playing the Doom 2016 Beta multiplayer"
 description: "See me fail and try the Doom Beta multiplayer!"
 pubDate: 2016-04-02
-tags: ["games"]
+tags: ["games", "doom"]
 ---
 
 See me fail and try the Doom Beta multiplayer 😅

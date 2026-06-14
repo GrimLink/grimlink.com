@@ -3,7 +3,7 @@ title: "Deadpool 2 trailer is f* awesome"
 description: "The new Deadpool 2 trailer is absolutely awesome."
 pubDate: 2017-11-15
 image: "img-1.jpg"
-tags: ["movies"]
+tags: ["movie-tv"]
 ---
 
 The new #Deadpool2 trailer is f* awesome 😍

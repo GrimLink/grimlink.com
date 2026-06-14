@@ -2,7 +2,7 @@
 title: "Can't wait for Persona 5"
 description: "Can't bloody wait, this Persona 5 trailer looks awesome. Totally loving the vibe!"
 pubDate: 2015-02-05
-tags: ["games"]
+tags: ["games", "rpg"]
 ---
 
 Can't bloody wait, this Persona 5 trailer looks awesome. Totally loving the vibe this game is giving me.

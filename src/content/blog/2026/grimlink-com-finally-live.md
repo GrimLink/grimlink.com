@@ -2,7 +2,7 @@
 title: "GrimLink.com Finally Live!"
 description: "After many years I finally made my own site."
 pubDate: 2026-05-15
-tags: ["astro", "fylgja-css"]
+tags: ["astrojs", "fylgjacss"]
 crossPosts:
   bluesky: "3mly7cekl6c25"
   mastodon: "116585055101841158"

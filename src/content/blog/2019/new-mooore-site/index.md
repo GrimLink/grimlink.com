@@ -2,7 +2,7 @@
 title: "New Mooore Site"
 description: "I proudly have released with my colleagues the new Mooore website"
 pubDate: "2019-11-01"
-tags: ["pwa", "wordpress"]
+tags: ["pwa"]
 crossPosts:
   linkedin: "seanvanzuidam_reactapp-pwa-wordpress-activity-6596073147923996672-nkGL"
 ---

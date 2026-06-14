@@ -2,7 +2,7 @@
 title: "Looking forward to the new Alpine.js features"
 description: "Looking forward to the new features from Alpine.js at AlpineDay"
 pubDate: 2021-06-10
-tags: ["javascript", "alpinejs"]
+tags: ["javascript"]
 ---
 
 Looking forward to using the new features from Alpine.js at AlpineDay.

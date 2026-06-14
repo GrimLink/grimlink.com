@@ -2,7 +2,7 @@
 title: "Working on OKLCH Colors for Fylgja"
 description: "Last week, we worked on the Fylgja colors package, focusing on the new oklch color spec. We created a beautiful color palette."
 pubDate: "2023-05-29"
-tags: ["css", "fylgja-css"]
+tags: ["css", "fylgjacss"]
 crossPosts:
   mastodon: "110450740603893276"
 ---

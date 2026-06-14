@@ -2,7 +2,7 @@
 title: "A new Ni No Kuni game announced!"
 description: "Yesss! A new Ni No Kuni game, loved the first one and can't wait to explore the world again."
 pubDate: 2015-12-05
-tags: ["games"]
+tags: ["games", "rpg"]
 ---
 
 Yesss a new Yesss! A new Ni No Kuni game! 😍

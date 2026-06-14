@@ -4,7 +4,7 @@ description: "A reflection on my first time attending CSS Day, including my expe
 image: "photo-of-me-with-kevin.jpg"
 thumb: "css-day-logo.jpg"
 pubDate: 2026-06-14
-tags: ["events", "css", "design-tokens", "fylgja-css", "games"]
+tags: ["events", "css", "design-tokens", "fylgjacss", "doom"]
 crossPosts:
   bluesky: "3mobcrpbzlk2s"
   mastodon: "116749685130782791"

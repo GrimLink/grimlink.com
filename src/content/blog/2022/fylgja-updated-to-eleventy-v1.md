@@ -2,7 +2,7 @@
 title: "Updated Fylgja to Eleventy v1"
 description: "Updated fylgja.dev to Eleventy v1 this week. The update process was as easy as just updating 11ty — absolute enjoyment."
 pubDate: 2022-01-30
-tags: ["eleventy", "fylgja-css", "css"]
+tags: ["eleventy", "fylgjacss", "css"]
 ---
 
 Updated https://fylgja.dev to Eleventy v1 this week.

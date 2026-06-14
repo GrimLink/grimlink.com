@@ -2,7 +2,7 @@
 title: "Early Experimentation with MPA View-Transitions"
 description: "The view-transitions feature for MPAs works really well. Enabling it with a Chrome flag and a meta tag gives you smooth transitions without JavaScript."
 pubDate: "2023-08-21"
-tags: ["css", "chrome"]
+tags: ["css"]
 crossPosts:
   mastodon: "110928566413653249"
 ---

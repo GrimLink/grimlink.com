@@ -2,7 +2,7 @@
 title: "No Schema data in Fylgja CSS"
 description: "So I noticed Fylgja CSS was without Schema data since the transition to Astro JS.."
 pubDate: 2025-07-16
-tags: ["fylgja-css"]
+tags: ["fylgjacss"]
 crossPosts:
   bluesky: "3lv5zuy36c22a"
   mastodon: "114940866939056805"

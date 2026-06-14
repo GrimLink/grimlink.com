@@ -2,7 +2,7 @@
 title: "Love Doom? watch this documentary"
 description: "Love Doom? Watch this documentary series from NoClip on YouTube."
 pubDate: 2016-12-14
-tags: ["games"]
+tags: ["games", "doom"]
 image: "https://i.ytimg.com/vi_webp/_7zdNr7AnWI/maxresdefault.webp"
 ---
 
