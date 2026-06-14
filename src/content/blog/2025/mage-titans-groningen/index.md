@@ -3,7 +3,7 @@ title: "Mage Titans Groningen 2025"
 description: "What an incredible two days at Mage Titans Groningen! Feeling completely energized and inspired by the Magento community."
 pubDate: 2025-09-29
 image: "./magetitans.jpg"
-tags: ["events", "magento", "hyva", "design-tokens"]
+tags: ["events", "magento2", "hyva", "design-tokens"]
 crossPosts:
   linkedin: "seanvanzuidam_magetitansgroningen-magentocommunity-magentoopensource-activity-7378502883903946753-sLp9"
 ---

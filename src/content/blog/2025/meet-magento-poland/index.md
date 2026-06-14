@@ -3,7 +3,7 @@ title: "Meet Magento Poland 2025"
 description: "What a blast! Meet Magento Poland was an incredible experience and a journey of firsts for me."
 pubDate: 2025-11-25
 image: "./img-1.jpg"
-tags: ["events", "magento", "hyva"]
+tags: ["events", "magento2", "hyva"]
 crossPosts:
   linkedin: "seanvanzuidam_meetmagentopoland-mm25pl-poznaagm2025-activity-7399440873337327618-Ru5q"
 ---

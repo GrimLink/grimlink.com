@@ -2,7 +2,7 @@
 title: "Mage v2.6.0 Released"
 description: "Exciting updates in Mage 2.6.0! New commands like mage new store and mage nuke, plus enhanced mage add for Git repositories."
 pubDate: 2026-03-08
-tags: ["magento", "tools"]
+tags: ["magento2", "tools"]
 crossPosts:
   linkedin: "seanvanzuidam_release-v260-grimlinkmage-activity-7436443218235453442-yYGj"
 ---

@@ -3,7 +3,7 @@ title: "Heading to Webwinkel Vakdagen 2026"
 description: "Heading to Webwinkel Vakdagen on March 25th! Hyvä is taking a stand for Ownership at Stand 53."
 pubDate: 2026-03-23
 image: "./image.jpg"
-tags: ["events", "magento", "hyva"]
+tags: ["events", "magento2", "hyva"]
 crossPosts:
   linkedin: "seanvanzuidam_ecommerce-magento-hyvaeu-activity-7441798866384998400-D7_k"
 ---
