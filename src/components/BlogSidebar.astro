@@ -12,7 +12,7 @@ const allYears = posts.map((post) => post.data.pubDate.getFullYear().toString())
 const uniqueYears = [...new Set(allYears)].sort((a, b) => b.localeCompare(a));
 ---
 
-<aside class="sticky">
+<aside>
 	<h2>Archive</h2>
 	<ul role="list" class="blog-list inline-flex flex-wrap gap">
 		<li><a href="/blog/">All</a></li>
@@ -44,7 +44,8 @@ const uniqueYears = [...new Set(allYears)].sort((a, b) => b.localeCompare(a));
 		align-self: start;
 
 		@media (width >= 128ch) {
-			--inset-y: var(--size-6) auto;
+			position: sticky;
+			top: var(--size-6);
 
 			> :first-child {
 				margin-block-start: 0;
@@ -70,7 +71,7 @@ const uniqueYears = [...new Set(allYears)].sort((a, b) => b.localeCompare(a));
 
 	@container (scroll-state(scrolled: top)) {
 		aside {
-			--inset-y: var(--size-24) 0;
+			top: var(--size-24);
 		}
 	}
 </style>
