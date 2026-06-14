@@ -86,7 +86,7 @@ const postId = id ? `post-${id.replace(/^\/|\/$/g, "").replaceAll("/", "-")}` : 
 	</Head>
 	<body>
 		<PageHeader />
-		<main class:list={["container", className]} style="--container-size: 68ch">
+		<main id="main" class:list={["container", className]} style="--container-size: 68ch">
 			<article>
 				<h1 class="post-heading">{title}</h1>
 				<div class="post-meta">

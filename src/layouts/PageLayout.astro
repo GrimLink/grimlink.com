@@ -65,7 +65,7 @@ const dateHash = `?v=${today.getMonth() + 1}-${today.getFullYear()}`;
 	</Head>
 	<body>
 		<PageHeader />
-		<main class:list={className} style={style}>
+		<main id="main" class:list={className} style={style}>
 			<slot />
 		</main>
 		<PageFooter />
