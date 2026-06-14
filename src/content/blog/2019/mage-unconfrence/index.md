@@ -1,12 +1,12 @@
 ---
-title: "MageUC19 Unconference in Cologne"
-description: "MageUC19 — the Magento Unconference 2019 in Cologne."
+title: "Mage Unconference in Cologne"
+description: "Mage Unconference A fantastic event with great sessions and even better people."
 pubDate: 2019-11-29
 image: "img-1.jpg"
 tags: ["events", "magento2"]
 ---
 
-MageUC19 — the Magento Unconference 2019 in Cologne! A fantastic event with great sessions and even better people.
+Mage Unconference A fantastic event with great sessions and even better people.
 
 <div class="md-row">
 
