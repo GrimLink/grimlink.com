@@ -24,6 +24,7 @@ export default defineConfig({
 		}),
 	},
 	image: {
+		service: { entrypoint: "./src/image-service.mjs" },
 		remotePatterns: [{ protocol: "https" }],
 	},
 	devToolbar: {
