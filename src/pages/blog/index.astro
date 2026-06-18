@@ -5,9 +5,14 @@ import PostCard from "@/components/PostCard.astro";
 import BlogSidebar from "@/components/BlogSidebar.astro";
 import BlogImg from "@/assets/blog.webp";
 
-const posts = (await getCollection("blog")).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const currentYear = new Date().getFullYear();
+const allPosts = await getCollection("blog");
+const posts = allPosts
+	.filter((post) => post.data.pubDate.getFullYear() === currentYear)
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const prevYear = allPosts.some((post) => post.data.pubDate.getFullYear() === currentYear - 1)
+	? currentYear - 1
+	: null;
 
 const pageTitle = "My Feed";
 const pageDescription = "All my Blog and Social Posts in one handy page.";
@@ -40,7 +45,17 @@ const pageDescription = "All my Blog and Social Posts in one handy page.";
 						))
 					}
 				</ul>
-				<p><a href="#main" class="btn w-full">Back to Top</a></p>
+				<nav class="flex-col gap" aria-label="Year navigation" style={{ "--sm_flex-dir": "row", "--my": "var(--size-8) 0" }}>
+					<a href="#main" class="btn flex-auto">Back to Top</a>
+					{prevYear ? (
+						<a href={`/blog/${prevYear}/`} class="btn flex-auto">
+							{prevYear}
+							<span aria-hidden="true">→</span>
+						</a>
+					) : (
+						<span />
+					)}
+				</nav>
 			</div>
 			<BlogSidebar />
 		</div>

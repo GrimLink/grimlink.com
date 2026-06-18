@@ -8,6 +8,7 @@ const posts = await getCollection("blog");
 const allTags = posts.flatMap((post) => post.data.tags).filter(Boolean);
 const uniqueTags = [...new Set(allTags)].sort();
 
+const currentYear = new Date().getFullYear().toString();
 const allYears = posts.map((post) => post.data.pubDate.getFullYear().toString());
 const uniqueYears = [...new Set(allYears)].sort((a, b) => b.localeCompare(a));
 ---
@@ -15,14 +16,18 @@ const uniqueYears = [...new Set(allYears)].sort((a, b) => b.localeCompare(a));
 <aside>
 	<h2>Archive</h2>
 	<ul role="list" class="blog-list inline-flex flex-wrap gap">
-		<li><a href="/blog/">All</a></li>
 		{
 			uniqueYears.map((year) => (
 				<li>
 					<a
-						href={`/blog/${year}/`}
+						href={year === currentYear ? "/blog/" : `/blog/${year}/`}
 						aria-label={`Posts from ${year}`}
-						aria-current={`/blog/${year}/` === Astro.url.pathname ? "page" : undefined}
+						aria-current={
+							`/blog/${year}/` === Astro.url.pathname ||
+							(Astro.url.pathname === "/blog/" && year === currentYear)
+								? "page"
+								: undefined
+						}
 					>
 						{year}
 					</a>

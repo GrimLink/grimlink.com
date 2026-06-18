@@ -9,20 +9,24 @@ export async function getStaticPaths() {
 	const posts = await getCollection("blog");
 
 	const allYears = posts.map((post) => post.data.pubDate.getFullYear().toString());
-	const uniqueYears = [...new Set(allYears)];
+	const uniqueYearsSet = new Set(allYears);
+	const uniqueYears = [...uniqueYearsSet];
 
 	return uniqueYears.map((year) => {
 		const filteredPosts = posts
 			.filter((post) => post.data.pubDate.getFullYear().toString() === year)
 			.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+		const prevYear = uniqueYearsSet.has(String(parseInt(year) - 1))
+			? String(parseInt(year) - 1)
+			: null;
 		return {
 			params: { year },
-			props: { posts: filteredPosts, year },
+			props: { posts: filteredPosts, year, prevYear },
 		};
 	});
 }
 
-const { posts, year } = Astro.props;
+const { posts, year, prevYear } = Astro.props;
 const pageTitle = `Posts from ${year}`;
 const pageDescription = `Blog and Social Posts filtered by the year ${year}`;
 ---
@@ -41,19 +45,32 @@ const pageDescription = `Blog and Social Posts filtered by the year ${year}`;
 		<h1>{pageTitle}</h1>
 		<p>{pageDescription}</p>
 		<div class="page-layout">
-			<ul role="list" class="post-list flow">
-				{
-					posts.map((post, i) => (
-						<li>
-							<PostCard
-								{...post}
-								class="reveal"
-								loading={i === 0 ? "eager" : "lazy"}
-							/>
-						</li>
-					))
-				}
-			</ul>
+			<div>
+				<ul role="list" class="post-list flow">
+					{
+						posts.map((post, i) => (
+							<li>
+								<PostCard
+									{...post}
+									class="reveal"
+									loading={i === 0 ? "eager" : "lazy"}
+								/>
+							</li>
+						))
+					}
+				</ul>
+				<nav class="flex-col gap" aria-label="Year navigation" style={{ "--sm_flex-dir": "row", "--my": "var(--size-8) 0" }}>
+					<a href="#main" class="btn flex-auto">Back to Top</a>
+					{prevYear ? (
+						<a href={`/blog/${prevYear}/`} class="btn flex-auto">
+							{prevYear}
+							<span aria-hidden="true">→</span>
+						</a>
+					) : (
+						<span />
+					)}
+				</nav>
+			</div>
 			<BlogSidebar />
 		</div>
 	</div>
