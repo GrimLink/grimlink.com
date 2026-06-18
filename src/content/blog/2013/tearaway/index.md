@@ -1,5 +1,5 @@
 ---
-title: "Tearaway"
+title: "My Journey with Tearaway"
 description: "From choosing the Tearaway jukebox pre-order pack to completing my wonderful journey and earning the platinum."
 pubDate: 2013-11-12
 updateDate: 2013-11-26
