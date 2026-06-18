@@ -34,9 +34,13 @@ const posts = (await getCollection("blog"))
 			<h2 id="recent-posts">Recent Posts</h2>
 			<ul role="list" class="post-list flow">
 				{
-					posts.map((post) => (
+					posts.map((post, i) => (
 						<li>
-							<PostCard {...post} headingTag="h3" />
+							<PostCard
+								{...post}
+								headingTag="h3"
+								loading={i < 2 ? "eager" : "lazy"}
+							/>
 						</li>
 					))
 				}

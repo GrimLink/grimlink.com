@@ -43,9 +43,13 @@ const pageDescription = `Blog and Social Posts filtered by the year ${year}`;
 		<div class="page-layout">
 			<ul role="list" class="post-list flow">
 				{
-					posts.map((post) => (
+					posts.map((post, i) => (
 						<li>
-							<PostCard {...post} class="reveal" />
+							<PostCard
+								{...post}
+								class="reveal"
+								loading={i === 0 ? "eager" : "lazy"}
+							/>
 						</li>
 					))
 				}

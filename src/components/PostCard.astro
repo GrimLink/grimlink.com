@@ -22,9 +22,10 @@ interface Props extends HTMLAttributes<"article"> {
 	variant?: "card" | "flat";
 	data: PostProps;
 	headingTag?: "h2" | "h3" | "h4" | "h5" | "h6";
+	loading?: "eager" | "lazy";
 }
 
-const { id, class: className, style, variant = "card", data, headingTag = "h2" } = Astro.props;
+const { id, class: className, style, variant = "card", data, headingTag = "h2", loading } = Astro.props;
 const { title, description, image, thumb, pubDate, tags } = data;
 const postId = id ? `post-${id.replace(/^\/|\/$/g, "").replaceAll("/", "-")}` : undefined;
 const href = id ? `/blog/${id}/` : undefined;
@@ -55,7 +56,7 @@ const Heading = headingTag;
 			{tags && <Tags tags={tags} />}
 		</div>
 	</div>
-	{image && <Image src={thumb || image} alt="" width="250" height="250" />}
+	{image && <Image src={thumb || image} alt="" width="250" height="250" loading={loading} />}
 </article>
 
 <style

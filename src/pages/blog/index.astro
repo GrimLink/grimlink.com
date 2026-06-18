@@ -29,9 +29,13 @@ const pageDescription = "All my Blog and Social Posts in one handy page.";
 			<div>
 				<ul role="list" class="post-list flow">
 					{
-						posts.map((post) => (
+						posts.map((post, i) => (
 							<li>
-								<PostCard {...post} class="reveal" />
+								<PostCard
+									{...post}
+									class="reveal"
+									loading={i === 0 ? "eager" : "lazy"}
+								/>
 							</li>
 						))
 					}
