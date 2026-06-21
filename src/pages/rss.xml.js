@@ -22,6 +22,11 @@ export async function GET(context) {
     ].join(""),
     items: posts.map((post) => {
       const thumbnail = post.data.thumb || post.data.image;
+      const mimeType = thumbnail ? ({
+        jpg: "image/jpeg", jpeg: "image/jpeg",
+        png: "image/png", webp: "image/webp",
+        gif: "image/gif", avif: "image/avif",
+      }[thumbnail.format] ?? "image/jpeg") : undefined;
       return {
         title: post.data.title,
         description: post.data.description,
@@ -30,7 +35,7 @@ export async function GET(context) {
         enclosure: thumbnail
           ? {
               url: new URL(thumbnail.src, context.site).toString(),
-              type: "image/webp",
+              type: mimeType,
               length: 0,
             }
           : undefined,
