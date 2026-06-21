@@ -28,7 +28,7 @@ export async function getStaticPaths() {
 
 const { posts, year, prevYear } = Astro.props;
 const pageTitle = `Posts from ${year}`;
-const pageDescription = `Blog and Social Posts filtered by the year ${year}`;
+const pageDescription = `My Blog and Social Posts from ${year}`;
 ---
 
 <PageLayout
@@ -59,16 +59,22 @@ const pageDescription = `Blog and Social Posts filtered by the year ${year}`;
 						))
 					}
 				</ul>
-				<nav class="flex-col gap" aria-label="Year navigation" style={{ "--sm_flex-dir": "row", "--my": "var(--size-8) 0" }}>
+				<nav
+					class="flex-col gap"
+					aria-label="Year navigation"
+					style={{ "--sm_flex-dir": "row", "--my": "var(--size-8) 0" }}
+				>
 					<a href="#main" class="btn flex-auto">Back to Top</a>
-					{prevYear ? (
-						<a href={`/blog/${prevYear}/`} class="btn flex-auto">
-							{prevYear}
-							<span aria-hidden="true">→</span>
-						</a>
-					) : (
-						<span />
-					)}
+					{
+						prevYear ? (
+							<a href={`/blog/${prevYear}/`} class="btn flex-auto">
+								Go to {prevYear}
+								<span aria-hidden="true">→</span>
+							</a>
+						) : (
+							<span />
+						)
+					}
 				</nav>
 			</div>
 			<BlogSidebar />

@@ -45,16 +45,22 @@ const pageDescription = "All my Blog and Social Posts in one handy page.";
 						))
 					}
 				</ul>
-				<nav class="flex-col gap" aria-label="Year navigation" style={{ "--sm_flex-dir": "row", "--my": "var(--size-8) 0" }}>
+				<nav
+					class="flex-col gap"
+					aria-label="Year navigation"
+					style={{ "--sm_flex-dir": "row", "--my": "var(--size-8) 0" }}
+				>
 					<a href="#main" class="btn flex-auto">Back to Top</a>
-					{prevYear ? (
-						<a href={`/blog/${prevYear}/`} class="btn flex-auto">
-							{prevYear}
-							<span aria-hidden="true">→</span>
-						</a>
-					) : (
-						<span />
-					)}
+					{
+						prevYear ? (
+							<a href={`/blog/${prevYear}/`} class="btn flex-auto">
+								Go to {prevYear}
+								<span aria-hidden="true">→</span>
+							</a>
+						) : (
+							<span />
+						)
+					}
 				</nav>
 			</div>
 			<BlogSidebar />
