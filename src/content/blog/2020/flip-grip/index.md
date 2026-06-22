@@ -4,6 +4,8 @@ description: "Got the Flip Grip from Fangamer a couple of weeks ago."
 image: "./flip-grip.jpg"
 tags: ["games", "nintendo", "swag"]
 pubDate: "2020-07-25"
+crossPosts:
+  instagram: "CDDuNUelvWV"
 ---
 
 Got the Flip Grip from Fangamer a couple of weeks ago.

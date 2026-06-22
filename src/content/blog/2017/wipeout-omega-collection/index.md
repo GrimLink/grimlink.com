@@ -4,6 +4,8 @@ description: "Can't wait to see WipEout 2048 on the big screen with the WipEout 
 pubDate: 2017-06-07
 image: "img-1.jpg"
 tags: ["games", "playstation"]
+crossPosts:
+  instagram: "BVC7r0rlBjc"
 ---
 
 Can't wait to see WipEout 2048 on the big screen with the WipEout Omega Collection. 😍

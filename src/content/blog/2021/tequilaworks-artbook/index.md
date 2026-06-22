@@ -4,6 +4,8 @@ description: "Loving the TequilaWorks 10th Anniversary artbook — so many memor
 pubDate: 2021-02-01
 image: "img-1.jpg"
 tags: ["games", "swag"]
+crossPosts:
+  instagram: "CKwfDpwDJAH"
 ---
 
 Loving the Tequila Works 10th Anniversary artbook 😍

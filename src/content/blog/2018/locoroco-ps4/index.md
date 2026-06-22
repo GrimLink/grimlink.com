@@ -4,6 +4,8 @@ description: "Going back to LocoRoco on PS4 feels as great as when I played it o
 pubDate: 2018-11-25
 image: "img-1.jpg"
 tags: ["games", "playstation"]
+crossPosts:
+  instagram: "BqnRFBcg7mf"
 ---
 
 Going back to Loco Roco on #PS4 feels as great as when I played it on #PSP 😄

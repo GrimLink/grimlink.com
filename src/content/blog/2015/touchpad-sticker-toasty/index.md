@@ -4,6 +4,8 @@ description: "Looking good! My custom touchpad sticker from Toasty Stickers arri
 pubDate: 2015-07-22
 image: "img-1.jpg"
 tags: ["games", "playstation", "swag"]
+crossPosts:
+  instagram: "5mGJAzNHJo"
 ---
 
 Looking good 😍 — my custom touchpad sticker from Toasty Stickers arrived today!

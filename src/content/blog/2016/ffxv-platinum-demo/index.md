@@ -4,6 +4,8 @@ description: "The Platinum Demo for Final Fantasy XV gave a nice feel of the FFX
 pubDate: 2016-03-31
 image: "img-1.jpg"
 tags: ["games", "playstation", "rpg"]
+crossPosts:
+  instagram: "BDofM2QtHKa"
 ---
 
 The Platinum Demo FFXV gave me a nice feel of the FFXV gameplay 😍

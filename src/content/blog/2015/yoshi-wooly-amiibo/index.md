@@ -4,6 +4,8 @@ description: "Bought this Yoshi Wooly Amiibo just because it's awesome to own."
 pubDate: 2015-12-10
 image: "img-1.jpg"
 tags: ["games", "nintendo", "swag"]
+crossPosts:
+  instagram: "_H2ZUTtHM0"
 ---
 
 It's sooo cute 😍

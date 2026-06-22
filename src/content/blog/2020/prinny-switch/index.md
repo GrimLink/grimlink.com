@@ -4,6 +4,8 @@ description: "Can't wait getting back into both games. But this time on the big 
 image: "./nanoblock-prinny.jpg"
 tags: ["games", "nintendo", "swag"]
 pubDate: "2020-08-11"
+crossPosts:
+  instagram: "CHdcdpHDKW0"
 ---
 
 Loving the lego Prinny

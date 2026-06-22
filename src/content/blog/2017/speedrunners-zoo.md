@@ -6,7 +6,7 @@ tags: ["games"]
 image: "https://i.ytimg.com/vi_webp/iuXXvIDIbVA/maxresdefault.webp"
 ---
 
-SpeedRunners zoo 🏃
+Watch me and my friends run like maniacs in a zoo
 
 <iframe
 	width="1120"

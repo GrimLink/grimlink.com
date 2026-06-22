@@ -4,6 +4,8 @@ description: "My Analogue Pocket came in today — super excited to play some of
 pubDate: 2021-12-17
 image: "img-1.jpg"
 tags: ["games", "swag"]
+crossPosts:
+  instagram: "CXlKXb4j14c"
 ---
 
 My Analogue Pocket came in today 🥰

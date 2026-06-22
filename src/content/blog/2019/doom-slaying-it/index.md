@@ -3,7 +3,9 @@ title: "Slaying it in DOOM"
 description: "Slaying it in DOOM!"
 pubDate: 2019-12-07
 image: "img-1.jpg"
-tags: ["games", "doom"]
+tags: ["games", "doom", "swag"]
+crossPosts:
+  instagram: "B5yVE1VDaKB"
 ---
 
 Slaying it 😍

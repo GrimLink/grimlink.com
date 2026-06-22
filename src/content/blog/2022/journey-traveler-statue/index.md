@@ -4,6 +4,8 @@ description: "In 2012 I played Journey and fell in love with it. Finally found a
 pubDate: 2022-01-09
 image: "img-1.jpg"
 tags: ["games", "playstation", "swag"]
+crossPosts:
+  instagram: "CYgIdRuj7eU"
 ---
 
 In the year 2012 I played Journey and fell in love with it.

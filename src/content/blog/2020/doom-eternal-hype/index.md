@@ -4,6 +4,8 @@ description: "Sooo ready for DOOM Eternal!"
 pubDate: 2020-03-18
 image: "img-1.jpg"
 tags: ["games", "swag", "doom"]
+crossPosts:
+  instagram: "B939J8KDKlO"
 ---
 
 Sooo ready for DOOM Eternal 😎

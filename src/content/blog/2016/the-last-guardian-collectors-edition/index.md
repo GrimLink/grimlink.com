@@ -4,6 +4,8 @@ description: "The Last Guardian Collector's Edition is really nice — the statu
 pubDate: 2016-12-08
 image: "img-1.jpg"
 tags: ["games", "playstation", "swag"]
+crossPosts:
+  instagram: "BNxap0fjO12"
 ---
 
 The Last Guardian Collector's Edition is really nice — the statue feels and looks great 😍

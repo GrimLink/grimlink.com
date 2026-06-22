@@ -4,6 +4,8 @@ description: "Totally loving my new PlayStation 500 Million Edition Controller."
 pubDate: 2018-08-25
 image: "img-1.jpg"
 tags: ["games", "playstation"]
+crossPosts:
+  instagram: "Bm545K_A05Q"
 ---
 
 Totally loving my new PlayStation 500 Million Edition Controller 😍

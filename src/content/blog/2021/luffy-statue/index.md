@@ -4,6 +4,8 @@ description: "I normally don't own statues from an anime, but I had to get this 
 pubDate: 2021-09-09
 image: "img-1.jpg"
 tags: ["anime", "swag"]
+crossPosts:
+  instagram: "CTnH7OSDk77"
 ---
 
 I normally don't own statues from an anime, but I had to get this one of Luffy 🥰

@@ -4,6 +4,8 @@ description: "Proudly expanding my collection with a Legend of Zelda set, Wind W
 pubDate: 2016-09-16
 image: "img-1.jpg"
 tags: ["games", "nintendo", "swag"]
+crossPosts:
+  instagram: "BKbF0CfAPJV"
 ---
 
 Proudly expanding my collection with this Legend of Zelda set 😋
