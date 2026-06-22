@@ -2,7 +2,7 @@
 title: "Sound Shapes and making my first level"
 description: "Completed Sound Shapes and created my first level — Roots of the World."
 pubDate: 2012-08-17
-updateDate: 2012-08-24
+updatedDate: 2012-08-24
 image: "img-1.jpg"
 tags: ["games", "playstation"]
 ---

@@ -2,7 +2,7 @@
 title: "Playing through Persona 4 Golden"
 description: "My journey through Persona 4 Golden on PS Vita — from first impressions to Izanagi, completing the game, and diving into New Game+."
 pubDate: 2013-02-22
-updateDate: 2013-06-01
+updatedDate: 2013-06-01
 image: "img-1.jpg"
 tags: ["games", "playstation", "rpg"]
 ---

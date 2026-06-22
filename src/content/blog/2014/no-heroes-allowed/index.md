@@ -2,7 +2,7 @@
 title: "No Heroes Allowed: No Puzzles Either"
 description: "From falling in love with No Heroes Allowed: No Puzzles Either to finally beating the last stage."
 pubDate: 2014-04-21
-updateDate: 2014-06-02
+updatedDate: 2014-06-02
 image: "img-1.jpg"
 tags: ["games", "playstation"]
 ---

@@ -2,7 +2,7 @@
 title: "Joomla Pizza, Bugs & Fun 2013"
 description: "Attending the Joomla Pizza, Bugs & Fun event in the Netherlands — and ending the day with tasty pizzas."
 pubDate: 2013-07-02
-updateDate: 2013-07-12
+updatedDate: 2013-07-12
 image: "img-1.jpg"
 tags: ["joomla"]
 ---

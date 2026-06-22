@@ -2,7 +2,7 @@
 title: "Killzone Shadow Fall"
 description: "From anticipating Killzone Shadow Fall to playing it on PS4 — clean kills, tricky trophies, and personalization."
 pubDate: 2014-05-16
-updateDate: 2014-11-06
+updatedDate: 2014-11-06
 image: "img-1.jpg"
 tags: ["games", "playstation"]
 ---

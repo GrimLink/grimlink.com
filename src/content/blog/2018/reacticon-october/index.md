@@ -8,7 +8,7 @@ tags: ["events", "magento2", "pwa"]
 
 Reacticon October 2018! On my way with a traditional coffee from the Yireo MUG mug ☕
 
-At Reacticon we can even meet the Prime Minister 😂
+At Reacticon we can even meet the Prime Minister, Mark Rutte 😂
 
 Great talks, KnockoutJisse stickers, and thank you to James Zetlen for joining us remotely from far away!
 

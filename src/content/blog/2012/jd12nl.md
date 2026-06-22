@@ -2,7 +2,7 @@
 title: "Joomla Days Netherlands 2012"
 description: "Two days at JD12NL — sessions on CSS3, migrations, SEO and more."
 pubDate: 2012-04-21
-updateDate: 2012-04-22
+updatedDate: 2012-04-22
 tags: ["events", "joomla"]
 ---
 

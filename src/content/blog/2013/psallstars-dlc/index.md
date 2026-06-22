@@ -2,7 +2,7 @@
 title: "PlayStation All-Stars Battle Royale DLC"
 description: "The PlayStation All-Stars Battle Royale DLC is out — free characters, full girl roster, and Kratos hype."
 pubDate: 2013-02-13
-updateDate: 2013-03-10
+updatedDate: 2013-03-10
 image: "img-1.jpg"
 tags: ["games", "playstation"]
 ---

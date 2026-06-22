@@ -2,7 +2,7 @@
 title: "Joomla Days Netherlands 2011"
 description: "Two days at JD11NL — sessions, community, and lots of coffee."
 pubDate: 2011-04-02
-updateDate: 2011-04-03
+updatedDate: 2011-04-03
 tags: ["events", "joomla"]
 ---
 

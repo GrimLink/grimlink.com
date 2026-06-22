@@ -2,7 +2,7 @@
 title: "Joomla at the Barn 2012"
 description: "Three days at JAB12 in Bad Nauheim, Germany — sessions, the JOSCAR awards, and a great community."
 pubDate: 2012-05-18
-updateDate: 2012-05-20
+updatedDate: 2012-05-20
 tags: ["events","joomla"]
 ---
 
