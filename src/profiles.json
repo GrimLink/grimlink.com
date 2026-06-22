@@ -5,6 +5,11 @@
 		"active": true
 	},
 	{
+		"name": "Blogger",
+		"url": "https://grimlink.blogspot.com/",
+		"active": false
+	},
+	{
 		"name": "Bluesky",
 		"url": "https://bsky.app/profile/grimlink.com",
 		"active": true
