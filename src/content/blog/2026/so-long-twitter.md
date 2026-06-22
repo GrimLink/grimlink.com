@@ -52,7 +52,7 @@ I don't miss it. But I'm glad the memories are somewhere they won't disappear.
 | 2019 |    135 | [Mage Unconference](/blog/2019/mage-unconfrence/)                                       |
 | 2020 |     73 | [Completed Breath of the Wild](/blog/2020/completed-breath-of-the-wild/)                |
 | 2021 |    230 | [My Analogue Pocket came in today](/blog/2021/analogue-pocket-arrived/)                 |
-| 2022 |    153 | [HyvaCamp 2022](/blog/2022/on-my-way-to-hyva-camp/)                                    |
+| 2022 |    153 | [HyvaCamp 2022](/blog/2022/hyva-camp/)                                    |
 | 2023 |     89 | [Triangle Strategy Finished](/blog/2023/triangle-strategy-finished/)                    |
 | 2024 |     29 | [Astro Bot: A Joy From Start to Finish](/blog/2024/astro-bot-joy-from-start-to-finish/) |
 

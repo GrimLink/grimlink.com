@@ -4,6 +4,8 @@ description: "A day at HyvaCamp — experimenting with View Transitions with Vin
 pubDate: 2022-05-12
 image: "img-1.jpg"
 tags: ["events", "hyva", "magento2"]
+crossPosts:
+  instagram: "Cdc1MvBD7g2"
 ---
 
 Drove to HyvaCamp with Ruud van Zuidam for a day of Hyvä. Always good to be in the same room as people building on the same stack.
