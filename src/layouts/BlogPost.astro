@@ -47,6 +47,7 @@ const {
 const rssUrl = new URL("rss.xml", Astro.site);
 const dateHash = `?v=${today.getMonth() + 1}-${today.getFullYear()}`;
 const postId = id ? `post-${id.replace(/^\/|\/$/g, "").replaceAll("/", "-")}` : undefined;
+const hasTags = tags && tags.length > 0;
 ---
 
 <html lang={lang} dir={dir} data-theme="auto">
@@ -101,8 +102,8 @@ const postId = id ? `post-${id.replace(/^\/|\/$/g, "").replaceAll("/", "-")}` : 
 							</>
 						)
 					}
-					{tags && <span> ∙ </span>}
-					{tags && <Tags tags={tags} />}
+					{hasTags && <span> ∙ </span>}
+					{hasTags && <Tags tags={tags} />}
 				</div>
 				<slot />
 			</article>

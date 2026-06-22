@@ -1,0 +1,67 @@
+{
+	"favGames": [
+		{
+			"title": "Golden Sun: The Lost Age",
+			"url": "https://backloggd.com/games/golden-sun-the-lost-age/",
+			"image": "https://images.igdb.com/igdb/image/upload/t_cover_big_2x/co25rt.jpg"
+		},
+		{
+			"title": "Doom",
+			"url": "https://backloggd.com/games/doom/",
+			"image": "https://images.igdb.com/igdb/image/upload/t_cover_big_2x/co5rav.jpg"
+		},
+		{
+			"title": "Tactics Ogre: Let Us Cling Together",
+			"url": "https://backloggd.com/games/tactics-ogre-let-us-cling-together--1/",
+			"image": "https://images.igdb.com/igdb/image/upload/t_cover_big_2x/co53gw.jpg"
+		},
+		{
+			"title": "The Legend of Zelda: A Link to the Past",
+			"url": "https://backloggd.com/games/the-legend-of-zelda-a-link-to-the-past-and-four-swords/",
+			"image": "https://images.igdb.com/igdb/image/upload/t_cover_big_2x/co3nsh.jpg"
+		},
+		{
+			"title": "Persona 4 Golden",
+			"url": "https://backloggd.com/games/persona-4-golden/",
+			"image": "https://images.igdb.com/igdb/image/upload/t_cover_big_2x/co1n1x.jpg"
+		}
+	],
+	"webGames": [
+		{
+			"title": "CSS Doom",
+			"type": "FPS",
+			"description": "The classic FPS rendered entirely in CSS. Built by Niels Leenheer.",
+			"url": "http://cssdoom.wtf/"
+		},
+		{
+			"title": "Death Star Battles",
+			"type": "Strategy",
+			"description": "A multiplayer space shooter where gravity does most of the work. Adjust angle and power, fire, and let physics finish the job.",
+			"url": "https://deathstarbattles.ca/"
+		},
+		{
+			"title": "JavaScript Guessing Game",
+			"type": "Trivia",
+			"description": "You know there are too many JavaScript libraries when there is a game for it.",
+			"url": "https://javascript-game.firebaseapp.com/#/"
+		},
+		{
+			"title": "Email is Easy",
+			"type": "Trivia",
+			"description": "How well do you know email addresses? Guess whether a given address is valid or not. Surprisingly tricky.",
+			"url": "https://e-mail.wtf/"
+		},
+		{
+			"title": "Flexbox Froggy",
+			"type": "Educational",
+			"description": "Guide frogs to their lily pads by writing CSS flexbox properties. A fun way to learn or brush up on flexbox.",
+			"url": "https://flexboxfroggy.com/"
+		},
+		{
+			"title": "Grid Garden",
+			"type": "Educational",
+			"description": "Water your carrot garden using CSS grid. Covers the full grid spec from basic placement to named areas.",
+			"url": "https://cssgridgarden.com/"
+		}
+	]
+}

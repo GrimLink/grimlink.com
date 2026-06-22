@@ -1,5 +1,4 @@
 ---
-import "@fylgja/card/index.css";
 import type { HTMLAttributes } from "astro/types";
 
 type TagProps = HTMLAttributes<"div" | "article">;
@@ -16,6 +15,12 @@ const Tag = tag;
 </Tag>
 
 <style>
+	@media (prefers-reduced-motion: no-preference) {
+		.card:has(.stretched-link):hover {
+			scale: 1.03;
+		}
+	}
+
 	.card:has(iframe:only-child) {
 		--card-py: 0;
 		--card-px: 0;

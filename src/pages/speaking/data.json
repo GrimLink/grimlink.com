@@ -3,16 +3,17 @@
 		"type": "event",
 		"title": "MageTitans 2025",
 		"description": "⚡ Design Tokens and Figma. Bridge the gap between design and development to eliminate inconsistencies and speed up releases.",
-		"logo": "https://mage-titans.nl/build/assets/heading-logo-dT4OpLSi.png",
 		"link": "https://mage-titans.nl/speakers/sean-van-zuidam",
-		"pubDate": "2025-09-26"
+		"pubDate": "2025-09-26",
+		"image": "magetitan-25.jpg"
 	},
 	{
 		"type": "event",
 		"title": "Hyvä Camp 2025 | Kiel",
 		"description": "Hyvä Commerce: Your Magento Store, Supercharged ⚡",
 		"link": "https://www.splendid-internet.de/hyvae-camp-kiel-2025/#english-version",
-		"pubDate": "2025-06-25"
+		"pubDate": "2025-06-25",
+		"image": "hyva-camp-kiel-25.jpg"
 	},
 	{
 		"type": "video",

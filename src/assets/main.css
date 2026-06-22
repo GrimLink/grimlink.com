@@ -8,6 +8,8 @@
 @import "@fylgja/tokens/css/shadows.css" layer(theme);
 @import "@fylgja/tokens/css/easing.css" layer(theme);
 
+@import "@fylgja/card/index.css" layer(components);
+
 @import "@fylgja/utilities" layer(utilities);
 
 @layer theme {
@@ -101,6 +103,10 @@
 		animation: fade-in linear both;
 		animation-timeline: view();
 		animation-range: entry 0% cover 20%;
+	}
+
+	.overlay {
+		--overlay-bg: hsl(0 0% 0% / 75%);
 	}
 }
 

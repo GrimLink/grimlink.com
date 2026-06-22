@@ -62,15 +62,19 @@ const posts = (await getCollection("blog"))
 									href={project.url}
 									target={external ? "_blank" : null}
 									rel={external ? "noopener noreferrer" : null}
+									class="inline-block"
 								>
 									{project.title}
-								</a>{" "}
+								</a>
 								<span class="text-muted-dark">{project.description}</span>
 							</li>
 						);
 					})
 				}
 			</ul>
+			<p class="text-muted">
+				<a href="/projects/" class="hover-underline">View all projects</a>
+			</p>
 		</section>
 
 		<section aria-labelledby="lists" class="flow">

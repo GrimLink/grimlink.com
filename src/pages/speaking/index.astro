@@ -4,6 +4,7 @@ import Card from "@fylgja/Card.astro";
 import Youtube from "@fylgja/Youtube.astro";
 import FormattedDate from "@/components/FormattedDate.astro";
 import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import dataJson from "./data.json";
 import SpeakingImg from "@/assets/speaking.webp";
 
@@ -12,12 +13,24 @@ interface Speaker {
 	title: string;
 	link: string;
 	description?: string;
-	logo?: string;
+	image?: string;
 	pubDate?: string;
 	videoStart?: number;
 }
 
 const data = dataJson as Speaker[];
+
+const imageGlob = import.meta.glob<{ default: ImageMetadata }>(
+	"./assets/*.{jpg,jpeg,png,webp,avif}",
+);
+const images: Record<string, ImageMetadata> = Object.fromEntries(
+	await Promise.all(
+		Object.entries(imageGlob).map(async ([path, loader]) => {
+			const mod = await loader();
+			return [path.replace("./assets/", ""), mod.default];
+		}),
+	),
+);
 
 const pageTitle = "Speaking";
 const pageDescription =
@@ -36,26 +49,38 @@ const pageDescription =
 >
 	<h1>{pageTitle}</h1>
 	<p>{pageDescription}</p>
-	<ul role="list" class="auto-grid gap" style="--max-col-size: 42ch">
+	<ul role="list" class="auto-grid gap" style="--max-col-size: 34ch">
 		{
 			data.map((speaker, index) => {
 				const loading = index < 2 ? "eager" : "lazy";
 				return (
-					<Card tag="li">
+					<Fragment>
 						{speaker.type === "video" ? (
-							<Youtube
-								src={speaker.link}
-								start={speaker.videoStart}
-								title={speaker.title}
-								loading={loading}
-								style={{
-									width: "100%",
-									height: "100%",
-								}}
-							/>
+							<Card tag="li">
+								<Youtube
+									src={speaker.link}
+									start={speaker.videoStart}
+									title={speaker.title}
+									loading={loading}
+									style={{
+										width: "100%",
+										height: "100%",
+									}}
+								/>
+							</Card>
 						) : (
-							<div class="card-content">
-								<div class="flex align gap">
+							<Card tag="li" class="stack">
+								{speaker.image && images[speaker.image] && (
+									<Image
+										src={images[speaker.image]}
+										width={840}
+										height={480}
+										alt=""
+										loading={loading}
+										class="w-full"
+									/>
+								)}
+								<div class="card-content overlay align-self-end">
 									<div class="flow-none">
 										<p class="lead">
 											<a
@@ -73,21 +98,11 @@ const pageDescription =
 											</p>
 										)}
 									</div>
-									{speaker.logo && (
-										<Image
-											src={speaker.logo}
-											width={80}
-											height={60}
-											layout="constrained"
-											alt=""
-											loading={loading}
-										/>
-									)}
+									<p class="post-body">{speaker.description}</p>
 								</div>
-								<p class="post-body">{speaker.description}</p>
-							</div>
+							</Card>
 						)}
-					</Card>
+					</Fragment>
 				);
 			})
 		}
@@ -98,6 +113,10 @@ const pageDescription =
 	.post-meta {
 		font-size: 0.875em;
 		font-style: italic;
-		color: var(--color-muted);
+		color: color-mix(in srgb, var(--overlay-fg) 75%, black);
+	}
+
+	.post-body {
+		font-size: 0.875em;
 	}
 </style>

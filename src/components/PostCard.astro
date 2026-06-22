@@ -23,14 +23,25 @@ interface Props extends HTMLAttributes<"article"> {
 	data: PostProps;
 	headingTag?: "h2" | "h3" | "h4" | "h5" | "h6";
 	loading?: "eager" | "lazy";
+	hideMeta?: boolean;
 }
 
-const { id, class: className, style, variant = "card", data, headingTag = "h2", loading } = Astro.props;
+const {
+	id,
+	class: className,
+	style,
+	variant = "card",
+	data,
+	headingTag = "h2",
+	loading,
+	hideMeta = false,
+} = Astro.props;
 const { title, description, image, thumb, pubDate, tags } = data;
 const postId = id ? `post-${id.replace(/^\/|\/$/g, "").replaceAll("/", "-")}` : undefined;
 const href = id ? `/blog/${id}/` : undefined;
 
 const Heading = headingTag;
+const hasTags = tags && tags.length > 0;
 ---
 
 <article
@@ -50,11 +61,15 @@ const Heading = headingTag;
 			</a>
 		</Heading>
 		{description && <p class="line-clamp">{description}</p>}
-		<div class="post-meta relative">
-			{pubDate && <FormattedDate date={pubDate} />}
-			{tags && <span> ∙ </span>}
-			{tags && <Tags tags={tags} />}
-		</div>
+		{
+			!hideMeta && (
+				<div class="post-meta relative">
+					{pubDate && <FormattedDate date={pubDate} />}
+					{hasTags && <span> ∙ </span>}
+					{hasTags && <Tags tags={tags} />}
+				</div>
+			)
+		}
 	</div>
 	{image && <Image src={thumb || image} alt="" width="250" height="250" loading={loading} />}
 </article>

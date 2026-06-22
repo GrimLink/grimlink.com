@@ -1,0 +1,14 @@
+---
+import SocialsIcons from "@/assets/socials.svg?url";
+
+interface Props {
+	size?: number;
+	"aria-hidden"?: boolean | "true" | "false";
+}
+
+const { size = 24, ...props } = Astro.props;
+---
+
+<svg width={size} height={size} fill="currentcolor" {...props}>
+	<use href={`${SocialsIcons}#github`} />
+</svg>

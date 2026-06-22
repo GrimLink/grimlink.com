@@ -1,0 +1,164 @@
+{
+	"personal": [
+		{
+			"name": "grimlink.com",
+			"description": "My personal website — the one you are on right now.",
+			"url": "https://github.com/GrimLink/grimlink.com",
+			"status": "active"
+		},
+		{
+			"name": "mage",
+			"description": "Simplifies bin/magento commands by adding helpful shortcuts and time-saving tools to enhance your productivity.",
+			"url": "https://github.com/GrimLink/mage",
+			"status": "active"
+		},
+		{
+			"name": "hyva-module-template",
+			"description": "A blank starter template for building Hyvä based modules for Magento.",
+			"url": "https://github.com/GrimLink/hyva-module-template",
+			"status": "active"
+		},
+		{
+			"name": "magento2-icon-packs",
+			"description": "Replace the default Magento 2 Blank or Luma icons with any other popular icon framework.",
+			"url": "https://github.com/GrimLink/magento2-icon-packs",
+			"status": "inactive"
+		},
+		{
+			"name": "magento-patch-bfcache",
+			"description": "Patch for Magento 2 to restore bfcache compatibility.",
+			"url": "https://github.com/GrimLink/magento-patch-bfcache",
+			"status": "active"
+		},
+		{
+			"name": "eleventy-plugin-lucide-icons",
+			"description": "An Eleventy shortcode that embeds Lucide icons as inline SVG into templates.",
+			"url": "https://github.com/GrimLink/eleventy-plugin-lucide-icons",
+			"status": "active"
+		},
+		{
+			"name": "eleventy-plugin-sass",
+			"description": "Simple 11ty config wrapper for running Sass directly as a custom template.",
+			"url": "https://github.com/GrimLink/eleventy-plugin-sass",
+			"status": "inactive"
+		},
+		{
+			"name": "create-project",
+			"description": "Quickly scaffold a new project from the CLI.",
+			"url": "https://github.com/GrimLink/create-project",
+			"status": "active"
+		},
+		{
+			"name": "warp-theme-snazzy",
+			"description": "A Warp terminal theme based on the Snazzy colour scheme.",
+			"url": "https://github.com/GrimLink/warp-theme-snazzy",
+			"status": "inactive"
+		},
+		{
+			"name": "zed-magento2-snippets",
+			"description": "Magento 2 and Hyvä snippets for the Zed editor.",
+			"url": "https://github.com/mage-os-lab/zed-magento2-snippets",
+			"status": "active"
+		},
+		{
+			"name": "dotfiles",
+			"description": "My dev environment setup — editor config, shell, and tooling.",
+			"url": "https://github.com/GrimLink/dotfiles",
+			"status": "active"
+		}
+	],
+	"fylgja": [
+		{
+			"name": "fylgja",
+			"description": "The flexible and lightweight CSS library designed to streamline your web development.",
+			"url": "https://github.com/fylgja/fylgja",
+			"status": "active"
+		},
+		{
+			"name": "snap-slider",
+			"description": "A CSS-powered slider/carousel, enhanced with JavaScript for improved functionality and accessibility.",
+			"url": "https://github.com/fylgja/snap-slider",
+			"status": "active"
+		},
+		{
+			"name": "alpinejs-dialog",
+			"description": "Bring the power of Alpine.js to the HTML dialog element.",
+			"url": "https://github.com/fylgja/alpinejs-dialog",
+			"status": "active"
+		},
+		{
+			"name": "tailwindcss",
+			"description": "Tailwind CSS preset to use the Fylgja design system — tokens, base styles, and utilities.",
+			"url": "https://github.com/fylgja/tailwindcss",
+			"status": "active"
+		},
+		{
+			"name": "tailwindcss-plugin-cssprops",
+			"description": "A Tailwind v3 CSS plugin that streamlines CSS variable management.",
+			"url": "https://github.com/fylgja/tailwindcss-plugin-cssprops",
+			"status": "inactive"
+		},
+		{
+			"name": "stylelint-config",
+			"description": "A shareable Stylelint config that enforces Fylgja's CSS rules.",
+			"url": "https://github.com/fylgja/stylelint-config",
+			"status": "active"
+		},
+		{
+			"name": "fylgja-sass",
+			"description": "Small SCSS helper function package.",
+			"url": "https://github.com/fylgja/fylgja-sass",
+			"status": "active"
+		},
+		{
+			"name": "11ty-starter-template",
+			"description": "11ty starter template built using Fylgja CSS.",
+			"url": "https://github.com/fylgja/11ty-starter-template",
+			"status": "inactive"
+		},
+		{
+			"name": "examples",
+			"description": "Functional examples for using Fylgja with popular tools and frameworks.",
+			"url": "https://github.com/fylgja/examples",
+			"status": "active"
+		}
+	],
+	"siteation": [
+		{
+			"name": "magento2-storeinfo",
+			"description": "Easily access and display Magento 2 store information.",
+			"url": "https://github.com/Siteation/magento2-storeinfo",
+			"status": "active"
+		},
+		{
+			"name": "magento2-storeinfo-menus",
+			"description": "Create footer menus with ease using Magento 2 store info.",
+			"url": "https://github.com/Siteation/magento2-storeinfo-menus",
+			"status": "active"
+		},
+		{
+			"name": "magento2-storeinfo-payments",
+			"description": "Display your configured payment methods on your store with ease.",
+			"url": "https://github.com/Siteation/magento2-storeinfo-payments",
+			"status": "active"
+		},
+		{
+			"name": "magento2-storeinfo-usps",
+			"description": "Create USPs with ease using Magento 2 store info.",
+			"url": "https://github.com/Siteation/magento2-storeinfo-usps",
+			"status": "active"
+		},
+		{
+			"name": "magento2-hyva-icons-lucide",
+			"description": "Use Lucide icons in your Hyvä frontend.",
+			"url": "https://github.com/Siteation/magento2-hyva-icons-lucide",
+			"status": "active"
+		},
+		{
+			"name": "magento2-hyva-icons-payment",
+			"description": "Display payment icons in your Hyvä frontend.",
+			"url": "https://github.com/Siteation/magento2-hyva-icons-payment",
+			"status": "active"
+		}
+	]
+}
