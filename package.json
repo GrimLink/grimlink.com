@@ -20,6 +20,7 @@
     "astro": "^6.4.3",
     "fylgja": "^2.1.0",
     "rehype-external-links": "^3.0.0",
+    "remark-github-blockquote-alert": "^2.1.0",
     "sharp": "^0.34.3"
   }
 }

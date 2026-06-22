@@ -9,6 +9,7 @@
 @import "@fylgja/tokens/css/easing.css" layer(theme);
 
 @import "@fylgja/card/index.css" layer(components);
+@import "./gh-alert.css" layer(components);
 
 @import "@fylgja/utilities" layer(utilities);
 
