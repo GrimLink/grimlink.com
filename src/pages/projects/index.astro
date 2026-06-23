@@ -94,7 +94,11 @@ const pageDescription =
 	<section aria-labelledby="siteation-projects">
 		<h2 id="siteation-projects">Siteation</h2>
 		<p>
-			StoreInfo modules for Magento 2, published under the <a href="https://github.com/Siteation" target="_blank" rel="noopener noreferrer">Siteation</a> organisation.
+			StoreInfo modules for Magento 2, published under the <a
+				href="https://github.com/Siteation"
+				target="_blank"
+				rel="noopener noreferrer">Siteation</a
+			> organisation.
 		</p>
 		<dl class="project-list">
 			{
@@ -131,21 +135,31 @@ const pageDescription =
 	.project-list {
 		--list-flow: 0;
 		display: grid;
-		grid-template-columns: auto 1fr;
+		grid-template-columns: 1fr;
 		margin-block-start: var(--size-4);
 
 		dt,
 		dd {
 			padding-block: var(--size-2);
-			border-block-end: 1px solid oklch(from var(--root-fg) l c h / 10%);
 		}
 
 		dt {
 			padding-inline-end: var(--size-6);
+			padding-block-end: 0;
 		}
 
 		dd {
 			color: var(--color-muted);
+			border-block-end: 1px solid oklch(from var(--root-fg) l c h / 10%);
+		}
+
+		@media (width >= 640px) {
+			grid-template-columns: auto 1fr;
+
+			dt {
+				border-block-end: 1px solid oklch(from var(--root-fg) l c h / 10%);
+				padding-block-end: var(--size-2);
+			}
 		}
 	}
 
