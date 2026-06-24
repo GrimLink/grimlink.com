@@ -5,7 +5,7 @@ import { Image } from "astro:assets";
 import { ArrowRight } from "@lucide/astro";
 import PostCard from "@/components/PostCard.astro";
 import Card from "@fylgja/Card.astro";
-import AboutImg from "@/assets/about.webp";
+import GamesImg from "@/assets/games.webp";
 import dataJson from "./data.json";
 import { socials } from "@/consts";
 
@@ -24,7 +24,7 @@ const gamesPosts = (await getCollection("blog"))
 <PageLayout
 	title={pageTitle}
 	description={pageDescription}
-	image={AboutImg}
+	image={GamesImg}
 	breadcrumbs={[
 		{ name: "Home", item: "/" },
 		{ name: "Games", item: "/games/" },

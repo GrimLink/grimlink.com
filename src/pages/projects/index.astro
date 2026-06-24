@@ -1,6 +1,5 @@
 ---
 import PageLayout from "@/layouts/PageLayout.astro";
-import AboutImg from "@/assets/about.webp";
 import dataJson from "./data.json";
 
 const sort = (list: { status?: string }[]) =>
@@ -18,7 +17,6 @@ const pageDescription =
 <PageLayout
 	title={pageTitle}
 	description={pageDescription}
-	image={AboutImg}
 	breadcrumbs={[
 		{ name: "Home", item: "/" },
 		{ name: "Projects", item: "/projects/" },
