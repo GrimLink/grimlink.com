@@ -1,5 +1,5 @@
 ---
-title: "MageUnconfrence 2022 in Cologne"
+title: "Mage Unconfrence 2022 in Cologne"
 description: "Two great days at MageUnconfrence 2022 — talking about static content in Magento, meeting the community, and drinking Kölsch."
 pubDate: 2022-09-30
 image: "img-1.jpg"
