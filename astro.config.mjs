@@ -1,9 +1,7 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
-import { unified } from "@astrojs/markdown-remark";
-import { remarkWrapTables } from "./remarkPlugins";
-import { remarkAlert } from "remark-github-blockquote-alert";
-import rehypeExternalLinks from "rehype-external-links";
+import { satteri } from "@astrojs/markdown-satteri";
+import { wrapTables, githubAlerts, externalLinks } from "./markdown-plugins";
 
 export default defineConfig({
 	site: "https://grimlink.com",
@@ -13,17 +11,9 @@ export default defineConfig({
 		"/*": "/",
 	},
 	markdown: {
-		processor: unified({
-			remarkPlugins: [remarkAlert, remarkWrapTables],
-			rehypePlugins: [
-				[
-					rehypeExternalLinks,
-					{
-						target: "_blank",
-						rel: "noopener noreferrer",
-					},
-				],
-			],
+		processor: satteri({
+			mdastPlugins: [githubAlerts, wrapTables],
+			hastPlugins: [externalLinks],
 		}),
 	},
 	image: {
