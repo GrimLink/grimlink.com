@@ -6,7 +6,7 @@ image: "cover.jpg"
 tags: ["ai", "hyva", "design-tokens"]
 ---
 
-It has been a few weeks since my last post. I really wanted to write about the many things I did and learned, but sadly I did not find the time for it. In that time I attended the [Mage Unconference NL](https://mageunconference.nl/) and the [Hack-AI-Thon](https://www.hypernode.com/en/hack-ai-thon-2026/), organized by Hyvä, Hypernode and Maxcluster, and together with my colleagues, we released not one but multiple releases of the Hyvä Theme.
+It has been a few weeks since my last post. I really wanted to write about the many things I did and learned, but sadly I did not find the time for it. In that time I attended the [Mage Unconference NL](https://mageunconference.nl/) and the [Hack-AI-Thon](https://www.hypernode.com/en/hack-ai-thon-2026/), organized by [Hyvä](https://www.hyva.io/), [Hypernode](https://www.hypernode.com/) and [Maxcluster](https://maxcluster.de/), and together with my colleagues, we released not one but multiple releases of the Hyvä Theme.
 
 So a lot.
 
@@ -69,7 +69,7 @@ Sure, I could force it with a lot of prompting, but it was an annoying journey, 
 So for Hyvä I needed to create a fallback for the design tokens Hyvä uses, and this did the trick. Now, if `color-primary-lighter` is missing, it will use `color-primary` as the base value and use `color-mix()` to create a proper lighter color.
 
 And so my journey with AI and Design Tokens is over.
-Or is it? This week, together with Vinai, I shipped the result of all this exploration: [Hyvä Theme 1.5.2, which includes these new updates](https://docs.hyva.io/hyva-themes/upgrading/upgrading-to-1-5-2.html). If you use AI for design, give it a try. And if you don't use Hyvä, you can still put it to work directly with the [Fylgja Props Builder].
+Or is it? This week, together with [Vinai](https://vinaikopp.com/), I shipped the result of all this exploration: [Hyvä Theme 1.5.2, which includes these new updates](https://docs.hyva.io/hyva-themes/upgrading/upgrading-to-1-5-2.html). If you use AI for design, give it a try. And if you don't use Hyvä, you can still put it to work directly with the [Fylgja Props Builder].
 
 [Fylgja Props Builder]: https://fylgja.dev/library/extensions/props-builder/
 [Hyvä Tokens]: https://docs.hyva.io/hyva-themes/working-with-tailwindcss/using-hyva-modules/tokens.html
