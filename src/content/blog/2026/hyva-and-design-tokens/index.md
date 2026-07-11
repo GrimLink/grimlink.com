@@ -4,6 +4,10 @@ description: "How AI brought design tokens back into the spotlight, and how Clau
 pubDate: 2026-07-11
 image: "cover.jpg"
 tags: ["ai", "hyva", "design-tokens"]
+crossPosts:
+  bluesky: "3mqf4wyfcnc2h"
+  mastodon: "116902404309535754"
+  linkedin: "seanvanzuidam_designtokens-hyva-magento2-share-7481750786394238976-D23D"
 ---
 
 It has been a few weeks since my last post. I really wanted to write about the many things I did and learned, but sadly I did not find the time for it. In that time I attended the [Mage Unconference NL](https://mageunconference.nl/) and the [Hack-AI-Thon](https://www.hypernode.com/en/hack-ai-thon-2026/), organized by [Hyvä](https://www.hyva.io/), [Hypernode](https://www.hypernode.com/) and [Maxcluster](https://maxcluster.de/), and together with my colleagues, we released not one but multiple releases of the Hyvä Theme.
