@@ -44,7 +44,7 @@ const gamesPosts = (await getCollection("blog"))
 	<section aria-labelledby="fav-games">
 		<h2 id="fav-games">Games I love & adore</h2>
 		<p>My favourite games of all time. While I love a lot of games, these are the ones I remember most fondly and tend to return to more than once.</p>
-		<ul role="list" class="grid-cols gap" style="--grid-cols: 2; --sm_grid-cols: 3; --lg_grid-cols: 5">
+		<ul role="list" class="fav-games flex-wrap gap">
 			{
 				favGames.map((game, i) => (
 					<Card tag="li" class="stack">
@@ -111,7 +111,7 @@ const gamesPosts = (await getCollection("blog"))
 					<li>
 						<a href={game.url} target="_blank" rel="noopener noreferrer" class="inline-block">
 							{game.title}
-						</a>
+						</a>{" "}
 						{game.type && <span class="game-type">{game.type}</span>}
 						{game.description && (<br /><span>{game.description}</span>)}
 					</li>
@@ -125,6 +125,26 @@ const gamesPosts = (await getCollection("blog"))
 <style>
 	section {
 		margin-block-start: var(--size-12);
+	}
+
+	.fav-games {
+		justify-content: center;
+	}
+
+	.fav-games > li {
+		flex: 0 1 calc((100% - var(--gap)) / 2);
+	}
+
+	@media (width >= 480px) {
+		.fav-games > li {
+			flex-basis: calc((100% - var(--gap) * 2) / 3);
+		}
+	}
+
+	@media (width >= 1024px) {
+		.fav-games > li {
+			flex-basis: calc((100% - var(--gap) * 4) / 5);
+		}
 	}
 
 	.read-more svg {
