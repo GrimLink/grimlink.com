@@ -10,7 +10,7 @@ type PostProps = {
 	title: string;
 	description?: string;
 	image?: ImageMetadata;
-	thumb?: ImageMetadata;
+	thumb?: ImageMetadata | false;
 	pubDate?: Date;
 	tags?: string[];
 };
@@ -71,7 +71,11 @@ const hasTags = tags && tags.length > 0;
 			)
 		}
 	</div>
-	{image && <Image src={thumb || image} alt="" width="250" height="250" loading={loading} />}
+	{
+		thumb !== false && (thumb || image) && (
+			<Image src={thumb || image} alt="" width="250" height="250" loading={loading} />
+		)
+	}
 </article>
 
 <style

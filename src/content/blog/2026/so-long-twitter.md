@@ -3,6 +3,7 @@ title: "So long, Twitter"
 description: "Looking back at 16 years of tweets, the good times they captured, and how the memories found a better home."
 pubDate: 2026-06-22
 image: "@/assets/preservation.webp"
+thumb: false
 ---
 
 I joined Twitter on February 6, 2009. I know because my very first tweet was: _"started to use twitter"_, a sentence so earnest it could only have been written by an 18-year-old excited about a new thing on the internet.

@@ -11,7 +11,11 @@ const blog = defineCollection({
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
 			image: z.optional(image()),
-			thumb: z.optional(image().describe("Overrides the image to set a specific blog thumb")),
+			thumb: z.optional(
+				z
+					.union([image(), z.literal(false)])
+					.describe("Overrides the image to set a specific blog thumb, or false to hide it"),
+			),
 			tags: z.array(z.string()).optional(),
 			crossPosts: z.record(z.string(), z.string()).optional(),
 		}),
