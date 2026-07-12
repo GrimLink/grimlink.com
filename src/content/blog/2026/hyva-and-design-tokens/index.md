@@ -78,4 +78,4 @@ Or is it? This week, together with [Vinai](https://vinaikopp.com/), I shipped th
 [Fylgja Props Builder]: https://fylgja.dev/library/extensions/props-builder/
 [Hyvä Tokens]: https://docs.hyva.io/hyva-themes/working-with-tailwindcss/using-hyva-modules/tokens.html
 [Claude Design]: https://claude.ai/design
-[Google Stitch]: https://stitch.google.com/
+[Google Stitch]: https://stitch.withgoogle.com/
