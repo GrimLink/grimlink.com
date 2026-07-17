@@ -1,6 +1,13 @@
 [
 	{
 		"type": "event",
+		"title": "Cream Meetup: Frontend Performance",
+		"description": "An evening on frontend performance in e-commerce, exploring how speed impacts UX, conversion, and SEO.",
+		"link": "https://cream.nl/event/cream-meetup-frontend-performance/",
+		"pubDate": "2026-09-17"
+	},
+	{
+		"type": "event",
 		"title": "MageTitans 2025",
 		"description": "⚡ Design Tokens and Figma. Bridge the gap between design and development to eliminate inconsistencies and speed up releases.",
 		"link": "https://mage-titans.nl/speakers/sean-van-zuidam",

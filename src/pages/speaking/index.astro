@@ -19,6 +19,7 @@ interface Speaker {
 }
 
 const data = dataJson as Speaker[];
+const now = new Date();
 
 const imageGlob = import.meta.glob<{ default: ImageMetadata }>(
 	"./assets/*.{jpg,jpeg,png,webp,avif}",
@@ -53,6 +54,10 @@ const pageDescription =
 		{
 			data.map((speaker, index) => {
 				const loading = index < 2 ? "eager" : "lazy";
+				const isUpcoming =
+					speaker.type === "event" &&
+					speaker.pubDate &&
+					new Date(speaker.pubDate) > now;
 				return (
 					<Fragment>
 						{speaker.type === "video" ? (
@@ -70,6 +75,7 @@ const pageDescription =
 							</Card>
 						) : (
 							<Card tag="li" class="stack">
+								{isUpcoming && <span class="badge">Upcoming</span>}
 								{speaker.image && images[speaker.image] && (
 									<Image
 										src={images[speaker.image]}
@@ -110,6 +116,13 @@ const pageDescription =
 </PageLayout>
 
 <style>
+	.badge {
+		position: absolute;
+		top: var(--size-2);
+		right: var(--size-2);
+		z-index: 1;
+	}
+
 	.post-meta {
 		font-size: 0.875em;
 		font-style: italic;
