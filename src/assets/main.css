@@ -109,6 +109,10 @@
 	.overlay {
 		--overlay-bg: hsl(0 0% 0% / 75%);
 	}
+
+	.align-self-end {
+		place-self: end stretch;
+	}
 }
 
 @keyframes fade-in {
