@@ -48,6 +48,10 @@ const pageDescription =
 		{ name: "Speaking", item: "/speaking/" },
 	]}
 >
+	<Fragment slot="head">
+		<link rel="preconnect" href="https://www.youtube-nocookie.com" />
+		<link rel="preconnect" href="https://www.google.com" />
+	</Fragment>
 	<h1>{pageTitle}</h1>
 	<p>{pageDescription}</p>
 	<ul role="list" class="auto-grid gap" style="--max-col-size: 34ch">
