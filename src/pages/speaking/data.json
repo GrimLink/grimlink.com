@@ -47,5 +47,21 @@
 		"title": "Getting more out of Hyvä | Hyvä Meetup #8",
 		"link": "https://youtu.be/bgM6oZ_QtEs",
 		"pubDate": "2023-11-28"
+	},
+	{
+		"type": "video",
+		"title": "Reaction - Adding CSS frameworks like Fylgja to Hyvä",
+		"description": "A talk from Reacticon Live Stream - Day 4, on bringing CSS frameworks like Fylgja into Hyvä.",
+		"link": "https://youtu.be/aGuclzRp44Q",
+		"videoStart": "13244",
+		"pubDate": "2021-10-14"
+	},
+	{
+		"type": "event",
+		"title": "Joomladagen 2017",
+		"description": "Joomla en Progressive Web Apps: how PWAs combine the best of the web and native apps, and how Joomla can adopt them.",
+		"link": "/blog/2017/joomladagen/",
+		"pubDate": "2017-04-01",
+		"image": "joomladagen-17.webp"
 	}
 ]
