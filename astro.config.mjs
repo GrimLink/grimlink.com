@@ -11,6 +11,13 @@ export default defineConfig({
 		"/*": "/",
 	},
 	markdown: {
+		shikiConfig: {
+			defaultColor: false,
+			themes: {
+				light: "github-light-default",
+				dark: "github-dark-default",
+			},
+		},
 		processor: satteri({
 			mdastPlugins: [githubAlerts, wrapTables],
 			hastPlugins: [externalLinks],

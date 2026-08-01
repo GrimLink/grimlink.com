@@ -32,6 +32,20 @@
 			margin-inline-start: 1em;
 		}
 	}
+
+	.astro-code {
+		& span {
+			color: var(--shiki-light);
+		}
+	}
+
+	@media (prefers-color-scheme: dark) {
+		html:not([data-theme="light"]) .astro-code {
+			& span {
+				color: var(--shiki-dark);
+			}
+		}
+	}
 }
 
 @layer components {
