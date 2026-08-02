@@ -3,6 +3,10 @@ title: "Replacing DocSearch with a Custom Search"
 description: "How I replaced DocSearch on the Fylgja CSS site with a custom one built on Astro collections, and what that saved."
 pubDate: "2026-08-01"
 tags: ["astrojs", "fylgjacss", "performance"]
+crossPosts:
+  - bluesky: "3mrzelkp47c2a"
+  - mastodon: "117021622443677592"
+  - linkedin: "seanvanzuidam_replacing-docsearch-with-a-custom-search-activity-7489384777717010432-cjRb"
 ---
 
 Collections are one of [Astro.js]'s biggest strengths. They are a bit stricter than plain files thanks to the types, but that is exactly why they are easy to reuse somewhere else.
