@@ -19,3 +19,6 @@ trim_trailing_whitespace = false
 
 [*.yml]
 indent_style = space
+
+[atproto-did]
+insert_final_newline = false
