@@ -46,7 +46,7 @@
 			"name": "create-project",
 			"description": "Quickly scaffold a new project from the CLI.",
 			"url": "https://github.com/GrimLink/create-project",
-			"status": "active"
+			"status": "inactive"
 		},
 		{
 			"name": "warp-theme-snazzy",
