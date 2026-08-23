@@ -1,0 +1,232 @@
+---
+import PageLayout from "@/layouts/PageLayout.astro";
+import { Image } from "astro:assets";
+import dataJson from "./data.json";
+import CoverCurrentImg from "./assets/cover-current.webp";
+import CoverGamingImg from "./assets/cover-gaming.webp";
+import CoverRetiredImg from "./assets/cover-retired.webp";
+
+interface Tool {
+	name: string;
+	description: string;
+	url?: string;
+}
+
+const { workbench, apps, cli } = dataJson as {
+	workbench: Tool[];
+	apps: Tool[];
+	cli: Tool[];
+};
+
+const covers = [
+	{
+		image: CoverCurrentImg,
+		machine: "MacBook M5",
+		start: "2026",
+		alt: "Translucent laptop cover with stickers, among them the CSS logo, Zed, Astro, a Game Boy, Astro Bot, the Chrome dino and a Hyvä speech bubble",
+		description:
+			"The one in use today. Mostly the things I work with daily, with room left for whatever conference hands me next.",
+	},
+	{
+		image: CoverGamingImg,
+		machine: "MacBook Pro 2016",
+		start: "2019",
+		end: "2026",
+		alt: "Black laptop cover covered in game and anime stickers, among them Hollow Knight, Persona 5, Untitled Goose Game, Journey and The Last Guardian",
+		description:
+			"Almost entirely games I love. Hollow Knight, Journey, Persona 5, The Last Guardian, and a goose that should not be trusted.",
+	},
+	{
+		image: CoverRetiredImg,
+		machine: "MacBook Pro 2012",
+		start: "2014",
+		end: "2019",
+		alt: "Worn black laptop cover with older stickers, among them PlayStation, Naughty Dog, GitHub, Magento, Vue Storefront, PhpStorm and Atom",
+		description:
+			"My first sticker cover, scratched and faded. A snapshot of the tools I used back then, Atom and PhpStorm included.",
+	},
+];
+
+const pageTitle = "Tools";
+const pageDescription =
+	"The hardware, apps and command line tools I use every day, plus the laptop covers I have collected stickers on.";
+---
+
+<PageLayout
+	title={pageTitle}
+	description={pageDescription}
+	image={CoverCurrentImg}
+	breadcrumbs={[
+		{ name: "Home", item: "/" },
+		{ name: "Tools", item: "/tools/" },
+	]}
+	class="container"
+>
+	<h1>{pageTitle}</h1>
+	<p>{pageDescription}</p>
+	<p>
+		Everything here is set up from <a
+			href="https://github.com/grimlink/dotfiles/"
+			target="_blank"
+			rel="noopener noreferrer">my dotfiles</a
+		>, which install the lot in two scripts.
+	</p>
+
+	<div class="auto-grid gap" style="--max-col-size: 34rem">
+		<section aria-labelledby="workbench" class="col-span-full">
+			<h2 id="workbench">Workbench</h2>
+			<dl class="tool-list">
+				{
+					workbench.map((tool) => (
+						<>
+							<dt>
+								{tool.url ? (
+									<a
+										href={tool.url}
+										target="_blank"
+										rel="noopener noreferrer"
+										class="hover-underline"
+									>
+										{tool.name}
+									</a>
+								) : (
+									tool.name
+								)}
+							</dt>
+							<dd>{tool.description}</dd>
+						</>
+					))
+				}
+			</dl>
+		</section>
+
+		<section aria-labelledby="apps">
+			<h2 id="apps">Supporting apps</h2>
+			<dl class="tool-list">
+				{
+					apps.map((tool) => (
+						<>
+							<dt>
+								<a
+									href={tool.url}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="hover-underline"
+								>
+									{tool.name}
+								</a>
+							</dt>
+							<dd>{tool.description}</dd>
+						</>
+					))
+				}
+			</dl>
+		</section>
+
+		<section aria-labelledby="cli">
+			<h2 id="cli">Command line</h2>
+			<dl class="tool-list">
+				{
+					cli.map((tool) => (
+						<>
+							<dt>
+								<a
+									href={tool.url}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="hover-underline"
+								>
+									{tool.name}
+								</a>
+							</dt>
+							<dd>{tool.description}</dd>
+						</>
+					))
+				}
+			</dl>
+		</section>
+	</div>
+
+	<section aria-labelledby="covers">
+		<h2 id="covers">Laptop covers</h2>
+		<p>
+			Every laptop I own gets a hard cover, so the machine stays clean and the stickers{" "}
+			stay mine. When the machine is replaced, the cover comes off and the next one starts{
+				" "
+			}
+			empty.
+		</p>
+		<ul
+			role="list"
+			class="auto-grid gap"
+			style="--max-col-size: 30rem; --md_gap: var(--size-8); --separator-flow: 0"
+		>
+			{
+				covers.map((cover, index) => (
+					<li>
+						<figure>
+							<Image
+								src={cover.image}
+								alt={cover.alt}
+								widths={[480, 800]}
+								sizes="(min-width: 60rem) 30rem, 100vw"
+								loading={index < 1 ? "eager" : "lazy"}
+								class="w-full"
+							/>
+							<figcaption class="text-sm">
+								<p style="--my: 1em 0">
+									<strong>{cover.machine}</strong>
+								</p>
+								<p class="italic text-muted" style="--my: 0 1em">
+									<time datetime={cover.start}>{cover.start}</time>
+									{cover.end ? (
+										<>
+											{" – "}
+											<time datetime={cover.end}>{cover.end}</time>
+										</>
+									) : (
+										", still a work in progress"
+									)}
+								</p>
+								<p class="text-muted">{cover.description}</p>
+							</figcaption>
+						</figure>
+					</li>
+				))
+			}
+		</ul>
+	</section>
+</PageLayout>
+
+<style>
+	.tool-list {
+		--list-flow: 0;
+		display: grid;
+		grid-template-columns: 1fr;
+		margin-block-start: var(--size-4);
+
+		dt,
+		dd {
+			padding-block: var(--size-2);
+		}
+
+		dt {
+			padding-inline-end: var(--size-6);
+			padding-block-end: 0;
+		}
+
+		dd {
+			color: var(--color-muted);
+			border-block-end: 1px solid oklch(from var(--root-fg) l c h / 10%);
+		}
+
+		@media (width >= 640px) {
+			grid-template-columns: auto 1fr;
+
+			dt {
+				border-block-end: 1px solid oklch(from var(--root-fg) l c h / 10%);
+				padding-block-end: var(--size-2);
+			}
+		}
+	}
+</style>

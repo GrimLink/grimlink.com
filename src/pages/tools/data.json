@@ -1,0 +1,87 @@
+{
+	"workbench": [
+		{
+			"name": "MacBook M5",
+			"description": "My daily driver, docked to an external display for most of the day."
+		},
+		{
+			"name": "Zed",
+			"description": "My editor of choice. Quick to start, quiet by default, and pleasant to write CSS in.",
+			"url": "https://zed.dev/"
+		},
+		{
+			"name": "Ghostty",
+			"description": "Fast, GPU accelerated terminal, running Zsh with the Pure prompt.",
+			"url": "https://ghostty.org/"
+		},
+		{
+			"name": "Fork",
+			"description": "Git client for the moments a visual diff beats the CLI.",
+			"url": "https://git-fork.com/"
+		}
+	],
+	"apps": [
+		{
+			"name": "Raycast",
+			"description": "Launcher, clipboard history, and snippets.",
+			"url": "https://www.raycast.com/"
+		},
+		{
+			"name": "TablePlus",
+			"description": "Database client for everyday queries.",
+			"url": "https://tableplus.com/"
+		},
+		{
+			"name": "Ray",
+			"description": "Debugging without var_dump, mostly for PHP.",
+			"url": "https://myray.app/"
+		},
+		{
+			"name": "LocalSend",
+			"description": "AirDrop that works across every device in the house.",
+			"url": "https://localsend.org/"
+		},
+		{
+			"name": "Command X",
+			"description": "Cut and paste files in Finder, the way it should have worked all along.",
+			"url": "https://sindresorhus.com/command-x"
+		},
+		{
+			"name": "TextSniper",
+			"description": "Grabs text out of anything on screen, images and video included.",
+			"url": "https://www.textsniper.app/"
+		}
+	],
+	"cli": [
+		{
+			"name": "mage",
+			"description": "My own shortcuts for the Magento CLI.",
+			"url": "https://github.com/grimlink/mage/"
+		},
+		{
+			"name": "gh & glab",
+			"description": "GitHub and GitLab from the terminal.",
+			"url": "https://cli.github.com/"
+		},
+		{
+			"name": "ripgrep",
+			"description": "Search that keeps up with a Magento codebase.",
+			"url": "https://github.com/BurntSushi/ripgrep"
+		},
+		{
+			"name": "bat",
+			"description": "cat with syntax highlighting.",
+			"url": "https://github.com/sharkdp/bat"
+		},
+		{
+			"name": "jq",
+			"description": "JSON wrangling in pipes.",
+			"url": "https://jqlang.github.io/jq/"
+		},
+		{
+			"name": "ImageMagick",
+			"description": "Batch resizing and converting, usually to WebP.",
+			"url": "https://imagemagick.org/"
+		}
+	]
+}
