@@ -41,6 +41,11 @@
 		"active": true
 	},
 	{
+		"name": "GitLab",
+		"url": "https://gitlab.com/GrimLink",
+		"active": true
+	},
+	{
 		"name": "Gravatar",
 		"url": "https://gravatar.com/grimlink",
 		"active": true
