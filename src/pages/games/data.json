@@ -62,6 +62,12 @@
 			"type": "Educational",
 			"description": "Water your carrot garden using CSS grid. Covers the full grid spec from basic placement to named areas.",
 			"url": "https://cssgridgarden.com/"
+		},
+		{
+			"title": "Ultimate Playspace",
+			"type": "Arcade",
+			"description": "Multiple mini games",
+			"url": "https://ultimateplayspace.com/"
 		}
 	]
 }
