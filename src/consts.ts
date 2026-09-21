@@ -18,7 +18,6 @@ export const socials = {
 	linkedin: "https://www.linkedin.com/in/seanvanzuidam",
 	instagram: "https://www.instagram.com/seangrimlink",
 	youtube: "https://www.youtube.com/@SeanGrimLink",
-	gravatar: "https://gravatar.com/grimlink",
 };
 
 export const sourceBaseUrls = {
