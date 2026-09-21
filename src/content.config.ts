@@ -16,6 +16,10 @@ const blog = defineCollection({
 					.union([image(), z.literal(false)])
 					.describe("Overrides the image to set a specific blog thumb, or false to hide it"),
 			),
+			gallery: z
+				.array(z.union([image(), z.object({ src: image(), alt: z.string() })]))
+				.optional()
+				.describe("Images shown in a grid below the post, as a path or with alt text"),
 			tags: z.array(z.string()).optional(),
 			crossPosts: z.record(z.string(), z.string()).optional(),
 		}),

@@ -1,0 +1,162 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image, getImage } from "astro:assets";
+import { ChevronLeft, ChevronRight, X } from "@lucide/astro";
+
+type GalleryImage = ImageMetadata | { src: ImageMetadata; alt: string };
+
+interface Props {
+	images: GalleryImage[];
+	id?: string;
+}
+
+const MAX_TILES = 4;
+const TILE_SIZE = 480;
+
+const { images: entries, id = "gallery" } = Astro.props;
+const images = entries.map((entry) => ("alt" in entry ? entry : { src: entry, alt: "" }));
+const tiles = images.slice(0, MAX_TILES);
+const more = images.length - tiles.length;
+// The overlay covers the last tile too, so its own image counts as one you have yet to see.
+const moreLabel = `+${more + 1}`;
+const cols = Math.min(tiles.length, 3);
+const featureRows = tiles.length - 1;
+const hasFeature = tiles.length > 2;
+// Plain images without width and height, so max sizes keep the ratio instead of squashing it.
+const slides = await Promise.all(images.map((image) => getImage({ src: image.src })));
+
+/**
+ * Crops a tile so the tiles fill the grid on their own, without any set heights.
+ * @param index
+ * @returns The width and height to render the tile at, none for a single image.
+ */
+function tileSize(index: number) {
+	if (tiles.length === 1) return {};
+	if (tiles.length === 2) return { width: TILE_SIZE * 1.5, height: TILE_SIZE * 1.5 };
+	if (index === 0) return { width: TILE_SIZE * 2, height: TILE_SIZE * featureRows };
+	return { width: TILE_SIZE, height: TILE_SIZE };
+}
+
+/**
+ * @param index
+ * @returns The accessible name of a tile.
+ */
+function tileLabel(index: number) {
+	let label = `Open image ${index + 1} of ${images.length}`;
+	if (index === tiles.length - 1 && more > 0) label += `, ${more} more`;
+	return images[index].alt ? `${label}: ${images[index].alt}` : label;
+}
+---
+
+<image-gallery class="block" style="--my: 1.5em">
+	<div
+		class="grid-cols gap rounded clip"
+		style={`--grid-cols: ${cols}; --gap: var(--size-1); --btn-px: 0; --btn-py: 0; --btn-radius: 0; --btn-border-width: 0; --outline-offset: -4px`}
+	>
+		{tiles.map((image, index) => (
+			<button
+				type="button"
+				command="show-modal"
+				commandfor={id}
+				data-index={index}
+				aria-label={tileLabel(index)}
+				class="stack"
+				style={
+					index === 0 && hasFeature
+						? `--col: span 2; --row: span ${featureRows}`
+						: undefined
+				}
+			>
+				<Image
+					src={image.src}
+					alt=""
+					{...tileSize(index)}
+					fit="cover"
+					class="w-full h-full object-cover"
+				/>
+				{index === tiles.length - 1 && more > 0 && (
+					<span
+						class="grid align-center overlay text-xl font-bold"
+						style="--overlay-bg: hsl(0 0% 0% / 80%); align-self: normal"
+					>
+						{moreLabel}
+					</span>
+				)}
+			</button>
+		))}
+	</div>
+
+	<dialog
+		id={id}
+		closedby="any"
+		aria-label="Image viewer"
+		class="w-full h-full open:flex align-center"
+		style={{
+			"--p": 0,
+			"--backdrop": "hsl(0 0% 0% / 85%)",
+			"--dialog-bg": "transparent",
+			"--dialog-shadow": "none",
+			"--dialog-translate-y": 0,
+			"--btn-stroke": "transparent",
+			"--btn-bg": "hsl(0 0% 100% / 15%)",
+			"--btn-hover-bg": "hsl(0 0% 100% / 30%)",
+			"--btn-color": "hsl(0 0% 100%)",
+		}}
+	>
+		{slides.map((slide, index) => (
+			<img
+				src={slide.src}
+				alt={images[index].alt}
+				loading="lazy"
+				decoding="async"
+				hidden={index > 0}
+				class="max-w-full max-h-full"
+			/>
+		))}
+		<div class="absolute stack" style="--inset: 0">
+			<span
+				class="align-self badge"
+				aria-live="polite"
+				style="--align-self: start; --m: var(--size-3)"
+			>
+				1 / {images.length}
+			</span>
+			<button
+				type="button"
+				command="close"
+				commandfor={id}
+				aria-label="Close"
+				class="align-self shadow"
+				style="--align-self: start end; --m: var(--size-3)"
+			>
+				<X aria-hidden="true" />
+			</button>
+			{images.length > 1 && (
+				<>
+					<button
+						type="button"
+						data-step="-1"
+						aria-label="Previous image"
+						class="align-self shadow"
+						style="--align-self: center start; --m: var(--size-3)"
+					>
+						<ChevronLeft aria-hidden="true" />
+					</button>
+					<button
+						type="button"
+						data-step="1"
+						aria-label="Next image"
+						class="align-self shadow"
+						style="--align-self: center end; --m: var(--size-3)"
+					>
+						<ChevronRight aria-hidden="true" />
+					</button>
+				</>
+			)}
+		</div>
+	</dialog>
+</image-gallery>
+
+<script>
+	import "./element.js";
+</script>

@@ -136,6 +136,15 @@
 	.mx-auto {
 		margin-inline: auto;
 	}
+
+	.object-scale-down {
+		object-fit: scale-down;
+	}
+
+	.shadow {
+		--shadow: var(--shadow-2);
+		box-shadow: var(--shadow);
+	}
 }
 
 @keyframes fade-in {

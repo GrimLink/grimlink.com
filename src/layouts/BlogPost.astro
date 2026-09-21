@@ -13,6 +13,7 @@ import FormattedDate from "@/components/FormattedDate.astro";
 import PostNavigation from "@/components/PostNavigation.astro";
 import DiscussionLinks from "@/components/DiscussionLinks.astro";
 import Tags from "@/components/Tags.astro";
+import ImageGallery from "@/components/ImageGallery/index.astro";
 import ShareButton from "@fylgja/ShareButton.astro";
 import ShareBluesky from "@fylgja/ShareBluesky.astro";
 
@@ -36,6 +37,7 @@ const {
 	updatedDate,
 	image,
 	tags = [],
+	gallery,
 	crossPosts,
 	id,
 	lang = "en",
@@ -106,6 +108,7 @@ const hasTags = tags && tags.length > 0;
 					{hasTags && <Tags tags={tags} />}
 				</div>
 				<slot />
+				{gallery && gallery.length > 0 && <ImageGallery images={gallery} />}
 			</article>
 			<div class="flex gap align" style={{ "--my": "var(--size-6) 0" }}>
 				<div>
