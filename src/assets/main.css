@@ -53,11 +53,19 @@
 	.md-row {
 		display: grid;
 		gap: 1em;
-		grid-template-columns: minmax(0px, 1fr) minmax(0px, 1fr);
-		margin-block: 1.5em;
+		grid-template-columns: minmax(0px, 1fr);
+		margin-block: 1lh;
 
-		p:only-child {
-			display: contents;
+		@media (width >= 640px) {
+			grid-template-columns: minmax(0px, 1fr) minmax(0px, 1fr);
+		}
+
+		> p {
+			margin-block: 0;
+
+			&:only-child {
+				display: contents;
+			}
 		}
 	}
 }
