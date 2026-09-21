@@ -1,7 +1,7 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import { satteri } from "@astrojs/markdown-satteri";
-import { wrapTables, githubAlerts, externalLinks } from "./markdown-plugins";
+import { wrapTables, githubAlerts, externalLinks, imageAttributes } from "./markdown-plugins";
 import { animationTimelineFix } from "./lightningcss-fixes";
 
 export default defineConfig({
@@ -20,7 +20,7 @@ export default defineConfig({
 			},
 		},
 		processor: satteri({
-			mdastPlugins: [githubAlerts, wrapTables],
+			mdastPlugins: [githubAlerts, wrapTables, imageAttributes],
 			hastPlugins: [externalLinks],
 		}),
 	},
@@ -31,7 +31,7 @@ export default defineConfig({
 	vite: {
 		css: {
 			lightningcss: { visitor: animationTimelineFix },
-		}
+		},
 	},
 	devToolbar: {
 		enabled: false,
