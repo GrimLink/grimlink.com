@@ -132,6 +132,10 @@
 	.col-span-full {
 		grid-column: 1 / -1;
 	}
+
+	.mx-auto {
+		margin-inline: auto;
+	}
 }
 
 @keyframes fade-in {

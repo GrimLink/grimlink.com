@@ -13,6 +13,7 @@
 	--control-checked-stroke: var(--brand);
 	--control-checked-bg: var(--brand);
 	--control-checked-color: var(--on-brand);
+	--separator-flow: 1lh;
 	color-scheme: light dark;
 	scrollbar-color: var(--scrollthumb-color, var(--brand))
 		var(--scrolltrack-color, var(--surface-color));
