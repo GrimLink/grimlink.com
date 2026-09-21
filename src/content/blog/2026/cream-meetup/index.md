@@ -13,8 +13,6 @@ gallery:
     alt: Attendees gathered around long tables with pizza at the Cream office
   - src: ./cream-4.jpg
     alt: The dimly lit meetup room with a kiosk and plants before the talks
-  - src: ./seo-get-fcked.jpg
-    alt: Meme used in the slides on SEO
 crossPosts: 
   linkedin: "seanvanzuidam_meetup-magento-mageos-ugcPost-7506616841914572801-AXBp"
 ---
