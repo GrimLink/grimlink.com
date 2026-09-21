@@ -55,67 +55,68 @@ const pageDescription =
 	<h1>{pageTitle}</h1>
 	<p>{pageDescription}</p>
 	<ul role="list" class="auto-grid gap" style="--max-col-size: 34ch">
-		{
-			data.map((speaker, index) => {
-				const loading = index < 2 ? "eager" : "lazy";
-				const isUpcoming =
-					speaker.type === "event" &&
-					speaker.pubDate &&
-					new Date(speaker.pubDate) > now;
-				return (
-					<Fragment>
-						{speaker.type === "video" ? (
-							<Card tag="li">
-								<Youtube
-									src={speaker.link}
-									start={speaker.videoStart}
-									title={speaker.title}
+		{data.map((speaker, index) => {
+			const loading = index < 2 ? "eager" : "lazy";
+			const isUpcoming =
+				speaker.type === "event" && speaker.pubDate && new Date(speaker.pubDate) > now;
+			return (
+				<Fragment>
+					{speaker.type === "video" ? (
+						<Card tag="li">
+							<Youtube
+								src={speaker.link}
+								start={speaker.videoStart}
+								title={speaker.title}
+								loading={loading}
+								style={{
+									width: "100%",
+									height: "100%",
+								}}
+							/>
+						</Card>
+					) : (
+						<Card tag="li" class="stack">
+							{isUpcoming && <span class="badge">Upcoming</span>}
+							{speaker.image && images[speaker.image] && (
+								<Image
+									src={images[speaker.image]}
+									width={840}
+									height={480}
+									alt=""
 									loading={loading}
-									style={{
-										width: "100%",
-										height: "100%",
-									}}
+									class="w-full"
 								/>
-							</Card>
-						) : (
-							<Card tag="li" class="stack">
-								{isUpcoming && <span class="badge">Upcoming</span>}
-								{speaker.image && images[speaker.image] && (
-									<Image
-										src={images[speaker.image]}
-										width={840}
-										height={480}
-										alt=""
-										loading={loading}
-										class="w-full"
-									/>
-								)}
-								<div class="card-content overlay align-self-end">
-									<div class="flow-none">
-										<p class="lead">
-											<a
-												href={speaker.link}
-												class="stretched-link hover-underline"
-												target="_blank"
-												rel="noopener noreferrer"
-											>
-												{speaker.title}
-											</a>
+							)}
+							<div
+								class:list={[
+									"card-content align-self-end",
+									speaker.image && "overlay",
+								]}
+							>
+								<div class="flow-none">
+									<p class="lead">
+										<a
+											href={speaker.link}
+											class="stretched-link hover-underline"
+											target="_blank"
+											rel="noopener noreferrer"
+										>
+											{speaker.title}
+										</a>
+									</p>
+									{speaker.pubDate && (
+										<p class="post-meta">
+											<FormattedDate date={speaker.pubDate} />
 										</p>
-										{speaker.pubDate && (
-											<p class="post-meta">
-												<FormattedDate date={speaker.pubDate} />
-											</p>
-										)}
-									</div>
-									<p class="post-body">{speaker.description}</p>
+									)}
 								</div>
-							</Card>
-						)}
-					</Fragment>
-				);
-			})
-		}
+								<p class="post-body">{speaker.description}</p>
+							</div>
+						</Card>
+					)}
+				</Fragment>
+			);
+		})}
 	</ul>
 </PageLayout>
 
