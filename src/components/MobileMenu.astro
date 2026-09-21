@@ -65,27 +65,25 @@ const { id = "mobile-menu", title = "Mobile Menu", items } = Astro.props;
 	</div>
 	<nav>
 		<ul>
-			{
-				items.map((item) => {
-					const isExternal = typeof item.url === "string" && item.url.startsWith("http");
-					const Icon = item.icon ? iconMap[item.icon] : null;
-					return (
-						<li>
-							<a
-								href={item.url}
-								aria-current={item.url === Astro.url.pathname ? "page" : undefined}
-								class="btn w-full align"
-								style="--align: start"
-								target={isExternal ? "_blank" : undefined}
-								rel={isExternal ? "noopener noreferrer" : undefined}
-							>
-								{Icon && <Icon size={18} aria-hidden="true" />}
-								<span>{item.label}</span>
-							</a>
-						</li>
-					);
-				})
-			}
+			{items.map((item) => {
+				const isExternal = typeof item.url === "string" && item.url.startsWith("http");
+				const Icon = item.icon ? iconMap[item.icon] : null;
+				return (
+					<li>
+						<a
+							href={item.url}
+							aria-current={item.url === Astro.url.pathname ? "page" : undefined}
+							class="btn w-full align"
+							style="--align: start"
+							target={isExternal ? "_blank" : undefined}
+							rel={isExternal ? "noopener noreferrer" : undefined}
+						>
+							{Icon && <Icon size={18} aria-hidden="true" />}
+							<span>{item.label}</span>
+						</a>
+					</li>
+				);
+			})}
 		</ul>
 	</nav>
 </dialog>
