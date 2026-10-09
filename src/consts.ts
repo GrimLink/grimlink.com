@@ -40,13 +40,13 @@ export const projects = [
 		url: "https://fylgja.dev/",
 	},
 	{
+		title: "Mage (Magento 2 CLI Tool)",
+		description: "Shortcuts and tools to simplify Magento CLI commands.",
+		url: "/mage/",
+	},
+	{
 		title: "Magento2 Storeinfo",
 		description: "Easily access and display Magento store information.",
 		url: "https://github.com/Siteation/magento2-storeinfo",
-	},
-	{
-		title: "Mage Tool",
-		description: "Shortcuts and tools to simplify Magento CLI commands.",
-		url: "/mage/",
 	},
 ];

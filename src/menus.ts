@@ -8,6 +8,8 @@ export const mainMenu = [
 	{ url: "/tools/", label: "Tools", icon: "Wrench" },
 	{ url: "/about/", label: "About Me", icon: "User" },
 	{ url: socials.github, label: "GitHub", icon: "Github" },
+	{ url: "https://fylgja.dev/", label: "Fylgja CSS", icon: "Fylgja" },
+	{ url: "/mage/", label: "Mage CLI", icon: "Terminal" },
 	{ url: "/404/", label: "404", icon: "Ghost" },
 ];
 
