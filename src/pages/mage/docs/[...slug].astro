@@ -1,0 +1,31 @@
+---
+import { type CollectionEntry, getCollection, render } from "astro:content";
+import MageDocs from "@/layouts/MageDocs.astro";
+import { mageRepo, mageRef } from "@/loaders/mage-docs";
+
+export async function getStaticPaths() {
+	const docs = await getCollection("mageDocs");
+	return docs.map((doc) => ({ params: { slug: doc.id }, props: { doc } }));
+}
+
+interface Props {
+	doc: CollectionEntry<"mageDocs">;
+}
+
+const { doc } = Astro.props;
+const { Content } = await render(doc);
+---
+
+<MageDocs
+	title={doc.data.title}
+	description={doc.data.description}
+	breadcrumbs={[{ name: doc.data.title, item: Astro.url.pathname }]}
+>
+	<Content />
+	<hr />
+	<p>
+		<a href={`${mageRepo}/blob/${mageRef}/${doc.data.path}`} target="_blank" rel="noopener noreferrer"
+			>View this page on GitHub</a
+		>
+	</p>
+</MageDocs>

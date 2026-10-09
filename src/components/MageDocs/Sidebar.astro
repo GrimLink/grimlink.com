@@ -1,0 +1,124 @@
+---
+import { Menu, X } from "@lucide/astro";
+import { getMageDocsNav, docHref, docLabel } from "./nav";
+
+const nav = await getMageDocsNav();
+const current = Astro.url.pathname;
+---
+
+<button commandfor="mage-docs-menu" command="show-modal" class="btn docs-menu-btn">
+	<Menu size={18} aria-hidden="true" /> Docs menu
+</button>
+
+<dialog id="mage-docs-menu" closedby="any" class="offcanvas">
+	<div class="dialog-header text-end">
+		<button
+			commandfor="mage-docs-menu"
+			command="close"
+			aria-label="Close docs menu"
+			class="close-btn"
+		>
+			<X aria-hidden="true" />
+		</button>
+	</div>
+	<nav aria-label="Mage docs">
+		<ul role="list">
+			<li>
+				<a href="/mage/">
+					<span aria-hidden="true">←</span> Back to Mage
+				</a>
+			</li>
+			<li>
+				<a href="/mage/docs/" aria-current={current === "/mage/docs/" ? "page" : undefined}>
+					Overview
+				</a>
+			</li>
+		</ul>
+		{nav.map(({ title, docs }) => (
+			<>
+				<h2>{title}</h2>
+				<ul role="list">
+					{docs.map((doc) => (
+						<li>
+							<a
+								href={docHref(doc)}
+								aria-current={current === docHref(doc) ? "page" : undefined}
+							>
+								{docLabel(doc)}
+							</a>
+						</li>
+					))}
+				</ul>
+			</>
+		))}
+	</nav>
+</dialog>
+
+<style>
+	.docs-menu-btn {
+		order: -1;
+		justify-self: start;
+	}
+
+	.close-btn {
+		padding: var(--size-2);
+		background: none;
+		border: none;
+		color: inherit;
+	}
+
+	dialog {
+		--tx: -100%;
+		--mx: 0 auto;
+		padding: var(--size-4) var(--size-6) var(--size-8);
+		border-radius: 0 1rem 1rem 0;
+	}
+
+	nav {
+		align-self: start;
+		color: var(--color-muted);
+	}
+
+	/* The dialog falls away, so the nav becomes a column of the layout grid */
+	@media (width >= 96ch) {
+		.docs-menu-btn,
+		.dialog-header {
+			display: none;
+		}
+
+		dialog {
+			display: contents;
+		}
+
+		nav {
+			grid-column: 1;
+			grid-row: 1;
+			position: sticky;
+			top: var(--size-6);
+			max-block-size: calc(100dvh - var(--size-12));
+			overflow-y: auto;
+		}
+	}
+
+	h2 {
+		margin-block: var(--size-8) var(--size-3);
+		font-size: var(--font-size-3);
+		color: var(--root-fg);
+	}
+
+	ul {
+		display: grid;
+		gap: var(--size-2);
+		margin: 0;
+		padding: 0;
+	}
+
+	:any-link:not(:hover) {
+		text-decoration: none;
+	}
+
+	[aria-current="page"] {
+		color: var(--root-fg);
+		font-weight: bold;
+	}
+</style>

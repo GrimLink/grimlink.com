@@ -1,0 +1,420 @@
+---
+import { Code } from "astro:components";
+import { Bot, Eraser, FolderTree, Layers, PackagePlus, Terminal } from "@lucide/astro";
+import PageLayout from "@/layouts/PageLayout.astro";
+import Card from "@fylgja/Card.astro";
+
+const pageTitle = "Mage";
+const pageDescription =
+	"Mage is a tool built on top of bin/magento that makes Magento 2 and Mage-OS development faster, with shortcuts and helpers for the work you repeat every day.";
+
+const repo = "https://github.com/GrimLink/mage";
+const themes = { light: "github-light-default", dark: "github-dark-default" } as const;
+
+const install = {
+	curl: "curl -O https://raw.githubusercontent.com/GrimLink/mage/main/mage && chmod +x mage",
+	wget: "wget https://raw.githubusercontent.com/GrimLink/mage/main/mage && chmod +x mage",
+	path: "mv mage ~/.local/bin/",
+	update: "mage self-update",
+};
+
+const example = `mage create my-shop
+cd my-shop
+mage add hyva
+mage open admin`;
+
+const features = [
+	{
+		icon: Terminal,
+		title: "A new project in one command",
+		text: "mage create installs and sets up Mage-OS, Magento Open Source or Adobe Commerce, ready to log in to.",
+	},
+	{
+		icon: FolderTree,
+		title: "Works from any folder",
+		text: "Run mage from anywhere in a project, it finds the Magento root on its own. Anything it does not know goes to bin/magento.",
+	},
+	{
+		icon: Layers,
+		title: "Environment aware",
+		text: "The same commands work on your machine, with Laravel Valet, Warden and DDEV, mage runs them where they belong.",
+	},
+	{
+		icon: PackagePlus,
+		title: "One place to add things",
+		text: "mage add takes composer packages, git repositories and composer fragments, generates themes, modules and store views, and adds the Hyvä Theme.",
+	},
+	{
+		icon: Eraser,
+		title: "Clean without side effects",
+		text: "mage clean only clears the caches, Redis keys and search indices of the project you are in, never those of another.",
+	},
+	{
+		icon: Bot,
+		title: "Ready for scripts and agents",
+		text: "No silent defaults without a terminal, -y for the defaults, and json output, so CI and AI agents can use mage too.",
+	},
+];
+
+const commandGroups = [
+	{
+		title: "Projects",
+		commands: [
+			{ name: "create", doc: "create", text: "Create, install and set up a new project" },
+			{
+				name: "setup",
+				doc: "create#mage-setup",
+				text: "Install Magento on an existing codebase",
+			},
+			{
+				name: "nuke",
+				doc: "nuke",
+				text: "Permanently delete a project (database, environment, files)",
+			},
+			{
+				name: "backup",
+				doc: "backup",
+				text: "Back up the database, and optionally the media",
+			},
+			{
+				name: "restore",
+				doc: "restore",
+				text: "Restore a backup, and set it up for this device",
+			},
+			{
+				name: "sync",
+				doc: "sync",
+				text: "Pull the media, and optionally the latest backup, from a server",
+			},
+		],
+	},
+	{
+		title: "Add to a project",
+		commands: [
+			{
+				name: "add",
+				doc: "add",
+				text: "Add a package, git repository, composer fragment or handler",
+			},
+			{ name: "add theme", doc: "add-theme", text: "Create a child theme" },
+			{ name: "add module", doc: "add-module", text: "Create a module" },
+			{ name: "add hyva", doc: "add-hyva", text: "Add the Hyvä Theme" },
+			{ name: "add sample", doc: "add-sample", text: "Add the Luma or the Koti sample data" },
+			{
+				name: "add patch",
+				doc: "add-patch",
+				text: "Add composer patches, or create one from changes in vendor",
+			},
+			{
+				name: "add bfcache",
+				doc: "add-patch#mage-add-bfcache",
+				text: "Add the BFCache compatibility patches",
+			},
+			{
+				name: "add store",
+				doc: "add-store",
+				text: "Create a store view with its own domain",
+			},
+			{
+				name: "add i18n",
+				doc: "add-i18n",
+				text: "Collect the translations of a module or theme",
+			},
+			{ name: "add admin", doc: "add-admin", text: "Create an admin user" },
+			{ name: "add customer", doc: "add-admin#mage-add-customer", text: "Create a customer" },
+			{
+				name: "add storeinfo",
+				doc: "add-storeinfo",
+				text: "Add the Siteation StoreInfo modules",
+			},
+		],
+	},
+	{
+		title: "Packages and modules",
+		commands: [
+			{ name: "del", doc: "remove", text: "Remove packages by name or term" },
+			{ name: "upd", doc: "update", text: "Update packages by name or term" },
+			{
+				name: "enable, disable",
+				doc: "enable",
+				text: "Enable or disable modules by name or term",
+			},
+			{
+				name: "outdated",
+				doc: "outdated",
+				text: "List the direct dependencies with a newer version",
+			},
+		],
+	},
+	{
+		title: "Daily work",
+		commands: [
+			{ name: "watch", doc: "watch", text: "Clean only the caches a file change affects" },
+			{
+				name: "build",
+				doc: "build",
+				text: "Build themes with their npm scripts, or watch one",
+			},
+			{ name: "log", doc: "log", text: "Follow a log in var/log" },
+			{ name: "reindex", doc: "reindex", text: "Reindex, then clean the cache" },
+			{ name: "clean", doc: "clean", text: "Clean caches and generated files (alias purge)" },
+		],
+	},
+	{
+		title: "Insight and settings",
+		commands: [
+			{
+				name: "info",
+				doc: "info",
+				text: "Show the version, mode, urls, Redis and more of the project",
+			},
+			{ name: "open", doc: "open", text: "Open a store view, the admin or the mail catcher" },
+			{
+				name: "show",
+				doc: "show",
+				text: "Show stores, themes, modules, logs or the full page cache",
+			},
+			{
+				name: "set",
+				doc: "set",
+				text: "Change a setting, such as the CSP or full page cache",
+			},
+			{ name: "run", doc: "run", text: "Run n98-magerun2" },
+		],
+	},
+];
+
+/**
+ * Get the url of the docs of a command, with the anchor of a section when given.
+ * @param {string} doc The doc id, such as `add-patch#mage-add-bfcache`
+ * @returns {string}
+ */
+const commandHref = (doc: string): string => {
+	const [page, hash] = doc.split("#");
+	return `/mage/docs/commands/${page}/${hash ? `#${hash}` : ""}`;
+};
+---
+
+<PageLayout
+	title={pageTitle}
+	description={pageDescription}
+	breadcrumbs={[
+		{ name: "Home", item: "/" },
+		{ name: "Projects", item: "/projects/" },
+		{ name: "Mage", item: "/mage/" },
+	]}
+	class="container flex-col gap"
+	style="--my: var(--size-8) var(--size-16); --gap: var(--size-16)"
+>
+	<section
+		class="hero grid-cols gap align-center"
+		aria-labelledby="intro"
+		style="--lg_grid-cols: 2"
+	>
+		<div class="flow" style="--flow: var(--size-6)">
+			<a href="/blog/2026/mage-v3-released/" class="badge">
+				Version 3 is out, see what's new
+			</a>
+			<h1 id="intro" class="text-gradient">
+				{pageTitle}
+			</h1>
+			<p class="lead">{pageDescription}</p>
+			<div class="flex-wrap gap">
+				<a href="#install" class="btn --primary">
+					Install Mage
+				</a>
+				<a href="/mage/docs/" class="btn">
+					Read the docs
+				</a>
+				<a href={repo} class="btn" target="_blank" rel="noopener noreferrer">
+					View on GitHub
+				</a>
+			</div>
+		</div>
+		<figure class="terminal">
+			<figcaption>~/Sites</figcaption>
+			<Code code={example} lang="bash" themes={themes} defaultColor={false} />
+		</figure>
+	</section>
+
+	<section aria-labelledby="features">
+		<h2 id="features">Features</h2>
+		<ul role="list" class="auto-grid gap" style="--max-col-size: 30ch">
+			{features.map(({ icon: Icon, title, text }) => (
+				<Card tag="li" class="flow">
+					<span class="icon">
+						<Icon aria-hidden="true" />
+					</span>
+					<h3>{title}</h3>
+					<p>{text}</p>
+				</Card>
+			))}
+		</ul>
+	</section>
+
+	<section aria-labelledby="install">
+		<h2 id="install">Install</h2>
+		<p>Download the script with curl:</p>
+		<Code code={install.curl} lang="bash" themes={themes} defaultColor={false} />
+		<p>Or with wget:</p>
+		<Code code={install.wget} lang="bash" themes={themes} defaultColor={false} />
+		<p>
+			Then move it to a folder in your <code>PATH</code>, such as <code>~/.local/bin</code>:
+		</p>
+		<Code code={install.path} lang="bash" themes={themes} defaultColor={false} />
+
+		<h3>Requirements</h3>
+		<ul>
+			<li>
+				<strong>bash</strong> 3.2 or newer, the version macOS ships with is enough.
+			</li>
+			<li>
+				<strong>git</strong>, and <strong>curl</strong> or <strong>wget</strong>.
+			</li>
+			<li>
+				<a href="https://jqlang.org/" target="_blank" rel="noopener noreferrer">
+					jq
+				</a>{" "}
+				for a few commands, such as adding a composer fragment or showing the modules.
+			</li>
+		</ul>
+
+		<h3>Updating</h3>
+		<p>Mage updates itself, together with its templates:</p>
+		<Code code={install.update} lang="bash" themes={themes} defaultColor={false} />
+	</section>
+
+	<section aria-labelledby="commands">
+		<h2 id="commands">Commands</h2>
+		<p>
+			Anything mage does not know runs <code>bin/magento</code>, so{" "}
+			<code>mage cache:clean</code> just works. Run <code>mage help</code> for the full list,
+			including <code>help</code>, <code>version</code> and <code>self-update</code>.
+		</p>
+		<div class="command-groups">
+			{commandGroups.map(({ title, commands }) => (
+				<Card class="flow">
+					<h3>{title}</h3>
+					<dl class="commands">
+						{commands.map(({ name, doc, text }) => (
+							<div>
+								<dt>
+									<a href={commandHref(doc)}>
+										<code>{name}</code>
+									</a>
+								</dt>
+								<dd>{text}</dd>
+							</div>
+						))}
+					</dl>
+				</Card>
+			))}
+		</div>
+	</section>
+
+	<section aria-labelledby="learn-more">
+		<h2 id="learn-more">Learn more</h2>
+		<p>
+			The <a href="/mage/docs/">docs</a> describe each command, the{" "}
+			<a href="/mage/docs/config/">configuration</a> and the{" "}
+			<a href="/mage/docs/environments/">environments</a>, and the{" "}
+			<a href={`${repo}/blob/main/CHANGELOG.md`} target="_blank" rel="noopener noreferrer">
+				changelog
+			</a>{" "}
+			lists what changed in every release.
+		</p>
+	</section>
+</PageLayout>
+
+<style>
+	.hero {
+		--accent: light-dark(var(--brand), color-mix(in oklch, var(--brand) 60%, var(--root-fg)));
+
+		h1 {
+			--gradient-from: var(--root-fg);
+			--gradient-to: var(--accent);
+			--gradient-angle: 120deg;
+			inline-size: fit-content;
+			font-size: clamp(var(--font-size-8), 10vw, 5rem);
+		}
+
+		.badge {
+			--badge-px: 1.5ch;
+			display: inline-block;
+			text-decoration: none;
+			text-transform: none;
+		}
+	}
+
+	.terminal {
+		inline-size: 100%;
+		margin: 0;
+		overflow: hidden;
+		border: 1px solid color-mix(in oklab, var(--root-fg) 15%, transparent);
+		border-radius: var(--card-radius, 1rem);
+		box-shadow:
+			var(--shadow-4),
+			0 0 6rem color-mix(in oklab, var(--brand) 35%, transparent);
+
+		figcaption {
+			padding: var(--size-2) var(--size-4);
+			padding-inline-start: calc(var(--size-4) + 5ch);
+			background: color-mix(in oklab, var(--root-fg) 8%, var(--root-bg));
+			color: var(--color-muted);
+			font-size: var(--font-size-1);
+			text-align: center;
+			/* the three window buttons */
+			background-image:
+				radial-gradient(circle, #ff5f57 0.35rem, transparent 0.4rem),
+				radial-gradient(circle, #febc2e 0.35rem, transparent 0.4rem),
+				radial-gradient(circle, #28c840 0.35rem, transparent 0.4rem);
+			background-size: 1.25rem 100%;
+			background-repeat: no-repeat;
+			background-position:
+				var(--size-3) center,
+				calc(var(--size-3) + 1.25rem) center,
+				calc(var(--size-3) + 2.5rem) center;
+		}
+
+		:global(pre) {
+			margin: 0;
+			padding: var(--size-6);
+			border-radius: 0;
+			font-size: var(--font-size-2);
+		}
+	}
+
+	.command-groups {
+		columns: 2 40ch;
+		gap: var(--size-4);
+
+		> * {
+			break-inside: avoid;
+			margin-block-end: var(--size-4);
+		}
+	}
+
+	.commands {
+		> div {
+			padding-block: var(--size-2);
+
+			+ div {
+				border-block-start: 1px solid color-mix(in oklab, var(--root-fg) 10%, transparent);
+			}
+		}
+
+		dd {
+			margin: 0;
+			color: var(--color-muted);
+		}
+	}
+
+	.card .icon {
+		display: inline-grid;
+		place-items: center;
+		padding: var(--size-3);
+		border-radius: 0.5rem;
+		background: color-mix(in oklab, var(--brand) 18%, transparent);
+		color: light-dark(var(--brand), color-mix(in oklch, var(--brand) 60%, var(--root-fg)));
+	}
+</style>

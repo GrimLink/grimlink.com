@@ -1,0 +1,59 @@
+---
+import PageLayout from "@/layouts/PageLayout.astro";
+import Sidebar from "@/components/MageDocs/Sidebar.astro";
+
+interface Props {
+	title: string;
+	metaTitle?: string;
+	description: string;
+	breadcrumbs: { name: string; item: string }[];
+}
+
+const { title, metaTitle = `${title} | Mage docs`, description, breadcrumbs } = Astro.props;
+---
+
+<PageLayout
+	title={metaTitle}
+	description={description}
+	breadcrumbs={[
+		{ name: "Home", item: "/" },
+		{ name: "Projects", item: "/projects/" },
+		{ name: "Mage", item: "/mage/" },
+		{ name: "Docs", item: "/mage/docs/" },
+		...breadcrumbs,
+	]}
+	class="container"
+	style="--my: var(--size-12) var(--size-16)"
+>
+	<div class="docs-layout">
+		<article>
+			<h1>{title}</h1>
+			<slot />
+		</article>
+		<Sidebar />
+	</div>
+</PageLayout>
+
+<style>
+	.docs-layout {
+		display: grid;
+		gap: var(--size-8);
+
+		@media (width >= 96ch) {
+			grid-template-columns: 24ch minmax(0, 1fr);
+			gap: var(--size-12);
+		}
+	}
+
+	article {
+		max-inline-size: 80ch;
+
+		> :global(h1) {
+			margin-block-start: 0;
+		}
+
+		> :global(h2) {
+			margin-block-start: var(--size-12);
+		}
+	}
+</style>

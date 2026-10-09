@@ -1,6 +1,7 @@
 import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
+import { mageDocsLoader } from "@/loaders/mage-docs";
 
 const blog = defineCollection({
 	loader: glob({ base: "./src/content/blog", pattern: "**/*.md" }),
@@ -25,4 +26,14 @@ const blog = defineCollection({
 		}),
 });
 
-export const collections = { blog };
+const mageDocs = defineCollection({
+	loader: mageDocsLoader(),
+	schema: z.object({
+		title: z.string(),
+		description: z.string(),
+		group: z.enum(["topics", "commands"]),
+		path: z.string().describe("Path of the doc in the mage repository"),
+	}),
+});
+
+export const collections = { blog, mageDocs };

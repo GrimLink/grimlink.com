@@ -47,6 +47,6 @@ export const projects = [
 	{
 		title: "Mage Tool",
 		description: "Shortcuts and tools to simplify Magento CLI commands.",
-		url: "https://github.com/grimlink/mage/",
+		url: "/mage/",
 	},
 ];

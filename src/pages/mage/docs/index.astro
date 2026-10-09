@@ -1,0 +1,51 @@
+---
+import MageDocs from "@/layouts/MageDocs.astro";
+import Card from "@fylgja/Card.astro";
+import { getMageDocsNav, docHref, docLabel } from "@/components/MageDocs/nav";
+
+const nav = await getMageDocsNav();
+---
+
+<MageDocs
+	title="Mage docs"
+	metaTitle="Mage docs"
+	description="Every command, option and setting of Mage, the tool on top of bin/magento for Magento 2 and Mage-OS development."
+	breadcrumbs={[]}
+>
+	<p>
+		Every command, option and setting of Mage. New to Mage? Start with the <a href="/mage/#install"
+			>install</a
+		>, then run <code>mage help</code> in a project.
+	</p>
+	{
+		nav.map(({ title, docs }) => (
+			<section>
+				<h2>{title}</h2>
+				<ul role="list" class="auto-grid gap" style="--max-col-size: 28ch">
+					{docs.map((doc) => (
+						<Card tag="li" class="flow">
+							<h3>
+								<a href={docHref(doc)}>{docLabel(doc)}</a>
+							</h3>
+							<p class="line-clamp" style="--line-count: 2">{doc.data.description}</p>
+						</Card>
+					))}
+				</ul>
+			</section>
+		))
+	}
+</MageDocs>
+
+<style>
+	section {
+		margin-block-start: var(--size-12);
+	}
+
+	h3 {
+		font-size: var(--font-size-4);
+	}
+
+	.card p {
+		color: var(--color-muted);
+	}
+</style>
