@@ -54,28 +54,26 @@ const hasTags = tags && tags.length > 0;
 	]}
 	style={style}
 >
-	<div class:list={["flex-auto", variant === "card" ? "card-content" : ""]}>
+	<div
+		class:list={["flex-auto", variant === "card" ? "card-content flex-col gap flow-none" : ""]}
+	>
 		<Heading class="post-heading">
 			<a href={href} class="stretched-link">
 				{title}
 			</a>
 		</Heading>
 		{description && <p class="line-clamp">{description}</p>}
-		{
-			!hideMeta && (
-				<div class="post-meta relative">
-					{pubDate && <FormattedDate date={pubDate} />}
-					{hasTags && <span> ∙ </span>}
-					{hasTags && <Tags tags={tags} />}
-				</div>
-			)
-		}
+		{!hideMeta && (
+			<div class="post-meta relative" style="margin-block-start: auto">
+				{pubDate && <FormattedDate date={pubDate} />}
+				{hasTags && <span> ∙ </span>}
+				{hasTags && <Tags tags={tags} />}
+			</div>
+		)}
 	</div>
-	{
-		thumb !== false && (thumb || image) && (
-			<Image src={thumb || image} alt="" width="250" height="250" loading={loading} />
-		)
-	}
+	{thumb !== false && (thumb || image) && (
+		<Image src={thumb || image} alt="" width="250" height="250" loading={loading} />
+	)}
 </article>
 
 <style
@@ -101,7 +99,7 @@ const hasTags = tags && tags.length > 0;
 
 	img {
 		max-width: 33%;
-		width: 150px;
+		width: 230px;
 		object-fit: cover;
 	}
 
