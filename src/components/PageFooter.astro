@@ -5,19 +5,17 @@ import { footerMenu } from "@/menus";
 
 <footer class="page-footer container">
 	<nav>
-		<ul class="inline-flex gap">
-			{
-				footerMenu.map((item) => (
-					<li>
-						<a
-							href={item.url}
-							aria-current={item.url === Astro.url.pathname ? "page" : undefined}
-						>
-							{item.label}
-						</a>
-					</li>
-				))
-			}
+		<ul class="inline-flex flex-wrap gap">
+			{footerMenu.map((item) => (
+				<li>
+					<a
+						href={item.url}
+						aria-current={item.url === Astro.url.pathname ? "page" : undefined}
+					>
+						{item.label}
+					</a>
+				</li>
+			))}
 		</ul>
 	</nav>
 	<small class="block">
