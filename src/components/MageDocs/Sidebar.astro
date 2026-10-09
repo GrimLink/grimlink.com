@@ -22,7 +22,7 @@ const current = Astro.url.pathname;
 			<X aria-hidden="true" />
 		</button>
 	</div>
-	<nav aria-label="Mage docs">
+	<nav aria-label="Mage docs" class="scroll-y scroll-mask">
 		<ul role="list">
 			<li>
 				<a href="/mage/">
@@ -96,8 +96,7 @@ const current = Astro.url.pathname;
 			grid-row: 1;
 			position: sticky;
 			top: var(--size-6);
-			max-block-size: calc(100dvh - var(--size-12));
-			overflow-y: auto;
+			max-block-size: calc(94svh - var(--size-12));
 		}
 	}
 
