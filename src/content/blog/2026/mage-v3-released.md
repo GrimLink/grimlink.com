@@ -2,6 +2,8 @@
 title: "Mage v3.0.0 Released"
 description: "Mage 3 is a full rebuild: it works from any folder, knows your environment, and has one place to add things to your Magento project."
 pubDate: 2026-10-09
+image: "../../../assets/projects/mage-social.jpg"
+thumb: false
 tags: ["magento2", "hyva", "tools"]
 ---
 

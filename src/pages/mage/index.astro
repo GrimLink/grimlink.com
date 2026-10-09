@@ -3,6 +3,7 @@ import { Code } from "astro:components";
 import { Bot, Eraser, FolderTree, Layers, PackagePlus, Terminal } from "@lucide/astro";
 import PageLayout from "@/layouts/PageLayout.astro";
 import Card from "@fylgja/Card.astro";
+import MageSocialImg from "@/assets/projects/mage-social.jpg";
 
 const pageTitle = "Mage";
 const pageDescription =
@@ -198,6 +199,7 @@ const commandHref = (doc: string): string => {
 <PageLayout
 	title={pageTitle}
 	description={pageDescription}
+	image={MageSocialImg}
 	breadcrumbs={[
 		{ name: "Home", item: "/" },
 		{ name: "Projects", item: "/projects/" },

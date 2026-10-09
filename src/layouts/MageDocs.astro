@@ -1,6 +1,7 @@
 ---
 import PageLayout from "@/layouts/PageLayout.astro";
 import Sidebar from "@/components/MageDocs/Sidebar.astro";
+import MageSocialImg from "@/assets/projects/mage-social.jpg";
 
 interface Props {
 	title: string;
@@ -15,6 +16,7 @@ const { title, metaTitle = `${title} | Mage docs`, description, breadcrumbs } = 
 <PageLayout
 	title={metaTitle}
 	description={description}
+	image={MageSocialImg}
 	breadcrumbs={[
 		{ name: "Home", item: "/" },
 		{ name: "Projects", item: "/projects/" },
