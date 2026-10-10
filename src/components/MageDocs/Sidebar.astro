@@ -11,7 +11,7 @@ const current = Astro.url.pathname;
 	<span>Docs menu</span>
 </button>
 
-<dialog id="mage-docs-menu" closedby="any" class="offcanvas">
+<dialog id="mage-docs-menu" closedby="any" class="offcanvas open:flex flex-col">
 	<div class="dialog-header text-end">
 		<button
 			commandfor="mage-docs-menu"
@@ -22,7 +22,7 @@ const current = Astro.url.pathname;
 			<X aria-hidden="true" />
 		</button>
 	</div>
-	<nav aria-label="Mage docs" class="scroll-y scroll-mask">
+	<nav aria-label="Mage docs" class="scroll-y scroll-mask w-full">
 		<ul role="list">
 			<li>
 				<a href="/mage/">
@@ -55,6 +55,20 @@ const current = Astro.url.pathname;
 	</nav>
 </dialog>
 
+<script>
+	const dialog = document.querySelector<HTMLDialogElement>("#mage-docs-menu");
+	const wide = window.matchMedia("(width >= 96ch)");
+
+	// With display: contents an open modal keeps the page inert and has no visible close button
+	wide.addEventListener("change", (e) => {
+		if (e.matches) dialog?.close();
+	});
+
+	window.addEventListener("pageshow", (e) => {
+		if (e.persisted) dialog?.close();
+	});
+</script>
+
 <style>
 	.docs-menu-btn {
 		order: -1;
@@ -76,9 +90,9 @@ const current = Astro.url.pathname;
 	}
 
 	nav {
+		flex-grow: 1;
 		align-self: start;
 		color: var(--color-muted);
-  max-block-size: 94svh;
 	}
 
 	/* The dialog falls away, so the nav becomes a column of the layout grid */
@@ -97,7 +111,7 @@ const current = Astro.url.pathname;
 			grid-row: 1;
 			position: sticky;
 			top: var(--size-6);
-			max-block-size: calc(94svh - var(--size-12));
+			max-block-size: calc(94svh - var(--size-16));
 		}
 	}
 
