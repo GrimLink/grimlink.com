@@ -13,27 +13,28 @@ const nav = await getMageDocsNav();
 	breadcrumbs={[]}
 >
 	<p>
-		Every command, option and setting of Mage. New to Mage? Start with the <a href="/mage/#install"
-			>install</a
-		>, then run <code>mage help</code> in a project.
+		Every command, option and setting of Mage. New to Mage? Start with the{" "}
+		<a href="/mage/#install">install</a>, then run <code>mage help</code> in a project.
 	</p>
-	{
-		nav.map(({ title, docs }) => (
-			<section>
-				<h2>{title}</h2>
-				<ul role="list" class="auto-grid gap" style="--max-col-size: 28ch">
-					{docs.map((doc) => (
-						<Card tag="li" class="flow">
-							<h3>
-								<a href={docHref(doc)}>{docLabel(doc)}</a>
-							</h3>
-							<p class="line-clamp" style="--line-count: 2">{doc.data.description}</p>
-						</Card>
-					))}
-				</ul>
-			</section>
-		))
-	}
+	{nav.map(({ title, docs }) => (
+		<section>
+			<h2>{title}</h2>
+			<ul role="list" class="auto-grid gap" style="--max-col-size: 28ch">
+				{docs.map((doc) => (
+					<Card tag="li" class="flow">
+						<h3>
+							<a href={docHref(doc)} class="stretched-link hover-underline">
+								{docLabel(doc)}
+							</a>
+						</h3>
+						<p class="line-clamp" style="--line-count: 2">
+							{doc.data.description}
+						</p>
+					</Card>
+				))}
+			</ul>
+		</section>
+	))}
 </MageDocs>
 
 <style>
