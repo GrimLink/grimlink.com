@@ -1,5 +1,8 @@
 ---
 import PageLayout from "@/layouts/PageLayout.astro";
+import { Terminal } from "@lucide/astro";
+import Card from "@fylgja/Card.astro";
+import FylgjaIcon from "@/components/icons/Fylgja.astro";
 import dataJson from "./data.json";
 
 const sort = (list: { status?: string }[]) =>
@@ -26,108 +29,147 @@ const pageDescription =
 	<h1>{pageTitle}</h1>
 	<p>{pageDescription}</p>
 
+	<ul role="list" class="featured grid-cols gap" style="--md_grid-cols: 2">
+		<Card tag="li" class="flex gap">
+			<span class="icon">
+				<FylgjaIcon size={32} aria-hidden="true" />
+			</span>
+			<div class="flow-none flex-col gap-sm">
+				<h2 class="lead">
+					<a
+						href="https://fylgja.dev/"
+						class="stretched-link hover-underline"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						Fylgja CSS
+					</a>
+				</h2>
+				<p>
+					A modular CSS framework with a class-less base, design tokens and utilities. Use
+					only the parts you need.
+				</p>
+			</div>
+		</Card>
+		<Card tag="li" class="flex gap">
+			<span class="icon">
+				<Terminal size={32} aria-hidden="true" />
+			</span>
+			<div class="flow-none flex-col gap-sm">
+				<h2 class="lead">
+					<a href="/mage/" class="stretched-link hover-underline">
+						Mage
+					</a>
+				</h2>
+				<p>
+					A CLI built on top of bin/magento with shortcuts and helpers for everyday
+					Magento 2 and Mage-OS development.
+				</p>
+			</div>
+		</Card>
+	</ul>
+
 	<section aria-labelledby="personal-projects">
 		<h2 id="personal-projects">Personal</h2>
 		<dl class="project-list">
-			{
-				personal.map((project) => (
-					<>
-						<dt>
-							{project.status && (
-								<span class:list={["status", project.status]}>
-									{project.status}
-								</span>
-							)}
-							<a
-								href={project.url}
-								target="_blank"
-								rel="noopener noreferrer"
-								class="hover-underline"
-							>
-								{project.name}
-							</a>
-						</dt>
-						{project.description && <dd>{project.description}</dd>}
-					</>
-				))
-			}
+			{personal.map((project) => (
+				<>
+					<dt>
+						{project.status && (
+							<span class:list={["status", project.status]}>{project.status}</span>
+						)}
+						<a
+							href={project.url}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="hover-underline"
+						>
+							{project.name}
+						</a>
+					</dt>
+					{project.description && <dd>{project.description}</dd>}
+				</>
+			))}
 		</dl>
 	</section>
 
 	<section aria-labelledby="fylgja-projects">
 		<h2 id="fylgja-projects">Fylgja CSS</h2>
 		<p>
-			Projects under the <a
-				href="https://fylgja.dev/"
-				target="_blank"
-				rel="noopener noreferrer">Fylgja CSS</a
-			> organisation.
+			Projects under the{" "}
+			<a href="https://fylgja.dev/" target="_blank" rel="noopener noreferrer">
+				Fylgja CSS
+			</a>{" "}
+			organisation.
 		</p>
 		<dl class="project-list">
-			{
-				fylgja.map((project) => (
-					<>
-						<dt>
-							{project.status && (
-								<span class:list={["status", project.status]}>
-									{project.status}
-								</span>
-							)}
-							<a
-								href={project.url}
-								target="_blank"
-								rel="noopener noreferrer"
-								class="hover-underline"
-							>
-								{project.name}
-							</a>
-						</dt>
-						{project.description && <dd>{project.description}</dd>}
-					</>
-				))
-			}
+			{fylgja.map((project) => (
+				<>
+					<dt>
+						{project.status && (
+							<span class:list={["status", project.status]}>{project.status}</span>
+						)}
+						<a
+							href={project.url}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="hover-underline"
+						>
+							{project.name}
+						</a>
+					</dt>
+					{project.description && <dd>{project.description}</dd>}
+				</>
+			))}
 		</dl>
 	</section>
 
 	<section aria-labelledby="siteation-projects">
 		<h2 id="siteation-projects">Siteation</h2>
 		<p>
-			StoreInfo modules for Magento 2, published under the <a
-				href="https://github.com/Siteation"
-				target="_blank"
-				rel="noopener noreferrer">Siteation</a
-			> organisation.
+			StoreInfo modules for Magento 2, published under the{" "}
+			<a href="https://github.com/Siteation" target="_blank" rel="noopener noreferrer">
+				Siteation
+			</a>{" "}
+			organisation.
 		</p>
 		<dl class="project-list">
-			{
-				siteation.map((project) => (
-					<>
-						<dt>
-							{project.status && (
-								<span class:list={["status", project.status]}>
-									{project.status}
-								</span>
-							)}
-							<a
-								href={project.url}
-								target="_blank"
-								rel="noopener noreferrer"
-								class="hover-underline"
-							>
-								{project.name}
-							</a>
-						</dt>
-						{project.description && <dd>{project.description}</dd>}
-					</>
-				))
-			}
+			{siteation.map((project) => (
+				<>
+					<dt>
+						{project.status && (
+							<span class:list={["status", project.status]}>{project.status}</span>
+						)}
+						<a
+							href={project.url}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="hover-underline"
+						>
+							{project.name}
+						</a>
+					</dt>
+					{project.description && <dd>{project.description}</dd>}
+				</>
+			))}
 		</dl>
 	</section>
 </PageLayout>
 
 <style>
-	section {
+	section,
+	.featured {
 		margin-block-start: var(--size-8);
+	}
+
+	.featured .icon {
+		display: inline-grid;
+		align-self: start;
+		place-items: center;
+		padding: var(--size-3);
+		border-radius: 0.5rem;
+		background: color-mix(in oklab, var(--brand) 18%, transparent);
+		color: light-dark(var(--brand), color-mix(in oklch, var(--brand) 60%, var(--root-fg)));
 	}
 
 	.project-list {
