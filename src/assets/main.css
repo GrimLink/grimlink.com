@@ -10,6 +10,7 @@
 
 @import "@fylgja/card/index.css" layer(components);
 @import "@fylgja/badge/index.css" layer(components);
+@import "@fylgja/form-extend" layer(components);
 @import "./gh-alert.css" layer(components);
 
 @import "@fylgja/utilities" layer(utilities);
