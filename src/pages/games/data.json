@@ -68,6 +68,12 @@
 			"type": "Arcade",
 			"description": "Multiple mini games",
 			"url": "https://ultimateplayspace.com/"
+		},
+		{
+			"title": "Tupo",
+			"type": "Puzzle",
+			"description": "A daily sudoku style logic puzzle with a twist. One new puzzle every day.",
+			"url": "https://playtupo.com/"
 		}
 	]
 }
