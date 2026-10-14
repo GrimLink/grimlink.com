@@ -1,0 +1,326 @@
+---
+import PageLayout from "@/layouts/PageLayout.astro";
+import CopyButton from "@/components/Playground/CopyButton.astro";
+import BackLink from "@/components/Playground/BackLink.astro";
+import "@/components/Playground/playground.css";
+
+const keywords = [
+	{ name: "square", superellipse: "infinity" },
+	{ name: "squircle", superellipse: "2" },
+	{ name: "round", superellipse: "1" },
+	{ name: "bevel", superellipse: "0" },
+	{ name: "scoop", superellipse: "-1" },
+	{ name: "notch", superellipse: "-infinity" },
+];
+const chips = [
+	...keywords.map((keyword) => keyword.name),
+	"superellipse(4)",
+	"superellipse(-0.5)",
+	"bevel round",
+	"scoop notch",
+];
+
+const longhands = [
+	{
+		properties: "corner-top-left-shape, corner-top-right-shape, …",
+		description: "One physical corner each.",
+	},
+	{
+		properties: "corner-start-start-shape, corner-start-end-shape, …",
+		description: "The logical versions, they follow the writing mode like border-start-start-radius.",
+	},
+	{
+		properties: "corner-top-shape, corner-left-shape, …",
+		description: "Both corners of one side at once. Also as corner-block-start-shape and friends.",
+	},
+];
+
+const tips = [
+	"Without a border-radius nothing happens. The radius sets the size of the corner, corner-shape its curve.",
+	"The border, outline, box-shadow, overflow clipping and backdrop-filter all follow the shape.",
+	"Every keyword is a superellipse, so the shape animates smoothly from one to another.",
+	"Browsers without support fall back to plain rounded corners, so it is safe to use today.",
+	"border-radius: 50% with bevel gives a diamond, no clip-path needed.",
+];
+
+const pageTitle = "CSS corner-shape";
+const pageDescription =
+	"A visual playground for corner-shape, from squircles to notches, and how every keyword maps to a superellipse.";
+---
+
+<PageLayout
+	title={pageTitle}
+	description={pageDescription}
+	breadcrumbs={[
+		{ name: "Home", item: "/" },
+		{ name: "Playground", item: "/playground/" },
+		{ name: pageTitle, item: "/playground/corner-shape/" },
+	]}
+	class="container"
+>
+	<BackLink />
+	<h1>{pageTitle}</h1>
+	<p>{pageDescription}</p>
+
+	<div class="markdown-alert markdown-alert-warning" hidden>
+		<p>
+			Your browser does not support <code>corner-shape</code> yet, so the previews only show
+			the border-radius. Chrome and Edge support it from version 139.
+		</p>
+	</div>
+
+	<div class="grid-cols gap" style="--md_grid-cols: 2; --gap: var(--size-8)">
+		<section aria-labelledby="playground" class="playground">
+			<h2 id="playground" class="sr-only">Playground</h2>
+			<form id="corner-form">
+				<div class="code-field">
+					<label for="corner-radius">border-radius:</label>
+					<input
+						id="corner-radius"
+						name="r"
+						type="text"
+						value="30%"
+						autocomplete="off"
+						autocapitalize="off"
+						spellcheck="false"
+					/>
+				</div>
+				<div class="code-field">
+					<label for="corner-shape">corner-shape:</label>
+					<input
+						id="corner-shape"
+						name="q"
+						type="text"
+						value="squircle"
+						autocomplete="off"
+						autocapitalize="off"
+						spellcheck="false"
+					/>
+					<CopyButton label="Copy declarations" />
+				</div>
+				<ul role="list" class="chips flex-wrap gap-sm" aria-label="Quick picks">
+					{
+						chips.map((chip) => (
+							<li>
+								<button type="button" value={chip}>
+									{chip}
+								</button>
+							</li>
+						))
+					}
+				</ul>
+				<label for="corner-k" class="superellipse">
+					<code>superellipse(<span>2</span>)</code>
+					<input id="corner-k" type="range" min="-5" max="5" step="0.1" value="2" />
+				</label>
+			</form>
+
+			<output for="corner-radius corner-shape" aria-live="polite" class="text-muted"></output>
+			<div class="stage">
+				<div class="box"></div>
+				<div class="radius-only"></div>
+			</div>
+			<p class="text-sm text-muted">The dashed outline is the same border-radius without a corner-shape.</p>
+		</section>
+
+		<section aria-labelledby="how-it-works" class="explanation flow">
+			<h2 id="how-it-works">How corner-shape works</h2>
+			<p>
+				<code>border-radius</code> decides how big a corner is, <code>corner-shape</code> decides
+				the curve inside that space. Every keyword is a <code>superellipse(K)</code>.
+				<code>K = 1</code> is the normal round corner, higher values pull it toward a square,
+				<code>0</code> is a straight line, and negative values curve inward.
+			</p>
+			<ul role="list" class="keywords">
+				{
+					keywords.map((keyword) => (
+						<li>
+							<div style={`corner-shape: ${keyword.name}`} />
+							<code>{keyword.name}</code>
+							<code class="text-muted">superellipse({keyword.superellipse})</code>
+						</li>
+					))
+				}
+			</ul>
+
+			<h3>Per corner</h3>
+			<p>
+				The shorthand takes 1 to 4 values in the same order as border-radius: top left, top
+				right, bottom right, bottom left. So <code>bevel round</code> bevels the top left and
+				bottom right corners.
+			</p>
+			<dl>
+				{
+					longhands.map((longhand) => (
+						<>
+							<dt>
+								<code>{longhand.properties}</code>
+							</dt>
+							<dd>{longhand.description}</dd>
+						</>
+					))
+				}
+			</dl>
+
+			<h3>Good to know</h3>
+			<ul>
+				{tips.map((tip) => <li>{tip}</li>)}
+			</ul>
+		</section>
+	</div>
+</PageLayout>
+
+<script>
+	const form = document.querySelector<HTMLFormElement>("#corner-form")!;
+	const radius = document.querySelector<HTMLInputElement>("#corner-radius")!;
+	const shape = document.querySelector<HTMLInputElement>("#corner-shape")!;
+	const slider = document.querySelector<HTMLInputElement>("#corner-k")!;
+	const sliderValue = document.querySelector<HTMLElement>(".superellipse span")!;
+	const output = document.querySelector<HTMLOutputElement>("output[for]")!;
+	const stage = document.querySelector<HTMLElement>(".stage")!;
+	const copy = document.querySelector<HTMLButtonElement>(".copy-btn")!;
+
+	const SUPERELLIPSE = /^superellipse\(\s*(-?\d*\.?\d+)\s*\)$/;
+	const KEYWORD_VALUES: Record<string, string> = {
+		square: "infinity",
+		squircle: "2",
+		round: "1",
+		bevel: "0",
+		scoop: "-1",
+		notch: "-infinity",
+	};
+	const supported = CSS.supports("corner-shape", "round");
+
+	/**
+	 * Applies both values to the preview, and keeps the slider, copy button and URL in sync.
+	 */
+	function update() {
+		const radiusValue = radius.value.trim();
+		const shapeValue = shape.value.trim();
+		const radiusValid = CSS.supports("border-radius", radiusValue);
+		const shapeValid = !supported || CSS.supports("corner-shape", shapeValue);
+
+		stage.style.setProperty("--radius", radiusValid ? radiusValue : "");
+		stage.style.setProperty("--shape", shapeValid ? shapeValue : "");
+		radius.setCustomValidity(radiusValid ? "" : "Invalid border-radius");
+		shape.setCustomValidity(shapeValid ? "" : "Invalid corner-shape");
+		copy.dataset.copy = `border-radius: ${radiusValue};\ncorner-shape: ${shapeValue};`;
+
+		const k = shapeValue.match(SUPERELLIPSE)?.[1] ?? KEYWORD_VALUES[shapeValue];
+		if (k && Number.isFinite(Number(k))) slider.value = k;
+		sliderValue.textContent = slider.value;
+
+		if (!radiusValid) {
+			output.textContent = `${radiusValue} is not a valid border-radius`;
+		} else if (!shapeValid) {
+			output.textContent = `${shapeValue} is not a valid corner-shape`;
+		} else if (KEYWORD_VALUES[shapeValue]) {
+			output.textContent = `${shapeValue} is superellipse(${KEYWORD_VALUES[shapeValue]})`;
+		} else {
+			output.textContent = "";
+		}
+
+		const url = new URL(location.href);
+		url.searchParams.set("r", radiusValue);
+		url.searchParams.set("q", shapeValue);
+		history.replaceState(null, "", url);
+	}
+
+	const params = new URLSearchParams(location.search);
+	if (params.has("r")) radius.value = params.get("r")!;
+	if (params.has("q")) shape.value = params.get("q")!;
+	document.querySelector<HTMLElement>(".markdown-alert")!.hidden = supported;
+
+	form.addEventListener("input", (event) => {
+		if (event.target === slider) shape.value = `superellipse(${slider.value})`;
+		update();
+	});
+	form.addEventListener("submit", (event) => event.preventDefault());
+	form.addEventListener("click", (event) => {
+		const chip = (event.target as Element).closest<HTMLButtonElement>("button[value]");
+		if (!chip) return;
+		shape.value = chip.value;
+		update();
+	});
+	copy.addEventListener("copied", () => (output.textContent = "Copied the declarations"));
+
+	update();
+</script>
+
+<style>
+	.code-field + .code-field {
+		margin-block-start: 0;
+	}
+
+	.superellipse {
+		display: flex;
+		align-items: center;
+		gap: var(--size-4);
+		margin-block-start: var(--size-4);
+
+		code {
+			min-inline-size: 18ch;
+		}
+
+		input {
+			flex: 1;
+		}
+	}
+
+	.stage {
+		--radius: 30%;
+		--shape: round;
+		display: grid;
+		place-items: center;
+		padding: var(--size-8);
+
+		> * {
+			grid-area: 1 / 1;
+			inline-size: min(100%, 20rem);
+			aspect-ratio: 4 / 3;
+			border-radius: var(--radius);
+		}
+	}
+
+	.radius-only {
+		border: 2px dashed oklch(from var(--root-fg) l c h / 25%);
+	}
+
+	.box {
+		corner-shape: var(--shape);
+		background: linear-gradient(135deg, var(--brand), oklch(from var(--brand) l c calc(h + 90)));
+		border: 6px solid oklch(from var(--brand) calc(l + 0.2) c h);
+		box-shadow: var(--shadow-4);
+
+		@media (prefers-reduced-motion: no-preference) {
+			transition:
+				border-radius 0.3s var(--ease-out-3),
+				corner-shape 0.3s var(--ease-out-3);
+		}
+	}
+
+	.keywords {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+		gap: var(--size-6) var(--size-4);
+
+		li {
+			display: grid;
+			justify-items: start;
+			gap: var(--size-1);
+			margin: 0;
+		}
+
+		div {
+			inline-size: var(--size-16);
+			aspect-ratio: 1;
+			margin-block-end: var(--size-2);
+			border-radius: 35%;
+			background: var(--brand);
+		}
+
+		.text-muted {
+			font-size: 0.75em;
+		}
+	}
+</style>

@@ -6,6 +6,7 @@ export const mainMenu = [
 	{ url: "/projects/", label: "Projects", icon: "FolderOpen" },
 	{ url: "/games/", label: "Games", icon: "Gamepad2" },
 	{ url: "/tools/", label: "Tools", icon: "Wrench" },
+	{ url: "/playground/", label: "Playground", icon: "Shapes" },
 	{ url: "/about/", label: "About Me", icon: "User" },
 	{ url: socials.github, label: "GitHub", icon: "Github" },
 	{ url: "https://fylgja.dev/", label: "Fylgja CSS", icon: "Fylgja" },

@@ -1,0 +1,96 @@
+.playground {
+	align-self: start;
+
+	@media (width >= 768px) {
+		position: sticky;
+		top: var(--size-4);
+		transition: top 0.3s;
+	}
+
+	/* The page header slides back in when scrolling up */
+	@container (scroll-state(scrolled: top)) {
+		top: calc(5rem + var(--size-4));
+	}
+
+	output {
+		display: block;
+		margin-block: var(--size-6) var(--size-2);
+		font-family: var(--family-mono);
+		font-size: 0.875em;
+	}
+}
+
+.code-field {
+	display: flex;
+	align-items: center;
+	gap: 0.125em;
+	margin-block: var(--size-2) var(--size-4);
+	padding: var(--size-2) var(--size-4);
+	font-family: var(--family-mono);
+	font-size: var(--font-size-5);
+	border: 2px solid oklch(from var(--root-fg) l c h / 20%);
+	border-radius: var(--size-3);
+
+	&:focus-within {
+		border-color: var(--brand);
+	}
+
+	&:has(:invalid) {
+		border-color: var(--form-error-color);
+	}
+
+	> label {
+		color: var(--color-muted);
+		white-space: nowrap;
+	}
+
+	select,
+	input,
+	textarea {
+		--form-border-width: 0;
+		--form-px: 0;
+		--form-bg: transparent;
+		field-sizing: content;
+	}
+
+	select {
+		color: var(--brand);
+	}
+
+	input,
+	textarea {
+		inline-size: auto;
+		min-inline-size: 1ch;
+
+		&:focus-visible {
+			outline: none;
+		}
+	}
+
+	textarea {
+		--textarea-min-size: 1lh;
+		--form-py: 0;
+		resize: none;
+	}
+}
+
+.chips button {
+	--btn-py: 0.125rem;
+	--btn-px: 0.75rem;
+	--btn-radius: 99px;
+	--btn-border-width: 1px;
+	--btn-stroke: oklch(from var(--root-fg) l c h / 20%);
+	font-family: var(--family-mono);
+	font-size: 0.875em;
+}
+
+.explanation {
+	dt {
+		margin-block-start: var(--size-3);
+	}
+
+	dd {
+		margin-inline-start: 0;
+		color: var(--color-muted);
+	}
+}

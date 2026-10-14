@@ -1,0 +1,69 @@
+---
+import PageLayout from "@/layouts/PageLayout.astro";
+
+const playgrounds = [
+	{
+		name: "CSS nth selectors",
+		url: "/playground/css-nth/",
+		description:
+			"A visual playground for :nth-child, :nth-of-type and friends, plus the sibling combinators.",
+	},
+	{
+		name: "CSS clip-path",
+		url: "/playground/clip-path/",
+		description:
+			"A visual playground for clip-path, with draggable polygon points and every shape function on one page.",
+	},
+	{
+		name: "CSS corner-shape",
+		url: "/playground/corner-shape/",
+		description:
+			"A visual playground for corner-shape, from squircles to notches, and how every keyword maps to a superellipse.",
+	},
+	{
+		name: "CSS gradients",
+		url: "/playground/gradients/",
+		description:
+			"A visual playground for linear, radial and conic gradients, color stops, and how the color space changes the fade.",
+	},
+];
+
+const pageTitle = "Playground";
+const pageDescription = "Interactive references for the things I keep looking up.";
+---
+
+<PageLayout
+	title={pageTitle}
+	description={pageDescription}
+	breadcrumbs={[
+		{ name: "Home", item: "/" },
+		{ name: "Playground", item: "/playground/" },
+	]}
+	class="container"
+>
+	<h1>{pageTitle}</h1>
+	<p>{pageDescription}</p>
+
+	<ul role="list" class="auto-grid gap" style="--max-col-size: 24rem">
+		{
+			playgrounds.map((playground) => (
+				<li>
+					<h2 class="text-xl">
+						<a href={playground.url} class="hover-underline">
+							{playground.name}
+						</a>
+					</h2>
+					<p class="text-muted">{playground.description}</p>
+				</li>
+			))
+		}
+	</ul>
+
+	<p>
+		For everything else, see the <a
+			href="https://developer.mozilla.org/en-US/docs/Web"
+			target="_blank"
+			rel="noopener noreferrer">MDN Web Docs</a
+		> by Mozilla.
+	</p>
+</PageLayout>

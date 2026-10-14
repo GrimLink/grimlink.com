@@ -1,0 +1,414 @@
+---
+import PageLayout from "@/layouts/PageLayout.astro";
+import CopyButton from "@/components/Playground/CopyButton.astro";
+import BackLink from "@/components/Playground/BackLink.astro";
+import "@/components/Playground/playground.css";
+
+const BOX_COUNT = 24;
+const SPAN_POSITIONS = new Set([3, 4, 8, 11, 12, 16, 19, 20, 23]);
+const boxes = Array.from({ length: BOX_COUNT }, (_, index) => ({
+	position: index + 1,
+	tag: SPAN_POSITIONS.has(index + 1) ? "span" : "div",
+}));
+
+const pseudoClasses = ["nth-child", "nth-last-child", "nth-of-type", "nth-last-of-type"];
+const chips = ["odd", "even", "3n", "3n+1", "3n-1", "n+4", "-n+3", "5", "odd of span"];
+
+const examples = [
+	{ formula: "3", matches: "Only the 3rd" },
+	{ formula: "odd", matches: "1, 3, 5, …, same as 2n+1" },
+	{ formula: "even", matches: "2, 4, 6, …, same as 2n" },
+	{ formula: "3n", matches: "3, 6, 9, …" },
+	{ formula: "3n+1", matches: "1, 4, 7, …" },
+	{ formula: "3n-1", matches: "2, 5, 8, …" },
+	{ formula: "n+4", matches: "The 4th and everything after it" },
+	{ formula: "-n+3", matches: "The first 3" },
+];
+
+const variants = [
+	{
+		selector: ":nth-child()",
+		description: "Counts every sibling, no matter the element type.",
+	},
+	{
+		selector: ":nth-last-child()",
+		description: "Same as nth-child, but counts from the last sibling backwards.",
+	},
+	{
+		selector: ":nth-of-type()",
+		description: "Only counts siblings with the same tag name as the element itself.",
+	},
+	{
+		selector: ":nth-last-of-type()",
+		description: "Same as nth-of-type, counting from the end.",
+	},
+	{
+		selector: ":nth-child(An+B of S)",
+		description:
+			"Filters the siblings by selector S first, then counts. Like nth-of-type, but for any selector, such as :nth-child(odd of .visible).",
+	},
+];
+
+const shorthands = [
+	{ selector: ":first-child", equals: ":nth-child(1)" },
+	{ selector: ":last-child", equals: ":nth-last-child(1)" },
+	{ selector: ":only-child", equals: ":first-child:last-child" },
+	{ selector: ":first-of-type", equals: ":nth-of-type(1)" },
+	{ selector: ":last-of-type", equals: ":nth-last-of-type(1)" },
+	{ selector: ":only-of-type", equals: ":first-of-type:last-of-type" },
+];
+
+const combinators = [
+	{ value: "next", selector: "A + B", label: "Next sibling" },
+	{ value: "after", selector: "A ~ B", label: "All siblings after" },
+	{ value: "prev", selector: "B:has(+ A)", label: "Previous sibling" },
+	{ value: "before", selector: "B:has(~ A)", label: "All siblings before" },
+];
+
+const pageTitle = "CSS nth selectors";
+const pageDescription =
+	"A visual playground for :nth-child, :nth-of-type and friends, plus the sibling combinators.";
+---
+
+<PageLayout
+	title={pageTitle}
+	description={pageDescription}
+	breadcrumbs={[
+		{ name: "Home", item: "/" },
+		{ name: "Playground", item: "/playground/" },
+		{ name: pageTitle, item: "/playground/css-nth/" },
+	]}
+	class="container"
+>
+	<BackLink />
+	<h1>{pageTitle}</h1>
+	<p>{pageDescription}</p>
+
+	<div class="grid-cols gap" style="--md_grid-cols: 2; --gap: var(--size-8)">
+		<section aria-labelledby="playground" class="playground">
+			<h2 id="playground" class="sr-only">Playground</h2>
+			<form id="nth-form">
+				<label for="nth-formula">An+B formula</label>
+				<div class="code-field">
+					<label for="nth-pseudo" class="sr-only">Pseudo-class</label>
+					<span aria-hidden="true">:</span>
+					<select id="nth-pseudo" name="pseudo">
+						{pseudoClasses.map((pseudo) => <option>{pseudo}</option>)}
+					</select>
+					<span aria-hidden="true">(</span>
+					<input
+						id="nth-formula"
+						name="q"
+						type="text"
+						value="2n+1"
+						autocomplete="off"
+						autocapitalize="off"
+						spellcheck="false"
+					/>
+					<span aria-hidden="true">)</span>
+					<CopyButton label="Copy selector" />
+				</div>
+				<ul role="list" class="chips flex-wrap gap-sm" aria-label="Quick picks">
+					{
+						chips.map((chip) => (
+							<li>
+								<button type="button" value={chip}>
+									{chip}
+								</button>
+							</li>
+						))
+					}
+				</ul>
+			</form>
+
+			<output for="nth-pseudo nth-formula" aria-live="polite" class="text-muted"></output>
+			<div class="nth-grid">
+				{boxes.map(({ position, tag: Tag }) => <Tag>{position}</Tag>)}
+			</div>
+			<p class="text-sm text-muted">
+				Squares are <code>&lt;div&gt;</code>, circles are <code>&lt;span&gt;</code>. The
+				number is the position among all siblings.
+			</p>
+		</section>
+
+		<section aria-labelledby="how-it-works" class="explanation flow">
+			<h2 id="how-it-works">How An+B works</h2>
+			<p>
+				<code>n</code> is a counter that starts at 0 and goes up by one. The browser fills in
+				every value and selects each element whose position comes out of the formula.
+				<code>A</code> is the step size, <code>B</code> the offset. Positions start at 1, so
+				anything that comes out at 0 or below matches nothing.
+			</p>
+			<table>
+				<thead>
+					<tr>
+						<th scope="col">Formula</th>
+						<th scope="col">Matches</th>
+					</tr>
+				</thead>
+				<tbody>
+					{
+						examples.map((example) => (
+							<tr>
+								<td>
+									<code>{example.formula}</code>
+								</td>
+								<td>{example.matches}</td>
+							</tr>
+						))
+					}
+				</tbody>
+			</table>
+
+			<h3>The variants</h3>
+			<dl>
+				{
+					variants.map((variant) => (
+						<>
+							<dt>
+								<code>{variant.selector}</code>
+							</dt>
+							<dd>{variant.description}</dd>
+						</>
+					))
+				}
+			</dl>
+			<p>
+				Watch out, <code>p:nth-child(2)</code> is not the second paragraph. It is the second
+				child, but only if that child happens to be a <code>p</code>. Use
+				<code>p:nth-of-type(2)</code> for the second paragraph.
+			</p>
+
+			<h3>Shorthands</h3>
+			<dl class="shorthands">
+				{
+					shorthands.map((shorthand) => (
+						<>
+							<dt>
+								<code>{shorthand.selector}</code>
+							</dt>
+							<dd>
+								<code>{shorthand.equals}</code>
+							</dd>
+						</>
+					))
+				}
+			</dl>
+		</section>
+	</div>
+
+	<section aria-labelledby="siblings" class="siblings">
+		<h2 id="siblings">Bonus: sibling combinators</h2>
+		<p>
+			Pick an element to be <code>A</code> and a combinator, and see which <code>B</code>
+			siblings get selected. Siblings only look forward, so going backwards takes
+			<code>:has()</code>.
+		</p>
+		<fieldset class="flex-wrap gap-sm">
+			<legend>Combinator</legend>
+			{
+				combinators.map((combinator, index) => (
+					<label>
+						<input
+							type="radio"
+							name="combinator"
+							value={combinator.value}
+							checked={index === 0}
+						/>
+						<code>{combinator.selector}</code>
+						<span class="text-muted">{combinator.label}</span>
+					</label>
+				))
+			}
+		</fieldset>
+		<div class="sibling-row" role="radiogroup" aria-label="Element A">
+			{
+				Array.from({ length: 10 }, (_, index) => (
+					<label>
+						<input
+							type="radio"
+							name="sibling-anchor"
+							class="sr-only"
+							checked={index === 4}
+						/>
+						{index + 1}
+					</label>
+				))
+			}
+		</div>
+	</section>
+</PageLayout>
+
+<script>
+	const form = document.querySelector<HTMLFormElement>("#nth-form")!;
+	const pseudo = document.querySelector<HTMLSelectElement>("#nth-pseudo")!;
+	const formula = document.querySelector<HTMLInputElement>("#nth-formula")!;
+	const output = document.querySelector<HTMLOutputElement>("output[for]")!;
+	const grid = document.querySelector<HTMLElement>(".nth-grid")!;
+	const copy = document.querySelector<HTMLButtonElement>(".copy-btn")!;
+	const boxes = Array.from(grid.children);
+
+	/**
+	 * Runs the selector against the boxes, so the browser decides what matches.
+	 * @param selector
+	 * @returns The matching boxes, null when the selector is invalid.
+	 */
+	function match(selector: string): Set<Element> | null {
+		try {
+			return new Set(grid.querySelectorAll(selector));
+		} catch {
+			return null;
+		}
+	}
+
+	/**
+	 * Highlights the matching boxes and keeps the URL in sync for sharing.
+	 */
+	function update() {
+		const value = formula.value.trim();
+		const selector = `:${pseudo.value}(${value})`;
+		const matches = value ? match(`:scope > ${selector}`) : new Set<Element>();
+		const ofTypeWithOf = pseudo.value.endsWith("of-type") && /\sof\s/.test(value);
+
+		boxes.forEach((box) => box.toggleAttribute("data-match", !!matches?.has(box)));
+		formula.setCustomValidity(matches ? "" : "Invalid selector");
+		copy.dataset.copy = selector;
+
+		if (ofTypeWithOf) {
+			output.textContent = "The of S syntax only works with nth-child and nth-last-child";
+		} else if (!matches) {
+			output.textContent = `${selector} is not a valid selector`;
+		} else {
+			output.textContent = `${selector} matches ${matches.size} of ${boxes.length}`;
+		}
+
+		const url = new URL(location.href);
+		url.searchParams.set("pseudo", pseudo.value);
+		url.searchParams.set("q", value);
+		history.replaceState(null, "", url);
+	}
+
+	const params = new URLSearchParams(location.search);
+	const pseudoParam = params.get("pseudo");
+	if (Array.from(pseudo.options).some((option) => option.value === pseudoParam)) {
+		pseudo.value = pseudoParam!;
+	}
+	if (params.has("q")) formula.value = params.get("q")!;
+
+	form.addEventListener("input", update);
+	copy.addEventListener("copied", () => (output.textContent = `Copied ${copy.dataset.copy}`));
+	form.addEventListener("submit", (event) => event.preventDefault());
+	form.addEventListener("click", (event) => {
+		const chip = (event.target as Element).closest<HTMLButtonElement>("button[value]");
+		if (!chip) return;
+		formula.value = chip.value;
+		update();
+	});
+
+	update();
+</script>
+
+<style>
+	.nth-grid,
+	.sibling-row {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(3rem, 1fr));
+		gap: var(--size-2);
+
+		> * {
+			display: grid;
+			place-items: center;
+			aspect-ratio: 1;
+			font-family: var(--family-mono);
+			border: 2px solid oklch(from var(--root-fg) l c h / 25%);
+			border-radius: var(--size-2);
+
+			@media (prefers-reduced-motion: no-preference) {
+				transition:
+					background-color 0.2s var(--ease-out-3),
+					scale 0.2s var(--ease-out-3);
+			}
+		}
+	}
+
+	.nth-grid {
+		> span {
+			border-radius: 50%;
+		}
+
+		> [data-match] {
+			background-color: var(--brand);
+			border-color: var(--brand);
+			color: var(--on-brand);
+			scale: 1.05;
+		}
+	}
+
+	.shorthands {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		gap: var(--size-2) var(--size-4);
+
+		:is(dt, dd) {
+			margin: 0;
+		}
+	}
+
+	.siblings {
+		margin-block-start: var(--size-10);
+
+		fieldset {
+			margin-block: var(--size-4);
+			border: 0;
+			padding: 0;
+		}
+
+		legend {
+			margin-block-end: var(--size-2);
+		}
+
+		fieldset label {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5em;
+			padding: var(--size-1) var(--size-3);
+			border: 1px solid oklch(from var(--root-fg) l c h / 20%);
+			border-radius: 99px;
+			cursor: pointer;
+
+			&:has(:checked) {
+				border-color: var(--brand);
+			}
+		}
+	}
+
+	.sibling-row {
+		max-inline-size: 40rem;
+
+		> label {
+			cursor: pointer;
+
+			&:has(:checked) {
+				border-style: dashed;
+				border-color: var(--brand);
+				color: var(--brand);
+				font-weight: bold;
+			}
+
+			&:has(:focus-visible) {
+				outline: 2px solid var(--brand);
+				outline-offset: 2px;
+			}
+		}
+	}
+
+	.siblings:has([value="next"]:checked) .sibling-row > label:has(:checked) + label,
+	.siblings:has([value="after"]:checked) .sibling-row > label:has(:checked) ~ label,
+	.siblings:has([value="prev"]:checked) .sibling-row > label:has(+ label :checked),
+	.siblings:has([value="before"]:checked) .sibling-row > label:has(~ label :checked) {
+		background-color: var(--brand);
+		border-color: var(--brand);
+		color: var(--on-brand);
+		scale: 1.05;
+	}
+</style>

@@ -1,0 +1,342 @@
+---
+import PageLayout from "@/layouts/PageLayout.astro";
+import CopyButton from "@/components/Playground/CopyButton.astro";
+import BackLink from "@/components/Playground/BackLink.astro";
+import "@/components/Playground/playground.css";
+
+const presets = [
+	{ name: "Linear", value: "linear-gradient(135deg, oklch(70% 0.2 30), oklch(60% 0.2 280))" },
+	{
+		name: "Radial",
+		value: "radial-gradient(circle at 30% 30%, oklch(90% 0.1 90), oklch(55% 0.2 300))",
+	},
+	{
+		name: "Conic",
+		value: "conic-gradient(from 90deg, oklch(75% 0.2 30), oklch(75% 0.2 150), oklch(75% 0.2 270), oklch(75% 0.2 30))",
+	},
+	{
+		name: "Rainbow",
+		value: "linear-gradient(to right in oklch longer hue, oklch(70% 0.2 30), oklch(70% 0.2 20))",
+	},
+	{
+		name: "Hint",
+		value: "linear-gradient(to right, oklch(70% 0.2 30), 20%, oklch(60% 0.2 280))",
+	},
+	{ name: "Dutch flag", value: "linear-gradient(#ae1c28 0 33.3%, #fff 0 66.6%, #21468b 0)" },
+	{
+		name: "Pie",
+		value: "conic-gradient(oklch(65% 0.2 30) 0 40%, oklch(70% 0.15 200) 0 75%, oklch(85% 0.1 90) 0)",
+	},
+	{
+		name: "Stripes",
+		value: "repeating-linear-gradient(45deg, oklch(65% 0.2 30) 0 1rem, transparent 0 2rem)",
+	},
+	{
+		name: "Checkerboard",
+		value: "repeating-conic-gradient(oklch(50% 0 0 / 25%) 0 25%, transparent 0 50%) 0 0 / 2rem 2rem",
+	},
+	{
+		name: "Spotlight",
+		value: "radial-gradient(circle at 50% 0%, oklch(100% 0 0 / 60%), transparent 60%), oklch(30% 0.05 260)",
+	},
+	{
+		name: "Mesh",
+		value: "radial-gradient(at 20% 20%, oklch(80% 0.15 40), transparent 50%), radial-gradient(at 80% 30%, oklch(75% 0.15 300), transparent 50%), radial-gradient(at 50% 90%, oklch(80% 0.15 180), transparent 50%), oklch(95% 0.02 90)",
+	},
+];
+const defaultValue = presets[0].value;
+
+const functions = [
+	{
+		syntax: "linear-gradient(angle, stops)",
+		description:
+			"Runs along a line. 0deg points up and 90deg to the right, or use keywords like to right or to top left. The default is to bottom.",
+	},
+	{
+		syntax: "radial-gradient(shape size at x y, stops)",
+		description:
+			"Grows out from a point. The shape is circle or ellipse, the size a length or closest-side, closest-corner, farthest-side or farthest-corner (the default).",
+	},
+	{
+		syntax: "conic-gradient(from angle at x y, stops)",
+		description:
+			"Sweeps around a point, like a clock hand. Stops take angles or percentages of the full turn.",
+	},
+	{
+		syntax: "repeating-*-gradient()",
+		description:
+			"Repeats the stop list over and over. The distance between the first and last stop is the size of one repeat.",
+	},
+];
+
+const stops = [
+	{ syntax: "red 20%", description: "A color at a position." },
+	{
+		syntax: "red 20% 40%",
+		description: "Two positions make a solid band from 20% to 40%.",
+	},
+	{
+		syntax: "red 50%, blue 50%",
+		description: "Two stops at the same spot give a hard edge instead of a fade.",
+	},
+	{
+		syntax: "red 50%, blue 0",
+		description:
+			"A position lower than the one before it is pulled up to match, so 0 is a short way to write a hard edge.",
+	},
+	{
+		syntax: "red, 30%, blue",
+		description: "A position on its own is a hint, it moves the midpoint of the fade.",
+	},
+];
+
+const spaces = [
+	{ name: "srgb" },
+	{ name: "srgb-linear" },
+	{ name: "lab" },
+	{ name: "oklab" },
+	{ name: "hsl", polar: true },
+	{ name: "lch", polar: true },
+	{ name: "oklch", polar: true },
+];
+const hues = ["shorter", "longer", "increasing", "decreasing"];
+
+const tips = [
+	"A gradient is an image, so it goes in background-image and you can stack several with commas. The first one is on top.",
+	"background-image does not transition. Register a custom property with @property and animate that inside the gradient instead.",
+	"Fading to transparent no longer turns grey in the middle, modern browsers mix with premultiplied alpha.",
+	"For gradient text, use background-clip: text with color: transparent.",
+	"For a gradient border, use border-image: linear-gradient(…) 1. It ignores border-radius, so for rounded corners use a transparent border with two backgrounds: a solid one on padding-box and the gradient on border-box.",
+];
+
+const pageTitle = "CSS gradients";
+const pageDescription =
+	"A visual playground for linear, radial and conic gradients, color stops, and how the color space changes the fade.";
+---
+
+<PageLayout
+	title={pageTitle}
+	description={pageDescription}
+	breadcrumbs={[
+		{ name: "Home", item: "/" },
+		{ name: "Playground", item: "/playground/" },
+		{ name: pageTitle, item: "/playground/gradients/" },
+	]}
+	class="container"
+>
+	<BackLink />
+	<h1>{pageTitle}</h1>
+	<p>{pageDescription}</p>
+
+	<div class="grid-cols gap" style="--md_grid-cols: 2; --gap: var(--size-8)">
+		<section aria-labelledby="playground" class="playground">
+			<h2 id="playground" class="sr-only">Playground</h2>
+			<form id="gradient-form">
+				<div class="code-field">
+					<label for="gradient-value">background:</label>
+					<textarea
+						id="gradient-value"
+						name="q"
+						rows="1"
+						autocomplete="off"
+						autocapitalize="off"
+						spellcheck="false">{defaultValue}</textarea>
+					<CopyButton label="Copy declaration" />
+				</div>
+				<ul role="list" class="chips flex-wrap gap-sm" aria-label="Presets">
+					{
+						presets.map((preset) => (
+							<li>
+								<button type="button" value={preset.value}>
+									{preset.name}
+								</button>
+							</li>
+						))
+					}
+				</ul>
+			</form>
+
+			<output for="gradient-value" aria-live="polite" class="text-muted"></output>
+			<div class="preview"></div>
+		</section>
+
+		<section aria-labelledby="gradient-functions" class="explanation flow">
+			<h2 id="gradient-functions">Gradient functions</h2>
+			<dl>
+				{
+					functions.map((fn) => (
+						<>
+							<dt>
+								<code>{fn.syntax}</code>
+							</dt>
+							<dd>{fn.description}</dd>
+						</>
+					))
+				}
+			</dl>
+
+			<h3>Color stops</h3>
+			<dl>
+				{
+					stops.map((stop) => (
+						<>
+							<dt>
+								<code>{stop.syntax}</code>
+							</dt>
+							<dd>{stop.description}</dd>
+						</>
+					))
+				}
+			</dl>
+
+			<h3>Color space</h3>
+			<p>
+				Add <code>in</code> and a color space after the direction, like <code
+					>linear-gradient(to right in oklch, …)</code
+				>. Hex, <code>rgb()</code> and <code>hsl()</code> colors fade in srgb by default, which
+				often goes muddy in the middle. Modern colors like <code>oklch()</code> default to
+				oklab. Polar spaces (hsl, lch, oklch) also take a hue direction:
+				<code>shorter hue</code> (the default), <code>longer hue</code>,
+				<code>increasing hue</code> or <code>decreasing hue</code>.
+			</p>
+
+			<h3>Good to know</h3>
+			<ul>
+				{tips.map((tip) => <li>{tip}</li>)}
+			</ul>
+		</section>
+	</div>
+
+	<section aria-labelledby="interpolation" class="interpolation">
+		<h2 id="interpolation">Bonus: same colors, different spaces</h2>
+		<p>
+			Pick two colors and see how each color space fades between them. Blue to yellow is the
+			classic case where srgb goes grey.
+		</p>
+		<form id="interpolation-form" class="flex-wrap gap align" style="--align: normal">
+			<label>From <input type="color" name="from" value="#0000ff" /></label>
+			<label>To <input type="color" name="to" value="#ffff00" /></label>
+			<label>
+				Hue
+				<select name="hue">
+					{hues.map((hue) => <option value={`${hue} hue`}>{hue}</option>)}
+				</select>
+			</label>
+		</form>
+		<ul role="list" class="strips">
+			{
+				spaces.map((space) => (
+					<li>
+						<code>
+							in {space.name}
+							{space.polar && <span class="text-muted"> + hue</span>}
+						</code>
+						<div
+							style={`background: linear-gradient(to right in ${space.name}${space.polar ? " var(--hue)" : ""}, var(--from), var(--to))`}
+						/>
+					</li>
+				))
+			}
+		</ul>
+	</section>
+</PageLayout>
+
+<script>
+	const form = document.querySelector<HTMLFormElement>("#gradient-form")!;
+	const field = document.querySelector<HTMLTextAreaElement>("#gradient-value")!;
+	const output = document.querySelector<HTMLOutputElement>("output[for]")!;
+	const preview = document.querySelector<HTMLElement>(".preview")!;
+	const copy = document.querySelector<HTMLButtonElement>(".copy-btn")!;
+	const interpolation = document.querySelector<HTMLFormElement>("#interpolation-form")!;
+	const strips = document.querySelector<HTMLElement>(".strips")!;
+
+	/**
+	 * Applies the value to the preview, and keeps the copy button and URL in sync.
+	 */
+	function update() {
+		const value = field.value.trim();
+		const valid = CSS.supports("background", value);
+		preview.style.background = valid ? value : "";
+		field.setCustomValidity(valid ? "" : "Invalid background");
+		copy.dataset.copy = `background: ${value};`;
+		output.textContent = valid ? "" : "Not a valid value, or not supported in this browser";
+
+		const url = new URL(location.href);
+		url.searchParams.set("q", value);
+		history.replaceState(null, "", url);
+	}
+
+	/**
+	 * Passes the picked colors and hue direction to the strips.
+	 */
+	function updateStrips() {
+		const data = new FormData(interpolation);
+		strips.style.setProperty("--from", String(data.get("from")));
+		strips.style.setProperty("--to", String(data.get("to")));
+		strips.style.setProperty("--hue", String(data.get("hue")));
+	}
+
+	const params = new URLSearchParams(location.search);
+	if (params.has("q")) field.value = params.get("q")!;
+
+	form.addEventListener("input", update);
+	form.addEventListener("submit", (event) => event.preventDefault());
+	form.addEventListener("click", (event) => {
+		const preset = (event.target as Element).closest<HTMLButtonElement>("button[value]");
+		if (!preset) return;
+		field.value = preset.value;
+		update();
+	});
+	copy.addEventListener("copied", () => (output.textContent = "Copied the declaration"));
+	interpolation.addEventListener("input", updateStrips);
+
+	update();
+	updateStrips();
+</script>
+
+<style>
+	.code-field {
+		align-items: first baseline;
+	}
+
+	.preview {
+		aspect-ratio: 4 / 3;
+		border-radius: var(--size-3);
+		outline: 2px dashed oklch(from var(--root-fg) l c h / 25%);
+	}
+
+	.interpolation {
+		margin-block-start: var(--size-10);
+
+		label {
+			display: inline-flex;
+			align-items: center;
+			gap: var(--size-2);
+		}
+	}
+
+	.strips {
+		--from: #0000ff;
+		--to: #ffff00;
+		--hue: shorter hue;
+		display: grid;
+		gap: var(--size-3);
+		margin-block-start: var(--size-6);
+
+		li {
+			display: grid;
+			gap: var(--size-1) var(--size-4);
+			margin: 0;
+
+			@media (width >= 640px) {
+				grid-template-columns: 16ch 1fr;
+				align-items: center;
+			}
+		}
+
+		div {
+			block-size: var(--size-12);
+			border-radius: var(--size-2);
+		}
+	}
+</style>

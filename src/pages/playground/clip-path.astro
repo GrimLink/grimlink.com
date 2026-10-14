@@ -1,0 +1,381 @@
+---
+import PageLayout from "@/layouts/PageLayout.astro";
+import CopyButton from "@/components/Playground/CopyButton.astro";
+import BackLink from "@/components/Playground/BackLink.astro";
+import "@/components/Playground/playground.css";
+
+const presets = [
+	{ name: "Circle", value: "circle(50%)" },
+	{ name: "Ellipse", value: "ellipse(50% 30%)" },
+	{ name: "Inset", value: "inset(10% 20% round 1rem)" },
+	{ name: "Triangle", value: "polygon(50% 0%, 100% 100%, 0% 100%)" },
+	{ name: "Rhombus", value: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" },
+	{
+		name: "Hexagon",
+		value: "polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%)",
+	},
+	{
+		name: "Star",
+		value: "polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)",
+	},
+	{
+		name: "Arrow",
+		value: "polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%)",
+	},
+	{
+		name: "Message",
+		value: "polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%)",
+	},
+	{
+		name: "Cross",
+		value: "polygon(35% 0%, 65% 0%, 65% 35%, 100% 35%, 100% 65%, 65% 65%, 65% 100%, 35% 100%, 35% 65%, 0% 65%, 0% 35%, 35% 35%)",
+	},
+	{ name: "xywh", value: "xywh(10% 20% 80% 60% round 15%)" },
+	{
+		name: "Wave",
+		value: "shape(from 0% 20%, curve to 50% 20% with 25% 0%, smooth to 100% 20%, line to 100% 100%, line to 0% 100%, close)",
+	},
+];
+const defaultValue = presets.find((preset) => preset.name === "Hexagon")!.value;
+
+const functions = [
+	{
+		syntax: "inset(top right bottom left round r)",
+		description:
+			"Cuts the box inward from each edge, with the same 1 to 4 value order as margin. round adds a border-radius.",
+	},
+	{
+		syntax: "circle(r at x y)",
+		description:
+			"r can also be closest-side or farthest-side. The position defaults to the center.",
+	},
+	{ syntax: "ellipse(rx ry at x y)", description: "A circle with two radii." },
+	{
+		syntax: "polygon(fill-rule, x y, …)",
+		description:
+			"Any number of points, joined in order and closed automatically. The fill-rule is optional.",
+	},
+	{
+		syntax: "xywh(x y w h round r)",
+		description: "A rectangle from a position and a size.",
+	},
+	{
+		syntax: "rect(top right bottom left round r)",
+		description: "A rectangle where every edge is measured from the top or left edge.",
+	},
+	{
+		syntax: 'path("M 0 0 …")',
+		description: "An SVG path string. It only takes pixels, so it does not scale with the element.",
+	},
+	{
+		syntax: "shape(from x y, …)",
+		description:
+			"Like path(), but with CSS units, percentages and calc(), so it scales. Commands are line, hline, vline, curve, smooth, arc and close, each with to or by.",
+	},
+	{ syntax: "url(#id)", description: "Uses an SVG <clipPath> element." },
+];
+
+const tips = [
+	"Clipped parts no longer receive clicks or hover, the hit area follows the shape.",
+	"The element keeps its full size in the layout, only the painting is cut.",
+	"box-shadow and outline get clipped too. Put a filter: drop-shadow() on a wrapper instead.",
+	"Shapes animate when both ends use the same function. Polygons also need the same number of points.",
+	"Percentages resolve against the reference box, x against its width and y against its height.",
+];
+
+const pageTitle = "CSS clip-path";
+const pageDescription =
+	"A visual playground for clip-path, with draggable polygon points and every shape function on one page.";
+---
+
+<PageLayout
+	title={pageTitle}
+	description={pageDescription}
+	breadcrumbs={[
+		{ name: "Home", item: "/" },
+		{ name: "Playground", item: "/playground/" },
+		{ name: pageTitle, item: "/playground/clip-path/" },
+	]}
+	class="container"
+>
+	<BackLink />
+	<h1>{pageTitle}</h1>
+	<p>{pageDescription}</p>
+
+	<div class="grid-cols gap" style="--md_grid-cols: 2; --gap: var(--size-8)">
+		<section aria-labelledby="playground" class="playground">
+			<h2 id="playground" class="sr-only">Playground</h2>
+			<form id="clip-form">
+				<div class="code-field">
+					<label for="clip-value">clip-path:</label>
+					<textarea
+						id="clip-value"
+						name="q"
+						rows="1"
+						autocomplete="off"
+						autocapitalize="off"
+						spellcheck="false">{defaultValue}</textarea>
+					<CopyButton label="Copy declaration" />
+				</div>
+				<ul role="list" class="chips flex-wrap gap-sm" aria-label="Presets">
+					{
+						presets.map((preset) => (
+							<li>
+								<button type="button" value={preset.value}>
+									{preset.name}
+								</button>
+							</li>
+						))
+					}
+				</ul>
+			</form>
+
+			<output for="clip-value" aria-live="polite" class="text-muted"></output>
+			<div class="stage">
+				<div class="shape"></div>
+				<div class="handles"></div>
+			</div>
+		</section>
+
+		<section aria-labelledby="shape-functions" class="explanation flow">
+			<h2 id="shape-functions">Shape functions</h2>
+			<p>
+				A clip-path draws a shape over the element and hides everything outside of it. Points
+				are x then y, measured from the top left corner of the box.
+			</p>
+			<dl>
+				{
+					functions.map((fn) => (
+						<>
+							<dt>
+								<code>{fn.syntax}</code>
+							</dt>
+							<dd>{fn.description}</dd>
+						</>
+					))
+				}
+			</dl>
+
+			<h3>Reference box</h3>
+			<p>
+				Add a box after the shape to measure from it, like <code
+					>circle(50%) content-box</code
+				>. The default is <code>border-box</code>, the others are <code>padding-box</code>,
+				<code>content-box</code> and <code>margin-box</code>, plus <code>fill-box</code>,
+				<code>stroke-box</code> and <code>view-box</code> for SVG. A box on its own, like
+				<code>clip-path: padding-box</code>, clips to that box and keeps its rounded corners.
+			</p>
+
+			<h3>Good to know</h3>
+			<ul>
+				{tips.map((tip) => <li>{tip}</li>)}
+			</ul>
+		</section>
+	</div>
+</PageLayout>
+
+<script>
+	type Point = { x: number; y: number };
+
+	const form = document.querySelector<HTMLFormElement>("#clip-form")!;
+	const field = document.querySelector<HTMLTextAreaElement>("#clip-value")!;
+	const output = document.querySelector<HTMLOutputElement>("output[for]")!;
+	const stage = document.querySelector<HTMLElement>(".stage")!;
+	const shape = document.querySelector<HTMLElement>(".shape")!;
+	const handles = document.querySelector<HTMLElement>(".handles")!;
+	const copy = document.querySelector<HTMLButtonElement>(".copy-btn")!;
+
+	const POLYGON = /^polygon\(\s*(?:(nonzero|evenodd)\s*,\s*)?(.+)\)$/s;
+	const PERCENTAGE = /^-?\d*\.?\d+%$|^0$/;
+
+	let fillRule = "";
+	let points: Point[] = [];
+
+	/**
+	 * Reads a polygon where every coordinate is a percentage, the only kind the handles can edit.
+	 * @param value
+	 * @returns The fill-rule and points, or null for any other value.
+	 */
+	function parsePolygon(value: string): { rule: string; points: Point[] } | null {
+		const [, rule = "", list = ""] = value.match(POLYGON) ?? [];
+		const pairs = list.split(",").map((pair) => pair.trim().split(/\s+/));
+		if (!list || pairs.some((pair) => pair.length !== 2 || !pair.every((n) => PERCENTAGE.test(n)))) {
+			return null;
+		}
+
+		return { rule, points: pairs.map(([x, y]) => ({ x: parseFloat(x), y: parseFloat(y) })) };
+	}
+
+	/**
+	 * @returns The current points written back as a polygon.
+	 */
+	function formatPolygon(): string {
+		const list = points.map(({ x, y }) => `${x}% ${y}%`).join(", ");
+		return `polygon(${fillRule ? `${fillRule}, ` : ""}${list})`;
+	}
+
+	/**
+	 * Applies the value to the preview, and keeps the copy button and URL in sync.
+	 * @param value
+	 * @returns Whether the browser accepts the value.
+	 */
+	function apply(value: string): boolean {
+		const valid = CSS.supports("clip-path", value);
+		shape.style.clipPath = valid ? value : "";
+		field.setCustomValidity(valid ? "" : "Invalid clip-path");
+		copy.dataset.copy = `clip-path: ${value};`;
+
+		const url = new URL(location.href);
+		url.searchParams.set("q", value);
+		history.replaceState(null, "", url);
+		return valid;
+	}
+
+	/**
+	 * @param handle
+	 * @param point
+	 */
+	function placeHandle(handle: HTMLElement, point: Point) {
+		handle.style.setProperty("--x", `${point.x}%`);
+		handle.style.setProperty("--y", `${point.y}%`);
+		handle.ariaLabel = `Point at ${point.x}% ${point.y}%`;
+	}
+
+	/**
+	 * Reads the field and rebuilds the handles for it.
+	 */
+	function update() {
+		const value = field.value.trim();
+		const polygon = parsePolygon(value);
+		fillRule = polygon?.rule ?? "";
+		points = polygon?.points ?? [];
+		const valid = apply(value);
+
+		handles.replaceChildren(
+			...points.map((point, index) => {
+				const handle = document.createElement("button");
+				handle.type = "button";
+				handle.dataset.index = String(index);
+				placeHandle(handle, point);
+				return handle;
+			}),
+		);
+
+		if (!valid) {
+			output.textContent = "Not a valid value, or not supported in this browser";
+		} else if (polygon) {
+			output.textContent = "Drag the points, or move a focused point with the arrow keys";
+		} else {
+			output.textContent = "Pick a polygon preset to get draggable points";
+		}
+	}
+
+	/**
+	 * Moves a point and writes the new polygon to the field.
+	 * @param handle
+	 * @param point
+	 */
+	function movePoint(handle: HTMLElement, point: Point) {
+		const clamp = (n: number) => Math.round(Math.min(100, Math.max(0, n)));
+		const next = { x: clamp(point.x), y: clamp(point.y) };
+		points[Number(handle.dataset.index)] = next;
+		placeHandle(handle, next);
+		field.value = formatPolygon();
+		apply(field.value);
+	}
+
+	handles.addEventListener("pointerdown", (event) => {
+		const handle = (event.target as Element).closest<HTMLButtonElement>("button");
+		if (!handle) return;
+		handle.setPointerCapture(event.pointerId);
+		handle.focus();
+	});
+
+	handles.addEventListener("pointermove", (event) => {
+		const handle = event.target as HTMLButtonElement;
+		if (!handle.hasPointerCapture?.(event.pointerId)) return;
+		const rect = stage.getBoundingClientRect();
+		movePoint(handle, {
+			x: ((event.clientX - rect.left) / rect.width) * 100,
+			y: ((event.clientY - rect.top) / rect.height) * 100,
+		});
+	});
+
+	handles.addEventListener("keydown", (event) => {
+		const handle = (event.target as Element).closest<HTMLButtonElement>("button");
+		const step = event.shiftKey ? 10 : 1;
+		const moves: Record<string, [number, number]> = {
+			ArrowLeft: [-step, 0],
+			ArrowRight: [step, 0],
+			ArrowUp: [0, -step],
+			ArrowDown: [0, step],
+		};
+		if (!handle || !moves[event.key]) return;
+		event.preventDefault();
+		const point = points[Number(handle.dataset.index)];
+		const [dx, dy] = moves[event.key];
+		movePoint(handle, { x: point.x + dx, y: point.y + dy });
+	});
+
+	const params = new URLSearchParams(location.search);
+	if (params.has("q")) field.value = params.get("q")!;
+
+	form.addEventListener("input", update);
+	form.addEventListener("submit", (event) => event.preventDefault());
+	form.addEventListener("click", (event) => {
+		const preset = (event.target as Element).closest<HTMLButtonElement>("button[value]");
+		if (!preset) return;
+		field.value = preset.value;
+		update();
+	});
+	copy.addEventListener("copied", () => (output.textContent = "Copied the declaration"));
+
+	update();
+</script>
+
+<style>
+	.code-field {
+		align-items: first baseline;
+	}
+
+	.stage {
+		--grid-line: oklch(from var(--root-fg) l c h / 8%);
+		position: relative;
+		inline-size: min(100%, 28rem);
+		aspect-ratio: 1;
+		outline: 2px dashed oklch(from var(--root-fg) l c h / 25%);
+		background:
+			repeating-linear-gradient(to right, var(--grid-line) 0 1px, transparent 1px 10%),
+			repeating-linear-gradient(to bottom, var(--grid-line) 0 1px, transparent 1px 10%);
+	}
+
+	.shape,
+	.handles {
+		position: absolute;
+		inset: 0;
+	}
+
+	.shape {
+		background: linear-gradient(135deg, var(--brand), oklch(from var(--brand) l c calc(h + 90)));
+	}
+
+	.handles :global(button) {
+		--btn-px: 0;
+		--btn-py: 0;
+		--btn-radius: 50%;
+		--btn-bg: var(--root-bg);
+		--btn-stroke: var(--brand);
+		position: absolute;
+		left: var(--x);
+		top: var(--y);
+		inline-size: var(--size-4);
+		block-size: var(--size-4);
+		translate: -50% -50%;
+		cursor: grab;
+		touch-action: none;
+
+		&:active {
+			cursor: grabbing;
+		}
+	}
+</style>

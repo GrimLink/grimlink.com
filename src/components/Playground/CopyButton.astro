@@ -1,0 +1,42 @@
+---
+import { Check, Copy } from "@lucide/astro";
+
+interface Props {
+	label?: string;
+}
+
+const { label = "Copy" } = Astro.props;
+---
+
+<button type="button" class="copy-btn" aria-label={label}>
+	<Copy size="0.875em" aria-hidden="true" />
+	<Check size="0.875em" aria-hidden="true" />
+</button>
+
+<script>
+	document.addEventListener("click", async (event) => {
+		const button = (event.target as Element).closest<HTMLButtonElement>(".copy-btn");
+		const text = button?.dataset.copy;
+		if (!button || !text) return;
+
+		await navigator.clipboard.writeText(text);
+		button.toggleAttribute("data-copied", true);
+		button.dispatchEvent(new CustomEvent("copied", { bubbles: true, detail: text }));
+		setTimeout(() => button.removeAttribute("data-copied"), 1500);
+	});
+</script>
+
+<style>
+	.copy-btn {
+		--btn-px: var(--size-2);
+		--btn-stroke: transparent;
+		flex-shrink: 0;
+		margin-inline-start: auto;
+		color: var(--color-muted);
+
+		&:not([data-copied]) > :global(:last-child),
+		&[data-copied] > :global(:first-child) {
+			display: none;
+		}
+	}
+</style>
