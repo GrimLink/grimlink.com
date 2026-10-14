@@ -3,6 +3,9 @@ export const siteDescription =
 	"Hi, I am Sean van Zuidam also known on the web as GrimLink. I am a Frontend Developer from Zwollywood.";
 export const themeColor = "#111624";
 
+/** Seasonal theme, adds a brand color override and decorations. Set to `undefined` to disable. */
+export const season: "halloween" | undefined = "halloween";
+
 export const author = "Sean van Zuidam";
 export const authorAbout =
 	"Frontend Developer, CSS maniac, Gamer and also the creator of Fylgja CSS";

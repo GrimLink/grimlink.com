@@ -1,0 +1,21 @@
+---
+import Ghost from "./Ghost.astro";
+---
+
+<style is:inline>
+	:root {
+		--brand: oklch(0.64 0.18 45);
+		--on-brand: #111;
+	}
+
+	:any-link {
+		text-decoration-color: var(--brand);
+	}
+
+	[data-theme="dark"] {
+		--brand: oklch(0.58 0.18 45);
+		--root-bg: color-mix(in oklab, hsl(0 15% 5%) 96%, var(--brand));
+		--card-bg: oklch(0.78 0.17 125.21 / 24%);
+	}
+</style>
+<Ghost />

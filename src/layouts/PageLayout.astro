@@ -9,6 +9,7 @@ import PageHeader from "@/components/PageHeader.astro";
 import PageFooter from "@/components/PageFooter.astro";
 import { SchemaMe, SchemaSite, SchemaBreadcrumbs } from "@/components/Schema";
 import Speculation from "@fylgja/Speculation.astro";
+import Season from "@/components/Season/index.astro";
 
 import PlaceHolderImg from "@/assets/placeholder.webp";
 import { author, siteTitle, siteDescription, themeColor, isProd, today } from "@/consts";
@@ -64,6 +65,7 @@ const dateHash = `?v=${today.getMonth() + 1}-${today.getFullYear()}`;
 		{isProd && <ServiceWorker />}
 	</Head>
 	<body>
+		<Season />
 		<PageHeader />
 		<main id="main" class:list={className} style={style}>
 			<slot />

@@ -1,0 +1,147 @@
+<div class="ghost" aria-hidden="true">
+	<svg viewBox="0 0 64 72" width="48" height="54">
+		<path
+			d="M6 31C6 15.5 16.5 4 32 4S58 15.5 58 31V64Q51.5 72 45 64T32 64T19 64T6 64Z"
+		>
+			<animate
+				attributeName="d"
+				dur="1.2s"
+				repeatCount="indefinite"
+				calcMode="spline"
+				keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"
+				values="M6 31C6 15.5 16.5 4 32 4S58 15.5 58 31V64Q51.5 72 45 64T32 64T19 64T6 64Z;
+					M6 31C6 15.5 16.5 4 32 4S58 15.5 58 31V64Q51.5 56 45 64T32 64T19 64T6 64Z;
+					M6 31C6 15.5 16.5 4 32 4S58 15.5 58 31V64Q51.5 72 45 64T32 64T19 64T6 64Z"
+			></animate>
+		</path>
+		<ellipse cx="28" cy="29" rx="4" ry="6"></ellipse>
+		<ellipse cx="44" cy="29" rx="4" ry="6"></ellipse>
+		<ellipse cx="38" cy="44" rx="4" ry="3.5"></ellipse>
+	</svg>
+</div>
+
+<style is:inline>
+	.ghost {
+		position: fixed;
+		inset: 0 auto auto 0;
+		z-index: 100;
+		pointer-events: none;
+		opacity: 0.9;
+		translate: -100vw;
+
+		& svg {
+			display: block;
+			scale: var(--flip, 1) 1;
+			transition: scale 0.3s;
+			animation: ghost-bob 1.6s ease-in-out infinite alternate;
+			filter: drop-shadow(0 0.25rem 0.5rem #0004);
+		}
+
+		& path {
+			fill: #fff;
+			stroke: #0002;
+			stroke-width: 2;
+		}
+
+		& ellipse {
+			fill: hsl(0 0% 10%);
+		}
+	}
+
+	@keyframes ghost-bob {
+		to {
+			translate: 0 -0.5rem;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce), print {
+		.ghost {
+			display: none;
+		}
+	}
+</style>
+
+<script>
+	const storageKey = "ghost-position";
+	const size = 48;
+	const followOffset = 24;
+	const idleDelay = 3000;
+	const wanderEase = 0.015;
+	const followEase = 0.08;
+
+	/**
+	 * Picks a random point inside the viewport where the ghost fits.
+	 * @returns {{ x: number, y: number }}
+	 */
+	const randomPoint = () => ({
+		x: Math.random() * (document.documentElement.clientWidth - size),
+		y: Math.random() * (document.documentElement.clientHeight - size),
+	});
+
+	/**
+	 * Restores the position from the previous page, so the ghost does not jump on navigation.
+	 * @returns {{ x: number, y: number }}
+	 */
+	const restorePoint = () => {
+		try {
+			return JSON.parse(sessionStorage.getItem(storageKey) ?? "") ?? randomPoint();
+		} catch {
+			return randomPoint();
+		}
+	};
+
+	const ghost = document.querySelector(".ghost");
+	const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+	if (ghost instanceof HTMLElement && !reducedMotion) {
+		const pos = restorePoint();
+		let target = randomPoint();
+		let lastPointer = -idleDelay;
+		let nextWander = 0;
+		let lastFrame = performance.now();
+
+		addEventListener(
+			"pointermove",
+			(event) => {
+				if (event.pointerType !== "mouse") return;
+				target = { x: event.clientX + followOffset, y: event.clientY + followOffset };
+				lastPointer = performance.now();
+			},
+			{ passive: true },
+		);
+
+		addEventListener("pagehide", () => {
+			sessionStorage.setItem(storageKey, JSON.stringify(pos));
+		});
+
+		/**
+		 * Eases the ghost towards its target, wandering when the mouse is idle.
+		 * @param {number} now
+		 */
+		const tick = (now: number) => {
+			const following = now - lastPointer < idleDelay;
+			if (!following && now > nextWander) {
+				target = randomPoint();
+				nextWander = now + 3000 + Math.random() * 4000;
+			}
+
+			// Normalise easing to 60fps so the speed is the same on high refresh screens
+			const frames = Math.min(now - lastFrame, 100) / (1000 / 60);
+			const ease = 1 - (1 - (following ? followEase : wanderEase)) ** frames;
+			lastFrame = now;
+
+			const dx = target.x - pos.x;
+			const dy = target.y - pos.y;
+			pos.x += dx * ease;
+			pos.y += dy * ease;
+
+			ghost.style.translate = `${pos.x}px ${pos.y}px`;
+			ghost.style.rotate = `${Math.max(-15, Math.min(15, dx * ease * 2))}deg`;
+			if (Math.abs(dx) > 2) ghost.style.setProperty("--flip", dx < 0 ? "-1" : "1");
+
+			requestAnimationFrame(tick);
+		};
+
+		requestAnimationFrame(tick);
+	}
+</script>

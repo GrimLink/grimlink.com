@@ -9,6 +9,7 @@ import PageHeader from "@/components/PageHeader.astro";
 import PageFooter from "@/components/PageFooter.astro";
 import { SchemaMe, SchemaSite, SchemaBlogPosting, SchemaBreadcrumbs } from "@/components/Schema";
 import Speculation from "@fylgja/Speculation.astro";
+import Season from "@/components/Season/index.astro";
 import FormattedDate from "@/components/FormattedDate.astro";
 import PostNavigation from "@/components/PostNavigation.astro";
 import DiscussionLinks from "@/components/DiscussionLinks.astro";
@@ -88,6 +89,7 @@ const hasTags = tags && tags.length > 0;
 		{isProd && <ServiceWorker />}
 	</Head>
 	<body>
+		<Season />
 		<PageHeader />
 		<main id="main" class:list={["container", className]} style="--container-size: 68ch">
 			<article>
