@@ -3,9 +3,10 @@ import PageLayout from "@/layouts/PageLayout.astro";
 import { Terminal } from "@lucide/astro";
 import Card from "@fylgja/Card.astro";
 import FylgjaIcon from "@/components/icons/Fylgja.astro";
+import ProjectList from "@/components/ProjectList.astro";
 import dataJson from "./data.json";
 
-const sort = (list: { status?: string }[]) =>
+const sort = <T extends { status?: string }>(list: T[]) =>
 	list.sort((a, b) => (a.status === "inactive" ? 1 : 0) - (b.status === "inactive" ? 1 : 0));
 
 const personal = sort(dataJson.personal);
@@ -71,26 +72,7 @@ const pageDescription =
 
 	<section aria-labelledby="personal-projects">
 		<h2 id="personal-projects">Personal</h2>
-		<dl class="project-list">
-			{personal.map((project) => (
-				<>
-					<dt>
-						{project.status && (
-							<span class:list={["status", project.status]}>{project.status}</span>
-						)}
-						<a
-							href={project.url}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="hover-underline"
-						>
-							{project.name}
-						</a>
-					</dt>
-					{project.description && <dd>{project.description}</dd>}
-				</>
-			))}
-		</dl>
+		<ProjectList projects={personal} />
 	</section>
 
 	<section aria-labelledby="fylgja-projects">
@@ -102,26 +84,7 @@ const pageDescription =
 			</a>{" "}
 			organisation.
 		</p>
-		<dl class="project-list">
-			{fylgja.map((project) => (
-				<>
-					<dt>
-						{project.status && (
-							<span class:list={["status", project.status]}>{project.status}</span>
-						)}
-						<a
-							href={project.url}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="hover-underline"
-						>
-							{project.name}
-						</a>
-					</dt>
-					{project.description && <dd>{project.description}</dd>}
-				</>
-			))}
-		</dl>
+		<ProjectList projects={fylgja} />
 	</section>
 
 	<section aria-labelledby="siteation-projects">
@@ -133,26 +96,7 @@ const pageDescription =
 			</a>{" "}
 			organisation.
 		</p>
-		<dl class="project-list">
-			{siteation.map((project) => (
-				<>
-					<dt>
-						{project.status && (
-							<span class:list={["status", project.status]}>{project.status}</span>
-						)}
-						<a
-							href={project.url}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="hover-underline"
-						>
-							{project.name}
-						</a>
-					</dt>
-					{project.description && <dd>{project.description}</dd>}
-				</>
-			))}
-		</dl>
+		<ProjectList projects={siteation} />
 	</section>
 </PageLayout>
 
@@ -170,55 +114,5 @@ const pageDescription =
 		border-radius: 0.5rem;
 		background: color-mix(in oklab, var(--brand) 18%, transparent);
 		color: light-dark(var(--brand), color-mix(in oklch, var(--brand) 60%, var(--root-fg)));
-	}
-
-	.project-list {
-		--list-flow: 0;
-		display: grid;
-		grid-template-columns: 1fr;
-		margin-block-start: var(--size-4);
-
-		dt,
-		dd {
-			padding-block: var(--size-2);
-		}
-
-		dt {
-			padding-inline-end: var(--size-6);
-			padding-block-end: 0;
-		}
-
-		dd {
-			color: var(--color-muted);
-			border-block-end: 1px solid oklch(from var(--root-fg) l c h / 10%);
-		}
-
-		@media (width >= 640px) {
-			grid-template-columns: auto 1fr;
-
-			dt {
-				border-block-end: 1px solid oklch(from var(--root-fg) l c h / 10%);
-				padding-block-end: var(--size-2);
-			}
-		}
-	}
-
-	.status {
-		display: inline-flex;
-		font-size: 0.75em;
-		padding-inline: 0.5em;
-		padding-block: 0.15em;
-		border-width: 1px;
-		border-radius: 1em;
-		vertical-align: middle;
-		margin-inline-end: 0.5em;
-
-		&.active {
-			color: light-dark(var(--brand), color-mix(in oklch, var(--brand) 60%, var(--root-fg)));
-		}
-
-		&.inactive {
-			color: var(--color-muted);
-		}
 	}
 </style>

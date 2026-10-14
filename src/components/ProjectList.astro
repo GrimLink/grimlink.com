@@ -1,0 +1,101 @@
+---
+interface Project {
+	name: string;
+	description?: string;
+	url: string;
+	demo?: string;
+	demoLabel?: string;
+	status?: string;
+}
+
+interface Props {
+	projects: Project[];
+}
+
+const { projects } = Astro.props;
+---
+
+<dl class="project-list">
+	{projects.map((project) => (
+		<>
+			<dt>
+				{project.status && (
+					<span class:list={["status", project.status]}>{project.status}</span>
+				)}
+				<a
+					href={project.url}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="hover-underline"
+				>
+					{project.name}
+				</a>
+			</dt>
+			{project.description && (
+				<dd>
+					{project.description}
+					{project.demo && (
+						<>
+							{" "}
+							<a href={project.demo} target="_blank" rel="noopener noreferrer">
+								{project.demoLabel ?? "Try it live"}
+							</a>
+						</>
+					)}
+				</dd>
+			)}
+		</>
+	))}
+</dl>
+
+<style>
+	.project-list {
+		--list-flow: 0;
+		display: grid;
+		grid-template-columns: 1fr;
+		margin-block-start: var(--size-4);
+
+		dt,
+		dd {
+			padding-block: var(--size-2);
+		}
+
+		dt {
+			padding-inline-end: var(--size-6);
+			padding-block-end: 0;
+		}
+
+		dd {
+			color: var(--color-muted);
+			border-block-end: 1px solid oklch(from var(--root-fg) l c h / 10%);
+		}
+
+		@media (width >= 640px) {
+			grid-template-columns: auto 1fr;
+
+			dt {
+				border-block-end: 1px solid oklch(from var(--root-fg) l c h / 10%);
+				padding-block-end: var(--size-2);
+			}
+		}
+	}
+
+	.status {
+		display: inline-flex;
+		font-size: 0.75em;
+		padding-inline: 0.5em;
+		padding-block: 0.15em;
+		border-width: 1px;
+		border-radius: 1em;
+		vertical-align: middle;
+		margin-inline-end: 0.5em;
+
+		&.active {
+			color: light-dark(var(--brand), color-mix(in oklch, var(--brand) 60%, var(--root-fg)));
+		}
+
+		&.inactive {
+			color: var(--color-muted);
+		}
+	}
+</style>

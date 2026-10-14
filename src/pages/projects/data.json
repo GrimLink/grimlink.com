@@ -72,18 +72,22 @@
 			"name": "fylgja",
 			"description": "The flexible and lightweight CSS library designed to streamline your web development.",
 			"url": "https://github.com/fylgja/fylgja",
+			"demo": "https://fylgja.dev/",
+			"demoLabel": "Visit fylgja.dev",
 			"status": "active"
 		},
 		{
 			"name": "snap-slider",
 			"description": "A CSS-powered slider/carousel, enhanced with JavaScript for improved functionality and accessibility.",
 			"url": "https://github.com/fylgja/snap-slider",
+			"demo": "https://fylgja-snap-slider.netlify.app/",
 			"status": "active"
 		},
 		{
 			"name": "alpinejs-dialog",
 			"description": "Bring the power of Alpine.js to the HTML dialog element.",
 			"url": "https://github.com/fylgja/alpinejs-dialog",
+			"demo": "https://alpinejs-dialog.netlify.app/",
 			"status": "active"
 		},
 		{
