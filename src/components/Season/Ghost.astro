@@ -1,4 +1,4 @@
-<div class="ghost" aria-hidden="true">
+<div class="halloween-ghost" aria-hidden="true">
 	<svg viewBox="0 0 64 72" width="48" height="54">
 		<path
 			d="M6 31C6 15.5 16.5 4 32 4S58 15.5 58 31V64Q51.5 72 45 64T32 64T19 64T6 64Z"
@@ -21,7 +21,7 @@
 </div>
 
 <style is:inline>
-	.ghost {
+	.halloween-ghost {
 		position: fixed;
 		inset: 0 auto auto 0;
 		z-index: 100;
@@ -55,7 +55,7 @@
 	}
 
 	@media (prefers-reduced-motion: reduce), print {
-		.ghost {
+		.halloween-ghost {
 			display: none;
 		}
 	}
@@ -90,7 +90,7 @@
 		}
 	};
 
-	const ghost = document.querySelector(".ghost");
+	const ghost = document.querySelector(".halloween-ghost");
 	const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 	if (ghost instanceof HTMLElement && !reducedMotion) {
