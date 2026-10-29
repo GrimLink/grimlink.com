@@ -1,0 +1,490 @@
+---
+import PageLayout from "@/layouts/PageLayout.astro";
+import BackLink from "@/components/Playground/BackLink.astro";
+import "@/components/Playground/playground.css";
+
+interface Character {
+	code: number;
+	name: string;
+	entity?: string;
+	note?: string;
+}
+
+const categories: { name: string; invisible?: boolean; characters: Character[] }[] = [
+	{
+		name: "Spaces",
+		invisible: true,
+		characters: [
+			{
+				code: 0x00a0,
+				name: "No-break space",
+				entity: "nbsp",
+				note: "Keeps 10 km on one line.",
+			},
+			{
+				code: 0x202f,
+				name: "Narrow no-break space",
+				note: "A thinner nbsp, for 10 000 or the space before ! in French.",
+			},
+			{
+				code: 0x2009,
+				name: "Thin space",
+				entity: "thinsp",
+				note: "Around a slash or between initials.",
+			},
+			{
+				code: 0x200a,
+				name: "Hair space",
+				entity: "hairsp",
+				note: "The thinnest visible space.",
+			},
+			{ code: 0x2002, name: "En space", entity: "ensp", note: "Half an em wide." },
+			{ code: 0x2003, name: "Em space", entity: "emsp", note: "As wide as the font size." },
+			{
+				code: 0x2007,
+				name: "Figure space",
+				entity: "numsp",
+				note: "As wide as a digit, to line up numbers.",
+			},
+			{
+				code: 0x2008,
+				name: "Punctuation space",
+				entity: "puncsp",
+				note: "As wide as a period.",
+			},
+		],
+	},
+	{
+		name: "Invisible",
+		invisible: true,
+		characters: [
+			{
+				code: 0x200b,
+				name: "Zero-width space",
+				entity: "ZeroWidthSpace",
+				note: "Allows a line break without showing anything, like <wbr>.",
+			},
+			{
+				code: 0x2060,
+				name: "Word joiner",
+				entity: "NoBreak",
+				note: "Prevents a line break, without adding width.",
+			},
+			{
+				code: 0x00ad,
+				name: "Soft hyphen",
+				entity: "shy",
+				note: "Shows a hyphen only when the word breaks there.",
+			},
+			{
+				code: 0x200d,
+				name: "Zero-width joiner",
+				entity: "zwj",
+				note: "Glues emoji together, like 👩‍💻.",
+			},
+			{
+				code: 0x200c,
+				name: "Zero-width non-joiner",
+				entity: "zwnj",
+				note: "Stops letters from joining or forming a ligature.",
+			},
+			{ code: 0x200e, name: "Left-to-right mark", entity: "lrm" },
+			{ code: 0x200f, name: "Right-to-left mark", entity: "rlm" },
+			{
+				code: 0xfeff,
+				name: "Byte order mark",
+				note: "The usual suspect when a file starts with a mystery character.",
+			},
+		],
+	},
+	{
+		name: "Dashes",
+		characters: [
+			{
+				code: 0x2010,
+				name: "Hyphen",
+				entity: "hyphen",
+				note: "The typographic hyphen, the key on your keyboard is a hyphen-minus.",
+			},
+			{ code: 0x2011, name: "Non-breaking hyphen", note: "Keeps e-mail on one line." },
+			{ code: 0x2012, name: "Figure dash", note: "As wide as a digit, for phone numbers." },
+			{ code: 0x2013, name: "En dash", entity: "ndash", note: "For ranges, like 10–20." },
+			{ code: 0x2014, name: "Em dash", entity: "mdash", note: "For a break in a sentence." },
+			{
+				code: 0x2212,
+				name: "Minus sign",
+				entity: "minus",
+				note: "Lines up with +, and screen readers say minus.",
+			},
+			{
+				code: 0x2015,
+				name: "Horizontal bar",
+				entity: "horbar",
+				note: "Introduces a quote in some languages.",
+			},
+		],
+	},
+	{
+		name: "Quotes",
+		characters: [
+			{ code: 0x2018, name: "Left single quote", entity: "lsquo" },
+			{
+				code: 0x2019,
+				name: "Right single quote",
+				entity: "rsquo",
+				note: "Also the proper apostrophe.",
+			},
+			{ code: 0x201c, name: "Left double quote", entity: "ldquo" },
+			{ code: 0x201d, name: "Right double quote", entity: "rdquo" },
+			{ code: 0x201a, name: "Low single quote", entity: "sbquo" },
+			{
+				code: 0x201e,
+				name: "Low double quote",
+				entity: "bdquo",
+				note: "Opening quote in Dutch and German.",
+			},
+			{ code: 0x2039, name: "Single guillemet left", entity: "lsaquo" },
+			{ code: 0x203a, name: "Single guillemet right", entity: "rsaquo" },
+			{ code: 0x00ab, name: "Guillemet left", entity: "laquo" },
+			{ code: 0x00bb, name: "Guillemet right", entity: "raquo" },
+			{
+				code: 0x2032,
+				name: "Prime",
+				entity: "prime",
+				note: "For feet and minutes, not a quote.",
+			},
+			{
+				code: 0x2033,
+				name: "Double prime",
+				entity: "Prime",
+				note: "For inches and seconds.",
+			},
+		],
+	},
+	{
+		name: "Punctuation",
+		characters: [
+			{ code: 0x2026, name: "Ellipsis", entity: "hellip" },
+			{ code: 0x00b7, name: "Middle dot", entity: "middot" },
+			{ code: 0x2022, name: "Bullet", entity: "bull" },
+			{ code: 0x2023, name: "Triangular bullet" },
+			{ code: 0x00b6, name: "Pilcrow", entity: "para" },
+			{ code: 0x00a7, name: "Section sign", entity: "sect" },
+			{ code: 0x2020, name: "Dagger", entity: "dagger" },
+			{ code: 0x2021, name: "Double dagger", entity: "Dagger" },
+			{ code: 0x203b, name: "Reference mark" },
+		],
+	},
+	{
+		name: "Math",
+		characters: [
+			{
+				code: 0x00d7,
+				name: "Multiplication sign",
+				entity: "times",
+				note: "For 1920×1080, not the letter x.",
+			},
+			{ code: 0x00f7, name: "Division sign", entity: "divide" },
+			{ code: 0x00b1, name: "Plus-minus", entity: "plusmn" },
+			{ code: 0x2248, name: "Almost equal", entity: "asymp" },
+			{ code: 0x2260, name: "Not equal", entity: "ne" },
+			{ code: 0x2264, name: "Less than or equal", entity: "le" },
+			{ code: 0x2265, name: "Greater than or equal", entity: "ge" },
+			{ code: 0x221e, name: "Infinity", entity: "infin" },
+			{ code: 0x00b0, name: "Degree", entity: "deg" },
+			{ code: 0x00b2, name: "Superscript two", entity: "sup2" },
+			{ code: 0x00b3, name: "Superscript three", entity: "sup3" },
+			{ code: 0x00bd, name: "One half", entity: "frac12" },
+			{ code: 0x00bc, name: "One quarter", entity: "frac14" },
+			{ code: 0x00be, name: "Three quarters", entity: "frac34" },
+		],
+	},
+	{
+		name: "Symbols",
+		characters: [
+			{ code: 0x00a9, name: "Copyright", entity: "copy" },
+			{ code: 0x00ae, name: "Registered", entity: "reg" },
+			{ code: 0x2122, name: "Trade mark", entity: "trade" },
+			{ code: 0x20ac, name: "Euro", entity: "euro" },
+			{ code: 0x00a3, name: "Pound", entity: "pound" },
+			{ code: 0x00a5, name: "Yen", entity: "yen" },
+			{ code: 0x00a2, name: "Cent", entity: "cent" },
+			{ code: 0x2713, name: "Check mark", entity: "check" },
+			{ code: 0x2717, name: "Ballot X", entity: "cross" },
+			{ code: 0x2605, name: "Black star", entity: "starf" },
+			{ code: 0x2606, name: "White star", entity: "star" },
+		],
+	},
+	{
+		name: "Arrows and keys",
+		characters: [
+			{ code: 0x2190, name: "Left arrow", entity: "larr" },
+			{ code: 0x2192, name: "Right arrow", entity: "rarr" },
+			{ code: 0x2191, name: "Up arrow", entity: "uarr" },
+			{ code: 0x2193, name: "Down arrow", entity: "darr" },
+			{
+				code: 0x2197,
+				name: "North east arrow",
+				entity: "nearr",
+				note: "Often used for external links.",
+			},
+			{ code: 0x2318, name: "Command key" },
+			{ code: 0x2325, name: "Option key" },
+			{ code: 0x21e7, name: "Shift key" },
+			{ code: 0x2303, name: "Control key" },
+			{ code: 0x21e5, name: "Tab key" },
+			{ code: 0x23ce, name: "Return key" },
+			{ code: 0x232b, name: "Delete key" },
+			{ code: 0x238b, name: "Escape key" },
+		],
+	},
+];
+
+const rows = categories.flatMap((category) =>
+	category.characters.map((character) => {
+		const hex = character.code.toString(16).toUpperCase().padStart(4, "0");
+		return {
+			...character,
+			category: category.name,
+			invisible: category.invisible,
+			char: String.fromCodePoint(character.code),
+			unicode: `U+${hex}`,
+			html: character.entity ? `&${character.entity};` : `&#x${hex};`,
+			css: `\\${hex}`,
+			js: `\\u${hex}`,
+		};
+	}),
+);
+
+const pageTitle = "Special characters";
+const pageDescription =
+	"The Unicode characters worth knowing, from the narrow no-break space to the minus sign, ready to copy as HTML, CSS or JS.";
+---
+
+<PageLayout
+	title={pageTitle}
+	description={pageDescription}
+	breadcrumbs={[
+		{ name: "Home", item: "/" },
+		{ name: "Playground", item: "/playground/" },
+		{ name: pageTitle, item: "/playground/unicode/" },
+	]}
+	class="container"
+>
+	<BackLink />
+	<h1>{pageTitle}</h1>
+	<p>{pageDescription}</p>
+
+	<form id="unicode-form">
+		<div class="code-field">
+			<label for="unicode-search">Search</label>
+			<input
+				id="unicode-search"
+				name="q"
+				type="search"
+				placeholder="space, dash, 202F, nbsp…"
+				autocomplete="off"
+				autocapitalize="off"
+				spellcheck="false"
+			/>
+		</div>
+		<ul role="list" class="chips flex-wrap gap-sm" aria-label="Categories">
+			<li>
+				<button type="button" value="" aria-pressed="true">
+					All
+				</button>
+			</li>
+			{categories.map((category) => (
+				<li>
+					<button type="button" value={category.name} aria-pressed="false">
+						{category.name}
+					</button>
+				</li>
+			))}
+		</ul>
+	</form>
+
+	<output for="unicode-search" aria-live="polite" class="text-muted"></output>
+
+	<div class="scroll-x clip-y">
+		<table>
+			<thead>
+				<tr>
+					<th scope="col">Char</th>
+					<th scope="col">Name</th>
+					<th scope="col">Unicode</th>
+					<th scope="col">HTML</th>
+					<th scope="col">CSS</th>
+					<th scope="col">JS</th>
+				</tr>
+			</thead>
+			<tbody>
+				{rows.map((row) => (
+					<tr
+						data-category={row.category}
+						data-search={[row.name, row.unicode, row.html, row.note, row.category]
+							.join(" ")
+							.toLowerCase()}
+					>
+						<td>
+							<button
+								type="button"
+								class:list={["glyph", { invisible: row.invisible }]}
+								data-copy={row.char}
+								aria-label={`Copy ${row.name}`}
+							>
+								<span>{row.char}</span>
+							</button>
+						</td>
+						<th scope="row">
+							{row.name}
+							{row.note && <small class="text-muted">{row.note}</small>}
+						</th>
+						{[row.unicode, row.html, row.css, row.js].map((value) => (
+							<td>
+								<button type="button" data-copy={value}>
+									{value}
+								</button>
+							</td>
+						))}
+					</tr>
+				))}
+			</tbody>
+		</table>
+	</div>
+
+	<section aria-labelledby="good-to-know" class="explanation">
+		<h2 id="good-to-know">Good to know</h2>
+		<ul>
+			<li>
+				Click any cell to copy it. The first column copies the character itself, handy for
+				the invisible ones.
+			</li>
+			<li>
+				With a UTF-8 page you can paste the character straight into your HTML. The entity is
+				only needed for the invisible ones, so the next person can see they are there.
+			</li>
+			<li>
+				In CSS <code>content</code>, end the escape with a space when a letter or digit
+				follows, like <code>"\00A0 km"</code>, or it reads them as part of the code.
+			</li>
+			<li>
+				Spaces look the same in a text editor. Turn on rendering of whitespace, or search
+				for the code point, when a layout does not break where you expect.
+			</li>
+		</ul>
+	</section>
+</PageLayout>
+
+<script>
+	const form = document.querySelector<HTMLFormElement>("#unicode-form")!;
+	const search = document.querySelector<HTMLInputElement>("#unicode-search")!;
+	const output = document.querySelector<HTMLOutputElement>("output[for]")!;
+	const chips = Array.from(form.querySelectorAll<HTMLButtonElement>(".chips button"));
+	const rows = Array.from(document.querySelectorAll<HTMLTableRowElement>("tbody tr"));
+	let category = "";
+
+	/**
+	 * Shows the rows that match both the search and the picked category.
+	 */
+	function update() {
+		const query = search.value.trim().toLowerCase();
+		let visible = 0;
+
+		rows.forEach((row) => {
+			const match =
+				(!category || row.dataset.category === category) &&
+				row.dataset.search!.includes(query);
+			row.hidden = !match;
+			if (match) visible++;
+		});
+
+		chips.forEach((chip) => (chip.ariaPressed = String(chip.value === category)));
+		output.textContent = `${visible} of ${rows.length} characters`;
+	}
+
+	form.addEventListener("input", update);
+	form.addEventListener("submit", (event) => event.preventDefault());
+	form.addEventListener("click", (event) => {
+		const chip = (event.target as Element).closest<HTMLButtonElement>(".chips button");
+		if (!chip) return;
+		category = chip.value;
+		update();
+	});
+
+	document.querySelector("tbody")!.addEventListener("click", async (event) => {
+		const button = (event.target as Element).closest<HTMLButtonElement>("button[data-copy]");
+		if (!button) return;
+		await navigator.clipboard.writeText(button.dataset.copy!);
+		button.toggleAttribute("data-copied", true);
+		output.textContent = `Copied ${button.ariaLabel?.replace("Copy ", "") ?? button.dataset.copy}`;
+		setTimeout(() => button.removeAttribute("data-copied"), 1200);
+	});
+
+	update();
+</script>
+
+<style>
+	.chips [aria-pressed="true"],
+	td button[data-copied] {
+		--btn-bg: var(--root-fg);
+		--btn-stroke: var(--root-fg);
+		--btn-color: var(--root-bg);
+	}
+
+	output {
+		display: block;
+		margin-block: var(--size-6) var(--size-2);
+		font-family: var(--family-mono);
+		font-size: 0.875em;
+	}
+
+	table {
+		inline-size: 100%;
+
+		th {
+			text-align: start;
+		}
+
+		thead th {
+			z-index: 1;
+			position: sticky;
+			top: 0;
+			background: var(--root-bg);
+			transition: top 0.3s;
+		}
+
+		tbody th {
+			font-weight: 500;
+
+			small {
+				display: block;
+				font-weight: normal;
+			}
+		}
+	}
+
+	td button {
+		--btn-px: var(--size-2);
+		--btn-py: var(--size-1);
+		--btn-stroke: transparent;
+		font-family: var(--family-mono);
+		font-weight: normal;
+		white-space: nowrap;
+	}
+
+	td .glyph {
+		min-inline-size: var(--size-10);
+		font-family: inherit;
+		font-size: var(--font-size-4);
+
+		&.invisible span {
+			background: color-mix(in oklab, currentcolor 20%, transparent);
+			outline: 1px dashed currentcolor;
+		}
+	}
+
+	.explanation {
+		margin-block-start: var(--size-8);
+	}
+</style>
