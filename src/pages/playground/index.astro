@@ -1,34 +1,40 @@
 ---
 import PageLayout from "@/layouts/PageLayout.astro";
+import { Blend, Grid3x3, Hexagon, Pilcrow, Squircle } from "@lucide/astro";
 
 const playgrounds = [
 	{
 		name: "CSS nth selectors",
 		url: "/playground/css-nth/",
+		icon: Grid3x3,
 		description:
 			"A visual playground for :nth-child, :nth-of-type and friends, plus the sibling combinators.",
 	},
 	{
 		name: "CSS clip-path",
 		url: "/playground/clip-path/",
+		icon: Hexagon,
 		description:
 			"A visual playground for clip-path, with draggable polygon points and every shape function on one page.",
 	},
 	{
 		name: "CSS corner-shape",
 		url: "/playground/corner-shape/",
+		icon: Squircle,
 		description:
 			"A visual playground for corner-shape, from squircles to notches, and how every keyword maps to a superellipse.",
 	},
 	{
 		name: "CSS gradients",
 		url: "/playground/gradients/",
+		icon: Blend,
 		description:
 			"A visual playground for linear, radial and conic gradients, color stops, and how the color space changes the fade.",
 	},
 	{
 		name: "Special characters",
 		url: "/playground/unicode/",
+		icon: Pilcrow,
 		description:
 			"The Unicode characters worth knowing, from the narrow no-break space to the minus sign, ready to copy as HTML, CSS or JS.",
 	},
@@ -53,15 +59,32 @@ const pageDescription = "Interactive references for the things I keep looking up
 	<ul role="list" class="auto-grid gap" style="--max-col-size: 24rem">
 		{
 			playgrounds.map((playground) => (
-				<li>
-					<h2 class="text-xl">
-						<a href={playground.url} class="hover-underline">
-							{playground.name}
-						</a>
-					</h2>
-					<p class="text-muted">{playground.description}</p>
+				<li class="relative flex gap">
+					<span class="icon flex-none">
+						<playground.icon size={28} aria-hidden="true" />
+					</span>
+					<div class="flow-none flex-col gap-sm">
+						<h2 class="text-xl">
+							<a href={playground.url} class="stretched-link hover-underline">
+								{playground.name}
+							</a>
+						</h2>
+						<p class="text-muted">{playground.description}</p>
+					</div>
 				</li>
 			))
 		}
 	</ul>
 </PageLayout>
+
+<style>
+	.icon {
+		display: inline-grid;
+		align-self: start;
+		place-items: center;
+		padding: var(--size-3);
+		border-radius: 0.5rem;
+		background: color-mix(in oklab, var(--brand) 18%, transparent);
+		color: light-dark(var(--brand), color-mix(in oklch, var(--brand) 60%, var(--root-fg)));
+	}
+</style>
