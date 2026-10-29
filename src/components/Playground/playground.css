@@ -59,7 +59,6 @@
 
 	input,
 	textarea {
-		inline-size: auto;
 		min-inline-size: 1ch;
 
 		&:focus-visible {

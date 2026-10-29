@@ -86,14 +86,20 @@ const pageDescription =
 
 	<div class="grid-cols gap" style="--md_grid-cols: 2; --gap: var(--size-8)">
 		<section aria-labelledby="playground" class="playground">
-			<h2 id="playground" class="sr-only">Playground</h2>
+			<h2 id="playground" class="sr-only">
+				Playground
+			</h2>
 			<form id="nth-form">
 				<label for="nth-formula">An+B formula</label>
 				<div class="code-field">
-					<label for="nth-pseudo" class="sr-only">Pseudo-class</label>
+					<label for="nth-pseudo" class="sr-only">
+						Pseudo-class
+					</label>
 					<span aria-hidden="true">:</span>
 					<select id="nth-pseudo" name="pseudo">
-						{pseudoClasses.map((pseudo) => <option>{pseudo}</option>)}
+						{pseudoClasses.map((pseudo) => (
+							<option>{pseudo}</option>
+						))}
 					</select>
 					<span aria-hidden="true">(</span>
 					<input
@@ -109,21 +115,21 @@ const pageDescription =
 					<CopyButton label="Copy selector" />
 				</div>
 				<ul role="list" class="chips flex-wrap gap-sm" aria-label="Quick picks">
-					{
-						chips.map((chip) => (
-							<li>
-								<button type="button" value={chip}>
-									{chip}
-								</button>
-							</li>
-						))
-					}
+					{chips.map((chip) => (
+						<li>
+							<button type="button" value={chip}>
+								{chip}
+							</button>
+						</li>
+					))}
 				</ul>
 			</form>
 
 			<output for="nth-pseudo nth-formula" aria-live="polite" class="text-muted"></output>
 			<div class="nth-grid">
-				{boxes.map(({ position, tag: Tag }) => <Tag>{position}</Tag>)}
+				{boxes.map(({ position, tag: Tag }) => (
+					<Tag>{position}</Tag>
+				))}
 			</div>
 			<p class="text-sm text-muted">
 				Squares are <code>&lt;div&gt;</code>, circles are <code>&lt;span&gt;</code>. The
@@ -134,8 +140,8 @@ const pageDescription =
 		<section aria-labelledby="how-it-works" class="explanation flow">
 			<h2 id="how-it-works">How An+B works</h2>
 			<p>
-				<code>n</code> is a counter that starts at 0 and goes up by one. The browser fills in
-				every value and selects each element whose position comes out of the formula.
+				<code>n</code> is a counter that starts at 0 and goes up by one. The browser fills
+				in every value and selects each element whose position comes out of the formula.
 				<code>A</code> is the step size, <code>B</code> the offset. Positions start at 1, so
 				anything that comes out at 0 or below matches nothing.
 			</p>
@@ -147,31 +153,27 @@ const pageDescription =
 					</tr>
 				</thead>
 				<tbody>
-					{
-						examples.map((example) => (
-							<tr>
-								<td>
-									<code>{example.formula}</code>
-								</td>
-								<td>{example.matches}</td>
-							</tr>
-						))
-					}
+					{examples.map((example) => (
+						<tr>
+							<td>
+								<code>{example.formula}</code>
+							</td>
+							<td>{example.matches}</td>
+						</tr>
+					))}
 				</tbody>
 			</table>
 
 			<h3>The variants</h3>
 			<dl>
-				{
-					variants.map((variant) => (
-						<>
-							<dt>
-								<code>{variant.selector}</code>
-							</dt>
-							<dd>{variant.description}</dd>
-						</>
-					))
-				}
+				{variants.map((variant) => (
+					<>
+						<dt>
+							<code>{variant.selector}</code>
+						</dt>
+						<dd>{variant.description}</dd>
+					</>
+				))}
 			</dl>
 			<p>
 				Watch out, <code>p:nth-child(2)</code> is not the second paragraph. It is the second
@@ -181,18 +183,16 @@ const pageDescription =
 
 			<h3>Shorthands</h3>
 			<dl class="shorthands">
-				{
-					shorthands.map((shorthand) => (
-						<>
-							<dt>
-								<code>{shorthand.selector}</code>
-							</dt>
-							<dd>
-								<code>{shorthand.equals}</code>
-							</dd>
-						</>
-					))
-				}
+				{shorthands.map((shorthand) => (
+					<>
+						<dt>
+							<code>{shorthand.selector}</code>
+						</dt>
+						<dd>
+							<code>{shorthand.equals}</code>
+						</dd>
+					</>
+				))}
 			</dl>
 		</section>
 	</div>
@@ -206,35 +206,31 @@ const pageDescription =
 		</p>
 		<fieldset class="flex-wrap gap-sm">
 			<legend>Combinator</legend>
-			{
-				combinators.map((combinator, index) => (
-					<label>
-						<input
-							type="radio"
-							name="combinator"
-							value={combinator.value}
-							checked={index === 0}
-						/>
-						<code>{combinator.selector}</code>
-						<span class="text-muted">{combinator.label}</span>
-					</label>
-				))
-			}
+			{combinators.map((combinator, index) => (
+				<label>
+					<input
+						type="radio"
+						name="combinator"
+						value={combinator.value}
+						checked={index === 0}
+					/>
+					<code>{combinator.selector}</code>
+					<span class="text-muted">{combinator.label}</span>
+				</label>
+			))}
 		</fieldset>
 		<div class="sibling-row" role="radiogroup" aria-label="Element A">
-			{
-				Array.from({ length: 10 }, (_, index) => (
-					<label>
-						<input
-							type="radio"
-							name="sibling-anchor"
-							class="sr-only"
-							checked={index === 4}
-						/>
-						{index + 1}
-					</label>
-				))
-			}
+			{Array.from({ length: 10 }, (_, index) => (
+				<label>
+					<input
+						type="radio"
+						name="sibling-anchor"
+						class="sr-only"
+						checked={index === 4}
+					/>
+					{index + 1}
+				</label>
+			))}
 		</div>
 	</section>
 </PageLayout>
@@ -410,5 +406,17 @@ const pageDescription =
 		border-color: var(--brand);
 		color: var(--on-brand);
 		scale: 1.05;
+	}
+
+	.code-field {
+		input {
+			inline-size: auto;
+			min-inline-size: 2ex;
+		}
+
+		select {
+			--select-icon: none;
+			padding-inline: var(--form-px, 0.8rem);
+		}
 	}
 </style>

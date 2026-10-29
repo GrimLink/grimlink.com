@@ -1,5 +1,6 @@
 ---
 import PageLayout from "@/layouts/PageLayout.astro";
+import { Search } from "@lucide/astro";
 import BackLink from "@/components/Playground/BackLink.astro";
 import "@/components/Playground/playground.css";
 
@@ -277,7 +278,10 @@ const pageDescription =
 
 	<form id="unicode-form">
 		<div class="code-field">
-			<label for="unicode-search">Search</label>
+			<label for="unicode-search">
+				<Search size="0.875em" aria-hidden="true" />
+				<span class="sr-only">Search</span>
+			</label>
 			<input
 				id="unicode-search"
 				name="q"
@@ -425,6 +429,18 @@ const pageDescription =
 </script>
 
 <style>
+	.code-field {
+		gap: var(--size-3);
+
+		> label {
+			display: inline-grid;
+		}
+
+		input {
+			flex: 1;
+		}
+	}
+
 	.chips [aria-pressed="true"],
 	td button[data-copied] {
 		--btn-bg: var(--root-fg);
