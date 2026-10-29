@@ -1,5 +1,6 @@
 ---
 import PageLayout from "@/layouts/PageLayout.astro";
+import PlaygroundImg from "@/assets/playground.webp";
 import { Blend, Grid3x3, Hexagon, Pilcrow, Squircle } from "@lucide/astro";
 
 const playgrounds = [
@@ -47,6 +48,7 @@ const pageDescription = "Interactive references for the things I keep looking up
 <PageLayout
 	title={pageTitle}
 	description={pageDescription}
+	image={PlaygroundImg}
 	breadcrumbs={[
 		{ name: "Home", item: "/" },
 		{ name: "Playground", item: "/playground/" },

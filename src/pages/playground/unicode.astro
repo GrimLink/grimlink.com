@@ -1,5 +1,6 @@
 ---
 import PageLayout from "@/layouts/PageLayout.astro";
+import PlaygroundImg from "@/assets/playground.webp";
 import { Search } from "@lucide/astro";
 import BackLink from "@/components/Playground/BackLink.astro";
 import "@/components/Playground/playground.css";
@@ -265,6 +266,7 @@ const pageDescription =
 <PageLayout
 	title={pageTitle}
 	description={pageDescription}
+	image={PlaygroundImg}
 	breadcrumbs={[
 		{ name: "Home", item: "/" },
 		{ name: "Playground", item: "/playground/" },
