@@ -130,8 +130,8 @@ const pageDescription =
 	<h1>{pageTitle}</h1>
 	<p>{pageDescription}</p>
 
-	<div class="grid-cols gap" style="--md_grid-cols: 2; --gap: var(--size-8)">
-		<section aria-labelledby="playground" class="playground">
+	<div class="grid-cols gap" style="--md_grid-cols: 5; --gap: var(--size-8)">
+		<section aria-labelledby="playground" class="playground" style="--md_col: span 3">
 			<h2 id="playground" class="sr-only">Playground</h2>
 			<form id="gradient-form">
 				<div class="code-field">
@@ -162,7 +162,7 @@ const pageDescription =
 			<div class="preview"></div>
 		</section>
 
-		<section aria-labelledby="gradient-functions" class="explanation flow">
+		<section aria-labelledby="gradient-functions" class="explanation flow" style="--md_col: span 2">
 			<h2 id="gradient-functions">Gradient functions</h2>
 			<dl>
 				{

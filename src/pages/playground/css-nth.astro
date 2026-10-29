@@ -86,8 +86,8 @@ const pageDescription =
 	<h1>{pageTitle}</h1>
 	<p>{pageDescription}</p>
 
-	<div class="grid-cols gap" style="--md_grid-cols: 2; --gap: var(--size-8)">
-		<section aria-labelledby="playground" class="playground">
+	<div class="grid-cols gap" style="--md_grid-cols: 5; --gap: var(--size-8)">
+		<section aria-labelledby="playground" class="playground" style="--md_col: span 3">
 			<h2 id="playground" class="sr-only">
 				Playground
 			</h2>
@@ -139,13 +139,19 @@ const pageDescription =
 			</p>
 		</section>
 
-		<section aria-labelledby="how-it-works" class="explanation flow">
+		<section aria-labelledby="how-it-works" class="explanation flow" style="--md_col: span 2">
 			<h2 id="how-it-works">How An+B works</h2>
+			<dl>
+				<dt><code>n</code></dt>
+				<dd>A counter that starts at 0 and goes up by one.</dd>
+				<dt><code>A</code></dt>
+				<dd>The step size, so 3n picks every third element.</dd>
+				<dt><code>B</code></dt>
+				<dd>The offset, so 3n+1 starts at the first element.</dd>
+			</dl>
 			<p>
-				<code>n</code> is a counter that starts at 0 and goes up by one. The browser fills
-				in every value and selects each element whose position comes out of the formula.
-				<code>A</code> is the step size, <code>B</code> the offset. Positions start at 1, so
-				anything that comes out at 0 or below matches nothing.
+				The browser fills in every n and selects each element whose position comes out.
+				Positions start at 1, so anything at 0 or below matches nothing.
 			</p>
 			<table>
 				<thead>

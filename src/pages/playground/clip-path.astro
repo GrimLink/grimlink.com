@@ -104,8 +104,8 @@ const pageDescription =
 	<h1>{pageTitle}</h1>
 	<p>{pageDescription}</p>
 
-	<div class="grid-cols gap" style="--md_grid-cols: 2; --gap: var(--size-8)">
-		<section aria-labelledby="playground" class="playground">
+	<div class="grid-cols gap" style="--md_grid-cols: 5; --gap: var(--size-8)">
+		<section aria-labelledby="playground" class="playground" style="--md_col: span 3">
 			<h2 id="playground" class="sr-only">Playground</h2>
 			<form id="clip-form">
 				<div class="code-field">
@@ -139,7 +139,7 @@ const pageDescription =
 			</div>
 		</section>
 
-		<section aria-labelledby="shape-functions" class="explanation flow">
+		<section aria-labelledby="shape-functions" class="explanation flow" style="--md_col: span 2">
 			<h2 id="shape-functions">Shape functions</h2>
 			<p>
 				A clip-path draws a shape over the element and hides everything outside of it. Points

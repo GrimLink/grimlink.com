@@ -71,8 +71,8 @@ const pageDescription =
 		</p>
 	</div>
 
-	<div class="grid-cols gap" style="--md_grid-cols: 2; --gap: var(--size-8)">
-		<section aria-labelledby="playground" class="playground">
+	<div class="grid-cols gap" style="--md_grid-cols: 5; --gap: var(--size-8)">
+		<section aria-labelledby="playground" class="playground" style="--md_col: span 3">
 			<h2 id="playground" class="sr-only">Playground</h2>
 			<form id="corner-form">
 				<div class="code-field">
@@ -125,7 +125,7 @@ const pageDescription =
 			<p class="text-sm text-muted">The dashed outline is the same border-radius without a corner-shape.</p>
 		</section>
 
-		<section aria-labelledby="how-it-works" class="explanation flow">
+		<section aria-labelledby="how-it-works" class="explanation flow" style="--md_col: span 2">
 			<h2 id="how-it-works">How corner-shape works</h2>
 			<p>
 				<code>border-radius</code> decides how big a corner is, <code>corner-shape</code> decides
