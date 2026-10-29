@@ -77,7 +77,7 @@ const { id = "mobile-menu", title = "Mobile Menu", items } = Astro.props;
 			</svg>
 		</button>
 	</div>
-	<nav>
+	<nav aria-label="Main">
 		<ul>
 			{items.map((item) => {
 				const isExternal = typeof item.url === "string" && item.url.startsWith("http");
