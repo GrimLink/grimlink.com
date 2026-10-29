@@ -19,5 +19,6 @@ export const footerMenu = [
 	{ url: "/speaking/", label: "Speaking" },
 	{ url: "/projects/", label: "Projects" },
 	{ url: "/tools/", label: "Tools" },
+	{ url: "/playground/", label: "Playground" },
 	{ url: "/about/", label: "About Me" },
 ];

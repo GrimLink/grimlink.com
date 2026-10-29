@@ -13,6 +13,7 @@ interface Props {
 }
 
 const { projects } = Astro.props;
+const isExternal = (url: string) => url.startsWith("http");
 ---
 
 <dl class="project-list">
@@ -24,8 +25,8 @@ const { projects } = Astro.props;
 				)}
 				<a
 					href={project.url}
-					target="_blank"
-					rel="noopener noreferrer"
+					target={isExternal(project.url) ? "_blank" : undefined}
+					rel={isExternal(project.url) ? "noopener noreferrer" : undefined}
 					class="hover-underline"
 				>
 					{project.name}

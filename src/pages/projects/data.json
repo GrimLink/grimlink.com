@@ -7,6 +7,12 @@
 			"status": "active"
 		},
 		{
+			"name": "Playground",
+			"description": "Interactive references for CSS and special characters, part of this site.",
+			"url": "/playground/",
+			"status": "active"
+		},
+		{
 			"name": "mage",
 			"description": "Simplifies bin/magento commands by adding helpful shortcuts and time-saving tools to enhance your productivity.",
 			"url": "https://github.com/GrimLink/mage",
