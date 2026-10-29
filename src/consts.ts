@@ -4,7 +4,7 @@ export const siteDescription =
 export const themeColor = "#111624";
 
 type seasonOptions = "christmas" | "halloween" | undefined;
-export const season: seasonOptions = undefined;
+export const season: seasonOptions = "halloween";
 
 export const author = "Sean van Zuidam";
 export const authorAbout =
