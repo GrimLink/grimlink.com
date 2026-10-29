@@ -19,7 +19,7 @@
     "@fylgja/card": "^2.0.2",
     "@fylgja/form-extend": "^1.1.0",
     "@lucide/astro": "^1.24.0",
-    "astro": "^7.3.8",
+    "astro": "^7.4.4",
     "fylgja": "^2.2.2",
     "sharp": "^0.35.3"
   }
