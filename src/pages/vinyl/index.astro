@@ -87,8 +87,9 @@ const galleries = new Map(
 	),
 );
 
-const pageTitle = "Vinyl";
-const pageDescription = "My vinyl collection, mostly game soundtracks with a few exceptions.";
+const pageTitle = "My Vinyl Collection";
+const pageDescription =
+	"My vinyl collection, mostly game soundtracks with a few exceptions here and there.";
 ---
 
 <PageLayout
@@ -107,8 +108,13 @@ const pageDescription = "My vinyl collection, mostly game soundtracks with a few
 
 	{sortedRecords.length > 0 ? (
 		<vinyl-records class="block" data-view="drawer">
-			<form aria-label="Sort and filter records" class="filters gap">
-				<div role="group" aria-label="View" class="input-group --merge view-toggle">
+			<form aria-label="Sort and filter records" class="filters gap mx-auto">
+				<div
+					role="group"
+					aria-label="View"
+					class="input-group --merge view-toggle"
+					style="--mx: 0 auto"
+				>
 					{views.map(({ value, label, icon: Icon }, i) => (
 						<label class="btn" title={label}>
 							<input
@@ -257,14 +263,17 @@ const pageDescription = "My vinyl collection, mostly game soundtracks with a few
 		<h2 id="how-it-started">How it started</h2>
 		<p>
 			My first vinyl came with the collector's edition of Ni no Kuni II, a picture disc tucked
-			in with the game. From there it went fast. Game soundtracks are often limited pressings,
-			so I started picking up a few before they were gone.
+			in with the game.
+			<br />
+			From there it went fast. Game soundtracks are often limited pressings, so I started
+			picking up a few before they were gone.
 		</p>
 		<p>
 			That has grown into the {records.length} records you see here. I mostly stick to
-			soundtracks from games, with a few exceptions. Some are film, series and anime
-			soundtracks, like Cowboy Bebop and One Piece, and there is a YOASOBI single and even a
-			Trash Taste anniversary record in between.
+			soundtracks from games, with a few exceptions.
+			<br />
+			Some are film, series and anime soundtracks, like Cowboy Bebop and One Piece, and there
+			is a YOASOBI single and even a Trash Taste anniversary record in between.
 		</p>
 	</section>
 </PageLayout>
@@ -284,7 +293,9 @@ const pageDescription = "My vinyl collection, mostly game soundtracks with a few
 
 	.story {
 		margin-block-start: var(--size-12);
+		margin-inline: auto;
 		scroll-margin-block-start: var(--size-8);
+		max-inline-size: var(--size-content);
 	}
 
 	.filters {

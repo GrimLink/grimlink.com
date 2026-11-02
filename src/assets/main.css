@@ -155,6 +155,11 @@
 		--shadow: var(--shadow-2);
 		box-shadow: var(--shadow);
 	}
+
+	.flex-balance {
+		flex-wrap: wrap;
+		flex-wrap: balance;
+	}
 }
 
 @keyframes fade-in {

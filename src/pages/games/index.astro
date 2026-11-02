@@ -35,90 +35,134 @@ const gamesPosts = (await getCollection("blog"))
 	<div class="flow">
 		<p>{pageDescription}</p>
 		<p>
-			I keep track of everything I play on <a href="https://backloggd.com/u/GrimLink/" target="_blank" rel="noopener noreferrer">Backloggd</a>, played, playing, and the ever-growing backlog 😅
+			I keep track of everything I play on{" "}
+			<a href="https://backloggd.com/u/GrimLink/" target="_blank" rel="noopener noreferrer">
+				Backloggd
+			</a>
+			, played, playing, and the ever-growing backlog 😅
 			<br />
-			If you want to see how far my PlayStation trophy hunting has gone, see <a href="https://psnprofiles.com/GrimLink" target="_blank" rel="noopener noreferrer">PSN Profiles</a>.
+			If you want to see how far my PlayStation trophy hunting has gone, see{" "}
+			<a href="https://psnprofiles.com/GrimLink" target="_blank" rel="noopener noreferrer">
+				PSN Profiles
+			</a>
+			.
 		</p>
 	</div>
 
 	<section aria-labelledby="fav-games">
 		<h2 id="fav-games">Games I love & adore</h2>
-		<p>My favourite games of all time. While I love a lot of games, these are the ones I remember most fondly and tend to return to more than once.</p>
+		<p>
+			My favourite games of all time. While I love a lot of games, these are the ones I
+			remember most fondly and tend to return to more than once.
+		</p>
 		<ul role="list" class="fav-games flex-wrap gap">
-			{
-				favGames.map((game, i) => (
-					<Card tag="li" class="stack">
-						{game.image && (
-							<Image
-								src={game.image}
-								alt={game.title}
-								width={264}
-								height={374}
-								class="w-full"
-								loading={i < 2 ? "eager" : "lazy"}
-							/>
-						)}
-						<p class="lead overlay card-content w-full text-center align-self-end">
-							<a
-								href={game.url}
-								class="stretched-link hover-underline"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<strong>{game.title}</strong>
-							</a>
-						</p>
-					</Card>
-				))
-			}
+			{favGames.map((game, i) => (
+				<Card tag="li" class="stack">
+					{game.image && (
+						<Image
+							src={game.image}
+							alt={game.title}
+							width={264}
+							height={374}
+							class="w-full"
+							loading={i < 2 ? "eager" : "lazy"}
+						/>
+					)}
+					<p class="lead overlay card-content w-full text-center align-self-end">
+						<a
+							href={game.url}
+							class="stretched-link hover-underline"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<strong>{game.title}</strong>
+						</a>
+					</p>
+				</Card>
+			))}
 		</ul>
 	</section>
 
-	{
-		gamesPosts.length > 0 && (
-			<section aria-labelledby="games-posts">
-				<h2 id="games-posts">More from the Feed</h2>
-				<p>More about my Gaming Experiences</p>
-				<ul role="list" class="auto-grid gap" style="--max-col-size: 26rem">
-					{gamesPosts.map((post, i) => (
-						<li class="flex-col">
-							<PostCard
-								{...post}
-								headingTag="h3"
-								loading={i < 2 ? "eager" : "lazy"}
-								hideMeta
-								class="flex-auto"
-							/>
-						</li>
-					))}
+	{gamesPosts.length > 0 && (
+		<section aria-labelledby="games-posts">
+			<h2 id="games-posts">More from the Feed</h2>
+			<p>More about my Gaming Experiences</p>
+			<ul role="list" class="auto-grid gap" style="--max-col-size: 26rem">
+				{gamesPosts.map((post, i) => (
 					<li class="flex-col">
-						<a href="/blog/tags/games/" class="read-more card card-elevated flex-auto flex gap-sm align-center hover-underline">
-							More posts tagged with Games
-							<ArrowRight size={20} aria-hidden="true" />
-						</a>
+						<PostCard
+							{...post}
+							headingTag="h3"
+							loading={i < 2 ? "eager" : "lazy"}
+							hideMeta
+							class="flex-auto"
+						/>
 					</li>
-				</ul>
-			</section>
-		)
-	}
+				))}
+				<li class="flex-col">
+					<a
+						href="/blog/tags/games/"
+						class="read-more card card-elevated flex-auto flex gap-sm align-center hover-underline"
+					>
+						More posts tagged with Games
+						<ArrowRight size={20} aria-hidden="true" />
+					</a>
+				</li>
+			</ul>
+		</section>
+	)}
 
 	<section aria-labelledby="web-games">
 		<h2 id="web-games">Cool Web Games</h2>
-		<p>A mix of games you can play right now in your browser, no install required. Some are pure fun, others are educational and aimed at developers — a few will even teach you CSS or test your knowledge of web trivia.</p>
+		<p>
+			A mix of games you can play right now in your browser, no install required.
+			<br />
+			Some are pure fun, others are educational and aimed at developers — a few will even
+			teach you CSS or test your knowledge of web trivia.
+		</p>
 		<ul>
-			{
-				webGames.map((game) => (
-					<li>
-						<a href={game.url} target="_blank" rel="noopener noreferrer" class="inline-block">
-							{game.title}
-						</a>{" "}
-						{game.type && <span class="game-type">{game.type}</span>}
-						{game.description && (<br /><span>{game.description}</span>)}
-					</li>
-				))
-			}
+			{webGames.map((game) => (
+				<li>
+					<a
+						href={game.url}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="inline-block"
+					>
+						{game.title}
+					</a>{" "}
+					{game.type && <span class="game-type">{game.type}</span>}
+					{game.description && (
+						<>
+							<br />
+							<span>{game.description}</span>
+						</>
+					)}
+				</li>
+			))}
 		</ul>
-		<p><em>Found another cool web game that should be on this list? Feel free to open an issue on the <a href="https://github.com/GrimLink/grimlink.com/issues/new" target="_blank" rel="noopener noreferrer">GitHub repo</a>, or share it with me on <a href={socials.bluesky} target="_blank" rel="noopener noreferrer">Bluesky</a> or <a href={socials.mastodon} target="_blank" rel="noopener noreferrer">Mastodon</a>.</em></p>
+		<p>
+			<em>
+				Found another cool web game that should be on this list? Feel free to open an issue
+				on the{" "}
+				<a
+					href="https://github.com/GrimLink/grimlink.com/issues/new"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					GitHub repo
+				</a>
+				, or share it with me on{" "}
+				<a href={socials.bluesky} target="_blank" rel="noopener noreferrer">
+					Bluesky
+				</a>{" "}
+				or{" "}
+				<a href={socials.mastodon} target="_blank" rel="noopener noreferrer">
+					Mastodon
+				</a>
+				.
+			</em>
+		</p>
 	</section>
 </PageLayout>
 
