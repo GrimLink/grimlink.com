@@ -64,11 +64,11 @@ class VinylRecords extends HTMLElement {
 		this.galleryCaption = this.dialog.querySelector("p");
 		this.galleryThumbs = [...this.dialog.querySelectorAll("[data-thumb]")];
 
-		const viewSelect = this.form.elements.namedItem("view");
+		const views = this.form.elements.namedItem("view");
 
-		this.form.addEventListener("change", () => this.update());
-		viewSelect.addEventListener("change", () => {
-			localStorage.setItem(VIEW_STORAGE_KEY, viewSelect.value);
+		this.form.addEventListener("change", (event) => {
+			if (event.target.name === "view") localStorage.setItem(VIEW_STORAGE_KEY, views.value);
+			this.update();
 		});
 
 		for (const button of this.querySelectorAll("[data-step]")) {
@@ -109,9 +109,7 @@ class VinylRecords extends HTMLElement {
 		});
 
 		const savedView = localStorage.getItem(VIEW_STORAGE_KEY);
-		if ([...viewSelect.options].some((option) => option.value === savedView)) {
-			viewSelect.value = savedView;
-		}
+		if ([...views].some((view) => view.value === savedView)) views.value = savedView;
 
 		// Browsers can restore the selects on reload, so the list has to catch up.
 		this.update();

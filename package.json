@@ -18,9 +18,13 @@
     "@fylgja/badge": "^2.0.0",
     "@fylgja/card": "^2.0.2",
     "@fylgja/form-extend": "^1.1.0",
+    "@fylgja/input-group": "^2.0.1",
     "@lucide/astro": "^1.24.0",
     "astro": "^7.4.4",
     "fylgja": "^2.2.2",
     "sharp": "^0.35.3"
+  },
+  "allowScripts": {
+    "fsevents@2.3.3": true
   }
 }

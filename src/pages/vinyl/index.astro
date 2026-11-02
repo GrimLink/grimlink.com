@@ -1,7 +1,7 @@
 ---
 import PageLayout from "@/layouts/PageLayout.astro";
 import { Image, getImage } from "astro:assets";
-import { ChevronLeft, ChevronRight, X } from "@lucide/astro";
+import { ChevronLeft, ChevronRight, GalleryHorizontal, LayoutGrid, List, X } from "@lucide/astro";
 import type { ImageMetadata } from "astro";
 import StoreIcons from "@/assets/stores.svg?url";
 import dataJson from "./data.json";
@@ -28,6 +28,12 @@ const recordLinks = [
 	{ key: "blackscreen", name: "Black Screen Records" },
 	{ key: "fangamer", name: "Fangamer" },
 ] as const;
+
+const views = [
+	{ value: "drawer", label: "Drawer", icon: GalleryHorizontal },
+	{ value: "grid", label: "Grid", icon: LayoutGrid },
+	{ value: "list", label: "List", icon: List },
+];
 
 const { records } = dataJson as { records: VinylRecord[] };
 
@@ -63,7 +69,12 @@ async function galleryOf(record: VinylRecord) {
 		views.map(async ({ file, label }) => {
 			const [full, thumb] = await Promise.all([
 				getImage({ src: images[file!] }),
-				getImage({ src: images[file!], width: THUMB_SIZE, height: THUMB_SIZE, fit: "cover" }),
+				getImage({
+					src: images[file!],
+					width: THUMB_SIZE,
+					height: THUMB_SIZE,
+					fit: "cover",
+				}),
 			]);
 			return { src: full.src, thumb: thumb.src, label };
 		}),
@@ -77,7 +88,7 @@ const galleries = new Map(
 );
 
 const pageTitle = "Vinyl";
-const pageDescription = "All of the vinyl I have collected through the years.";
+const pageDescription = "My vinyl collection, mostly game soundtracks with a few exceptions.";
 ---
 
 <PageLayout
@@ -90,140 +101,172 @@ const pageDescription = "All of the vinyl I have collected through the years.";
 	class="container"
 >
 	<h1>{pageTitle}</h1>
-	<p>{pageDescription}</p>
+	<p>
+		{pageDescription} Curious where it began? Read <a href="#how-it-started">how it started</a>.
+	</p>
 
-	{
-		sortedRecords.length > 0 ? (
-			<vinyl-records class="block" data-view="drawer">
-				<form aria-label="Sort and filter records" class="flex flex-wrap gap">
-					<label>
-						View
-						<select name="view">
-							<option value="drawer">Drawer</option>
-							<option value="grid">Grid</option>
-							<option value="list">List</option>
-						</select>
-					</label>
-					<label>
-						Sort by
-						<select name="sort">
-							<option value="title">Title</option>
-							<option value="artist">Artist</option>
-							<option value="year-desc">Newest first</option>
-							<option value="year-asc">Oldest first</option>
-						</select>
-					</label>
-					{genres.length > 1 && (
-						<label>
-							Genre
-							<select name="genre">
-								<option value="">All genres</option>
-								{genres.map((genre) => (
-									<option>{genre}</option>
-								))}
-							</select>
+	{sortedRecords.length > 0 ? (
+		<vinyl-records class="block" data-view="drawer">
+			<form aria-label="Sort and filter records" class="filters gap">
+				<div role="group" aria-label="View" class="input-group --merge view-toggle">
+					{views.map(({ value, label, icon: Icon }, i) => (
+						<label class="btn" title={label}>
+							<input
+								type="radio"
+								name="view"
+								value={value}
+								checked={i === 0}
+								aria-label={label}
+							/>
+							<Icon size={24} aria-hidden="true" />
 						</label>
-					)}
-				</form>
-				<p aria-live="polite" class="text-sm text-muted">
-					{sortedRecords.length} {sortedRecords.length === 1 ? "record" : "records"}
-				</p>
-				<ul role="list" class="records auto-grid gap scroll-mask" style="--max-col-size: 20rem">
-					{sortedRecords.map((record, i) => (
-						<li
-							data-title={record.title}
-							data-artist={record.artist}
-							data-year={record.year}
-							data-genres={record.genres?.join("|")}
-						>
-							{record.image && images[record.image] && (
-								<button
-									type="button"
-									class="cover"
-									aria-label={`View images of ${record.title}`}
-									data-gallery={JSON.stringify(galleries.get(record))}
-								>
-									<Image
-										src={images[record.image]}
-										alt=""
-										width={640}
-										height={640}
-										class="w-full"
-										loading={i < 4 ? "eager" : "lazy"}
-									/>
-								</button>
-							)}
-							<p class="text-sm">
-								<strong>{record.title}</strong>
-								<br />
-								<span class="text-muted">
-									{record.artist}
-									{record.year && `, ${record.year}`}
-								</span>
-								<span class="genres text-muted">{record.genres?.join(", ")}</span>
-							</p>
-							<ul role="list" class="links inline-flex flex-wrap gap-sm">
-								{recordLinks.map(
-									({ key, name }) =>
-										record[key] && (
-											<li>
-												<a
-													href={record[key]}
-													target="_blank"
-													rel="noopener noreferrer"
-													title={name}
-													aria-label={`${record.title} on ${name}`}
-												>
-													<svg width="20" height="20" fill="currentcolor" aria-hidden="true">
-														<use href={`${StoreIcons}#${key}`} />
-													</svg>
-												</a>
-											</li>
-										),
-								)}
-							</ul>
-						</li>
 					))}
-				</ul>
-				<div class="drawer-nav flex gap-sm">
-					<button type="button" data-step="-1" aria-label="Previous record">
-						<ChevronLeft aria-hidden="true" />
-					</button>
-					<button type="button" data-step="1" aria-label="Next record">
-						<ChevronRight aria-hidden="true" />
-					</button>
 				</div>
-				<dialog
-					id="record-gallery"
-					closedby="any"
-					aria-label="Record images"
-					class="gallery w-full h-full open:flex"
-					style={{
-						"--p": 0,
-						"--backdrop": "hsl(0 0% 0% / 85%)",
-						"--dialog-bg": "transparent",
-						"--dialog-shadow": "none",
-						"--dialog-translate-y": 0,
-					}}
-				>
-					<img src="data:," alt="" class="gallery-image" />
-					<p class="text-sm"></p>
-					<div class="gallery-thumbs flex gap-sm">
-						{[0, 1, 2].map((index) => (
-							<button type="button" data-thumb={index} hidden>
-								<img src="data:," alt="" width="72" height="72" />
+				<label>
+					<span class="sr-only">Sort by</span>
+					<select name="sort">
+						<option value="title">Title</option>
+						<option value="artist">Artist</option>
+						<option value="year-desc">Newest first</option>
+						<option value="year-asc">Oldest first</option>
+					</select>
+				</label>
+				{genres.length > 1 && (
+					<label>
+						<span class="sr-only">Genre</span>
+						<select name="genre">
+							<option value="">All genres</option>
+							{genres.map((genre) => (
+								<option>{genre}</option>
+							))}
+						</select>
+					</label>
+				)}
+			</form>
+			<p aria-live="polite" class="text-sm text-muted">
+				{sortedRecords.length} {sortedRecords.length === 1 ? "record" : "records"}
+			</p>
+			<ul role="list" class="records auto-grid gap scroll-mask" style="--max-col-size: 20rem">
+				{sortedRecords.map((record, i) => (
+					<li
+						data-title={record.title}
+						data-artist={record.artist}
+						data-year={record.year}
+						data-genres={record.genres?.join("|")}
+					>
+						{record.image && images[record.image] && (
+							<button
+								type="button"
+								class="cover"
+								aria-label={`View images of ${record.title}`}
+								data-gallery={JSON.stringify(galleries.get(record))}
+							>
+								<Image
+									src={images[record.image]}
+									alt=""
+									width={640}
+									height={640}
+									class="w-full"
+									loading={i < 4 ? "eager" : "lazy"}
+								/>
 							</button>
-						))}
-					</div>
-					<button type="button" command="close" commandfor="record-gallery" class="gallery-close" aria-label="Close">
-						<X aria-hidden="true" />
-					</button>
-				</dialog>
-			</vinyl-records>
-		) : (
-			<p class="text-muted">No records listed yet.</p>
-		)
-	}
+						)}
+						<p class="text-sm">
+							<strong>{record.title}</strong>
+							<br />
+							<span class="text-muted">
+								{record.artist}
+								{record.year && `, ${record.year}`}
+							</span>
+							<span class="genres text-muted">{record.genres?.join(", ")}</span>
+						</p>
+						<ul role="list" class="links inline-flex flex-wrap gap-sm">
+							{recordLinks.map(
+								({ key, name }) =>
+									record[key] && (
+										<li>
+											<a
+												href={record[key]}
+												target="_blank"
+												rel="noopener noreferrer"
+												title={name}
+												aria-label={`${record.title} on ${name}`}
+											>
+												<svg
+													width="20"
+													height="20"
+													fill="currentcolor"
+													aria-hidden="true"
+												>
+													<use href={`${StoreIcons}#${key}`} />
+												</svg>
+											</a>
+										</li>
+									),
+							)}
+						</ul>
+					</li>
+				))}
+			</ul>
+			<div class="drawer-nav flex gap-sm">
+				<button type="button" data-step="-1" aria-label="Previous record">
+					<ChevronLeft aria-hidden="true" />
+				</button>
+				<button type="button" data-step="1" aria-label="Next record">
+					<ChevronRight aria-hidden="true" />
+				</button>
+			</div>
+			<dialog
+				id="record-gallery"
+				closedby="any"
+				aria-label="Record images"
+				class="gallery w-full h-full open:flex"
+				style={{
+					"--p": 0,
+					"--backdrop": "hsl(0 0% 0% / 85%)",
+					"--dialog-bg": "transparent",
+					"--dialog-shadow": "none",
+					"--dialog-translate-y": 0,
+				}}
+			>
+				<img src="data:," alt="" class="gallery-image" />
+				<p class="text-sm"></p>
+				<div class="gallery-thumbs flex gap-sm">
+					{[0, 1, 2].map((index) => (
+						<button type="button" data-thumb={index} hidden>
+							<img src="data:," alt="" width="72" height="72" />
+						</button>
+					))}
+				</div>
+				<button
+					type="button"
+					command="close"
+					commandfor="record-gallery"
+					class="gallery-close"
+					aria-label="Close"
+				>
+					<X aria-hidden="true" />
+				</button>
+			</dialog>
+		</vinyl-records>
+	) : (
+		<p class="text-muted">No records listed yet.</p>
+	)}
+
+	<section aria-labelledby="how-it-started" class="story flow">
+		<h2 id="how-it-started">How it started</h2>
+		<p>
+			My first vinyl came with the collector's edition of Ni no Kuni II, a picture disc tucked
+			in with the game. From there it went fast. Game soundtracks are often limited pressings,
+			so I started picking up a few before they were gone.
+		</p>
+		<p>
+			That has grown into the {records.length} records you see here. I mostly stick to
+			soundtracks from games, with a few exceptions. Some are film, series and anime
+			soundtracks, like Cowboy Bebop and One Piece, and there is a YOASOBI single and even a
+			Trash Taste anniversary record in between.
+		</p>
+	</section>
 </PageLayout>
 
 <script>
@@ -237,6 +280,36 @@ const pageDescription = "All of the vinyl I have collected through the years.";
 
 	.records {
 		margin-block-start: var(--size-4);
+	}
+
+	.story {
+		margin-block-start: var(--size-12);
+		scroll-margin-block-start: var(--size-8);
+	}
+
+	.filters {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+
+		@media (width >= 640px) {
+			display: flex;
+			flex-wrap: wrap;
+		}
+	}
+
+	.filters select {
+		width: 100%;
+	}
+
+	.view-toggle {
+		--btn-px: var(--size-3);
+		--btn-py: var(--size-2);
+		--btn-stroke: color-mix(in oklab, var(--root-bg) 70%, var(--root-fg));
+		--btn-active-bg: var(--brand);
+		--btn-active-color: var(--on-brand);
+		grid-column: 1 / -1;
+		justify-self: start;
+		align-self: flex-end;
 	}
 
 	.cover {
