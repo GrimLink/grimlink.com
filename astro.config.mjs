@@ -30,7 +30,14 @@ export default defineConfig({
 	},
 	vite: {
 		css: {
-			lightningcss: { visitor: animationTimelineFix },
+			postcss: { plugins: [animationTimelineFix] },
+		},
+		customLogger: {
+			...globalThis.VITE_LOGGER,
+			warn(msg) {
+				if (msg.includes("target-current")) return;
+				console.warn(msg);
+			},
 		},
 	},
 	devToolbar: {

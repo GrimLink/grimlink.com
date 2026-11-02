@@ -3,89 +3,37 @@
  * both are set on the same rule. That is not valid syntax, so browsers drop the
  * whole declaration and the animation never runs.
  * See https://github.com/parcel-bundler/lightningcss/issues/1283
+ *
+ * Vite minifies CSS with Lightning CSS but strips any visitor from its options,
+ * so the fix runs earlier, as a PostCSS plugin on the unminified source.
  */
-
-/** @typedef {{ property: string }} Declaration */
-/** @typedef {{ declarations: Declaration[], importantDeclarations: Declaration[] }} DeclarationBlock */
-/** @typedef {{ type: "style", value: { selectors: unknown, declarations: DeclarationBlock, rules: unknown[], loc: unknown } }} StyleRule */
 
 const TIMELINE = "animation-timeline";
 
 /**
- * Collects the animation-timeline declarations that Lightning CSS would fold
- * into a neighboring animation shorthand.
- * @param {Declaration[]} declarations
- * @returns {Declaration[]}
- */
-function foldedTimelines(declarations) {
-	if (!declarations.some((declaration) => declaration.property === "animation")) return [];
-	return declarations.filter((declaration) => declaration.property === TIMELINE);
-}
-
-/**
- * Lightning CSS cannot read its own AST back when an optional field is present
- * as null, which any `var()` produces, so drop those keys before handing a rule
- * back. Only touched rules go through this, untouched ones are returned as void.
- * @param {unknown} node
+ * Moves animation-timeline out of a rule that also sets the animation shorthand,
+ * into a sibling rule the minifier cannot merge back. The sibling sits in the
+ * feature query that a scroll driven animation needs anyway.
+ * @param {import("postcss").Rule} rule
+ * @param {import("postcss").Helpers} helpers
  * @returns {void}
  */
-function dropNullFields(node) {
-	if (Array.isArray(node)) return node.forEach(dropNullFields);
-	if (node === null || typeof node !== "object") return;
-	for (const [key, value] of Object.entries(node)) {
-		if (value === null) delete /** @type {Record<string, unknown>} */ (node)[key];
-		else dropNullFields(value);
-	}
-}
+function splitAnimationTimeline(rule, { AtRule }) {
+	const declarations = rule.nodes.filter((node) => node.type === "decl");
+	if (!declarations.some((declaration) => declaration.prop === "animation")) return;
 
-/**
- * Moves animation-timeline out into a sibling rule so it survives minification.
- * A plain sibling gets merged back into the original rule, so it is wrapped in
- * the feature query that a scroll driven animation needs anyway.
- * @param {StyleRule} rule
- * @returns {[StyleRule, object] | void}
- */
-function splitAnimationTimeline(rule) {
-	const block = rule.value.declarations;
-	const normal = foldedTimelines(block.declarations);
-	const important = foldedTimelines(block.importantDeclarations);
-	if (normal.length === 0 && important.length === 0) return;
+	const timelines = declarations.filter((declaration) => declaration.prop === TIMELINE);
+	if (timelines.length === 0) return;
 
-	block.declarations = block.declarations.filter((declaration) => !normal.includes(declaration));
-	block.importantDeclarations = block.importantDeclarations.filter(
-		(declaration) => !important.includes(declaration),
+	const supports = new AtRule({ name: "supports", params: `(${TIMELINE}: view())` });
+	supports.append(
+		rule.clone({ nodes: [] }).append(timelines.map((timeline) => timeline.remove())),
 	);
-
-	dropNullFields(rule);
-	return [
-		rule,
-		{
-			type: "supports",
-			value: {
-				condition: {
-					type: "declaration",
-					propertyId: { property: TIMELINE },
-					value: "view()",
-				},
-				rules: [
-					{
-						type: "style",
-						value: {
-							selectors: rule.value.selectors,
-							declarations: {
-								declarations: normal,
-								importantDeclarations: important,
-							},
-							rules: [],
-							loc: rule.value.loc,
-						},
-					},
-				],
-				loc: rule.value.loc,
-			},
-		},
-	];
+	rule.after(supports);
 }
 
-/** @type {{ Rule: { style: typeof splitAnimationTimeline } }} */
-export const animationTimelineFix = { Rule: { style: splitAnimationTimeline } };
+/** @type {import("postcss").Plugin} */
+export const animationTimelineFix = {
+	postcssPlugin: "animation-timeline-fix",
+	Rule: splitAnimationTimeline,
+};
