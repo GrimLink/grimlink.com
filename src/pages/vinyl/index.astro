@@ -1,0 +1,492 @@
+---
+import PageLayout from "@/layouts/PageLayout.astro";
+import { Image, getImage } from "astro:assets";
+import { ChevronLeft, ChevronRight, X } from "@lucide/astro";
+import type { ImageMetadata } from "astro";
+import StoreIcons from "@/assets/stores.svg?url";
+import dataJson from "./data.json";
+
+interface VinylRecord {
+	artist: string;
+	title: string;
+	year?: number;
+	genres?: string[];
+	image?: string;
+	back?: string;
+	vinyl?: string;
+	discogs?: string;
+	blackscreen?: string;
+	youtubeMusic?: string;
+	bandcamp?: string;
+	fangamer?: string;
+}
+
+const recordLinks = [
+	{ key: "discogs", name: "Discogs" },
+	{ key: "youtubeMusic", name: "YouTube Music" },
+	{ key: "bandcamp", name: "Bandcamp" },
+	{ key: "blackscreen", name: "Black Screen Records" },
+	{ key: "fangamer", name: "Fangamer" },
+] as const;
+
+const { records } = dataJson as { records: VinylRecord[] };
+
+const imageGlob = import.meta.glob<{ default: ImageMetadata }>(
+	"./assets/*.{jpg,jpeg,png,webp,avif}",
+);
+const images: Record<string, ImageMetadata> = Object.fromEntries(
+	await Promise.all(
+		Object.entries(imageGlob).map(async ([path, loader]) => {
+			const mod = await loader();
+			return [path.replace("./assets/", ""), mod.default];
+		}),
+	),
+);
+
+const sortedRecords = records.toSorted((a, b) => a.title.localeCompare(b.title));
+const genres = [...new Set(records.flatMap((record) => record.genres ?? []))].sort();
+
+const THUMB_SIZE = 160;
+
+/**
+ * @param record
+ * @returns The images to page through in the lightbox, cover first.
+ */
+async function galleryOf(record: VinylRecord) {
+	const views = [
+		{ file: record.image, label: "Cover" },
+		{ file: record.back, label: "Back cover" },
+		{ file: record.vinyl, label: "Vinyl" },
+	].filter(({ file }) => file && images[file]);
+
+	return Promise.all(
+		views.map(async ({ file, label }) => {
+			const [full, thumb] = await Promise.all([
+				getImage({ src: images[file!] }),
+				getImage({ src: images[file!], width: THUMB_SIZE, height: THUMB_SIZE, fit: "cover" }),
+			]);
+			return { src: full.src, thumb: thumb.src, label };
+		}),
+	);
+}
+
+const galleries = new Map(
+	await Promise.all(
+		sortedRecords.map(async (record) => [record, await galleryOf(record)] as const),
+	),
+);
+
+const pageTitle = "Vinyl";
+const pageDescription = "All of the vinyl I have collected through the years.";
+---
+
+<PageLayout
+	title={pageTitle}
+	description={pageDescription}
+	breadcrumbs={[
+		{ name: "Home", item: "/" },
+		{ name: "Vinyl", item: "/vinyl/" },
+	]}
+	class="container"
+>
+	<h1>{pageTitle}</h1>
+	<p>{pageDescription}</p>
+
+	{
+		sortedRecords.length > 0 ? (
+			<vinyl-records class="block" data-view="drawer">
+				<form aria-label="Sort and filter records" class="flex flex-wrap gap">
+					<label>
+						View
+						<select name="view">
+							<option value="drawer">Drawer</option>
+							<option value="grid">Grid</option>
+							<option value="list">List</option>
+						</select>
+					</label>
+					<label>
+						Sort by
+						<select name="sort">
+							<option value="title">Title</option>
+							<option value="artist">Artist</option>
+							<option value="year-desc">Newest first</option>
+							<option value="year-asc">Oldest first</option>
+						</select>
+					</label>
+					{genres.length > 1 && (
+						<label>
+							Genre
+							<select name="genre">
+								<option value="">All genres</option>
+								{genres.map((genre) => (
+									<option>{genre}</option>
+								))}
+							</select>
+						</label>
+					)}
+				</form>
+				<p aria-live="polite" class="text-sm text-muted">
+					{sortedRecords.length} {sortedRecords.length === 1 ? "record" : "records"}
+				</p>
+				<ul role="list" class="records auto-grid gap scroll-mask" style="--max-col-size: 20rem">
+					{sortedRecords.map((record, i) => (
+						<li
+							data-title={record.title}
+							data-artist={record.artist}
+							data-year={record.year}
+							data-genres={record.genres?.join("|")}
+						>
+							{record.image && images[record.image] && (
+								<button
+									type="button"
+									class="cover"
+									aria-label={`View images of ${record.title}`}
+									data-gallery={JSON.stringify(galleries.get(record))}
+								>
+									<Image
+										src={images[record.image]}
+										alt=""
+										width={640}
+										height={640}
+										class="w-full"
+										loading={i < 4 ? "eager" : "lazy"}
+									/>
+								</button>
+							)}
+							<p class="text-sm">
+								<strong>{record.title}</strong>
+								<br />
+								<span class="text-muted">
+									{record.artist}
+									{record.year && `, ${record.year}`}
+								</span>
+								<span class="genres text-muted">{record.genres?.join(", ")}</span>
+							</p>
+							<ul role="list" class="links inline-flex flex-wrap gap-sm">
+								{recordLinks.map(
+									({ key, name }) =>
+										record[key] && (
+											<li>
+												<a
+													href={record[key]}
+													target="_blank"
+													rel="noopener noreferrer"
+													title={name}
+													aria-label={`${record.title} on ${name}`}
+												>
+													<svg width="20" height="20" fill="currentcolor" aria-hidden="true">
+														<use href={`${StoreIcons}#${key}`} />
+													</svg>
+												</a>
+											</li>
+										),
+								)}
+							</ul>
+						</li>
+					))}
+				</ul>
+				<div class="drawer-nav flex gap-sm">
+					<button type="button" data-step="-1" aria-label="Previous record">
+						<ChevronLeft aria-hidden="true" />
+					</button>
+					<button type="button" data-step="1" aria-label="Next record">
+						<ChevronRight aria-hidden="true" />
+					</button>
+				</div>
+				<dialog
+					id="record-gallery"
+					closedby="any"
+					aria-label="Record images"
+					class="gallery w-full h-full open:flex"
+					style={{
+						"--p": 0,
+						"--backdrop": "hsl(0 0% 0% / 85%)",
+						"--dialog-bg": "transparent",
+						"--dialog-shadow": "none",
+						"--dialog-translate-y": 0,
+					}}
+				>
+					<img src="data:," alt="" class="gallery-image" />
+					<p class="text-sm"></p>
+					<div class="gallery-thumbs flex gap-sm">
+						{[0, 1, 2].map((index) => (
+							<button type="button" data-thumb={index} hidden>
+								<img src="data:," alt="" width="72" height="72" />
+							</button>
+						))}
+					</div>
+					<button type="button" command="close" commandfor="record-gallery" class="gallery-close" aria-label="Close">
+						<X aria-hidden="true" />
+					</button>
+				</dialog>
+			</vinyl-records>
+		) : (
+			<p class="text-muted">No records listed yet.</p>
+		)
+	}
+</PageLayout>
+
+<script>
+	import "@/components/VinylRecords/element.js";
+</script>
+
+<style>
+	vinyl-records:not(:defined) :is(form, .drawer-nav) {
+		display: none;
+	}
+
+	.records {
+		margin-block-start: var(--size-4);
+	}
+
+	.cover {
+		--btn-px: 0;
+		--btn-py: 0;
+		--btn-radius: 0;
+		--btn-border-width: 0;
+		--btn-bg: transparent;
+		--btn-hover-bg: transparent;
+		--outline-offset: -4px;
+		display: block;
+		width: 100%;
+		cursor: zoom-in;
+	}
+
+	.gallery {
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: var(--size-3);
+		padding: var(--size-4);
+		color: white;
+	}
+
+	.gallery p {
+		margin: 0;
+		text-align: center;
+	}
+
+	.gallery-image {
+		flex: 0 1 auto;
+		min-height: 0;
+		max-width: 100%;
+		object-fit: contain;
+	}
+
+	.gallery-thumbs button {
+		--btn-px: 0;
+		--btn-py: 0;
+		--btn-border-width: 0;
+		--btn-bg: transparent;
+		--btn-hover-bg: transparent;
+		opacity: 0.6;
+
+		&[aria-current="true"] {
+			opacity: 1;
+			outline: 2px solid white;
+			outline-offset: 2px;
+		}
+	}
+
+	.gallery-thumbs img {
+		display: block;
+		width: var(--size-16);
+		height: var(--size-16);
+		object-fit: cover;
+	}
+
+	.gallery-close {
+		position: absolute;
+		inset-block-start: var(--size-3);
+		inset-inline-end: var(--size-3);
+		--btn-bg: hsl(0 0% 100% / 15%);
+		--btn-hover-bg: hsl(0 0% 100% / 30%);
+		--btn-color: white;
+	}
+
+	.records img {
+		aspect-ratio: 1;
+		object-fit: cover;
+	}
+
+	.records p,
+	.links {
+		margin-block: var(--size-2) 0;
+	}
+
+	.links {
+		--list-flow: 0;
+		padding-inline-start: 0;
+
+		a {
+			display: block;
+			padding: var(--size-1);
+			transition: scale 0.2s var(--ease-3);
+
+			&:is(:hover, :focus-visible) {
+				scale: 1.2;
+			}
+		}
+
+		svg {
+			display: block;
+		}
+	}
+
+	[data-view="list"] .records {
+		--list-flow: 0;
+		grid-template-columns: 1fr;
+		gap: 0;
+	}
+
+	[data-view="list"] .records > li:not([hidden]) {
+		display: grid;
+		grid-template-columns: var(--size-16) 1fr;
+		align-items: center;
+		column-gap: var(--size-4);
+		padding-block: var(--size-2);
+		border-block-end: 1px solid oklch(from var(--root-fg) l c h / 10%);
+
+		@media (width >= 640px) {
+			grid-template-columns: var(--size-16) 1fr auto;
+		}
+	}
+
+	[data-view="list"] .records > li > .cover {
+		@media (width < 640px) {
+			grid-row: span 2;
+		}
+	}
+
+	[data-view="list"] .records p,
+	[data-view="list"] .links {
+		margin-block: 0;
+	}
+
+	.genres {
+		display: none;
+		font-size: 0.875em;
+	}
+
+	[data-view="list"] .genres {
+		display: block;
+	}
+
+	[data-view="list"] .links {
+		grid-column: 2;
+
+		@media (width >= 640px) {
+			grid-column: 3;
+		}
+	}
+
+	vinyl-records:not([data-view="drawer"]) .drawer-nav {
+		display: none;
+	}
+
+	.drawer-nav {
+		justify-content: center;
+		margin-block-start: var(--size-4);
+	}
+
+	[data-view="drawer"] .records {
+		--cover: min(20rem, 70vw);
+		--overlap: 0px;
+		--drawer-gap: var(--size-4);
+		--mask-size: var(--size-16);
+		position: relative;
+		display: flex;
+		gap: var(--drawer-gap);
+		padding-block: var(--size-4);
+		overflow-x: auto;
+		overscroll-behavior-x: contain;
+		scroll-snap-type: x mandatory;
+		scrollbar-width: none;
+	}
+
+	/* Spacers instead of padding, as Firefox cuts the end padding short next to negative margins. */
+	[data-view="drawer"] .records::before,
+	[data-view="drawer"] .records::after {
+		content: "";
+		flex: 0 0 calc(50% - var(--cover) / 2 + var(--overlap) / 2 - var(--drawer-gap));
+	}
+
+	[data-view="drawer"] .records > li {
+		flex: 0 0 var(--cover);
+		margin-inline: calc(var(--overlap) / -2);
+		scroll-snap-align: center;
+		text-align: center;
+	}
+
+	[data-view="drawer"] .records .links {
+		justify-content: center;
+	}
+
+	/* Scroll snap measures transformed boxes, so the tilt goes on the image and not the snapped li. */
+	@supports (animation-timeline: view()) {
+		[data-view="drawer"] .records {
+			--overlap: calc(var(--cover) * 0.6);
+			--spread: calc(var(--cover) * 0.32);
+			--drawer-gap: 0px;
+			perspective: 70rem;
+		}
+
+		[data-view="drawer"] .records > li {
+			transform-style: preserve-3d;
+			animation: drawer-stack linear both;
+			animation-timeline: view(inline);
+		}
+
+		[data-view="drawer"] .records > li > .cover {
+			animation: drawer-tilt linear both;
+			animation-timeline: view(inline);
+		}
+
+		[data-view="drawer"] .records > li > :not(.cover) {
+			animation: drawer-label linear both;
+			animation-timeline: view(inline);
+		}
+	}
+
+	@keyframes drawer-stack {
+		0%,
+		100% {
+			z-index: 1;
+		}
+
+		50% {
+			z-index: 100;
+		}
+	}
+
+	@keyframes drawer-tilt {
+		0%,
+		41% {
+			transform: translateX(var(--spread)) rotateY(-62deg) scale(0.85);
+		}
+
+		50% {
+			transform: none;
+		}
+
+		59%,
+		100% {
+			transform: translateX(calc(var(--spread) * -1)) rotateY(62deg) scale(0.85);
+		}
+	}
+
+	@keyframes drawer-label {
+		0%,
+		46%,
+		54%,
+		100% {
+			visibility: hidden;
+			opacity: 0;
+		}
+
+		50% {
+			visibility: visible;
+			opacity: 1;
+		}
+	}
+</style>

@@ -5,6 +5,7 @@ export const mainMenu = [
 	{ url: "/speaking/", label: "Speaking", icon: "Calendar" },
 	{ url: "/projects/", label: "Projects", icon: "FolderOpen" },
 	{ url: "/games/", label: "Games", icon: "Gamepad2" },
+	{ url: "/vinyl/", label: "Vinyl", icon: "Disc3" },
 	{ url: "/tools/", label: "Tools", icon: "Wrench" },
 	{ url: "/playground/", label: "Playground", icon: "Shapes" },
 	{ url: "/about/", label: "About Me", icon: "User" },
