@@ -919,6 +919,18 @@
 			"discogs": "https://www.discogs.com/release/27113376-Bear-McCreary-God-Of-War-Ragnar%C3%B6k",
 			"blackscreen": "https://blackscreenrecords.com/products/godofwar-ragnarok?variant=44293779423498",
 			"youtubeMusic": "https://music.youtube.com/playlist?list=OLAK5uy_koQAB9JzJw49W-QCvP5RGSh3I_FCTuLsw"
+		},
+		{
+			"artist": "Carpenter Brut",
+			"title": "Leather Temple",
+			"year": 2026,
+			"genres": ["Synthwave"],
+			"image": "carpenter-brut-leather-temple.jpg",
+			"back": "carpenter-brut-leather-temple-back.jpg",
+			"vinyl": "carpenter-brut-leather-temple-vinyl.jpg",
+			"discogs": "https://www.discogs.com/release/36633523-Carpenter-Brut-Leather-Temple",
+			"youtubeMusic": "https://music.youtube.com/playlist?list=OLAK5uy_nsbvqd9ja9Y-oB0Gf2kFKwQkPmIMOv_1k",
+			"bandcamp": "https://carpenterbrut.bandcamp.com/album/leather-temple"
 		}
 	]
 }

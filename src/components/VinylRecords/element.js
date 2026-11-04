@@ -99,6 +99,12 @@ class VinylRecords extends HTMLElement {
 			if (!event.target.closest("img, button")) this.dialog.close();
 		});
 
+		// Otherwise the next cover opens with this image still showing until its own one loads.
+		this.dialog.addEventListener("close", () => {
+			this.galleryImage.src = "data:,";
+			this.galleryImage.alt = "";
+		});
+
 		this.dialog.addEventListener("keydown", (event) => {
 			const step = { ArrowLeft: -1, ArrowRight: 1 }[event.key];
 			if (!step) return;

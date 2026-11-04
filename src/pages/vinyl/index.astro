@@ -49,7 +49,9 @@ const images: Record<string, ImageMetadata> = Object.fromEntries(
 	),
 );
 
-const sortedRecords = records.toSorted((a, b) => a.title.localeCompare(b.title));
+const sortedRecords = records.toSorted(
+	(a, b) => (b.year ?? 0) - (a.year ?? 0) || a.title.localeCompare(b.title),
+);
 const genres = [...new Set(records.flatMap((record) => record.genres ?? []))].sort();
 
 const THUMB_SIZE = 160;
@@ -131,10 +133,10 @@ const pageDescription =
 				<label>
 					<span class="sr-only">Sort by</span>
 					<select name="sort">
-						<option value="title">Title</option>
-						<option value="artist">Artist</option>
 						<option value="year-desc">Newest first</option>
 						<option value="year-asc">Oldest first</option>
+						<option value="title">By Title</option>
+						<option value="artist">By Artist</option>
 					</select>
 				</label>
 				{genres.length > 1 && (
