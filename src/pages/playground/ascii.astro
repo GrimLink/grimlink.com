@@ -1,0 +1,481 @@
+---
+import PageLayout from "@/layouts/PageLayout.astro";
+import PlaygroundImg from "@/assets/playground.webp";
+import { Search } from "@lucide/astro";
+import BackLink from "@/components/Playground/BackLink.astro";
+import "@/components/Playground/playground.css";
+
+interface Control {
+	abbr: string;
+	name: string;
+	note?: string;
+}
+
+const controls: Control[] = [
+	{ abbr: "NUL", name: "Null", note: "Ends a C string, and splits find -print0 output." },
+	{ abbr: "SOH", name: "Start of heading" },
+	{ abbr: "STX", name: "Start of text" },
+	{ abbr: "ETX", name: "End of text", note: "Ctrl+C, sends SIGINT." },
+	{ abbr: "EOT", name: "End of transmission", note: "Ctrl+D, ends input or closes the shell." },
+	{ abbr: "ENQ", name: "Enquiry" },
+	{ abbr: "ACK", name: "Acknowledge" },
+	{ abbr: "BEL", name: "Bell", note: "Makes the terminal beep." },
+	{ abbr: "BS", name: "Backspace", note: "Moves the cursor one step back." },
+	{ abbr: "TAB", name: "Horizontal tab", note: "The default IFS, with space and newline." },
+	{ abbr: "LF", name: "Line feed", note: "The newline on Linux and macOS." },
+	{ abbr: "VT", name: "Vertical tab" },
+	{ abbr: "FF", name: "Form feed", note: "Ctrl+L, clears the screen." },
+	{ abbr: "CR", name: "Carriage return", note: "Windows ends lines with CR LF, the cause of $'\\r': command not found." },
+	{ abbr: "SO", name: "Shift out" },
+	{ abbr: "SI", name: "Shift in" },
+	{ abbr: "DLE", name: "Data link escape" },
+	{ abbr: "DC1", name: "Device control 1", note: "Ctrl+Q, XON, resumes output." },
+	{ abbr: "DC2", name: "Device control 2", note: "Ctrl+R, reverse history search." },
+	{ abbr: "DC3", name: "Device control 3", note: "Ctrl+S, XOFF, freezes output." },
+	{ abbr: "DC4", name: "Device control 4" },
+	{ abbr: "NAK", name: "Negative acknowledge", note: "Ctrl+U, deletes to the start of the line." },
+	{ abbr: "SYN", name: "Synchronous idle" },
+	{ abbr: "ETB", name: "End of transmission block", note: "Ctrl+W, deletes the word before the cursor." },
+	{ abbr: "CAN", name: "Cancel" },
+	{ abbr: "EM", name: "End of medium" },
+	{ abbr: "SUB", name: "Substitute", note: "Ctrl+Z, suspends the job." },
+	{ abbr: "ESC", name: "Escape", note: "Starts every ANSI color code, like \\e[1m." },
+	{ abbr: "FS", name: "File separator", note: "Ctrl+\\, sends SIGQUIT." },
+	{ abbr: "GS", name: "Group separator" },
+	{ abbr: "RS", name: "Record separator" },
+	{ abbr: "US", name: "Unit separator" },
+];
+
+const printableNames: Record<string, string> = {
+	" ": "Space",
+	"!": "Exclamation mark",
+	'"': "Double quote",
+	"#": "Number sign",
+	$: "Dollar sign",
+	"%": "Percent sign",
+	"&": "Ampersand",
+	"'": "Single quote",
+	"(": "Left parenthesis",
+	")": "Right parenthesis",
+	"*": "Asterisk",
+	"+": "Plus sign",
+	",": "Comma",
+	"-": "Hyphen-minus",
+	".": "Full stop",
+	"/": "Slash",
+	":": "Colon",
+	";": "Semicolon",
+	"<": "Less-than sign",
+	"=": "Equals sign",
+	">": "Greater-than sign",
+	"?": "Question mark",
+	"@": "At sign",
+	"[": "Left square bracket",
+	"\\": "Backslash",
+	"]": "Right square bracket",
+	"^": "Caret",
+	_: "Underscore",
+	"`": "Backtick",
+	"{": "Left curly bracket",
+	"|": "Vertical bar",
+	"}": "Right curly bracket",
+	"~": "Tilde",
+};
+
+const entities: Record<number, string> = {
+	9: "Tab",
+	10: "NewLine",
+	33: "excl",
+	34: "quot",
+	35: "num",
+	36: "dollar",
+	37: "percnt",
+	38: "amp",
+	39: "apos",
+	40: "lpar",
+	41: "rpar",
+	42: "ast",
+	43: "plus",
+	44: "comma",
+	46: "period",
+	47: "sol",
+	58: "colon",
+	59: "semi",
+	60: "lt",
+	61: "equals",
+	62: "gt",
+	63: "quest",
+	64: "commat",
+	91: "lbrack",
+	92: "bsol",
+	93: "rbrack",
+	94: "Hat",
+	95: "lowbar",
+	96: "grave",
+	123: "lbrace",
+	124: "verbar",
+	125: "rbrace",
+};
+
+const shellNotes: Record<string, string> = {
+	" ": "Splits words, quote it in file names.",
+	"!": "History expansion in an interactive shell, even inside double quotes.",
+	'"': "Quotes, but still expands $ and `.",
+	"#": "Starts a comment at the start of a word.",
+	$: "Expands variables and $(commands).",
+	"&": "Runs in the background, && runs on success.",
+	"'": "Quotes everything, and cannot be escaped inside single quotes.",
+	"(": "Starts a subshell.",
+	"*": "Glob for any characters.",
+	";": "Ends a command.",
+	"<": "Redirects input.",
+	">": "Redirects output, >> appends.",
+	"?": "Glob for one character.",
+	"[": "Glob for one character from a set, and the test command.",
+	"\\": "Escapes the next character.",
+	"`": "The old command substitution, prefer $( ).",
+	"{": "Brace expansion, like {1..10}.",
+	"|": "Pipes output to the next command.",
+	"~": "Expands to $HOME at the start of a word.",
+};
+
+/**
+ * Picks the category for a printable character code.
+ * @param {number} code The ASCII code.
+ * @returns {string} The category name.
+ */
+function categoryOf(code: number): string {
+	if (code >= 48 && code <= 57) return "Digits";
+	if (code >= 65 && code <= 90) return "Uppercase";
+	if (code >= 97 && code <= 122) return "Lowercase";
+	return "Symbols";
+}
+
+const categories = ["Control", "Symbols", "Digits", "Uppercase", "Lowercase"];
+
+const rows = Array.from({ length: 128 }, (_, code) => {
+	const base = {
+		code,
+		hex: code.toString(16).toUpperCase().padStart(2, "0"),
+		oct: code.toString(8).padStart(3, "0"),
+		bin: code.toString(2).padStart(8, "0"),
+		html: [`&#${code};`, entities[code] && `&${entities[code]};`].filter(Boolean),
+	};
+
+	if (code < 32 || code === 127) {
+		const control: Control =
+			code === 127
+				? { abbr: "DEL", name: "Delete", note: "What the Backspace key sends in most terminals." }
+				: controls[code];
+		return { ...base, ...control, char: undefined, category: "Control" };
+	}
+
+	const char = String.fromCharCode(code);
+	let name = printableNames[char];
+	if (!name) name = /\d/.test(char) ? `Digit ${char}` : `${char < "a" ? "Uppercase" : "Lowercase"} ${char}`;
+	return {
+		...base,
+		char,
+		abbr: undefined,
+		name,
+		note: shellNotes[char],
+		category: categoryOf(code),
+	};
+});
+
+const pageTitle = "ASCII table";
+const pageDescription =
+	"All 128 ASCII characters in decimal, hex, octal, binary and HTML, with notes on what they do in a shell script.";
+---
+
+<PageLayout
+	title={pageTitle}
+	description={pageDescription}
+	image={PlaygroundImg}
+	breadcrumbs={[
+		{ name: "Home", item: "/" },
+		{ name: "Playground", item: "/playground/" },
+		{ name: pageTitle, item: "/playground/ascii/" },
+	]}
+	class="container"
+>
+	<BackLink />
+	<h1>{pageTitle}</h1>
+	<p>{pageDescription}</p>
+
+	<form id="ascii-form">
+		<div class="code-field">
+			<label for="ascii-search">
+				<Search size="0.875em" aria-hidden="true" />
+				<span class="sr-only">Search</span>
+			</label>
+			<input
+				id="ascii-search"
+				name="q"
+				type="search"
+				placeholder="esc, 1B, 27, tab…"
+				autocomplete="off"
+				autocapitalize="off"
+				spellcheck="false"
+			/>
+		</div>
+		<ul role="list" class="chips flex-wrap gap-sm" aria-label="Categories">
+			<li>
+				<button type="button" value="" aria-pressed="true">
+					All
+				</button>
+			</li>
+			{categories.map((category) => (
+				<li>
+					<button type="button" value={category} aria-pressed="false">
+						{category}
+					</button>
+				</li>
+			))}
+		</ul>
+	</form>
+
+	<output for="ascii-search" aria-live="polite" class="text-muted"></output>
+
+	<div class="scroll-x clip-y">
+		<table>
+			<thead>
+				<tr>
+					<th scope="col">Chr</th>
+					<th scope="col">Dec</th>
+					<th scope="col">Hex</th>
+					<th scope="col">Oct</th>
+					<th scope="col">Bin</th>
+					<th scope="col">HTML</th>
+					<th scope="col">Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				{rows.map((row) => (
+					<tr
+						data-category={row.category}
+						data-char={row.char}
+						data-search={[
+							row.name,
+							row.abbr,
+							row.code,
+							row.hex,
+							...row.html,
+							row.note,
+							row.category,
+						]
+							.filter((value) => value !== undefined)
+							.join(" ")
+							.toLowerCase()}
+					>
+						<td>
+							{row.char === undefined ? (
+								<abbr class="glyph" title={row.name}>
+									{row.abbr}
+								</abbr>
+							) : (
+								<button
+									type="button"
+									class:list={["glyph", { invisible: row.char === " " }]}
+									data-copy={row.char}
+									aria-label={`Copy ${row.name}`}
+								>
+									<span>{row.char}</span>
+								</button>
+							)}
+						</td>
+						{[String(row.code), row.hex, row.oct, row.bin].map((value) => (
+							<td>
+								<button type="button" data-copy={value}>
+									{value}
+								</button>
+							</td>
+						))}
+						<td>
+							{row.html.map((value) => (
+								<button type="button" data-copy={value}>
+									{value}
+								</button>
+							))}
+						</td>
+						<th scope="row">
+							{row.name}
+							{row.note && <small class="text-muted">{row.note}</small>}
+						</th>
+					</tr>
+				))}
+			</tbody>
+		</table>
+	</div>
+
+	<section aria-labelledby="good-to-know" class="explanation">
+		<h2 id="good-to-know">Good to know</h2>
+		<ul>
+			<li>
+				Click any cell to copy it. The control characters have no glyph, so copy one of
+				their codes instead.
+			</li>
+			<li>
+				<code>$'…'</code> is Bash ANSI-C quoting, it turns <code>\e</code> or
+				<code>\x1B</code> into the real byte. Plain <code>echo</code> does not, use
+				<code>printf '\e[1mBold\e[0m'</code> for something that works in every shell.
+			</li>
+			<li>
+				Ctrl plus a key sends the code 64 lower, so Ctrl+C sends 3. <code>cat -v</code>
+				prints them the same way, as <code>^C</code>, and <code>^[</code> is Escape, so
+				Ctrl+[ works when Esc is out of reach.
+			</li>
+			<li>
+				Press Ctrl+V before a key to type it literally, like Ctrl+V Tab to put a real tab in
+				the command line.
+			</li>
+			<li>
+				Get the code of a character with <code>printf '%d' "'A"</code>, and the character
+				back with <code>printf "\x$(printf '%x' 65)"</code>.
+			</li>
+			<li>
+				See the hidden bytes in a file with <code>od -c</code> or <code>xxd</code>, handy for
+				spotting a stray <code>\r</code> from Windows.
+			</li>
+		</ul>
+	</section>
+</PageLayout>
+
+<script>
+	const form = document.querySelector<HTMLFormElement>("#ascii-form")!;
+	const search = document.querySelector<HTMLInputElement>("#ascii-search")!;
+	const output = document.querySelector<HTMLOutputElement>("output[for]")!;
+	const chips = Array.from(form.querySelectorAll<HTMLButtonElement>(".chips button"));
+	const rows = Array.from(document.querySelectorAll<HTMLTableRowElement>("tbody tr"));
+	let category = "";
+
+	/**
+	 * Shows the rows that match both the search and the picked category.
+	 * A single character searches for that exact character.
+	 */
+	function update() {
+		const raw = search.value.trim();
+		const query = raw.toLowerCase();
+		let visible = 0;
+
+		rows.forEach((row) => {
+			const found =
+				raw.length === 1 ? row.dataset.char === raw : row.dataset.search!.includes(query);
+			const match = (!category || row.dataset.category === category) && found;
+			row.hidden = !match;
+			if (match) visible++;
+		});
+
+		chips.forEach((chip) => (chip.ariaPressed = String(chip.value === category)));
+		output.textContent = `${visible} of ${rows.length} characters`;
+	}
+
+	form.addEventListener("input", update);
+	form.addEventListener("submit", (event) => event.preventDefault());
+	form.addEventListener("click", (event) => {
+		const chip = (event.target as Element).closest<HTMLButtonElement>(".chips button");
+		if (!chip) return;
+		category = chip.value;
+		update();
+	});
+
+	document.querySelector("tbody")!.addEventListener("click", async (event) => {
+		const button = (event.target as Element).closest<HTMLButtonElement>("button[data-copy]");
+		if (!button) return;
+		await navigator.clipboard.writeText(button.dataset.copy!);
+		button.toggleAttribute("data-copied", true);
+		output.textContent = `Copied ${button.ariaLabel?.replace("Copy ", "") ?? button.dataset.copy}`;
+		setTimeout(() => button.removeAttribute("data-copied"), 1200);
+	});
+
+	update();
+</script>
+
+<style>
+	.code-field {
+		gap: var(--size-3);
+
+		> label {
+			display: inline-grid;
+		}
+
+		input {
+			flex: 1;
+		}
+	}
+
+	.chips [aria-pressed="true"],
+	td button[data-copied] {
+		--btn-bg: var(--root-fg);
+		--btn-stroke: var(--root-fg);
+		--btn-color: var(--root-bg);
+	}
+
+	output {
+		display: block;
+		margin-block: var(--size-6) var(--size-2);
+		font-family: var(--family-mono);
+		font-size: 0.875em;
+	}
+
+	table {
+		inline-size: 100%;
+
+		th {
+			text-align: start;
+		}
+
+		thead th {
+			z-index: 1;
+			position: sticky;
+			top: 0;
+			background: var(--root-bg);
+			transition: top 0.3s;
+		}
+
+		tbody th {
+			min-inline-size: 16rem;
+			font-weight: 500;
+
+			small {
+				display: block;
+				font-weight: normal;
+			}
+		}
+	}
+
+	td {
+		white-space: nowrap;
+	}
+
+	td button {
+		--btn-px: var(--size-2);
+		--btn-py: var(--size-1);
+		--btn-stroke: transparent;
+		font-family: var(--family-mono);
+		font-weight: normal;
+	}
+
+	.glyph {
+		min-inline-size: var(--size-10);
+		font-family: var(--family-mono);
+		font-size: var(--font-size-4);
+
+		&.invisible span {
+			background: color-mix(in oklab, currentcolor 20%, transparent);
+			outline: 1px dashed currentcolor;
+		}
+	}
+
+	abbr.glyph {
+		display: inline-block;
+		padding-inline: var(--size-2);
+		font-size: 0.875em;
+		text-decoration: none;
+		color: var(--color-muted);
+	}
+
+	.explanation {
+		margin-block-start: var(--size-8);
+	}
+</style>
