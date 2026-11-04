@@ -1,7 +1,7 @@
 ---
 import PageLayout from "@/layouts/PageLayout.astro";
 import PlaygroundImg from "@/assets/playground.webp";
-import { Blend, Grid3x3, Hexagon, Pilcrow, Squircle } from "@lucide/astro";
+import { Blend, Grid3x3, Hexagon, Pilcrow, SquareTerminal, Squircle } from "@lucide/astro";
 
 const playgrounds = [
 	{
@@ -38,6 +38,13 @@ const playgrounds = [
 		icon: Pilcrow,
 		description:
 			"The Unicode characters worth knowing, from the narrow no-break space to the minus sign, ready to copy as HTML, CSS or JS.",
+	},
+	{
+		name: "ASCII table",
+		url: "/playground/ascii/",
+		icon: SquareTerminal,
+		description:
+			"All 128 ASCII characters in decimal, hex, octal, binary and HTML, with notes on what they do in a shell script.",
 	},
 ];
 

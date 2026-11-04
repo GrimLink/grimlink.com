@@ -41,7 +41,7 @@ import { mainMenu } from "@/menus";
 			translate: 0 -100%;
 		}
 
-		@container (scroll-state(scrolled: top)) {
+		@container (scroll-state(scrolled: top)) or (not scroll-state(scrollable: top)) {
 			translate: 0 0;
 		}
 	}

@@ -1,6 +1,7 @@
 ---
 import { author, today } from "@/consts";
 import { footerMenu } from "@/menus";
+import ScrollTop from "@/components/ScrollTop.astro";
 ---
 
 <footer class="page-footer container">
@@ -21,6 +22,7 @@ import { footerMenu } from "@/menus";
 	<small class="block">
 		© {today.getFullYear()} {author}.
 	</small>
+	<ScrollTop />
 </footer>
 <style>
 	footer {
