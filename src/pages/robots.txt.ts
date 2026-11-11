@@ -4,6 +4,7 @@ const getRobotsTxt = (site: URL) => {
 	const sitemapURL = new URL("sitemap-index.xml", site);
 
 	return `User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
 Allow: /
 
 Sitemap: ${sitemapURL.href}
