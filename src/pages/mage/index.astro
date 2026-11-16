@@ -154,11 +154,26 @@ const commandGroups = [
 			{
 				name: "build",
 				doc: "build",
-				text: "Build themes with their npm scripts, or watch one",
+				text: "Build the themes of the project with their npm scripts, or watch one",
 			},
 			{ name: "log", doc: "log", text: "Follow a log in var/log" },
 			{ name: "reindex", doc: "reindex", text: "Reindex, then clean the cache" },
 			{ name: "clean", doc: "clean", text: "Clean caches and generated files (alias purge)" },
+		],
+	},
+	{
+		title: "Code quality",
+		commands: [
+			{
+				name: "lint",
+				doc: "lint",
+				text: "Check a module or theme with the Hyvä coding standard",
+			},
+			{
+				name: "test",
+				doc: "test",
+				text: "Run the test actions of the project",
+			},
 		],
 	},
 	{
@@ -323,7 +338,8 @@ const commandHref = (doc: string): string => {
 		<p>
 			The <a href="/mage/docs/">docs</a> describe each command, the{" "}
 			<a href="/mage/docs/config/">configuration</a> and the{" "}
-			<a href="/mage/docs/environments/">environments</a>, and the{" "}
+			<a href="/mage/docs/environments/">environments</a>, the{" "}
+			<a href="/mage/docs/faq/">FAQ</a> answers the common questions, and the{" "}
 			<a href={`${repo}/blob/main/CHANGELOG.md`} target="_blank" rel="noopener noreferrer">
 				changelog
 			</a>{" "}
