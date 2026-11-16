@@ -19,7 +19,22 @@ export const docHref = (doc: MageDoc): string => `/mage/docs/${doc.id}/`;
 export const docLabel = (doc: MageDoc): string => doc.data.title.replace(/\bmage /g, "");
 
 /**
- * Get the docs grouped and ordered for the sidebar, topics in reading order, commands by name.
+ * Nest the docs of subcommands, such as `add-theme`, under the doc of their command.
+ * @param {MageDoc[]} docs Sorted docs of one group
+ * @returns {{ doc: MageDoc; children: MageDoc[] }[]}
+ */
+export function nestSubcommands(docs: MageDoc[]): { doc: MageDoc; children: MageDoc[] }[] {
+	const items: { doc: MageDoc; children: MageDoc[] }[] = [];
+	for (const doc of docs) {
+		const parent = items.find((item) => doc.id.startsWith(`${item.doc.id}-`));
+		if (parent) parent.children.push(doc);
+		else items.push({ doc, children: [] });
+	}
+	return items;
+}
+
+/**
+ * Get the docs grouped and ordered for the sidebar, topics in reading order, commands by their label.
  * @returns {Promise<{ title: string; docs: MageDoc[] }[]>}
  */
 export async function getMageDocsNav(): Promise<{ title: string; docs: MageDoc[] }[]> {
@@ -40,7 +55,7 @@ export async function getMageDocsNav(): Promise<{ title: string; docs: MageDoc[]
 			title: "Commands",
 			docs: docs
 				.filter((doc) => doc.data.group === "commands")
-				.sort((a, b) => a.id.localeCompare(b.id)),
+				.sort((a, b) => docLabel(a).localeCompare(docLabel(b))),
 		},
 	];
 }
